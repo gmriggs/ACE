@@ -6,11 +6,16 @@ using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using ACE.Server.Network;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
+    [ProtoInclude(100, typeof(Admin))]
     public class Sentinel : Player
     {
+        public Sentinel() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

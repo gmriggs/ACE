@@ -1,4 +1,5 @@
 using System;
+using ACE.Entity.Enum.Properties;
 
 namespace ACE.Server.WorldObjects
 {
@@ -90,6 +91,20 @@ namespace ACE.Server.WorldObjects
             IsMoving = false;
 
             SetFinalPosition();
+        }
+
+        public bool IsMonster()
+        {
+            var attackable = GetProperty(PropertyBool.Attackable) ?? false;
+            var tolerance = (Tolerance)(GetProperty(PropertyInt.Tolerance) ?? 0);
+
+            return (attackable && tolerance == Tolerance.None);
+        }
+
+        public bool IsAttackable()
+        {
+            var attackable = GetProperty(PropertyBool.Attackable) ?? false;
+            return attackable;
         }
     }
 }

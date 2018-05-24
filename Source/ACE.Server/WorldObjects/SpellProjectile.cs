@@ -14,9 +14,11 @@ using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Managers;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class SpellProjectile : WorldObject
     {
         private Creature projectileCaster;
@@ -31,6 +33,8 @@ namespace ACE.Server.WorldObjects
         public float FlightTime { get; set; }
         public float PlayscriptIntensity { get; set; }
         public ProjectileSpellType SpellType { get; set; }
+
+        public SpellProjectile() { }
 
         /// <summary>
         /// A new biota be created taking all of its values from weenie.

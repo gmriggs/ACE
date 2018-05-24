@@ -14,9 +14,11 @@ using ACE.Server.Network;
 using ACE.Server.Network.Structure;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Gem : Stackable
     {
         /// <summary>
@@ -27,6 +29,8 @@ namespace ACE.Server.WorldObjects
         //    get { return AceObject.UseCreateContractId; }
         //    set { AceObject.UseCreateContractId = value; }
         //}
+
+        public Gem() { }
 
         /// <summary>
         /// A new biota be created taking all of its values from weenie.

@@ -16,10 +16,19 @@ using ACE.Server.Network.Motion;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages;
 
+using ProtoBuf;
+
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
+    [ProtoInclude(108, typeof(Chest))]
+    [ProtoInclude(112, typeof(Corpse))]
+    [ProtoInclude(114, typeof(Creature))]
+
     public partial class Container : WorldObject
     {
+        public Container() { }
+
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>

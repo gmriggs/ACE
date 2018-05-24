@@ -1,18 +1,22 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using ACE.Entity.Enum;
 
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace ACE.Entity
 {
+    [ProtoContract]
     public class Position : ICloneable
     {
         [JsonProperty("landblockId")]
         private LandblockId landblockId;
 
         [JsonIgnore]
+        [ProtoMember(1)]
         public LandblockId LandblockId
         {
             get => landblockId.Raw != 0 ? landblockId : new LandblockId(Cell);
@@ -23,6 +27,7 @@ namespace ACE.Entity
         [JsonIgnore]
         public uint Cell { get; set; }
 
+        [ProtoMember(2)]
         public Vector3 Pos
         {
             get => new Vector3(PositionX, PositionY, PositionZ);
@@ -49,6 +54,7 @@ namespace ACE.Entity
             return blockUpdate;
         }
 
+        [ProtoMember(3)]
         public Quaternion Rotation
         {
             get => new Quaternion(RotationX, RotationY, RotationZ, RotationW);
@@ -167,7 +173,7 @@ namespace ACE.Entity
                 var landblock = LandblockId.TransitionX(blockOffset);
                 if (landblock != null)
                 {
-                    LandblockId = landblock.Value;
+                    LandblockId = landblock;
                     PositionX -= BlockLength * blockOffset;
                     changedBlock = true;
                 }
@@ -181,7 +187,7 @@ namespace ACE.Entity
                 var landblock = LandblockId.TransitionX(blockOffset);
                 if (landblock != null)
                 {
-                    LandblockId = landblock.Value;
+                    LandblockId = landblock;
                     PositionX -= BlockLength * blockOffset;
                     changedBlock = true;
                 }
@@ -195,7 +201,7 @@ namespace ACE.Entity
                 var landblock = LandblockId.TransitionX(blockOffset);
                 if (landblock != null)
                 {
-                    LandblockId = landblock.Value;
+                    LandblockId = landblock;
                     PositionY -= BlockLength * blockOffset;
                     changedBlock = true;
                 }
@@ -209,7 +215,7 @@ namespace ACE.Entity
                 var landblock = LandblockId.TransitionX(blockOffset);
                 if (landblock != null)
                 {
-                    LandblockId = landblock.Value;
+                    LandblockId = landblock;
                     PositionY -= BlockLength * blockOffset;
                     changedBlock = true;
                 }

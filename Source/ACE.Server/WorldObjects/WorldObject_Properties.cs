@@ -13,6 +13,8 @@ using ACE.Server.Entity;
 using ACE.Server.Network.Enum;
 using ACE.Server.Network.Motion;
 
+using ProtoBuf;
+
 namespace ACE.Server.WorldObjects
 {
     // todo: After we have all the properties moved here, we should set them all to private. Only what's needed should be protected/public.
@@ -309,6 +311,8 @@ namespace ACE.Server.WorldObjects
             return ret;
         }
 
+        public static Action<WorldObject> NotifyUpdate;
+
         public void SetPosition(PositionType positionType, Position position) // { Biota.SetPosition(positionType, position); }
         {
             if (position == null)
@@ -322,6 +326,9 @@ namespace ACE.Server.WorldObjects
 
                 Biota.SetPosition(positionType, position, biotaPropertiesPositionLock);
                 ChangesDetected = true;
+
+                if (NotifyUpdate != null)
+                    NotifyUpdate(this);
             }
         }
 
@@ -409,6 +416,7 @@ namespace ACE.Server.WorldObjects
             set { if (!value.HasValue) RemoveProperty(PropertyInt.Placement); else SetProperty(PropertyInt.Placement, (int)value.Value); }
         }
 
+        [ProtoMember(2)]
         public virtual Position Location
         {
             get => GetPosition(PositionType.Location);

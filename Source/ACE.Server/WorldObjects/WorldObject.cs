@@ -25,12 +25,36 @@ using ACE.Server.Network.Sequence;
 using ACE.Server.Physics;
 using ACE.Server.Physics.Common;
 using ACE.Server.Physics.Util;
+using ProtoBuf;
 
 using Landblock = ACE.Server.Entity.Landblock;
 using Position = ACE.Entity.Position;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
+    [ProtoInclude(101, typeof(AdvocateFane))]
+    [ProtoInclude(105, typeof(Bindstone))]
+    [ProtoInclude(106, typeof(Book))]
+    [ProtoInclude(107, typeof(Caster))]
+    [ProtoInclude(109, typeof(Clothing))]
+    [ProtoInclude(111, typeof(Container))]
+    [ProtoInclude(115, typeof(Door))]
+    [ProtoInclude(117, typeof(Game))]
+    [ProtoInclude(120, typeof(GenericObject))]
+    [ProtoInclude(121, typeof(Healer))]
+    [ProtoInclude(122, typeof(Key))]
+    [ProtoInclude(123, typeof(Lifestone))]
+    [ProtoInclude(124, typeof(Lock))]
+    [ProtoInclude(125, typeof(Lockpick))]
+    [ProtoInclude(126, typeof(MeleeWeapon))]
+    [ProtoInclude(128, typeof(MissileLauncher))]
+    [ProtoInclude(130, typeof(PKModifier))]
+    [ProtoInclude(132, typeof(Portal))]
+    [ProtoInclude(133, typeof(Scroll))]
+    [ProtoInclude(138, typeof(SpellProjectile))]
+    [ProtoInclude(139, typeof(Stackable))]
+    [ProtoInclude(140, typeof(Switch))]
     public abstract partial class WorldObject : IActor
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -44,6 +68,7 @@ namespace ACE.Server.WorldObjects
         /// <summary>
         /// This is just a wrapper around Biota.Id
         /// </summary>
+        [ProtoMember(1)]
         public ObjectGuid Guid => new ObjectGuid(Biota.Id);
 
         public PhysicsObj PhysicsObj { get; protected set; }
@@ -68,6 +93,8 @@ namespace ACE.Server.WorldObjects
         public EnchantmentManager EnchantmentManager;
 
         public List<AttackDamage> AttackList = new List<AttackDamage>();
+
+        public WorldObject() { }
 
         /// <summary>
         /// A new biota will be created taking all of its values from weenie.

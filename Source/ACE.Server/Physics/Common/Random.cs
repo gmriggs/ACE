@@ -7,7 +7,7 @@ namespace ACE.Server.Physics.Common
     public class Random
     {
         // multithread support
-        [ThreadStatic]
+        //[ThreadStatic]
         public static System.Random RNG;
 
         static Random()

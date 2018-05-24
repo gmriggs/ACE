@@ -1,3 +1,5 @@
+using ProtoBuf;
+
 namespace ACE.Entity
 {
     public enum GuidType
@@ -8,7 +10,8 @@ namespace ACE.Entity
         Dynamic,
     }
 
-    public struct ObjectGuid
+    [ProtoContract]
+    public class ObjectGuid
     {
         public static readonly ObjectGuid Invalid = new ObjectGuid(0);
 
@@ -33,10 +36,15 @@ namespace ACE.Entity
         public static uint DynamicMin { get; } = 0x80000000;
         public static uint DynamicMax { get; } = 0xFFFFFFFE; // Ends at E because uint.Max is reserved for "invalid"
 
+        [ProtoMember(1)]
         public uint Full { get; }
         public uint Low => Full & 0xFFFFFF;
         public uint High => (Full >> 24);
+
+        [ProtoMember(2)]
         public GuidType Type { get; }
+
+        public ObjectGuid() { }
 
         public ObjectGuid(uint full)
         {
@@ -69,12 +77,17 @@ namespace ACE.Entity
 
         public override bool Equals(object obj)
         {
-            return obj is ObjectGuid && (ObjectGuid)obj == this;
+            return obj is ObjectGuid && ((ObjectGuid)obj).Full == this.Full;
+        }
+
+        public bool Equals(ObjectGuid guid)
+        {
+            return Full.Equals(guid.Full);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Full.GetHashCode();
         }
     }
 }

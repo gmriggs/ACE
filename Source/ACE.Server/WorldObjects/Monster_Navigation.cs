@@ -207,6 +207,9 @@ namespace ACE.Server.WorldObjects
             if (Location.SetPosition(newPos))
                 UpdateLandblock();
 
+            if (NotifyUpdate != null)
+                NotifyUpdate(this);
+
             SendUpdatePosition();
         }
 
