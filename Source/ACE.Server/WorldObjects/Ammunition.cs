@@ -6,11 +6,15 @@ using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using ACE.Server.Network.GameMessages.Messages;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Ammunition : Stackable
     {
+        public Ammunition() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

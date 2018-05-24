@@ -4,11 +4,16 @@ using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using System.IO;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
+    [ProtoInclude(102, typeof(AdvocateItem))]
     public class GenericObject : WorldObject
     {
+        public GenericObject() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

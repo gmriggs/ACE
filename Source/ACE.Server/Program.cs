@@ -17,6 +17,8 @@ namespace ACE.Server
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private static readonly bool UseDiagnostics = true;
+
         public static void Main(string[] args)
         {
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
@@ -61,6 +63,11 @@ namespace ACE.Server
             log.Info("Initializing EventManager...");
             EventManager.Initialize();
 
+            if (UseDiagnostics)
+            {
+                log.Info("Initializing DiagnosticsManager...");
+                DiagnosticsManager.Initialize();
+            }
 
             // This should be last
             log.Info("Initializing CommandManager...");

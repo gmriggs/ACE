@@ -2,11 +2,22 @@ using ACE.Database.Models.Shard;
 using ACE.Database.Models.World;
 using ACE.Entity;
 using ACE.Entity.Enum.Properties;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
+    [ProtoInclude(103, typeof(Ammunition))]
+    [ProtoInclude(110, typeof(Coin))]
+    [ProtoInclude(119, typeof(Gem))]
+    [ProtoInclude(116, typeof(Food))]
+    [ProtoInclude(127, typeof(Missile))]
+    [ProtoInclude(137, typeof(SpellComponent))]
+
     public class Stackable : WorldObject
     {
+        public Stackable() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

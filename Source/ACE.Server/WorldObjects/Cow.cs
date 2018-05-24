@@ -6,11 +6,15 @@ using ACE.Entity.Enum;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.Motion;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Cow : Creature
     {
+        public Cow() { }
+
         private static readonly UniversalMotion motionTipRight = new UniversalMotion(MotionStance.Standing, new MotionItem(MotionCommand.TippedRight));
 
         /// <summary>
@@ -83,8 +87,11 @@ namespace ACE.Server.WorldObjects
             player.Session.Network.EnqueueSend(sendUseDoneEvent);
         }
 
-        private void Activate(ObjectGuid activator = new ObjectGuid())
-        {       
+        private void Activate(ObjectGuid activator = null)
+        {
+            if (activator == null)
+                activator = new ObjectGuid();
+
             AllowedActivator = activator.Full;
 
             CurrentLandblock.EnqueueBroadcastMotion(this, motionTipRight);

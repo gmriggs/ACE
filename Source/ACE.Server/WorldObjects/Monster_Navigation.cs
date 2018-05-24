@@ -219,6 +219,9 @@ namespace ACE.Server.WorldObjects
             var velocity = movement / deltaTime;
             PhysicsObj.CachedVelocity = velocity;
 
+            if (NotifyUpdate != null)
+                NotifyUpdate(this);
+
             SendUpdatePosition();
         }
 

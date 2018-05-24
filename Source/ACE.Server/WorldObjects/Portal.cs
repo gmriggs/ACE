@@ -7,14 +7,18 @@ using ACE.Entity.Enum.Properties;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Physics;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public sealed class Portal : WorldObject
     {
         //public Position Destination { get; private set; }
 
         // private byte portalSocietyId;
+        public Portal() { }
+
 
         private enum SpecialPortalWCID : ushort
         {

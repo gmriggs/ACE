@@ -10,14 +10,16 @@ using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Network.Motion;
 using System.Collections.Generic;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Door : WorldObject, Lock
     {
         private static List<GenericPropertyId> _updateLocked = new List<GenericPropertyId>() { new GenericPropertyId((uint)PropertyBool.Locked, PropertyType.PropertyBool) };
 
-
+        public Door() { }
 
         //private static readonly MovementData movementOpen = new MovementData();
         //private static readonly MovementData movementClosed = new MovementData();
@@ -210,8 +212,11 @@ namespace ACE.Server.WorldObjects
             checkDoorChain.EnqueueChain();
         }
 
-        public void Open(ObjectGuid opener = new ObjectGuid())
+        public void Open(ObjectGuid opener = null)
         {
+            if (opener == null)
+                opener = new ObjectGuid();
+
             if (CurrentMotionState == motionOpen)
                 return;
 
@@ -225,8 +230,11 @@ namespace ACE.Server.WorldObjects
                 UseTimestamp++;
         }
 
-        private void Close(ObjectGuid closer = new ObjectGuid())
+        private void Close(ObjectGuid closer = null)
         {
+            if (closer == null)
+                closer = new ObjectGuid();
+
             if (CurrentMotionState == motionClosed)
                 return;
 

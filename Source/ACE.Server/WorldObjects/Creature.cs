@@ -17,11 +17,20 @@ using ACE.Server.Network.Motion;
 using ACE.Server.Network.Sequence;
 using ACE.Server.Entity;
 using ACE.Server.WorldObjects.Entity;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+
+    [ProtoContract]
+    [ProtoInclude(113, typeof(Cow))]
+    [ProtoInclude(118, typeof(GamePiece))]
+    [ProtoInclude(131, typeof(Player))]
+    [ProtoInclude(141, typeof(Vendor))]
     public partial class Creature : Container
     {
+        public Creature() { }
+
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected static readonly UniversalMotion MotionDeath = new UniversalMotion(MotionStance.Standing, new MotionItem(MotionCommand.Dead));

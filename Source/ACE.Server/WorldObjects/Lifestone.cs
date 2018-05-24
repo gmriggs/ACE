@@ -8,11 +8,15 @@ using ACE.Entity.Enum.Properties;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Network.Motion;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Lifestone : WorldObject
     {
+        public Lifestone() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

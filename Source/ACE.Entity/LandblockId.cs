@@ -1,11 +1,16 @@
 using System;
 using ACE.Entity.Enum;
+using ProtoBuf;
 
 namespace ACE.Entity
 {
-    public struct LandblockId
+    [ProtoContract]
+    public class LandblockId: IEquatable<LandblockId>
     {
+        [ProtoMember(1)]
         public uint Raw { get; }
+
+        public LandblockId() { }
 
         public LandblockId(uint raw)
         {
@@ -50,22 +55,12 @@ namespace ACE.Entity
 
         public MapScope MapScope => (MapScope)((Raw & 0x0F00) >> 8);
 
-        public static bool operator ==(LandblockId c1, LandblockId c2)
-        {
-            return c1.Landblock == c2.Landblock;
-        }
-
-        public static bool operator !=(LandblockId c1, LandblockId c2)
-        {
-            return c1.Landblock != c2.Landblock;
-        }
-
         public bool IsAdjacentTo(LandblockId block)
         {
             return (Math.Abs(this.LandblockX - block.LandblockX) <= 1 && Math.Abs(this.LandblockY - block.LandblockY) <= 1);
         }
 
-        public LandblockId? TransitionX(int blockOffset)
+        public LandblockId TransitionX(int blockOffset)
         {
             var newX = LandblockX + blockOffset;
             if (newX < 0 || newX > 254)
@@ -74,7 +69,7 @@ namespace ACE.Entity
                 return new LandblockId((uint)newX << 24 | (uint)LandblockY << 16 | Raw & 0xFFFF);
         }
 
-        public LandblockId? TransitionY(int blockOffset)
+        public LandblockId TransitionY(int blockOffset)
         {
             var newY = LandblockY + blockOffset;
             if (newY < 0 || newY > 254)
@@ -86,13 +81,18 @@ namespace ACE.Entity
         public override bool Equals(object obj)
         {
             if (obj is LandblockId)
-                return ((LandblockId)obj) == this;
+                return ((LandblockId)obj).Landblock == this.Landblock;
             return false;
+        }
+
+        public bool Equals(LandblockId landblock)
+        {
+            return Landblock.Equals(landblock.Landblock);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Landblock.GetHashCode();
         }
     }
 }

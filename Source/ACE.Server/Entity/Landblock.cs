@@ -25,6 +25,7 @@ using ACE.Entity.Enum.Properties;
 using ACE.Server.Physics.Common;
 using Position = ACE.Entity.Position;
 using System.Numerics;
+using ProtoBuf;
 
 namespace ACE.Server.Entity
 {
@@ -34,6 +35,7 @@ namespace ACE.Server.Entity
     /// landblock goes from 0 to 192.  "indoor" (dungeon) landblocks have no
     /// functional limit as players can't freely roam in/out of them
     /// </summary>
+    [ProtoContract]
     public class Landblock : IActor
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -77,6 +79,7 @@ namespace ACE.Server.Entity
         private NestedActionQueue actionQueue;
         private NestedActionQueue motionQueue;
 
+        [ProtoMember(1)]
         public LandblockId Id { get; }
 
         public CellLandblock CellLandblock;

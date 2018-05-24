@@ -23,13 +23,19 @@ using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Network.Motion;
 using ACE.Server.WorldObjects.Entity;
 using ACE.Server.Physics;
+using ProtoBuf;
 
 using Position = ACE.Entity.Position;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
+    [ProtoInclude(134, typeof(Sentinel))]
+
     public partial class Player : Creature
     {
+        public Player() { }
+
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public Session Session { get; }
@@ -157,6 +163,8 @@ namespace ACE.Server.WorldObjects
         {
             EnchantmentManager.HeartBeat();
             VitalTick();
+
+            //var gameState = new Diagnostics.Entity.GameState(true);
 
             QueueNextHeartBeat();
         }

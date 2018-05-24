@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using ProtoBuf;
 
 namespace ACE.Server.Entity.Actions
 {
+    [ProtoContract]
     public interface IActor
     {
         void RunActions();

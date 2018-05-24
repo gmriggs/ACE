@@ -2,11 +2,15 @@ using ACE.Database.Models.Shard;
 using ACE.Database.Models.World;
 using ACE.Entity;
 using ACE.Entity.Enum.Properties;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Coin : Stackable
     {
+        public Coin() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

@@ -9,11 +9,15 @@ using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Network.Motion;
 using ACE.Server.Physics.Animation;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Healer : WorldObject
     {
+        public Healer() { }
+
         public ushort? UsesLeft
         {
             get => Structure;

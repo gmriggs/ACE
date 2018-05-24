@@ -8,11 +8,15 @@ using ACE.Entity.Enum.Properties;
 using ACE.Server.Entity;
 using ACE.Server.Network.GameMessages.Messages;
 using System.Collections.Generic;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Switch : WorldObject
     {
+        public Switch() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

@@ -10,6 +10,7 @@ using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Factories;
 using ACE.Server.Network.Motion;
+using ProtoBuf;
 
 using log4net;
 
@@ -23,6 +24,7 @@ namespace ACE.Server.WorldObjects
     /// ** Sell Data Flow **
     /// Player.HandleActionSell->Vendor.SellItemsValidateTransaction->Player.HandleActionSellFinalTransaction->Vendor.SellItemsFinalTransaction
     /// </summary>
+    [ProtoContract]
     public class Vendor : Creature
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -31,6 +33,8 @@ namespace ACE.Server.WorldObjects
         private Dictionary<ObjectGuid, WorldObject> uniqueItemsForSale = new Dictionary<ObjectGuid, WorldObject>();
 
         private bool inventoryloaded;
+
+        public Vendor() { }
 
         /// <summary>
         /// A new biota be created taking all of its values from weenie.

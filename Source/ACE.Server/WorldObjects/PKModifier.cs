@@ -9,11 +9,15 @@ using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Network.Motion;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class PKModifier : WorldObject
     {
+        public PKModifier() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

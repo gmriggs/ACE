@@ -3,11 +3,15 @@ using ACE.Database.Models.World;
 using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Bindstone : WorldObject
     {
+        public Bindstone() { }
+
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
         /// </summary>

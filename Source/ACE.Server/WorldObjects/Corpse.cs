@@ -5,12 +5,16 @@ using ACE.Entity.Enum;
 using ACE.Server.Network.Motion;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Managers;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Corpse : Container
     {
         private static readonly UniversalMotion dead = new UniversalMotion(MotionStance.Standing, new MotionItem(MotionCommand.Dead));
+
+        public Corpse() { }
 
         /// <summary>
         /// Timer's value is in heartbeats, which is every 5 seconds. This value equates for five minutes, including the first heartbeat queued at WO creation.

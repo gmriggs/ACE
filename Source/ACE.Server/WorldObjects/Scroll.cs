@@ -13,9 +13,11 @@ using ACE.Server.Network;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Network.Motion;
+using ProtoBuf;
 
 namespace ACE.Server.WorldObjects
 {
+    [ProtoContract]
     public class Scroll : WorldObject
     {
         private static readonly UniversalMotion motionReading = new UniversalMotion(MotionStance.Standing, new MotionItem(MotionCommand.Reading));
@@ -31,6 +33,8 @@ namespace ACE.Server.WorldObjects
         private const uint spellLevel8 = 350;
 
         private const IdentifyResponseFlags idFlags = IdentifyResponseFlags.IntStatsTable | IdentifyResponseFlags.StringStatsTable | IdentifyResponseFlags.SpellBook;
+
+        public Scroll() { }
 
         /// <summary>
         /// A new biota be created taking all of its values from weenie.
