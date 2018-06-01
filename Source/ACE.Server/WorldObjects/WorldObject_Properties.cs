@@ -312,6 +312,7 @@ namespace ACE.Server.WorldObjects
         }
 
         public static Action<WorldObject> NotifyUpdate;
+        public bool ForceSend = false;
 
         public void SetPosition(PositionType positionType, Position position) // { Biota.SetPosition(positionType, position); }
         {
@@ -553,6 +554,7 @@ namespace ACE.Server.WorldObjects
             set { if (!value.HasValue) RemoveProperty(PropertyBool.NoDraw); else SetProperty(PropertyBool.NoDraw, value.Value); }
         }
 
+        [ProtoMember(3)]
         public bool? Missile { get; set; }
 
         public bool? Pushable { get; set; }

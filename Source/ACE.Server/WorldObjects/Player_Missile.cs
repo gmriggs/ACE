@@ -79,11 +79,14 @@ namespace ACE.Server.WorldObjects
             var damageSource = LaunchProjectile(target);
 
             // todo: get correct animlenghts for shoot + reload + aim
+            float targetTime = 0.0f;
+            targetTime = LaunchProjectile(target);
             var animLength = ReloadMotion() * 2.5f;
 
             var actionChain = new ActionChain();
             //actionChain.AddDelaySeconds(targetTime);
             //actionChain.AddAction(this, () => DamageTarget(target, damageSource));
+            //actionChain.AddAction(this, () => DamageTarget(target));
             if (creature.Health.Current > 0 && GetCharacterOption(CharacterOption.AutoRepeatAttacks))
             {
                 // reload animation, accuracy bar refill

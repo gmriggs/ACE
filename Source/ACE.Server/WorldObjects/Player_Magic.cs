@@ -36,7 +36,7 @@ namespace ACE.Server.WorldObjects
             WorldObject target = CurrentLandblock.GetObject(guidTarget) as WorldObject;
             TargetCategory targetCategory = TargetCategory.WorldObject;
 
-            if (guidTarget == Guid)
+            if (guidTarget.Equals(Guid))
                 targetCategory = TargetCategory.Self;
             if (target == null)
             {
@@ -282,7 +282,7 @@ namespace ACE.Server.WorldObjects
 
             if (targetCategory == TargetCategory.WorldObject)
             {
-                if (guidTarget != Guid)
+                if (!guidTarget.Equals(Guid))
                 {
                     float distanceTo = Location.Distance2D(target.Location);
 
@@ -519,7 +519,7 @@ namespace ACE.Server.WorldObjects
                             }
                             break;
                         case MagicSchool.ItemEnchantment:
-                            if (guidTarget == Guid)
+                            if (guidTarget.Equals(Guid))
                                 CurrentLandblock.EnqueueBroadcast(Location, new GameMessageScript(Guid, (PlayScript)spell.CasterEffect, scale));
                             else
                                 CurrentLandblock.EnqueueBroadcast(Location, new GameMessageScript(target.Guid, (PlayScript)spell.TargetEffect, scale));

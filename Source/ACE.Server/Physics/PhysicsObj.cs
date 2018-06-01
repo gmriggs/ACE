@@ -1954,6 +1954,8 @@ namespace ACE.Server.Physics
             var player = WeenieObj.WorldObject as WorldObjects.Player;
             if (player == null) return;
 
+            if (player == null) return;
+
             foreach (var obj in addUpdateObjs.AddObjects)
                 player.TrackObject(obj.WeenieObj.WorldObject);
 
@@ -1986,8 +1988,7 @@ namespace ACE.Server.Physics
                 if (addUpdateObjs == null) return;
                 enqueue_objs(addUpdateObjs);
             }
-
-            //Console.WriteLine("Cell: " + newCell.ID.ToString("X8") + " (" + newCell.ShadowObjectList.Count + ")");
+            Console.WriteLine("Cell: " + newCell.ID.ToString("X8") + " (" + newCell.ShadowObjectList.Count + ")");
         }
 
         public bool enter_world(Position pos)
@@ -3509,6 +3510,10 @@ namespace ACE.Server.Physics
                 return;
 
             PhysicsTimer.CurrentTime = UpdateTime;
+
+            //if (info)
+                //Console.WriteLine("deltaTime: " + deltaTime);
+
             if (deltaTime <= PhysicsGlobals.EPSILON /*|| deltaTime > 2.0f */)   // commented out for debugging
             {
                 //UpdateTime = Timer.CurrentTime;   // consume time?

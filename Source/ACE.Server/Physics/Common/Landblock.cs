@@ -159,7 +159,7 @@ namespace ACE.Server.Physics.Common
 
             for (var i = 0; i < Terrain.Count; i++)
             {
-                var terrain = Terrain[(int)i];
+                var terrain = Terrain[i];
 
                 var terrainType = terrain >> 2 & 0x1F;      // TerrainTypes table size = 32 (grass, desert, volcano, etc.)
                 var sceneType = terrain >> 11;              // SceneTypes table size = 89 total, 32 which can be indexed for each terrain type

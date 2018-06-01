@@ -347,6 +347,9 @@ namespace ACE.Server.Entity
                 wolist = GetWorldObjectsInRange(wo, MaxObjectRange);
                 AddPlayerTracking(wolist, ((Player)wo));
             }
+
+            if (WorldObject.NotifyUpdate != null)
+                WorldObject.NotifyUpdate(wo);
         }
 
         public void RemoveWorldObject(ObjectGuid objectId, bool adjacencyMove)

@@ -188,6 +188,8 @@ namespace ACE.Server.WorldObjects
             if (player.Teleporting)
                 return;
 
+            if (player.Teleporting) return;
+
             player.Teleporting = true;
 
             if (Destination != null)

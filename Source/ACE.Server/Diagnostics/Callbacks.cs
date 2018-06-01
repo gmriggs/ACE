@@ -31,8 +31,9 @@ namespace ACE.Server.Diagnostics
 
             var isPlayer = wo is Player;
             var isMonster = (creature != null && creature.IsMonster());
+            var isMissile = wo.Missile != null && wo.Missile.Value;
 
-            return (isPlayer || isMonster);
+            return (isPlayer || isMonster || isMissile);
         }
 
         public static bool UpdateSendable(WorldObject wo)
@@ -41,8 +42,9 @@ namespace ACE.Server.Diagnostics
 
             var isPlayer = wo is Player;
             var isMonster = (creature != null && creature.IsAttackable());
+            var isMissile = wo.Missile != null && wo.Missile.Value;
 
-            return (isPlayer || isMonster);
+            return (isPlayer || isMonster || isMissile || wo.ForceSend);
         }
     }
 }

@@ -726,6 +726,8 @@ namespace ACE.Server.WorldObjects
 
             var useGravity = spellProjectile.SpellType == SpellProjectile.ProjectileSpellType.Arc;
             spellProjectile.Velocity = GetSpellProjectileVelocity(origin, target, dest, speed, useGravity, out time);
+            Console.WriteLine("Velocity: " + spellProjectile.Velocity.Get());
+
             spellProjectile.FlightTime = time;
 
             var loc = caster.Location;
@@ -785,8 +787,13 @@ namespace ACE.Server.WorldObjects
             if (!useGravity)    // no target tracking for arc spells
                 targetVelocity = target.PhysicsObj.CachedVelocity;
 
+            //Trajectory.SolveBallisticArc(origin, speed, dest, out velocity, out time);
             var gravity = useGravity ? PhysicsGlobals.Gravity : 0;
             Trajectory.solve_ballistic_arc_lateral(origin, speed, dest, targetVelocity, gravity, out Vector3 velocity, out time, out var impactPoint);
+
+            Console.WriteLine("Spell velocity: " + velocity);
+            Console.WriteLine("Origin: " + origin);
+            Console.WriteLine("Dest: " + dest);
 
             return new AceVector3(velocity.X, velocity.Y, velocity.Z);
         }

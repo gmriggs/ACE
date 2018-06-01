@@ -1322,6 +1322,9 @@ namespace ACE.Server.WorldObjects
                     WorldManager.UpdateLandblock.Add(this);
             }
 
+            if (NotifyUpdate != null)
+                NotifyUpdate(this);
+
             // return position change?
 
             return false;

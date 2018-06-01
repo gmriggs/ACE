@@ -631,11 +631,6 @@ namespace ACE.Server.WorldObjects
             // empty base
         }
 
-        public virtual void OnCollideObjectEnd(WorldObject target)
-        {
-            // empty base
-        }
-
         public virtual void OnCollideEnvironment()
         {
             // empty base

@@ -60,7 +60,7 @@ namespace ACE.Server.Entity
 
                     if (noise < obj.Freq && obj.WeenieObj == 0)
                     {
-                        var position = Displace(obj, globalCellX, globalCellY, j);
+                        var position = Displace(obj, globalCellX, globalCellY, (uint)j);
 
                         // ensure within landblock range, and not near road
                         var lx = cellX * LandblockMesh.CellSize + position.X;
@@ -74,8 +74,8 @@ namespace ACE.Server.Entity
                         model.ObjectDesc = obj;
                         model.Cell = new Vector2(cellX, cellY);
                         model.Position = new Vector3(position.X, position.Y, GetZ(_landblock, model));
-                        model.Rotation = Quaternion.CreateFromYawPitchRoll(0, 0, RotateObj(obj, globalCellX, globalCellY, j));
-                        model.Scale = ScaleObj(obj, globalCellX, globalCellY, j);
+                        model.Rotation = Quaternion.CreateFromYawPitchRoll(0, 0, RotateObj(obj, globalCellX, globalCellY, (uint)j));
+                        model.Scale = ScaleObj(obj, globalCellX, globalCellY, (uint)j);
                         model.BuildPolygons();
                         model.BoundingBox = new BoundingBox(model);
 

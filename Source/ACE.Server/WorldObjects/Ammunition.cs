@@ -82,6 +82,9 @@ namespace ACE.Server.WorldObjects
             var player = ProjectileSource as Player;
             if (player != null)
                 player.Session.Network.EnqueueSend(new GameMessageSystemChat("Your missile attack hit the environment.", ChatMessageType.Broadcast));
+
+            Console.WriteLine("Projectile.OnCollideEnvironment");
+            CurrentLandblock.RemoveWorldObject(Guid, false);
         }
     }
 }
