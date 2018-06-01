@@ -60,7 +60,7 @@ namespace ACE.Server.Entity
 
                     if (noise < obj.Freq && obj.WeenieObj == 0)
                     {
-                        var position = Displace(obj, globalCellX, globalCellY, j);
+                        var position = Displace(obj, globalCellX, globalCellY, (uint)j);
 
                         // ensure within landblock range, and not near road
                         var lx = cellX * LandblockMesh.CellSize + position.X;
@@ -74,8 +74,8 @@ namespace ACE.Server.Entity
                         model.ObjectDesc = obj;
                         model.Cell = new Vector2(cellX, cellY);
                         model.Position = new Vector3(position.X, position.Y, GetZ(_landblock, model));
-                        model.Rotation = Quaternion.CreateFromYawPitchRoll(0, 0, RotateObj(obj, globalCellX, globalCellY, j));
-                        model.Scale = ScaleObj(obj, globalCellX, globalCellY, j);
+                        model.Rotation = Quaternion.CreateFromYawPitchRoll(0, 0, RotateObj(obj, globalCellX, globalCellY, (uint)j));
+                        model.Scale = ScaleObj(obj, globalCellX, globalCellY, (uint)j);
                         model.BuildPolygons();
                         model.BoundingBox = new BoundingBox(model);
 
@@ -98,7 +98,7 @@ namespace ACE.Server.Entity
         /// <param name="iy">The global cell Y-offset</param>
         /// <param name="iq">The scene index of the object</param>
         /// <returns>The new location of the object</returns>
-        public static Vector2 Displace(ObjectDesc obj, uint ix, uint iy, int iq)
+        public static Vector2 Displace(ObjectDesc obj, uint ix, uint iy, uint iq)
         {
             float x;
             float y;
@@ -133,7 +133,7 @@ namespace ACE.Server.Entity
         /// <param name="x">The global cell X-offset</param>
         /// <param name="y">The global cell Y-offset</param>
         /// <param name="k">The scene index of the object</param>
-        public static float ScaleObj(ObjectDesc obj, uint x, uint y, int k)
+        public static float ScaleObj(ObjectDesc obj, uint x, uint y, uint k)
         {
             var scale = 1.0f;
 
@@ -152,7 +152,7 @@ namespace ACE.Server.Entity
         /// <summary>
         /// Returns the rotation for a scenery object
         /// </summary>
-        public static float RotateObj(ObjectDesc obj, uint x, uint y, int k)
+        public static float RotateObj(ObjectDesc obj, uint x, uint y, uint k)
         {
             if (obj.MaxRotation <= 0.0f)
                 return 0.0f;

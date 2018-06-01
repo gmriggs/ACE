@@ -8,8 +8,8 @@ namespace ACE.DatLoader.Entity
     /// </summary>
     public class Frame : IUnpackable
     {
-        public Vector3 Origin { get; private set; }
-        public Quaternion Orientation { get; private set; }
+        public Vector3 Origin { get; set; }
+        public Quaternion Orientation { get; set; }
 
         public Frame()
         {

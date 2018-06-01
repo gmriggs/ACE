@@ -1,3 +1,4 @@
+using System;
 using ProtoBuf;
 
 namespace ACE.Entity
@@ -11,7 +12,7 @@ namespace ACE.Entity
     }
 
     [ProtoContract]
-    public class ObjectGuid
+    public class ObjectGuid: IEquatable<ObjectGuid>
     {
         public static readonly ObjectGuid Invalid = new ObjectGuid(0);
 
@@ -65,23 +66,10 @@ namespace ACE.Entity
             return Type == GuidType.Player;
         }
 
-        public static bool operator ==(ObjectGuid g1, ObjectGuid g2)
-        {
-            return g1.Full == g2.Full;
-        }
-
-        public static bool operator !=(ObjectGuid g1, ObjectGuid g2)
-        {
-            return g1.Full != g2.Full;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is ObjectGuid && ((ObjectGuid)obj).Full == this.Full;
-        }
-
         public bool Equals(ObjectGuid guid)
         {
+            if (guid == null) return false;
+
             return Full.Equals(guid.Full);
         }
 

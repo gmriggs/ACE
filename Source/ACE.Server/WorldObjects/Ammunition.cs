@@ -1,3 +1,4 @@
+using System;
 using ACE.Database.Models.Shard;
 using ACE.Database.Models.World;
 using ACE.Entity;
@@ -5,6 +6,7 @@ using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using System.IO;
 using ProtoBuf;
+using ACE.Server.Network.GameMessages.Messages;
 
 namespace ACE.Server.WorldObjects
 {
@@ -40,6 +42,36 @@ namespace ACE.Server.WorldObjects
             base.SerializeIdentifyObjectResponse(writer, success, flags);
 
             WriteIdentifyObjectWeaponsProfile(writer, this, success);
+        }
+
+        public override void OnCollideObject(WorldObject target)
+        {
+            Console.WriteLine("Projectile.OnCollideObject");
+
+            if (ProjectileTarget == null || !ProjectileTarget.Equals(target))
+            {
+                Console.WriteLine("Unintended projectile target!");
+                OnCollideEnvironment();
+                return;
+            }
+
+            // take damage
+            var player = ProjectileSource as Player;
+            if (player != null)
+            {
+                var damage = player.DamageTarget(target);
+
+                if (damage > 0)
+                    player.Session.Network.EnqueueSend(new GameMessageSound(Guid, Sound.Collision, 1.0f));    // todo: landblock broadcast?
+            }
+
+            CurrentLandblock.RemoveWorldObject(Guid, false);
+        }
+
+        public override void OnCollideEnvironment()
+        {
+            Console.WriteLine("Projectile.OnCollideEnvironment");
+            CurrentLandblock.RemoveWorldObject(Guid, false);
         }
     }
 }

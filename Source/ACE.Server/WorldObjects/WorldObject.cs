@@ -65,6 +65,9 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public Biota Biota { get; }
 
+        public WorldObject ProjectileSource;
+        public WorldObject ProjectileTarget;
+
         /// <summary>
         /// This is just a wrapper around Biota.Id
         /// </summary>
@@ -358,7 +361,7 @@ namespace ACE.Server.WorldObjects
 
         public Position RequestedLocation { get; private set; }
 
-        public Position PreviousLocation { get; protected set; }
+        public Position PreviousLocation { get; set; }
 
         /// <summary>
         /// Should only be adjusted by LandblockManager -- default is null
@@ -617,9 +620,14 @@ namespace ACE.Server.WorldObjects
             return snapshot;
         }*/
 
-        public virtual void HandleActionOnCollide(ObjectGuid playerId)
+        public virtual void OnCollideObject(WorldObject target)
         {
-            // todo: implement.  default is probably to do nothing.
+            // empty base
+        }
+
+        public virtual void OnCollideEnvironment()
+        {
+            // empty base
         }
 
         public void HandleActionMotion(UniversalMotion motion)
