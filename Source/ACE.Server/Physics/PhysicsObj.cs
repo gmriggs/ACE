@@ -1956,6 +1956,8 @@ namespace ACE.Server.Physics
 
             if (player == null) return;
 
+            if (player == null) return;
+
             foreach (var obj in addUpdateObjs.AddObjects)
                 player.TrackObject(obj.WeenieObj.WorldObject);
 
@@ -1988,7 +1990,7 @@ namespace ACE.Server.Physics
                 if (addUpdateObjs == null) return;
                 enqueue_objs(addUpdateObjs);
             }
-            Console.WriteLine("Cell: " + newCell.ID.ToString("X8") + " (" + newCell.ShadowObjectList.Count + ")");
+            //Console.WriteLine("Cell: " + newCell.ID.ToString("X8") + " (" + newCell.ShadowObjectList.Count + ")");
         }
 
         public bool enter_world(Position pos)
