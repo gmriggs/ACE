@@ -1313,10 +1313,9 @@ namespace ACE.Server.WorldObjects
             var landblockUpdate = (cellBefore >> 16) != (curCell.ID >> 16);
             if (isMoved)
             {
-                //var dist = Vector3.Distance(newPos, ProjectileTarget.PhysicsObj.Position.Frame.Origin);
-                //Console.WriteLine("Dist: " + dist);
+                if (curCell.ID != cellBefore)
+                    Location.LandblockId = new LandblockId(curCell.ID);
 
-                Location.LandblockId = new LandblockId(curCell.ID);
                 Location.Pos = newPos;
                 if (landblockUpdate)
                     WorldManager.UpdateLandblock.Add(this);

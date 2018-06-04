@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Numerics;
 using ACE.Database.Models.Shard;
 using ACE.Database.Models.World;
 using ACE.Entity;
@@ -46,13 +47,13 @@ namespace ACE.Server.WorldObjects
 
         public override void OnCollideObject(WorldObject target)
         {
-            Console.WriteLine("Projectile.OnCollideObject(" + target.Guid.Full.ToString("X8") + ")");
-
             if (!PhysicsObj.is_active()) return;
+
+            Console.WriteLine(string.Format("Projectile.OnCollideObject({0} - {1} with {2} - {3})", Guid.Full.ToString("X8"), Name, target.Guid.Full.ToString("X8"), target.Name));
 
             if (ProjectileTarget == null || !ProjectileTarget.Equals(target))
             {
-                Console.WriteLine("Unintended projectile target!");
+                Console.WriteLine("Unintended projectile target! (should be " + ProjectileTarget.Guid.Full.ToString("X8") + " - " + ProjectileTarget.Name + ")");
                 OnCollideEnvironment();
                 return;
             }
@@ -75,16 +76,14 @@ namespace ACE.Server.WorldObjects
         {
             if (!PhysicsObj.is_active()) return;
 
-            Console.WriteLine("Projectile.OnCollideEnvironment()");
+            Console.WriteLine("Projectile.OnCollideEnvironment(" + Guid.Full.ToString("X8") + ")");
+
             CurrentLandblock.RemoveWorldObject(Guid, false);
             PhysicsObj.set_active(false);
 
             var player = ProjectileSource as Player;
             if (player != null)
                 player.Session.Network.EnqueueSend(new GameMessageSystemChat("Your missile attack hit the environment.", ChatMessageType.Broadcast));
-
-            Console.WriteLine("Projectile.OnCollideEnvironment");
-            CurrentLandblock.RemoveWorldObject(Guid, false);
         }
     }
 }
