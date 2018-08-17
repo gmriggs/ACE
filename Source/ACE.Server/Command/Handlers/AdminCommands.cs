@@ -14,6 +14,7 @@ using ACE.DatLoader;
 using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Server.Entity;
 using ACE.Server.Factories;
 using ACE.Server.Managers;
 using ACE.Server.Network;
@@ -960,6 +961,8 @@ namespace ACE.Server.Command.Handlers
                 loot.Location = session.Player.Location.InFrontOf(5f, true);
             else
                 loot.Location = session.Player.Location.InFrontOf((loot.UseRadius ?? 2) > 2 ? loot.UseRadius.Value : 2);
+
+            loot.Location.LandblockId = new LandblockId(loot.Location.GetCell());
             //inventoryItem.PhysicsDescriptionFlag |= PhysicsDescriptionFlag.Position;
             //LandblockManager.AddObject(loot);
             loot.EnterWorld();
