@@ -277,7 +277,7 @@ namespace ACE.Server.Physics.Common
             foreach (var adjacent in adjacents)
                 visibleObjs.AddRange(adjacent.ServerObjects);
 
-            return visibleObjs;
+            return visibleObjs.Where(i => i.ID != PhysicsObj.ID).ToList();
 
             /*var cells = GetOutdoorCells(cell);
 
@@ -308,7 +308,7 @@ namespace ACE.Server.Physics.Common
                 visibleObjs.AddRange(envCell.ObjectList);
             }
 
-            return visibleObjs.Where(i => !i.DatObject).Distinct().ToList();
+            return visibleObjs.Where(i => !i.DatObject && i.ID != PhysicsObj.ID).Distinct().ToList();
         }
 
         /// <summary>
@@ -362,6 +362,7 @@ namespace ACE.Server.Physics.Common
             ObjectTable.Remove(obj.ID);
             VisibleObjectTable.Remove(obj.ID);
             DestructionQueue.Remove(obj);
+            VoyeurTable.Remove(obj.ID);
 
             obj.ObjMaint.RemoveVoyeur(PhysicsObj);
         }
@@ -453,6 +454,18 @@ namespace ACE.Server.Physics.Common
 
             var visiblePlayers = GetVisibleObjects(PhysicsObj.CurCell).Where(o => o.IsPlayer).ToList();
             AddVoyeurs(visiblePlayers);
+        }
+
+        /// <summary>
+        /// The destructor cleans up all ObjMaint references
+        /// to this PhysicsObj
+        /// </summary>
+        public void DestroyObject()
+        {
+            foreach (var obj in ObjectTable.Values)
+                obj.ObjMaint.RemoveObject(PhysicsObj);
+
+            RemoveServerObject(PhysicsObj);
         }
     }
 }
