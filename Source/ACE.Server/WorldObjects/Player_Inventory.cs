@@ -725,6 +725,8 @@ namespace ACE.Server.WorldObjects
 
         public bool TryWieldItem(WorldObject item, int wieldLocation)
         {
+            //Console.WriteLine($"TryWieldItem({item.Name}, {(EquipMask)wieldLocation})");
+
             var wieldError = CheckWieldRequirement(item);
 
             if (wieldError != WeenieError.None)
@@ -736,6 +738,17 @@ namespace ACE.Server.WorldObjects
                 Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, errorType: wieldError));
                 Session.Network.EnqueueSend(new GameEventItemServerSaysContainId(Session, item, container));
                 return false;
+            }
+
+            // unwield missile launcher if dual wielding
+            if ((EquipMask)wieldLocation == EquipMask.Shield && !item.IsShield)
+            {
+                var mainWeapon = GetEquippedWeapon();
+                if (mainWeapon != null && mainWeapon.CurrentWieldedLocation == EquipMask.MissileWeapon)
+                {
+                    if (!UnwieldItemWithNetworking(this, mainWeapon))
+                        return false;
+                }
             }
 
             TryRemoveFromInventory(item.Guid, out var containerItem);
