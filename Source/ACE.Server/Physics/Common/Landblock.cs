@@ -596,6 +596,7 @@ namespace ACE.Server.Physics.Common
             }
             return adjacents;
         }
+<<<<<<< HEAD
 
         private List<EnvCell> envcells;
 
@@ -617,5 +618,7 @@ namespace ACE.Server.Physics.Common
             }
             return envcells;
         }
+=======
+>>>>>>> master
     }
 }
