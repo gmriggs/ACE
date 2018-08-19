@@ -1094,12 +1094,7 @@ namespace ACE.Server.WorldObjects
             else
                 globalOrigin.Z += caster.Height * 2.0f / 3.0f;
 
-<<<<<<< HEAD
             var direction = Vector3.Normalize(globalDest - globalOrigin);
-=======
-            LandblockManager.AddObject(spellProjectile);
-            spellProjectile.EnqueueBroadcast(new GameMessageScript(spellProjectile.Guid, ACE.Entity.Enum.PlayScript.Launch, spellProjectile.PlayscriptIntensity));
->>>>>>> master
 
             // This is not perfect but is close to values that retail used. TODO: revisit this later.
             globalOrigin += direction * (caster.PhysicsObj.GetRadius() + spellProjectile.PhysicsObj.GetRadius());
