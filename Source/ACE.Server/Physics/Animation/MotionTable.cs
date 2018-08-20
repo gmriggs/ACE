@@ -317,14 +317,14 @@ namespace ACE.Server.Physics.Animation
         public bool StopSequenceMotion(uint motion, float speed, MotionState currState, Sequence sequence, ref uint numAnims)
         {
             numAnims = 0;
-            if ((motion & 0x40000000) != 0 && currState.Substate == motion)
+            if ((motion & (uint)CommandMask.SubState) != 0 && currState.Substate == motion)
             {
                 uint style = 0;
                 StyleDefaults.TryGetValue(currState.Style, out style);
                 GetObjectSequence(style, currState, sequence, 1.0f, ref numAnims, true);
                 return true;
             }
-            if ((motion & 0x20000000) == 0)
+            if ((motion & (uint)CommandMask.Modifier) == 0)
                 return false;
 
             var modifier = currState.Modifiers.First;
