@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using ACE.Entity;
 using ACE.Entity.Enum;
+using ACE.Server.Entity;
 using ACE.Server.Managers;
 using ACE.Server.Physics.Animation;
 using ACE.Server.Physics.Common;
@@ -100,7 +101,7 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public void OnTurnComplete()
         {
-            var dir = Vector3.Normalize(AttackTarget.Location.GlobalPos - Location.GlobalPos);
+            var dir = Vector3.Normalize(AttackTarget.Location.ToGlobal() - Location.ToGlobal());
             Location.Rotate(dir);
 
             IsTurning = false;
@@ -114,7 +115,7 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public void StartMove()
         {
-            LastMoveTime = Timer.CurrentTime;
+            LastMoveTime = Physics.Common.Timer.CurrentTime;
             IsMoving = true;
         }
 
@@ -175,7 +176,7 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public float GetDistanceToTarget()
         {
-            var dist = (AttackTarget.Location.GlobalPos - Location.GlobalPos).Length();
+            var dist = (AttackTarget.Location.ToGlobal() - Location.ToGlobal()).Length();
             dist -= AttackTarget.PhysicsObj.GetRadius() + PhysicsObj.GetRadius();
             return dist;
         }
@@ -186,7 +187,7 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public Vector3 GetDestination()
         {
-            var dir = Vector3.Normalize(Location.GlobalPos - AttackTarget.Location.GlobalPos);
+            var dir = Vector3.Normalize(Location.ToGlobal() - AttackTarget.Location.ToGlobal());
             return AttackTarget.Location.Pos + dir * (AttackTarget.PhysicsObj.GetRadius() + PhysicsObj.GetRadius());
         }
 
