@@ -21,11 +21,11 @@ artifacts:
 
 deploy:
   release: ACE-v$(appveyor_build_version)
-  description: 'Test releases of binaries to GitHub relases'
+  description: 'Test releases of binaries to GitHub releases'
   provider: GitHub
   auth_token:
     secure: ZKXj2ehkYVw0oPyQddD6bHHy/xHfnqMmqHowDb7qG4rptm2LY9SVqF8ELjRzWE+V # your encrypted token from GitHub
-  artifact: Source\ACE*\bin\x64\Release\*.dll         # upload all NuGet packages to release assets
+  artifact: Source\ACE.Server\bin\x64\Release\netcoreapp2.1\ACE*.dll        # upload all NuGet packages to release assets
   draft: false
   prerelease: false
   on:
