@@ -18,7 +18,7 @@ test_script:
  - cmd: dotnet test --diag ACETests-Server.txt --no-build "Source\ACE.Server.Tests"
  - cmd: dotnet test --diag ACETests-Database.txt --no-build "Source\ACE.Database.Tests"
 artifacts:
-  - path: '**\ACE*.dll'
+  - path: 'Source\ACE.Server\bin\x64\Release\netcoreapp2.1\ACE*.dll'
 
 deploy:
   release: ACE-v$(appveyor_build_version)
