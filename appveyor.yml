@@ -5,6 +5,7 @@ image: Visual Studio 2017
 pull_requests:
   do_not_increment_build_number: true
 platform: x64
+configuration: Release
 before_build:
 - cmd: >-
     source\AppVeyor\AppVeyorBeforeCompile.bat
@@ -17,3 +18,15 @@ test_script:
  - cmd: dotnet test --diag ACETests-Database.txt --no-build "Source\ACE.Database.Tests"
 artifacts:
   - path: '**\ACE*.dll'
+
+deploy:
+  release: ACE-v$(appveyor_build_version)
+  description: 'Test releases of binaries to GitHub relases'
+  provider: GitHub
+  auth_token:
+    secure: ZKXj2ehkYVw0oPyQddD6bHHy/xHfnqMmqHowDb7qG4rptm2LY9SVqF8ELjRzWE+V # your encrypted token from GitHub
+  artifact: Source\ACE*\bin\x64\Release\*.dll         # upload all NuGet packages to release assets
+  draft: false
+  prerelease: false
+  on:
+    branch: appveyortest  
