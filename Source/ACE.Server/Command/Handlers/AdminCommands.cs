@@ -2307,5 +2307,56 @@ namespace ACE.Server.Command.Handlers
                 Console.WriteLine("---------------");
             }
         }
+
+        [CommandHandler("fix-dread-pirate", AccessLevel.Admin, CommandHandlerFlag.None, 0, "Fixes the Dread Pirate Roberts allegiance directly", "")]
+        public static void HandleFixDreadPirate(Session session, params string[] parameters)
+        {
+            var players = PlayerManager.GetAllPlayers();
+
+            var monarch = players.FirstOrDefault(i => i.Name.Equals("Dread Pirate Roberts"));
+
+            foreach (var player in players.Where(i => i.Name.Contains("Dread") || i.Name.Contains("Ebola")))
+            {
+                Console.WriteLine($"Fixed: {player.Name}");
+
+                player.MonarchId = monarch.Guid.Full;
+
+                if (player == monarch)
+                    player.PatronId = null;
+
+                player.SaveBiotaToDatabase();
+            }
+        }
+
+        [CommandHandler("verify-xp", AccessLevel.Admin, CommandHandlerFlag.None, 0, "fixes skill ranks from spec temple", "")]
+        public static void HandleVerifySkill(Session session, params string[] parameters)
+        {
+            var players = PlayerManager.GetAllOffline();
+
+            foreach (var player in players)
+            {
+                var updated = false;
+
+                foreach (var skill in player.Biota.BiotaPropertiesSkill)
+                {
+                    var rank = skill.LevelFromPP;
+
+                    var sac = (SkillAdvancementClass)skill.SAC;
+                    if (sac < SkillAdvancementClass.Trained)
+                        continue;
+
+                    var correctRank = Player.CalcSkillRank(sac, skill.PP);
+
+                    if (rank != correctRank)
+                    {
+                        Console.WriteLine($"{player.Name}'s {(Skill)skill.Type} rank is {rank}, should be {correctRank}");
+			skill.LevelFromPP = (ushort)correctRank;
+                        updated = true;
+                    }
+                }
+                if (updated)
+                    player.SaveBiotaToDatabase();
+            }
+        }
     }
 }
