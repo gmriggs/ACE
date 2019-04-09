@@ -446,5 +446,14 @@ namespace ACE.Server.Physics
 
             return hash;
         }
+
+        public override string ToString()
+        {
+            var str = "";
+            for (var i = 0; i < Vertices.Count; i++)
+                str += $"[{i}]: {Vertices[i]}\n";
+
+            return str;
+        }
     }
 }

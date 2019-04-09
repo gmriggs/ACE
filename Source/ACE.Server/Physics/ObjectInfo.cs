@@ -159,5 +159,19 @@ namespace ACE.Server.Physics.Animation
                 }
             }
         }
+
+        public override string ToString()
+        {
+            var str = $"Object: {Object.Name} ({Object.ID:X8})\n";
+
+            str += $"ObjectInfoState: {State}\n";
+            str += $"Scale: {Scale}\n";
+            str += $"StepUpHeight: {StepUpHeight}\n";
+            str += $"StepDownHeight: {StepDownHeight}\n";
+            str += $"Ethereal: {Ethereal}\n";
+            str += $"StepDown: {StepDown}\n";
+            str += $"TargetID: {TargetID}\n";
+            return str;
+        }
     }
 }

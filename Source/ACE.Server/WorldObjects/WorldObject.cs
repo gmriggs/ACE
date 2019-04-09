@@ -319,6 +319,9 @@ namespace ACE.Server.WorldObjects
             var startPos = new Physics.Common.Position(PhysicsObj.Position);
             var targetPos = new Physics.Common.Position(wo.PhysicsObj.Position);
 
+            if (PhysicsObj.GetBlockDist(startPos, targetPos) > 1)
+                return false;
+
             // set to eye level
             startPos.Frame.Origin.Z += PhysicsObj.GetHeight() - SightObj.GetHeight();
             targetPos.Frame.Origin.Z += wo.PhysicsObj.GetHeight() - SightObj.GetHeight();
@@ -346,6 +349,9 @@ namespace ACE.Server.WorldObjects
 
             var startPos = new Physics.Common.Position(PhysicsObj.Position);
             var targetPos = new Physics.Common.Position(pos);
+
+            if (PhysicsObj.GetBlockDist(startPos, targetPos) > 1)
+                return false;
 
             // set to eye level
             startPos.Frame.Origin.Z += PhysicsObj.GetHeight() - SightObj.GetHeight();
@@ -401,27 +407,9 @@ namespace ACE.Server.WorldObjects
         // ******************************************************************* OLD CODE BELOW ********************************
 
 
-        public static float MaxObjectTrackingRange { get; } = 20000f;
-
-        public Position ForcedLocation { get; private set; }
-
         public Position RequestedLocation { get; set; }
 
         public Position PreviousLocation { get; set; }
-
-
-        /// <summary>
-        /// Time when this object will despawn, -1 is never.
-        /// </summary>
-        public double DespawnTime { get; set; } = -1;
-
-        /// <summary>
-        /// tick-stamp for the server time of the last time the player moved.
-        /// TODO: implement
-        /// </summary>
-        public double LastAnimatedTicks { get; set; }
-
-        public virtual void PlayScript(Session session) { }
 
 
         ////// Logical Game Data

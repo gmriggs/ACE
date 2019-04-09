@@ -147,8 +147,23 @@ namespace ACE.Server.Physics.Animation
             return obj.FindObjCollisions(this) != TransitionState.OK;
         }
 
+        public DateTime MaxTime = DateTime.Now + TimeSpan.FromSeconds(5);
+        public bool ShowDebugInfo = true;
+        public bool Bailout = false;
+
         public TransitionState CheckOtherCells(ObjCell currCell)
         {
+            if (DateTime.Now > MaxTime)
+            {
+                if (ShowDebugInfo)
+                {
+                    Debug();
+                    ShowDebugInfo = false;
+                    Bailout = true;
+                }
+                return TransitionState.OK;
+            }
+
             var result = TransitionState.OK;
 
             SpherePath.CellArrayValid = true;
@@ -335,6 +350,9 @@ namespace ACE.Server.Physics.Animation
 
         public bool FindPlacementPos()
         {
+            if (Bailout)
+                return true;
+
             // refactor me
             SpherePath.SetCheckPos(SpherePath.CurPos, SpherePath.CurCell);
 
@@ -425,6 +443,9 @@ namespace ACE.Server.Physics.Animation
 
         public bool FindPlacementPosition()
         {
+            if (Bailout)
+                return true;
+
             SpherePath.SetCheckPos(SpherePath.CurPos, SpherePath.CurCell);
             SpherePath.InsertType = InsertType.InitialPlacement;
             var transitionState = new TransitionState();
@@ -435,6 +456,9 @@ namespace ACE.Server.Physics.Animation
 
                 if (transitionState == TransitionState.OK)
                     transitionState = CheckOtherCells(SpherePath.CheckCell);
+
+                if (Bailout)
+                    return true;
             }
             else
                 transitionState = TransitionState.Collided;
@@ -493,6 +517,9 @@ namespace ACE.Server.Physics.Animation
 
         public bool FindTransitionalPosition()
         {
+            if (Bailout)
+                return true;
+
             if (SpherePath.BeginCell == null) return false;
 
             var transitionState = TransitionState.OK;
@@ -659,6 +686,9 @@ namespace ACE.Server.Physics.Animation
 
         public TransitionState InsertIntoCell(ObjCell cell, int num_insertion_attempts)
         {
+            if (Bailout)
+                return TransitionState.OK;
+
             if (cell == null)
                 return TransitionState.Collided;
 
@@ -696,6 +726,9 @@ namespace ACE.Server.Physics.Animation
 
         public TransitionState PlacementInsert()
         {
+            if (Bailout)
+                return TransitionState.OK;
+
             if (SpherePath.CheckCell == null) return TransitionState.Collided;
 
             var checkCell = SpherePath.CheckCell;
@@ -709,6 +742,9 @@ namespace ACE.Server.Physics.Animation
 
         public bool StepDown(float stepDownHeight, float zVal)
         {
+            if (Bailout)
+                return true;
+
             SpherePath.NegPolyHit = false;
             SpherePath.StepDown = true;
 
@@ -745,6 +781,9 @@ namespace ACE.Server.Physics.Animation
 
         public bool StepUp(Vector3 collisionNormal)
         {
+            if (Bailout)
+                return true;
+
             CollisionInfo.ContactPlaneValid = false;
             CollisionInfo.ContactPlaneIsWater = false;
 
@@ -778,6 +817,9 @@ namespace ACE.Server.Physics.Animation
 
         public TransitionState TransitionalInsert(int num_insertion_attempts)
         {
+            if (Bailout)
+                return TransitionState.OK;
+
             if (SpherePath.CheckCell == null)
                 return TransitionState.OK;
 
@@ -933,6 +975,9 @@ namespace ACE.Server.Physics.Animation
 
         public TransitionState ValidatePlacement(TransitionState transitionState, bool adjust)
         {
+            if (Bailout)
+                return TransitionState.OK;
+
             if (SpherePath.CheckCell == null) return TransitionState.Collided;
 
             switch (transitionState)
@@ -954,6 +999,9 @@ namespace ACE.Server.Physics.Animation
 
         public TransitionState ValidatePlacementTransition(TransitionState transitionState, ref int redo)
         {
+            if (Bailout)
+                return TransitionState.OK;
+
             redo = 0;
 
             if (SpherePath.CheckCell == null) return TransitionState.Collided;
@@ -977,6 +1025,9 @@ namespace ACE.Server.Physics.Animation
 
         public TransitionState ValidateTransition(TransitionState transitionState, ref int redo)
         {
+            if (Bailout)
+                return TransitionState.OK;
+
             redo = 0;
             var _redo = 1;
             Plane contactPlane = new Plane();
@@ -1082,6 +1133,45 @@ namespace ACE.Server.Physics.Animation
             SpherePath.CacheGlobalCurrCenter();
 
             SpherePath.SetCheckPos(SpherePath.CurPos, SpherePath.CurCell);
+        }
+
+        public void Debug()
+        {
+            try
+            {
+                Console.WriteLine($"{DateTime.UtcNow} - ********* TRANSITION.DEBUG **********");
+
+                if (ObjectInfo != null)
+                {
+                    Console.WriteLine($"ObjectInfo:");
+                    Console.WriteLine($"{ObjectInfo}");
+                    Console.WriteLine($"---------------------------------");
+                }
+                if (SpherePath != null)
+                {
+                    Console.WriteLine($"SpherePath:");
+                    Console.WriteLine($"{SpherePath}");
+                    Console.WriteLine($"---------------------------------");
+                }
+                if (CollisionInfo != null)
+                {
+                    Console.WriteLine($"CollisionInfo:");
+                    Console.WriteLine($"{CollisionInfo}");
+                    Console.WriteLine($"---------------------------------");
+                }
+                if (CellArray != null)
+                {
+                    Console.WriteLine($"CellArray:");
+                    Console.WriteLine($"{CellArray}");
+                    Console.WriteLine($"---------------------------------");
+                }
+                if (NewCellPtr != null)
+                    Console.WriteLine($"NewCellPtr: {NewCellPtr}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

@@ -67,5 +67,10 @@ namespace ACE.Server.Physics.Entity
 
             return hash;
         }
+
+        public override string ToString()
+        {
+            return Origin.ToString();
+        }
     }
 }

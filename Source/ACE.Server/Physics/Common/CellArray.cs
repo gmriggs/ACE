@@ -45,5 +45,19 @@ namespace ACE.Server.Physics.Common
                 NumCells--;
             }
         }
+
+        public override string ToString()
+        {
+            var str = $"AddedOutside: {AddedOutside}\n";
+            str += $"LoadCells: {LoadCells}\n";
+            if (Cells != null)
+            {
+                var i = 0;
+                foreach (var cell in Cells)
+                    str += $"Cells[{i++}]: {cell.Key}\n";
+            }
+            str += $"NumCells: {NumCells}\n";
+            return str;
+        }
     }
 }

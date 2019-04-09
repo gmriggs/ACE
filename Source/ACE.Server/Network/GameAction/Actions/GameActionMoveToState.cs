@@ -12,7 +12,8 @@ namespace ACE.Server.Network.GameAction.Actions
         {
             var moveToState = new MoveToState(session.Player, message.Payload);
 
-            session.Player.SetRequestedLocation(moveToState.Position);
+            if (!session.Player.Teleporting)
+                session.Player.SetRequestedLocation(moveToState.Position);
 
             //if (!moveToState.StandingLongJump)
                 session.Player.BroadcastMovement(moveToState);

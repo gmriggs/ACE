@@ -71,5 +71,35 @@ namespace ACE.Server.Physics.Collision
             if (state != TransitionState.OK)
                 LastCollidedObject = obj;
         }
+
+        public override string ToString()
+        {
+            var str = $"LastKnownContactPlaneValid: {LastKnownContactPlaneValid}\n";
+
+            if (LastKnownContactPlane != null)
+                str += $"LastKnownContactPlane: {LastKnownContactPlane}\n";
+
+            str += $"LastKnownContactPlaneIsWater: {LastKnownContactPlaneIsWater}\n";
+            str += $"ContactPlaneValid: {ContactPlaneValid}\n";
+            str += $"ContactPlaneCellID: {ContactPlaneCellID:X8}\n";
+            str += $"LastKnownContactPlaneCellID: {LastKnownContactPlaneCellID:X8}\n";
+            str += $"ContactPlaneIsWater: {ContactPlaneIsWater}\n";
+            str += $"SlidingNormalValid: {SlidingNormalValid}\n";
+            str += $"CollisionNormalValid: {CollisionNormalValid}\n";
+            str += $"CollisionNormal: {CollisionNormal}\n";
+            str += $"AdjustOffset: {AdjustOffset}\n";
+            str += $"NumCollidObject: {NumCollideObject}\n";
+            if (CollideObject != null)
+                for (var i = 0; i < CollideObject.Count; i++)
+                    str += $"CollideObject[{i}]: {CollideObject[i].Name} ({CollideObject[i].ID:X8})\n";
+
+            if (LastCollidedObject != null)
+                str += $"LastCollidedObject: {LastCollidedObject.Name} ({LastCollidedObject.ID:X8}\n";
+
+            str += $"CollidedWithEnvironment: {CollidedWithEnvironment}\n";
+            str += $"FramesStationaryFall: {FramesStationaryFall}\n";
+
+            return str;
+        }
     }
 }

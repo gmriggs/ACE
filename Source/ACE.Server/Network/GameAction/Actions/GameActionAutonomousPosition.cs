@@ -24,7 +24,8 @@ namespace ACE.Server.Network.GameAction.Actions
 
             session.Player.LastContact = message.Payload.ReadByte() != 0;   // TRUE if player is currently on ground
 
-            session.Player.SetRequestedLocation(position);
+            if (!session.Player.Teleporting)
+                session.Player.SetRequestedLocation(position);
 
             message.Payload.Align();
         }

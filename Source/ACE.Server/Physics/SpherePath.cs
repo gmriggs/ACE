@@ -315,5 +315,84 @@ namespace ACE.Server.Physics.Animation
 
             return GlobalSphere[0].SlideSphere(transition, ref StepUpNormal, GlobalCurrCenter[0].Center);
         }
+
+        public override string ToString()
+        {
+            var str = $"NumSphere: {NumSphere}\n";
+            if (LocalSphere != null)
+                for (var i = 0; i < LocalSphere.Count; i++)
+                    str += $"LocalSphere[{i}]: {LocalSphere[i]}\n";
+
+            str += $"LocalLowPoint: {LocalLowPoint}\n";
+            if (GlobalSphere != null)
+                for (var i = 0; i < GlobalSphere.Count; i++)
+                    str += $"GlobalSphere[{i}]: {GlobalSphere[i]}\n";
+
+            str += $"GlobalLowPoint: {GlobalLowPoint}\n";
+            if (LocalSpaceSphere != null)
+                for (var i = 0; i < LocalSpaceSphere.Count; i++)
+                    str += $"LocalSpaceSphere[{i}]: {LocalSpaceSphere[i]}\n";
+
+            str += $"LocalSpaceLowPoint: {LocalSpaceLowPoint}\n";
+            if (LocalSpaceCurrCenter != null)
+                for (var i = 0; i < LocalSpaceCurrCenter.Count; i++)
+                    str += $"LocalSpaceCurrCenter[{i}]: {LocalSpaceCurrCenter[i]}\n";
+            if (GlobalCurrCenter != null)
+                for (var i = 0; i < GlobalCurrCenter.Count; i++)
+                    str += $"GlobalCurrCenter[{i}]: {GlobalCurrCenter[i]}\n";
+
+            if (LocalSpacePos != null)
+                str += $"LocalSpacePos: {LocalSpacePos}\n";
+
+            str += $"LocalSpaceZ: {LocalSpaceZ}";
+            if (BeginCell != null)
+                str += $"BeginCell: {BeginCell}\n";
+            if (BeginPos != null)
+                str += $"BeginPos: {BeginPos}\n";
+            if (EndPos != null)
+                str += $"EndPos: {EndPos}\n";
+            if (CurCell != null)
+                str += $"CurCell: {CurCell}\n";
+            if (CurPos != null)
+                str += $"CurPos: {CurPos}\n";
+
+            str += $"GlobalOffset: {GlobalOffset}\n";
+            str += $"StepUp: {StepUp}\n";
+            str += $"StepUpNormal: {StepUpNormal}\n";
+            str += $"Collide: {Collide}\n";
+            str += $"CheckCell: {CheckCell}\n";
+            str += $"CheckPos: {CheckPos}\n";
+            str += $"InsertType: {InsertType}\n";
+            str += $"StepDown: {StepDown}\n";
+            str += $"Backup: {Backup}\n";
+            str += $"BackupCell: {BackupCell}\n";
+            str += $"BackupCheckPos: {BackupCheckPos}\n";
+            str += $"ObstructionEthereal: {ObstructionEthereal}\n";
+            str += $"HitsInteriorCell: {HitsInteriorCell}\n";
+            str += $"BuildingCheck: {BuildingCheck}\n";
+            str += $"WalkableAllowance: {WalkableAllowance}\n";
+            str += $"WalkInterp: {WalkInterp}\n";
+            str += $"StepDownAmt: {StepDownAmt}\n";
+
+            if (WalkableCheckPos != null)
+                str += $"WalkableCheckPos: {WalkableCheckPos}\n";
+            if (Walkable != null)
+                str += $"Walkable: {Walkable}\n";
+
+            str += $"CheckWalkable: {CheckWalkable}\n";
+            str += $"WalkableUp: {WalkableUp}\n";
+
+            if (WalkablePos != null)
+                str += $"WalkablePos: {WalkablePos}\n";
+
+            str += $"WalkableScale: {WalkableScale}\n";
+            str += $"CellArrayValid: {CellArrayValid}\n";
+            str += $"NegStepUp: {NegStepUp}\n";
+            str += $"NegCollisionNormal: {NegCollisionNormal}\n";
+            str += $"NegPolyHit: {NegPolyHit}\n";
+            str += $"PlacementAllowsSliding: {PlacementAllowsSliding}\n";
+
+            return str;
+        }
     }
 }

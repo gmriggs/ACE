@@ -3,6 +3,9 @@ using System.Linq;
 
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Server.Managers;
+using ACE.Server.Physics;
+using ACE.Server.Physics.Common;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Network.GameMessages.Messages;
 
@@ -153,6 +156,70 @@ namespace ACE.Server.WorldObjects
                     }
                 }
             }
+        }
+
+        public static float MaxSpeed = 50;
+        public static float MaxSpeedSq = MaxSpeed * MaxSpeed;
+
+        /// <summary>
+        /// Used by physics engine to actually update a player position
+        /// Automatically notifies clients of updated position
+        /// </summary>
+        /// <param name="newPosition">The new position being requested, before verification through physics engine</param>
+        /// <returns>TRUE if object moves to a different landblock</returns>
+        public bool UpdatePlayerPhysics(ACE.Entity.Position newPosition, bool forceUpdate = false)
+        {
+            //Console.WriteLine($"UpdatePlayerPhysics: {newPosition.Cell:X8}, {newPosition.Pos}");
+
+            // possible bug: while teleporting, client can still send AutoPos packets from old landblock
+            if (Teleporting && !forceUpdate) return false;
+
+            if (PhysicsObj != null)
+            {
+                var distSq = Location.SquaredDistanceTo(newPosition);
+
+                if (distSq > PhysicsGlobals.EpsilonSq)
+                {
+                    if (newPosition.Landblock == 0x18A && Location.Landblock != 0x18A)
+                        log.Info($"{Name} is getting swanky");
+
+                    if (!Teleporting)
+                    {
+                        // verify movement
+                        if (distSq > MaxSpeedSq && PhysicsObj.GetBlockDist(Location.Cell, newPosition.Cell) > 1)
+                        {
+                            //Session.Network.EnqueueSend(new GameMessageSystemChat("Movement error", ChatMessageType.Broadcast));
+                            log.Warn($"MOVEMENT SPEED: {Name} trying to move from {Location} to {newPosition}, speed: {Math.Sqrt(distSq)}");
+                            return false;
+                        }
+                    }
+
+                    var curCell = LScape.get_landcell(newPosition.Cell);
+                    if (curCell != null)
+                    {
+                        PhysicsObj.set_request_pos(newPosition.Pos, newPosition.Rotation, curCell, Location.LandblockId.Raw);
+                        PhysicsObj.update_object_server();
+
+                        if (PhysicsObj.CurCell == null)
+                            PhysicsObj.CurCell = curCell;
+
+                        CheckMonsters();
+                    }
+                }
+            }
+
+            // double update path: landblock physics update -> updateplayerphysics() -> update_object_server() -> Teleport() -> updateplayerphysics() -> return to end of original branch
+            if (Teleporting && !forceUpdate) return true;
+
+            var landblockUpdate = Location.Cell >> 16 != newPosition.Cell >> 16;
+            Location = newPosition;
+
+            SendUpdatePosition();
+
+            if (!InUpdate)
+                LandblockManager.RelocateObjectForPhysics(this, true);
+
+            return landblockUpdate;
         }
     }
 }
