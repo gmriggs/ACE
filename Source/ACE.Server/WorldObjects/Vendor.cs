@@ -31,7 +31,26 @@ namespace ACE.Server.WorldObjects
         // unique items purchased from other players
         public readonly Dictionary<ObjectGuid, WorldObject> UniqueItemsForSale = new Dictionary<ObjectGuid, WorldObject>();
 
-        public Dictionary<ObjectGuid, WorldObject> AllItemsForSale => DefaultItemsForSale.Concat(UniqueItemsForSale).ToDictionary(i => i.Key, i => i.Value);
+        //public Dictionary<ObjectGuid, WorldObject> AllItemsForSale => DefaultItemsForSale.Concat(UniqueItemsForSale).ToDictionary(i => i.Key, i => i.Value);
+
+        public Dictionary<ObjectGuid, WorldObject> AllItemsForSale
+        {
+            get
+            {
+                var allItems = new Dictionary<ObjectGuid, WorldObject>();
+
+                foreach (var item in DefaultItemsForSale)
+                    allItems.TryAdd(item.Key, item.Value);
+
+                foreach (var item in UniqueItemsForSale)
+                {
+                    if (!allItems.TryAdd(item.Key, item.Value))
+                        log.Error($"{Name} ({Guid}) AllItemsForSale: has duplicate item {item.Value.Name} ({item.Value.Guid})");
+                }
+
+                return allItems;
+            }
+        }
 
         private bool inventoryloaded;
 
