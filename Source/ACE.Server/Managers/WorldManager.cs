@@ -659,11 +659,12 @@ namespace ACE.Server.Managers
                 {
                     wo.InUpdate = true;
 
-                    var newPosition = HandlePlayerPhysics(player, timeTick);
-
                     // update position through physics engine
-                    if (newPosition != null)
-                        landblockUpdate = wo.UpdatePlayerPhysics(newPosition);
+                    if (player.RequestedLocation != null)
+                    {
+                        landblockUpdate = player.UpdatePlayerPhysics(player.RequestedLocation);
+                        player.RequestedLocation = null;
+                    }
 
                     wo.InUpdate = false;
                 }
@@ -673,25 +674,6 @@ namespace ACE.Server.Managers
                 if (landblockUpdate)
                     movedObjects.Enqueue(wo);
             }
-        }
-
-        /// <summary>
-        /// Detects if player has moved through ForcedLocation or RequestedLocation
-        /// </summary>
-        private static Position HandlePlayerPhysics(Player player, double timeTick)
-        {
-            Position newPosition = null;
-
-            if (player.ForcedLocation != null)
-                newPosition = player.ForcedLocation;
-
-            else if (player.RequestedLocation != null)
-                newPosition = player.RequestedLocation;
-
-            if (newPosition != null)
-                player.ClearRequestedPositions();
-
-            return newPosition;
         }
 
         /// <summary>
