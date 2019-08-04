@@ -139,64 +139,89 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         protected override void Die(WorldObject lastDamager, WorldObject topDamager)
         {
-            UpdateVital(Health, 0);
-            NumDeaths++;
-            suicideInProgress = false;
-
-            // killer = top damager for looting rights
-            if (topDamager != null)
-                KillerId = topDamager.Guid.Full;
-
-            // broadcast death animation
-            var deathAnim = new Motion(MotionStance.NonCombat, MotionCommand.Dead);
-            EnqueueBroadcastMotion(deathAnim);
-
-            // killer death message = last damager
-            var killerMsg = lastDamager != null ? " to " + lastDamager.Name : "";
-            var currentDeathMessage = $"died{killerMsg}.";
-
-            // create network messages for player death
-            var msgHealthUpdate = new GameMessagePrivateUpdateAttribute2ndLevel(this, Vital.Health, 0);
-
-            // TODO: death sounds? seems to play automatically in client
-            // var msgDeathSound = new GameMessageSound(Guid, Sound.Death1, 1.0f);
-            var msgNumDeaths = new GameMessagePrivateUpdatePropertyInt(this, PropertyInt.NumDeaths, NumDeaths);
-
-            // send network messages for player death
-            Session.Network.EnqueueSend(msgHealthUpdate, msgNumDeaths);
-
-            if (lastDamager.Guid == Guid) // suicide
+            try
             {
-                var msgSelfInflictedDeath = new GameEventWeenieError(Session, WeenieError.YouKilledYourself);
-                Session.Network.EnqueueSend(msgSelfInflictedDeath);
+                UpdateVital(Health, 0);
+                NumDeaths++;
+                suicideInProgress = false;
+
+                // killer = top damager for looting rights
+                if (topDamager != null)
+                    KillerId = topDamager.Guid.Full;
+
+                // broadcast death animation
+                var deathAnim = new Motion(MotionStance.NonCombat, MotionCommand.Dead);
+                EnqueueBroadcastMotion(deathAnim);
+
+                // killer death message = last damager
+                var killerMsg = lastDamager != null ? " to " + lastDamager.Name : "";
+                var currentDeathMessage = $"died{killerMsg}.";
+
+                // create network messages for player death
+                var msgHealthUpdate = new GameMessagePrivateUpdateAttribute2ndLevel(this, Vital.Health, 0);
+
+                // TODO: death sounds? seems to play automatically in client
+                // var msgDeathSound = new GameMessageSound(Guid, Sound.Death1, 1.0f);
+                var msgNumDeaths = new GameMessagePrivateUpdatePropertyInt(this, PropertyInt.NumDeaths, NumDeaths);
+
+                // send network messages for player death
+                Session.Network.EnqueueSend(msgHealthUpdate, msgNumDeaths);
+
+                if (lastDamager.Guid == Guid) // suicide
+                {
+                    var msgSelfInflictedDeath = new GameEventWeenieError(Session, WeenieError.YouKilledYourself);
+                    Session.Network.EnqueueSend(msgSelfInflictedDeath);
+                }
+            }
+            catch (Exception)
+            {
+                log.Error($"{Name}.Die({lastDamager?.Name}, {topDamager?.Name}) - CRASH 1");
+                log.Error(System.Environment.StackTrace);
             }
 
             // update vitae
             // players who died in a PKLite fight do not accrue vitae
-            if (!IsPKLiteDeath(topDamager))
-                InflictVitaePenalty();
-
-            if (IsPKDeath(topDamager) || AugmentationSpellsRemainPastDeath == 0)
+            try
             {
-                var msgPurgeEnchantments = new GameEventMagicPurgeEnchantments(Session);
-                EnchantmentManager.RemoveAllEnchantments();
-                Session.Network.EnqueueSend(msgPurgeEnchantments);
+                if (!IsPKLiteDeath(topDamager))
+                    InflictVitaePenalty();
+
+                if (IsPKDeath(topDamager) || AugmentationSpellsRemainPastDeath == 0)
+                {
+                    var msgPurgeEnchantments = new GameEventMagicPurgeEnchantments(Session);
+                    EnchantmentManager.RemoveAllEnchantments();
+                    Session.Network.EnqueueSend(msgPurgeEnchantments);
+                }
+            }
+            catch (Exception)
+            {
+                log.Error($"{Name}.Die({lastDamager?.Name}, {topDamager?.Name}) - CRASH 2");
+                log.Error(System.Environment.StackTrace);
             }
 
+
             // wait for the death animation to finish
-            var dieChain = new ActionChain();
-            var animLength = DatManager.PortalDat.ReadFromDat<MotionTable>(MotionTableId).GetAnimationLength(MotionCommand.Dead);
-            dieChain.AddDelaySeconds(animLength + 1.0f);
-
-            dieChain.AddAction(this, () =>
+            try
             {
-                CreateCorpse(topDamager);
-                TeleportOnDeath();      // enter portal space
-                SetLifestoneProtection();
-                SetMinimumTimeSincePK();
-            });
+                var dieChain = new ActionChain();
+                var animLength = DatManager.PortalDat.ReadFromDat<MotionTable>(MotionTableId).GetAnimationLength(MotionCommand.Dead);
+                dieChain.AddDelaySeconds(animLength + 1.0f);
 
-            dieChain.EnqueueChain();
+                dieChain.AddAction(this, () =>
+                {
+                    CreateCorpse(topDamager);
+                    TeleportOnDeath();      // enter portal space
+                    SetLifestoneProtection();
+                    SetMinimumTimeSincePK();
+                });
+
+                dieChain.EnqueueChain();
+            }
+            catch (Exception)
+            {
+                log.Error($"{Name}.Die({lastDamager?.Name}, {topDamager?.Name}) - CRASH 3");
+                log.Error(System.Environment.StackTrace);
+            }
         }
 
         /// <summary>
