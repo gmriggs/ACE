@@ -33,53 +33,79 @@ namespace ACE.Server.WorldObjects
         {
             var deathMessage = base.OnDeath(lastDamager, damageType, criticalHit);
 
-            if (lastDamager != null)
-                lastDamager.EmoteManager.OnKill(this);
+            try
+            {
+                if (lastDamager != null)
+                    lastDamager.EmoteManager.OnKill(this);
 
-            var playerMsg = "";
-            if (lastDamager != null)
-                playerMsg = string.Format(deathMessage.Victim, Name, lastDamager.Name);
-            else
-                playerMsg = deathMessage.Victim;
+                var playerMsg = "";
+                if (lastDamager != null)
+                    playerMsg = string.Format(deathMessage.Victim, Name, lastDamager.Name);
+                else
+                    playerMsg = deathMessage.Victim;
 
-            var msgYourDeath = new GameEventYourDeath(Session, playerMsg);
-            Session.Network.EnqueueSend(msgYourDeath);
+                var msgYourDeath = new GameEventYourDeath(Session, playerMsg);
+                Session.Network.EnqueueSend(msgYourDeath);
+            }
+            catch (Exception)
+            {
+                log.Error($"{Name}.OnDeath({lastDamager?.Name}, {damageType}, {criticalHit}) - CRASH 1");
+                log.Error(System.Environment.StackTrace);
+            }
 
             // broadcast to nearby players
-            var nearbyMsg = "";
-            if (lastDamager != null)
-                nearbyMsg = string.Format(deathMessage.Broadcast, Name, lastDamager.Name);
-            else
-                nearbyMsg = deathMessage.Broadcast;
-
-            var broadcastMsg = new GameMessageSystemChat(nearbyMsg, ChatMessageType.Broadcast);
-
-            log.Info(nearbyMsg);
-
             var excludePlayers = new List<Player>();
-            if (lastDamager is Player lastDamagerPlayer)
-                excludePlayers.Add(lastDamagerPlayer);
-
-            var nearbyPlayers = EnqueueBroadcast(excludePlayers, false, broadcastMsg);
-
-            excludePlayers.AddRange(nearbyPlayers);
-            excludePlayers.Add(this);   // exclude self
-
-            if (Fellowship != null)
-                Fellowship.OnDeath(this);
-
-            // if the player's lifestone is in a different landblock, also broadcast their demise to that landblock
-            if (Sanctuary != null && Location.Landblock != Sanctuary.Landblock)
+            GameMessageSystemChat broadcastMsg = null;
+            try
             {
-                // ActionBroadcastKill might not work if other players around lifestone aren't aware of this player yet...
-                // this existing broadcast method is also based on the current visible objects to the player,
-                // and the player hasn't entered portal space or teleported back to the lifestone yet, so this doesn't work
-                //ActionBroadcastKill(nearbyMsg, Guid, lastDamager.Guid);
+                var nearbyMsg = "";
+                if (lastDamager != null)
+                    nearbyMsg = string.Format(deathMessage.Broadcast, Name, lastDamager.Name);
+                else
+                    nearbyMsg = deathMessage.Broadcast;
 
-                // instead, we get all of the players in the lifestone landblock + adjacent landblocks,
-                // and possibly limit that to some radius around the landblock?
-                var lifestoneBlock = LandblockManager.GetLandblock(new LandblockId(Sanctuary.Landblock << 16 | 0xFFFF), true);
-                lifestoneBlock.EnqueueBroadcast(excludePlayers, true, broadcastMsg);
+                broadcastMsg = new GameMessageSystemChat(nearbyMsg, ChatMessageType.Broadcast);
+
+                log.Info(nearbyMsg);
+
+                if (lastDamager is Player lastDamagerPlayer)
+                    excludePlayers.Add(lastDamagerPlayer);
+
+                var nearbyPlayers = EnqueueBroadcast(excludePlayers, false, broadcastMsg);
+
+                excludePlayers.AddRange(nearbyPlayers);
+                excludePlayers.Add(this);   // exclude self
+            }
+            catch (Exception)
+            {
+                log.Error($"{Name}.OnDeath({lastDamager?.Name}, {damageType}, {criticalHit}) - CRASH 2");
+                log.Error(System.Environment.StackTrace);
+            }
+
+            try
+            {
+                if (Fellowship != null)
+                    Fellowship.OnDeath(this);
+
+                // if the player's lifestone is in a different landblock, also broadcast their demise to that landblock
+                if (Sanctuary != null && Location.Landblock != Sanctuary.Landblock)
+                {
+                    // ActionBroadcastKill might not work if other players around lifestone aren't aware of this player yet...
+                    // this existing broadcast method is also based on the current visible objects to the player,
+                    // and the player hasn't entered portal space or teleported back to the lifestone yet, so this doesn't work
+                    //ActionBroadcastKill(nearbyMsg, Guid, lastDamager.Guid);
+
+                    // instead, we get all of the players in the lifestone landblock + adjacent landblocks,
+                    // and possibly limit that to some radius around the landblock?
+                    var lifestoneBlock = LandblockManager.GetLandblock(new LandblockId(Sanctuary.Landblock << 16 | 0xFFFF), true);
+                    if (broadcastMsg != null)
+                        lifestoneBlock.EnqueueBroadcast(excludePlayers, true, broadcastMsg);
+                }
+            }
+            catch (Exception)
+            {
+                log.Error($"{Name}.OnDeath({lastDamager?.Name}, {damageType}, {criticalHit}) - CRASH 3");
+                log.Error(System.Environment.StackTrace);
             }
 
             return deathMessage;
