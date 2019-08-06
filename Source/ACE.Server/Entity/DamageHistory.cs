@@ -237,5 +237,20 @@ namespace ACE.Server.Entity
                     OnHealInternal((uint)entry.Amount, entry.CurrentHealth, entry.MaxHealth);
             }
         }
+
+        public override string ToString()
+        {
+            var table = "";
+
+            foreach (var damager in TotalDamage.Values)
+            {
+                var wo = damager.TryGetWorldObject();
+                var guid = damager?.Guid;
+
+                table += $"{damager.Name} ({guid}) - {damager.Value}\n";
+            }
+
+            return table;
+        }
     }
 }

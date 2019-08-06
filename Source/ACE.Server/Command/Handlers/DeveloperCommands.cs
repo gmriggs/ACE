@@ -923,10 +923,20 @@ namespace ACE.Server.Command.Handlers
                 return;
             }
 
+            int delta = 0;
+
             if (!relValue)
-                session.Player.UpdateVital(vital, (uint)value);
+                delta = session.Player.UpdateVital(vital, (uint)value);
             else
-                session.Player.UpdateVitalDelta(vital, value);
+                delta = session.Player.UpdateVitalDelta(vital, value);
+
+            if (vital == session.Player.Health)
+            {
+                if (delta > 0)
+                    session.Player.DamageHistory.OnHeal((uint)delta);
+                else
+                    session.Player.DamageHistory.Add(session.Player, DamageType.Health, (uint)-delta);
+            }
         }
 
         [CommandHandler("sethealth", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld, 1, "sets your current health to a specific value.", "ushort")]
@@ -2553,6 +2563,14 @@ namespace ACE.Server.Command.Handlers
             }
             session.Player.SetHouseOwner(slumlord);
             session.Player.GiveDeed();
+        }
+
+        [CommandHandler("damagehistory", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld)]
+        public static void HandleDamageHitory(Session session, params string[] parameters)
+        {
+            session.Network.EnqueueSend(new GameMessageSystemChat(session.Player.DamageHistory.ToString(), ChatMessageType.Broadcast));
+
+            log.Info(session.Player.DamageHistory);
         }
     }
 }

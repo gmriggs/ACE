@@ -170,6 +170,12 @@ namespace ACE.Server.WorldObjects
                     break;
                 case DamageType.Health:
                     iAmount = player.UpdateVitalDelta(player.Health, -iAmount);
+
+                    if (iAmount > 0)
+                        player.DamageHistory.OnHeal((uint)iAmount);
+                    else
+                        player.DamageHistory.Add(this, DamageType.Health, (uint)-iAmount);
+
                     break;
             }
 

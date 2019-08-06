@@ -177,6 +177,7 @@ namespace ACE.Server.WorldObjects
             {
                 log.Error($"{Name}.Die({lastDamager?.Name}, {topDamager?.Name}) - CRASH 1");
                 log.Error(System.Environment.StackTrace);
+                log.Error(DamageHistory);
             }
 
             // update vitae
@@ -197,6 +198,7 @@ namespace ACE.Server.WorldObjects
             {
                 log.Error($"{Name}.Die({lastDamager?.Name}, {topDamager?.Name}) - CRASH 2");
                 log.Error(System.Environment.StackTrace);
+                log.Error(DamageHistory);
             }
 
 
@@ -221,6 +223,7 @@ namespace ACE.Server.WorldObjects
             {
                 log.Error($"{Name}.Die({lastDamager?.Name}, {topDamager?.Name}) - CRASH 3");
                 log.Error(System.Environment.StackTrace);
+                log.Error(DamageHistory);
             }
         }
 
