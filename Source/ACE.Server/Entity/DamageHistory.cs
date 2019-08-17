@@ -245,7 +245,7 @@ namespace ACE.Server.Entity
             foreach (var damager in TotalDamage.Values)
             {
                 var wo = damager.TryGetWorldObject();
-                var guid = damager?.Guid;
+                var guid = wo?.Guid;
 
                 table += $"{damager.Name} ({guid}) - {damager.Value}\n";
             }

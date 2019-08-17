@@ -51,6 +51,9 @@ namespace ACE.Server.WorldObjects
             {
                 log.Error($"{Name}.OnDeath({lastDamager?.Name}, {damageType}, {criticalHit}) - CRASH 1");
                 log.Error(System.Environment.StackTrace);
+                log.Error(DamageHistory);
+                log.Error($"DamageHistory.TopDamager={DamageHistory.TopDamager}");
+                log.Error($"DamageHistory.LastDamager={DamageHistory.LastDamager}");
             }
 
             // broadcast to nearby players
