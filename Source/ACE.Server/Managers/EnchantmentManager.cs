@@ -84,9 +84,9 @@ namespace ACE.Server.Managers
             var spells = new List<BiotaPropertiesEnchantmentRegistry>();
 
             var enchantments = from e in WorldObject.Biota.GetEnchantments(WorldObject.BiotaDatabaseLock)
-                group e by e.SpellCategory
+                               group e by e.SpellCategory
                 into categories
-                select categories.OrderByDescending(c => c.LayerId).First();
+                               select categories.OrderByDescending(c => c.LayerId).First();
 
             foreach (var enchantment in enchantments)
             {
@@ -116,13 +116,14 @@ namespace ACE.Server.Managers
         /// <summary>
         /// Returns the top layers in each spell category
         /// </summary>
-        public List<BiotaPropertiesEnchantmentRegistry> GetEnchantments_TopLayer(List<BiotaPropertiesEnchantmentRegistry> enchantments)
+        public List<BiotaPropertiesEnchantmentRegistry> GetEnchantments_TopLayer(IEnumerable<BiotaPropertiesEnchantmentRegistry> enchantments, WorldObject caster = null)
         {
             var results = from e in enchantments
-                group e by e.SpellCategory
+                          where caster != null ? e.CasterObjectId == caster.Guid.Full : true
+                          group e by e.SpellCategory
                 into categories
-                //select categories.OrderByDescending(c => c.LayerId).First();
-                select categories.OrderByDescending(c => c.PowerLevel).First();
+                          //select categories.OrderByDescending(c => c.LayerId).First();
+                          select categories.OrderByDescending(c => c.PowerLevel).First();
 
             return results.ToList();
         }
@@ -138,9 +139,13 @@ namespace ACE.Server.Managers
         /// <summary>
         /// Returns the top layers in each spell category for a StatMod type + key
         /// </summary>
-        public List<BiotaPropertiesEnchantmentRegistry> GetEnchantments_TopLayer(EnchantmentTypeFlags statModType, uint statModKey)
+        public List<BiotaPropertiesEnchantmentRegistry> GetEnchantments_TopLayer(EnchantmentTypeFlags statModType, uint statModKey, WorldObject caster = null)
         {
-            return GetEnchantments_TopLayer(WorldObject.Biota.GetEnchantmentsByStatModType((uint)statModType, WorldObject.BiotaDatabaseLock).Where(e => e.StatModKey == statModKey).ToList());
+            var enchantments = WorldObject.Biota.GetEnchantmentsByStatModType((uint)statModType, WorldObject.BiotaDatabaseLock);
+
+            var filtered = enchantments.Where(e => e.StatModKey == statModKey && (caster != null ? e.CasterObjectId == caster.Guid.Full : true));
+
+            return GetEnchantments_TopLayer(filtered);
         }
 
         /// <summary>
@@ -772,9 +777,9 @@ namespace ACE.Server.Managers
         /// <summary>
         /// Returns the sum of the modifiers for a StatModKey
         /// </summary>
-        public int GetAdditiveMod(PropertyInt statModKey)
+        public int GetAdditiveMod(PropertyInt statModKey, WorldObject caster = null)
         {
-            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Additive, (uint)statModKey);
+            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Additive, (uint)statModKey, caster);
 
             var modifier = 0;
             foreach (var enchantment in enchantments.Where(e => ((EnchantmentTypeFlags)e.StatModType & EnchantmentTypeFlags.Skill) == 0))
@@ -795,11 +800,11 @@ namespace ACE.Server.Managers
             return modifier;
         }
 
-        public float GetAdditiveMod(PropertyFloat statModKey)
+        public float GetAdditiveMod(PropertyFloat statModKey, WorldObject caster = null)
         {
             var typeFlags = EnchantmentTypeFlags.Float | EnchantmentTypeFlags.SingleStat | EnchantmentTypeFlags.Additive;
 
-            var enchantments = GetEnchantments_TopLayer(typeFlags, (uint)statModKey);
+            var enchantments = GetEnchantments_TopLayer(typeFlags, (uint)statModKey, caster);
 
             var modifier = 0.0f;
             foreach (var enchantment in enchantments)
@@ -811,9 +816,9 @@ namespace ACE.Server.Managers
         /// <summary>
         /// Returns the product of the modifiers for a StatModKey
         /// </summary>
-        public float GetMultiplicativeMod(PropertyFloat statModKey)
+        public float GetMultiplicativeMod(PropertyFloat statModKey, WorldObject caster = null)
         {
-            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Multiplicative, (uint)statModKey);
+            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Multiplicative, (uint)statModKey, caster);
 
             // multiplicative
             var modifier = 1.0f;
@@ -957,8 +962,13 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual int GetDamageBonus()
         {
+            return GetDamageBonus(null);
+        }
+
+        public int GetDamageBonus(WorldObject caster)
+        {
             var damageMod = GetAdditiveMod(PropertyInt.Damage);
-            var auraDamageMod = GetAdditiveMod(PropertyInt.WeaponAuraDamage);
+            var auraDamageMod = GetAdditiveMod(PropertyInt.WeaponAuraDamage, caster);
 
             // there is an unfortunate situation in the spell db,
             // where blood drinker 1-7 are defined as PropertyInt.Damage
@@ -978,6 +988,11 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual float GetDamageMod()
         {
+            return GetDamageMod(null);
+        }
+
+        public float GetDamageMod(WorldObject caster)
+        {
             return GetMultiplicativeMod(PropertyFloat.DamageMod);
         }
 
@@ -986,8 +1001,13 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual float GetAttackMod()
         {
+            return GetAttackMod(null);
+        }
+
+        public float GetAttackMod(WorldObject caster)
+        {
             var offenseMod = GetAdditiveMod(PropertyFloat.WeaponOffense);
-            var auraOffenseMod = GetAdditiveMod(PropertyFloat.WeaponAuraOffense);
+            var auraOffenseMod = GetAdditiveMod(PropertyFloat.WeaponAuraOffense, caster);
 
             /*if (WorldObject is Creature && auraOffenseMod != 0)
                 return auraOffenseMod;
@@ -1002,8 +1022,13 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual int GetWeaponSpeedMod()
         {
+            return GetWeaponSpeedMod(null);
+        }
+
+        public int GetWeaponSpeedMod(WorldObject caster)
+        {
             var speedMod = GetAdditiveMod(PropertyInt.WeaponTime);
-            var auraSpeedMod = GetAdditiveMod(PropertyInt.WeaponAuraSpeed);
+            var auraSpeedMod = GetAdditiveMod(PropertyInt.WeaponAuraSpeed, caster);
 
             /*if (WorldObject is Creature && auraSpeedMod != 0)
                 return auraSpeedMod;
@@ -1018,8 +1043,13 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual float GetDefenseMod()
         {
+            return GetDefenseMod(null);
+        }
+
+        public float GetDefenseMod(WorldObject caster)
+        {
             var defenseMod = GetAdditiveMod(PropertyFloat.WeaponDefense);
-            var auraDefenseMod = GetAdditiveMod(PropertyFloat.WeaponAuraDefense);
+            var auraDefenseMod = GetAdditiveMod(PropertyFloat.WeaponAuraDefense, caster);
 
             /*if (WorldObject is Creature && auraDefenseMod != 0)
                 return auraDefenseMod;
@@ -1034,8 +1064,13 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual float GetManaConvMod()
         {
+            return GetManaConvMod(null);
+        }
+
+        public float GetManaConvMod(WorldObject caster)
+        {
             var manaConvMod = GetMultiplicativeMod(PropertyFloat.ManaConversionMod);
-            var manaConvAuraMod = GetMultiplicativeMod(PropertyFloat.WeaponAuraManaConv);
+            var manaConvAuraMod = GetMultiplicativeMod(PropertyFloat.WeaponAuraManaConv, caster);
 
             /*if (WorldObject is Creature && manaConvAuraMod != 1.0f)
                 return manaConvAuraMod;
@@ -1050,8 +1085,13 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual float GetElementalDamageMod()
         {
+            return GetElementalDamageMod(null);
+        }
+
+        public float GetElementalDamageMod(WorldObject caster)
+        {
             var elementalDamageMod = GetAdditiveMod(PropertyFloat.ElementalDamageMod);
-            var elementalDamageAuraMod = GetAdditiveMod(PropertyFloat.WeaponAuraElemental);
+            var elementalDamageAuraMod = GetAdditiveMod(PropertyFloat.WeaponAuraElemental, caster);
 
             /*if (WorldObject is Creature && elementalDamageAuraMod != 0)
                 return elementalDamageAuraMod;
@@ -1066,7 +1106,12 @@ namespace ACE.Server.Managers
         /// </summary>
         public virtual float GetVarianceMod()
         {
-            return GetMultiplicativeMod(PropertyFloat.DamageVariance);
+            return GetVarianceMod(null);
+        }
+
+        public float GetVarianceMod(WorldObject caster)
+        {
+            return GetMultiplicativeMod(PropertyFloat.DamageVariance, caster);
         }
 
         /// <summary>

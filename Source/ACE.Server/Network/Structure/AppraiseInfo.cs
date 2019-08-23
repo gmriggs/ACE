@@ -332,19 +332,21 @@ namespace ACE.Server.Network.Structure
             if (wo.ItemSkillLimit != null)
                 PropertiesInt[PropertyInt.AppraisalItemSkill] = (int)wo.ItemSkillLimit;
 
-            if (wielder == null || !wo.IsEnchantable) return;
+            if (wielder == null) return;
 
             if (PropertiesFloat.ContainsKey(PropertyFloat.WeaponDefense) && !(wo is Missile) && !(wo is Ammunition))
             {
                 var defenseMod = wo.EnchantmentManager.GetDefenseMod();
-                var auraDefenseMod = wo.IsEnchantable ? wielder.EnchantmentManager.GetDefenseMod() : 0.0f;
+
+                var auraDefenseMod = wo.IsEnchantable ? wielder.EnchantmentManager.GetDefenseMod() : wielder.EnchantmentManager.GetDefenseMod(wo);
 
                 PropertiesFloat[PropertyFloat.WeaponDefense] += defenseMod + auraDefenseMod;
             }
 
             if (PropertiesFloat.ContainsKey(PropertyFloat.ManaConversionMod))
             {
-                var manaConvMod = wielder.EnchantmentManager.GetManaConvMod();
+                var manaConvMod = wo.IsEnchantable ? wielder.EnchantmentManager.GetManaConvMod() : wielder.EnchantmentManager.GetManaConvMod(wo);
+
                 if (manaConvMod != 1.0f)
                 {
                     PropertiesFloat[PropertyFloat.ManaConversionMod] *= manaConvMod;
@@ -357,7 +359,8 @@ namespace ACE.Server.Network.Structure
             if (PropertiesFloat.ContainsKey(PropertyFloat.ElementalDamageMod))
             {
                 var weaponEnchantments = wo.EnchantmentManager.GetElementalDamageMod();
-                var wielderEnchantments = wielder.EnchantmentManager.GetElementalDamageMod();
+
+                var wielderEnchantments = wo.IsEnchantable ? wielder.EnchantmentManager.GetElementalDamageMod() : wielder.EnchantmentManager.GetElementalDamageMod(wo);
 
                 var enchantments = weaponEnchantments + wielderEnchantments;
 

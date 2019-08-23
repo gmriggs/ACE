@@ -109,12 +109,25 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public static uint GetWeaponSpeed(Creature wielder)
         {
-            WorldObject weapon = GetWeapon(wielder as Player);
+            var weapon = GetWeapon(wielder as Player);
 
-            var baseSpeed = weapon != null ? weapon.GetProperty(PropertyInt.WeaponTime) ?? (int)defaultSpeed : (int)defaultSpeed;
+            // does swift killer increase punch/kick speed when no weapon is wielded?
+            if (weapon == null)
+                return defaultSpeed;
 
-            var speedMod = weapon != null ? weapon.EnchantmentManager.GetWeaponSpeedMod() : 0;
-            var auraSpeedMod = wielder != null ? wielder.EnchantmentManager.GetWeaponSpeedMod() : 0;
+            var baseSpeed = weapon.GetProperty(PropertyInt.WeaponTime) ?? (int)defaultSpeed;
+
+            var speedMod = weapon.EnchantmentManager.GetWeaponSpeedMod();
+
+            var auraSpeedMod = 0;
+
+            if (wielder != null)
+            {
+                if (weapon.IsEnchantable)
+                    auraSpeedMod = wielder.EnchantmentManager.GetWeaponSpeedMod();
+                else
+                    auraSpeedMod = wielder.EnchantmentManager.GetWeaponSpeedMod(weapon);
+            }
 
             return (uint)Math.Max(0, baseSpeed + speedMod + auraSpeedMod);
         }
@@ -129,7 +142,21 @@ namespace ACE.Server.WorldObjects
             if (weapon == null)
                 return defaultBonusModifier;
 
-            return defaultBonusModifier + (float)(weapon.GetProperty(PropertyFloat.ManaConversionMod) ?? 0.0f) * wielder.EnchantmentManager.GetManaConvMod();
+            var baseManaConv = (float)(weapon.GetProperty(PropertyFloat.ManaConversionMod) ?? 0.0f);
+
+            var manaConvMod = weapon.EnchantmentManager.GetManaConvMod();
+
+            var auraManaConvMod = 1.0f;
+
+            if (wielder != null)
+            {
+                if (weapon.IsEnchantable)
+                    auraManaConvMod = wielder.EnchantmentManager.GetManaConvMod();
+                else
+                    auraManaConvMod = wielder.EnchantmentManager.GetManaConvMod(weapon);
+            }
+
+            return defaultBonusModifier + (baseManaConv * manaConvMod * auraManaConvMod);
         }
 
         /// <summary>
@@ -148,6 +175,8 @@ namespace ACE.Server.WorldObjects
 
                 if (weapon.IsEnchantable)
                     defenseMod += wielder.EnchantmentManager.GetDefenseMod();
+                else
+                    defenseMod += wielder.EnchantmentManager.GetDefenseMod(weapon);
 
                 return defenseMod;
             }
@@ -171,6 +200,8 @@ namespace ACE.Server.WorldObjects
 
                 if (weapon.IsEnchantable)
                     offenseMod += wielder.EnchantmentManager.GetAttackMod();
+                else
+                    offenseMod += wielder.EnchantmentManager.GetAttackMod(weapon);
 
                 return offenseMod;
             }
@@ -329,7 +360,7 @@ namespace ACE.Server.WorldObjects
             var elementalDamageMod = weapon.ElementalDamageMod ?? 1.0f;
 
             // additive to base multiplier
-            var wielderEnchantments = wielder.EnchantmentManager.GetElementalDamageMod();
+            var wielderEnchantments = weapon.IsEnchantable ? wielder.EnchantmentManager.GetElementalDamageMod() : wielder.EnchantmentManager.GetElementalDamageMod(weapon);
             var weaponEnchantments = weapon.EnchantmentManager.GetElementalDamageMod();
 
             var enchantments = wielderEnchantments + weaponEnchantments;

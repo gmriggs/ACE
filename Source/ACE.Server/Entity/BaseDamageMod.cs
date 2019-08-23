@@ -38,13 +38,21 @@ namespace ACE.Server.Entity
 
             DamageMod = (float)(weapon.GetProperty(PropertyFloat.DamageMod) ?? 1.0f) * weapon.EnchantmentManager.GetDamageMod();
 
+            // factor in wielder auras
             if (weapon.IsEnchantable)
             {
-                // factor in wielder auras for enchantable weapons
                 DamageBonus += wielder.EnchantmentManager.GetDamageBonus();
                 VarianceMod *= wielder.EnchantmentManager.GetVarianceMod();
 
                 DamageMod *= wielder.EnchantmentManager.GetDamageMod();
+            }
+            else
+            {
+                // for unenchantable weapons, filter to weapon caster
+                DamageBonus += wielder.EnchantmentManager.GetDamageBonus(weapon);
+                VarianceMod *= wielder.EnchantmentManager.GetVarianceMod(weapon);
+
+                DamageMod *= wielder.EnchantmentManager.GetDamageMod(weapon);
             }
         }
     }
