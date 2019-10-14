@@ -385,6 +385,63 @@ namespace ACE.Server.Entity
             }
         }
 
+        /// <summary>
+        /// Splits luminance amongst fellowship members, depending on XP type and fellow settings
+        /// </summary>
+        /// <param name="amount">The input amount of luminance</param>
+        /// <param name="xpType">The type of lumaniance (quest luminance is handled differently)</param>
+        /// <param name="player">The fellowship member who originated the luminance</param>
+        public void SplitLuminance(ulong amount, XpType xpType, ShareType shareType, Player player)
+        {
+            // https://asheron.fandom.com/wiki/Announcements_-_2002/02_-_Fever_Dreams#Letter_to_the_Players_1
+
+            var fellowshipMembers = GetFellowshipMembers();
+
+            shareType &= ~ShareType.Fellowship;
+
+            // quest turn-ins: no share
+            if (xpType == XpType.Quest)
+            {
+                //player.GrantLuminance(amount, XpType.Quest, shareType);
+            }
+
+            // divides XP evenly to all the sharable fellows within level range,
+            // but with a significant boost to the amount of xp, based on # of fellowship members
+            else if (EvenShare)
+            {
+                var totalAmount = (ulong)Math.Round(amount * GetMemberSharePercent());
+
+                foreach (var member in fellowshipMembers.Values)
+                {
+                    var shareAmount = (ulong)Math.Round(totalAmount * GetDistanceScalar(player, member, xpType));
+
+                    var fellowXpType = player == member ? xpType : XpType.Fellowship;
+
+                    member.GrantXP((long)shareAmount, fellowXpType, shareType);
+                }
+
+                return;
+            }
+
+            // divides XP to all sharable fellows within level range
+            // based on each fellowship member's level
+            else
+            {
+                var levelXPSum = fellowshipMembers.Values.Select(p => p.GetXPToNextLevel(p.Level.Value)).Sum();
+
+                foreach (var member in fellowshipMembers.Values)
+                {
+                    var levelXPScale = (double)member.GetXPToNextLevel(member.Level.Value) / levelXPSum;
+
+                    var playerTotal = (ulong)Math.Round(amount * levelXPScale * GetDistanceScalar(player, member, xpType));
+
+                    var fellowXpType = player == member ? xpType : XpType.Fellowship;
+
+                    member.GrantXP((long)playerTotal, fellowXpType, shareType);
+                }
+            }
+        }
+
         internal double GetMemberSharePercent()
         {
             var fellowshipMembers = GetFellowshipMembers();
@@ -442,6 +499,29 @@ namespace ACE.Server.Entity
             var scalar = 1 - (dist - MaxDistance) / MaxDistance;
 
             return Math.Max(0.0f, scalar);
+        }
+
+        /// <summary>
+        /// Returns fellows within radar range (75 units outdoors, 25 units indoors)
+        /// </summary>
+        public List<Player> WithinRange(Player player)
+        {
+            var fellows = GetFellowshipMembers();
+
+            var landblockRange = PropertyManager.GetBool("fellow_kt_landblock").Item;
+
+            var results = new List<Player>();
+
+            foreach (var fellow in fellows.Values.Where(f => f != player))
+            {
+                var shareable = landblockRange ?
+                    player.CurrentLandblock == fellow.CurrentLandblock || player.Location.DistanceTo(fellow.Location) <= 192.0f :
+                    player.Location.Distance2D(fellow.Location) <= player.CurrentRadarRange && player.ObjMaint.VisibleObjects.ContainsKey(fellow.Guid.Full);      // 2d visible distance / radar range?
+
+                if (shareable)
+                    results.Add(player);
+            }
+            return results;
         }
 
         /// <summary>

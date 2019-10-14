@@ -566,6 +566,9 @@ namespace ACE.Server.WorldObjects
 
         public void Teleport(Position _newPosition)
         {
+            if (_newPosition == null)
+                return;
+
             var newPosition = new Position(_newPosition);
             //newPosition.PositionZ += 0.005f;
             newPosition.PositionZ += 0.005f * (ObjScale ?? 1.0f);
