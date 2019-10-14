@@ -466,7 +466,7 @@ namespace ACE.Server.WorldObjects
                 var deathItem = sorted.Inventory[i];
 
                 // split stack if needed
-                if ((deathItem.WorldObject.StackSize ?? 1) > 1)
+                /*if ((deathItem.WorldObject.StackSize ?? 1) > 1)
                 {
                     var stack = FindObject(deathItem.WorldObject.Guid, SearchLocations.MyInventory | SearchLocations.MyEquippedItems, out var foundInContainer, out var rootContainer, out _);
 
@@ -486,7 +486,7 @@ namespace ACE.Server.WorldObjects
                     }
                 }
                 else
-                {
+                {*/
                     if (TryRemoveFromInventoryWithNetworking(deathItem.WorldObject.Guid, out _, RemoveFromInventoryAction.ToCorpseOnDeath) || TryDequipObjectWithNetworking(deathItem.WorldObject.Guid, out _, DequipObjectAction.ToCorpseOnDeath))
                     {
                         //Console.WriteLine("Dropping " + deathItem.WorldObject.Name);
@@ -496,7 +496,7 @@ namespace ACE.Server.WorldObjects
                     {
                         log.WarnFormat("Couldn't find death item 0x{0:X8}:{1} for player {2}", deathItem.WorldObject.Guid.Full, deathItem.WorldObject.Name, Name);
                     }
-                }
+                //}
             }
 
             // handle items with BondedStatus.Slippery: always drop on death
