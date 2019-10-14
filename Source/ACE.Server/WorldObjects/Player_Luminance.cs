@@ -44,6 +44,7 @@ namespace ACE.Server.WorldObjects
                 return;
 
             // this is similar to Player_Xp.UpdateXpAndLevel()
+
             var remaining = (MaximumLuminance - AvailableLuminance) ?? 0;
 
             var addAmount = Math.Min(amount, remaining);
@@ -51,9 +52,6 @@ namespace ACE.Server.WorldObjects
             AvailableLuminance += addAmount;
 
             UpdateLuminance();
-
-            if (xpType == XpType.Quest)
-                Session.Network.EnqueueSend(new GameMessageSystemChat($"You've earned {amount:N0} luminance.", ChatMessageType.Broadcast));
         }
 
         /// <summary>
