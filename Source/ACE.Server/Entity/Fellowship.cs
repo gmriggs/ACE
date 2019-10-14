@@ -518,8 +518,6 @@ namespace ACE.Server.Entity
                     player.CurrentLandblock == fellow.CurrentLandblock || player.Location.DistanceTo(fellow.Location) <= 192.0f :
                     player.Location.Distance2D(fellow.Location) <= player.CurrentRadarRange && player.ObjMaint.VisibleObjectsContainsKey(fellow.Guid.Full);      // 2d visible distance / radar range?
 
-
-
                 if (shareable)
                     results.Add(player);
             }
