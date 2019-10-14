@@ -395,49 +395,28 @@ namespace ACE.Server.Entity
         {
             // https://asheron.fandom.com/wiki/Announcements_-_2002/02_-_Fever_Dreams#Letter_to_the_Players_1
 
-            var fellowshipMembers = GetFellowshipMembers();
-
             shareType &= ~ShareType.Fellowship;
 
-            // quest turn-ins: no share
             if (xpType == XpType.Quest)
             {
-                //player.GrantLuminance(amount, XpType.Quest, shareType);
+                // quest luminance is not shared
+                player.GrantLuminance((long)amount, XpType.Quest, shareType);
             }
-
-            // divides XP evenly to all the sharable fellows within level range,
-            // but with a significant boost to the amount of xp, based on # of fellowship members
-            else if (EvenShare)
-            {
-                var totalAmount = (ulong)Math.Round(amount * GetMemberSharePercent());
-
-                foreach (var member in fellowshipMembers.Values)
-                {
-                    var shareAmount = (ulong)Math.Round(totalAmount * GetDistanceScalar(player, member, xpType));
-
-                    var fellowXpType = player == member ? xpType : XpType.Fellowship;
-
-                    member.GrantXP((long)shareAmount, fellowXpType, shareType);
-                }
-
-                return;
-            }
-
-            // divides XP to all sharable fellows within level range
-            // based on each fellowship member's level
             else
             {
-                var levelXPSum = fellowshipMembers.Values.Select(p => p.GetXPToNextLevel(p.Level.Value)).Sum();
+                // pre-filter: evenly divide between luminance-eligible fellows
+                var shareableMembers = GetFellowshipMembers().Values.Where(f => f.MaximumLuminance != null).ToList();
 
-                foreach (var member in fellowshipMembers.Values)
+                var perAmount = (long)Math.Round((double)(amount / (ulong)shareableMembers.Count));
+
+                // further filter to fellows in radar range
+                var inRange = shareableMembers.Intersect(WithinRange(player, true)).ToList();
+
+                foreach (var member in inRange)
                 {
-                    var levelXPScale = (double)member.GetXPToNextLevel(member.Level.Value) / levelXPSum;
-
-                    var playerTotal = (ulong)Math.Round(amount * levelXPScale * GetDistanceScalar(player, member, xpType));
-
                     var fellowXpType = player == member ? xpType : XpType.Fellowship;
 
-                    member.GrantXP((long)playerTotal, fellowXpType, shareType);
+                    member.GrantLuminance(perAmount, fellowXpType, shareType);
                 }
             }
         }
@@ -504,7 +483,7 @@ namespace ACE.Server.Entity
         /// <summary>
         /// Returns fellows within radar range (75 units outdoors, 25 units indoors)
         /// </summary>
-        public List<Player> WithinRange(Player player)
+        public List<Player> WithinRange(Player player, bool includeSelf = false)
         {
             var fellows = GetFellowshipMembers();
 
@@ -512,14 +491,17 @@ namespace ACE.Server.Entity
 
             var results = new List<Player>();
 
-            foreach (var fellow in fellows.Values.Where(f => f != player))
+            foreach (var fellow in fellows.Values)
             {
-                var shareable = landblockRange ?
+                if (player == fellow && !includeSelf)
+                    continue;
+
+                var shareable = player == fellow || landblockRange ?
                     player.CurrentLandblock == fellow.CurrentLandblock || player.Location.DistanceTo(fellow.Location) <= 192.0f :
                     player.Location.Distance2D(fellow.Location) <= player.CurrentRadarRange && player.ObjMaint.VisibleObjectsContainsKey(fellow.Guid.Full);      // 2d visible distance / radar range?
 
                 if (shareable)
-                    results.Add(player);
+                    results.Add(fellow);
             }
             return results;
         }

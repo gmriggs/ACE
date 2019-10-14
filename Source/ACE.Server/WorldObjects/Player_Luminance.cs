@@ -33,9 +33,9 @@ namespace ACE.Server.WorldObjects
                 // this will divy up the luminance, and re-call this function
                 // with ShareType.Fellowship removed
                 Fellowship.SplitLuminance((ulong)amount, xpType, shareType, this);
-                return;
             }
-            AddLuminance(amount, xpType);
+            else
+                AddLuminance(amount, xpType);
         }
 
         private void AddLuminance(long amount, XpType xpType)
