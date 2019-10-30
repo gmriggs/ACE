@@ -5,7 +5,7 @@ namespace ACE.Entity.Enum
     [Flags]
     public enum ArchiveFlag: uint
     {
-        Flag1 = 0x1,  // guessed
+        IsPacked = 0x1,  // guessed
         WordAligned = 0x2,
         NoVersion = 0x4,
         Error = 0x8,

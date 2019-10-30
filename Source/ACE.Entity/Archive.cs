@@ -11,7 +11,7 @@ namespace ACE.Entity
         public byte[] Buffer;
         public uint CurrOffset;
         public Dictionary<ulong, byte[]> Data;
-        public ArchiveVersionStack VersionStack;
+        public InArchiveVersionStack VersionStack;
 
         public void CheckAlignment(uint objSize)
         {
@@ -38,7 +38,7 @@ namespace ACE.Entity
             if (PeekBytes(CurrOffset, nextAlign) != null)
             {
                 CurrOffset += nextAlign;
-                if (Flags.HasFlag(ArchiveFlag.Flag1))
+                if (Flags.HasFlag(ArchiveFlag.IsPacked))
                 {
                     // memset(Buffer, 0, diff)
                     // no need to initialize memory in c# version
@@ -66,7 +66,7 @@ namespace ACE.Entity
             return result;
         }
 
-        public byte[] GetSerialiedBuffer()
+        public byte[] GetSerializedBuffer()
         {
             var result = new byte[CurrOffset];
             Array.Copy(Buffer, result, CurrOffset);
@@ -92,22 +92,15 @@ namespace ACE.Entity
             return result;
         }
 
-        public int GetVersionByToken()
+        public uint? GetVersionByToken(uint tokVersion)
         {
-            if (VersionStack == null)
-                return -1;
-
-            // VersionStack->vfptr[1]
-            return 1;
+            return VersionStack?.GetVersionByToken(tokVersion);
         }
 
-        public ArchiveVersionRow GetVersionRowByHandle(uint version)
+        public ArchiveVersionRow.VersionEntry GetVersionRowByHandle(uint version)
         {
-            if (VersionStack == null)
-                return null;
-
-            // return VersionStack->vfptr[1].Release(version);
-            return new ArchiveVersionRow();
+            // verify
+            return VersionStack?.GetRowByHandle(version);
         }
 
         public void InitForPacking(ArchiveInitializer initializer, byte[] buffer)
@@ -115,7 +108,7 @@ namespace ACE.Entity
             ReleaseUserData();
             Buffer = buffer;
             Flags &= ~ArchiveFlag.NoVersion;
-            Flags |= ArchiveFlag.Flag1;
+            Flags |= ArchiveFlag.IsPacked;
             CurrOffset = 0;
             Error = null;
             InitVersionStack();
@@ -126,7 +119,7 @@ namespace ACE.Entity
         {
             ReleaseUserData();
             Buffer = buffer;
-            Flags &= ~(ArchiveFlag.NoVersion | ArchiveFlag.Flag1);
+            Flags &= ~(ArchiveFlag.NoVersion | ArchiveFlag.IsPacked);
             CurrOffset = 0;
             Error = null;
             InitVersionStack();
@@ -145,7 +138,7 @@ namespace ACE.Entity
 
             var endPos = pos + size;
 
-            if (Flags.HasFlag(ArchiveFlag.Flag1))   // buffer full?
+            if (Flags.HasFlag(ArchiveFlag.IsPacked))   // buffer full?
             {
                 // if (SmartBuffer::CanGrow(buffer))
                 var newBuffer = new byte[endPos];
@@ -170,36 +163,37 @@ namespace ACE.Entity
             }
         }
 
-        public string PushVersionRow()
+        public bool PushVersionRow()
         {
             if (Flags.HasFlag(ArchiveFlag.NoVersion))
-                return "INVALID_VERSIONHANDLE_0";   // fix type
+                return false;   // INVALID_VERSIONHANDLE_0
 
             if (VersionStack == null)
             {
                 Flags |= ArchiveFlag.NoVersion;
                 Error = new TResult(0x80004005);
-                return "INVALID_VERSIONHANDLE_0";   // fix type
+                return false;   // INVALID_VERSIONHANDLE_0
             }
 
-            //return VersionStack->vfptr[1].QueryInterface()
-            return "true";  // fix type
+            VersionStack.PushVersionRow();
+            return true;
         }
 
-        public string PushVersionRow(ArchiveVersionRow initialData)
+        public bool PushVersionRow(ArchiveVersionRow initialData)
         {
             if (Flags.HasFlag(ArchiveFlag.NoVersion))
-                return "INVALID_VERSIONHANDLE_0";   // fix type
+                return false;   // INVALID_VERSIONHANDLE_0
+
 
             if (VersionStack == null)
             {
                 Flags |= ArchiveFlag.NoVersion;
                 Error = new TResult(0x80004005);
-                return "INVALID_VERSIONHANDLE_0";   // fix type
+                return false;   // INVALID_VERSIONHANDLE_0
             }
 
-            //return VersionStack->vfptr[1].IUnknown_Release(initialData);
-            return "true";  // fix type
+            VersionStack.PushVersionRow(initialData);
+            return true;
         }
 
         public void RaiseError()
@@ -247,7 +241,7 @@ namespace ACE.Entity
             if (Flags.HasFlag(ArchiveFlag.NoVersion))
                 return false;
 
-            if (VersionStack == null /*|| !VersionStack->vfrptr[1].IUnknown_AddRef(tokVersion, version)*/)
+            if (VersionStack == null || !VersionStack.SetVersion(tokVersion, version))
             {
                 Flags |= ArchiveFlag.NoVersion;
                 Error = new TResult(0x80004005);
@@ -290,8 +284,7 @@ namespace ACE.Entity
                 if (archive.Flags.HasFlag(ArchiveFlag.NoVersion))
                     return false;
 
-                var result = archive.PushVersionRow(InitialData);
-                return result != "INVALID_VERSIONHANDLE_0";
+                return archive.PushVersionRow(InitialData);
             }
         }
     }
