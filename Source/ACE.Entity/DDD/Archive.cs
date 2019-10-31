@@ -287,5 +287,100 @@ namespace ACE.Entity
                 return archive.PushVersionRow(InitialData);
             }
         }
+
+        // custom methods
+        public bool IsPacked => (Flags & ArchiveFlag.IsPacked) != 0;
+
+        public int? ReadInt32()
+        {
+            CheckAlignment(4);
+            var data = GetBytes(4);
+            if (data != null)
+                return BitConverter.ToInt32(data, 0);
+            else
+                return null;
+        }
+
+        public uint? ReadUInt32()
+        {
+            CheckAlignment(4);
+            var data = GetBytes(4);
+            if (data != null)
+                return BitConverter.ToUInt32(data, 0);
+            else
+                return null;
+        }
+
+        public ulong? ReadUInt64()
+        {
+            CheckAlignment(8);
+            var data = GetBytes(8);
+            if (data != null)
+                return BitConverter.ToUInt64(data, 0);
+            else
+                return null;
+        }
+
+        public bool? ReadBool()
+        {
+            CheckAlignment(1);
+            var data = GetBytes(1);
+            if (data != null)
+                return BitConverter.ToBoolean(data, 0);
+            else
+                return null;
+        }
+
+        public byte[] ReadBytes(uint size)
+        {
+            return GetBytes(size);
+        }
+
+        public bool Write(int value)
+        {
+            CheckAlignment(4);
+            var data = GetBytes(4);
+            if (data == null)
+                return false;
+            data = BitConverter.GetBytes(value);
+            return true;
+        }
+
+        public bool Write(uint value)
+        {
+            CheckAlignment(4);
+            var data = GetBytes(4);
+            if (data == null)
+                return false;
+            data = BitConverter.GetBytes(value);
+            return true;
+        }
+
+        public bool Write(ulong value)
+        {
+            CheckAlignment(8);
+            var data = GetBytes(8);
+            if (data == null)
+                return false;
+            data = BitConverter.GetBytes(value);
+            return true;
+        }
+
+        public bool Write(bool value)
+        {
+            CheckAlignment(1);
+            var data = GetBytes(1);
+            if (data == null)
+                return false;
+            data = BitConverter.GetBytes(value);
+            return true;
+        }
+
+        public bool Write(byte[] data)
+        {
+            // todo
+            Array.Copy(data, 0, Buffer, CurrOffset, data.Length);
+            return true;
+        }
     }
 }
