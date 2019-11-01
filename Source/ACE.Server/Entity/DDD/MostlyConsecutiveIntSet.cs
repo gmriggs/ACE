@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
+using ACE.DatLoader.FileTypes;
 using ACE.Entity.Enum;
 
 namespace ACE.Entity
@@ -15,6 +17,16 @@ namespace ACE.Entity
         {
             Ints = new List<int>();
             Sorted = true;
+        }
+
+        public MostlyConsecutiveIntSet(Archive archive)
+        {
+            Serialize(archive);
+        }
+
+        public MostlyConsecutiveIntSet(IterationList iterationList)
+        {
+            Unpack(iterationList);
         }
 
         public void Add(int newInt)
@@ -37,12 +49,118 @@ namespace ACE.Entity
         public void Serialize(Archive archive)
         {
             if (archive.Flags.HasFlag(ArchiveFlag.IsPacked))
-                SerializePacked(archive);
+                Pack(archive);
             else
-                SerializeUnpacked(archive);
+                Unpack(archive);
         }
 
-        public void SerializePacked(Archive archive)
+        public IterationList Pack()
+        {
+            var itList = new IterationList();
+
+            Sort();
+
+            var size = Ints.Count;
+            itList.Iteration = size;
+
+            var i = 0;
+            var j = 0;
+
+            // find gaps
+            while (i < size)
+            {
+                j = i;
+                var curInt = Ints[i];
+                var consecutive = curInt;
+                do
+                {
+                    if (consecutive != curInt)
+                        break;
+                    j++;
+                    consecutive++;
+                    if (j < size)
+                        curInt = Ints[j];
+                }
+                while (j < size);
+
+                var negConsecutiveSpan = i - j;
+
+                if (negConsecutiveSpan >= -2)
+                {
+                    // does this keep adding to a list of gaps,
+                    // ie. can this structure contain more than 3 elements?
+                    var prevInt = Ints[i++];
+                    var masked = prevInt & 0x7FFFFFFF;
+
+                    itList.NegFirstGap = masked;
+                }
+                else
+                {
+                    itList.NegFirstGap = negConsecutiveSpan;
+
+                    var aCurInt = Ints[i];
+                    itList.FirstIteration = aCurInt;
+
+                    // size
+                    i -= negConsecutiveSpan;
+                }
+            }
+
+            return itList;
+        }
+
+        public void Unpack(IterationList iterationList)
+        {
+            var iteration = iterationList.Iteration;
+            if (iteration > 100000)     // client hardcoded limit?
+                return;
+
+            // original: set size, remove subset?
+            Ints = Enumerable.Repeat(0, iteration).ToList();
+
+            if (iteration == 0)
+            {
+                Sorted = true;
+                return;
+            }
+
+            var negFirstGap = iterationList.NegFirstGap;
+            var firstGap = -negFirstGap;
+
+            var firstIteration = 0;
+
+            if (negFirstGap >= 0)
+            {
+                // modify iteration?
+            }
+            else
+            {
+                firstIteration = iterationList.FirstIteration;
+
+                if (firstGap <= 0 && iteration >= 0)
+                {
+                    Sorted = true;
+                    return;
+                }
+            }
+
+            var i = 0;
+            var curIteration = firstIteration;
+
+            while (i < iteration)
+            {
+                Ints[i++] = curIteration++;
+
+                // check what this does here
+                if (i >= firstGap && i >= iteration)
+                {
+                    Sorted = true;
+                    return;
+                }
+            }
+        }
+
+        public void Pack(Archive archive)
         {
             Sort();
             archive.CheckAlignment(4);
@@ -109,7 +227,7 @@ namespace ACE.Entity
             }
         }
 
-        public void SerializeUnpacked(Archive archive)
+        public void Unpack(Archive archive)
         {
             var k = 0;
             var l = 0;
@@ -150,7 +268,7 @@ namespace ACE.Entity
                 archive.CheckAlignment(4);
                 var endBytes = archive.GetBytes(4);
                 var endBytesVal = BitConverter.ToInt32(endBytes, 0);
-                if (endBytesVal != 0)
+                if (endBytesVal >= 0)
                 {
                     prevBytes = endBytes;
 

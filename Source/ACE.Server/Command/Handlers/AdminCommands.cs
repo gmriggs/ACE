@@ -12,6 +12,7 @@ using ACE.Database.Models.Auth;
 using ACE.Database.Models.Shard;
 using ACE.Database.Models.World;
 using ACE.DatLoader;
+using ACE.DatLoader.FileTypes;
 using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
@@ -351,7 +352,7 @@ namespace ACE.Server.Command.Handlers
                     message += $"{characters.Count} Character(s) owned by: {account.AccountName}\n";
                     message += "-------------------\n";
                     foreach (var character in characters.Where(x => !x.IsDeleted && x.DeleteTime == 0))
-                        message += $"\"{(character.IsPlussed ? "+" : "")}{character.Name}\", ID 0x{character.Id.ToString("X8")}\n";                    
+                        message += $"\"{(character.IsPlussed ? "+" : "")}{character.Name}\", ID 0x{character.Id.ToString("X8")}\n";
                     var pendingDeletedCharacters = characters.Where(x => !x.IsDeleted && x.DeleteTime > 0).ToList();
                     if (pendingDeletedCharacters.Count > 0)
                     {
@@ -855,7 +856,7 @@ namespace ACE.Server.Command.Handlers
                             creature.Smite(session.Player, useTakeDamage);
                     }
 
-                    PlayerManager.BroadcastToAuditChannel(session.Player,$"{session.Player.Name} used smite all.");
+                    PlayerManager.BroadcastToAuditChannel(session.Player, $"{session.Player.Name} used smite all.");
                 }
                 else
                 {
@@ -950,7 +951,7 @@ namespace ACE.Server.Command.Handlers
             player.SetPosition(PositionType.TeleportedCharacter, currentPos);
             player.Session.Network.EnqueueSend(new GameMessageSystemChat($"{session.Player.Name} has teleported you.", ChatMessageType.Magic));
 
-            PlayerManager.BroadcastToAuditChannel(session.Player,$"{session.Player.Name} has teleported {player.Name} to them.");
+            PlayerManager.BroadcastToAuditChannel(session.Player, $"{session.Player.Name} has teleported {player.Name} to them.");
         }
 
         /// <summary>
@@ -1009,7 +1010,7 @@ namespace ACE.Server.Command.Handlers
         [CommandHandler("telepoi", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld, 1,
             "Teleport yourself to a named Point of Interest",
             "[POI|list]\n" +
-            "@telepoi Arwic\n"+
+            "@telepoi Arwic\n" +
             "Get the list of POIs\n" +
             "@telepoi list")]
         public static void HandleTeleportPoi(Session session, params string[] parameters)
@@ -1731,7 +1732,7 @@ namespace ACE.Server.Command.Handlers
             biotas.Add((session.Player.Biota, session.Player.BiotaDatabaseLock));
             DatabaseManager.Shard.SaveBiotasInParallel(biotas, result => DoGodMode(result, session));
         }
-            
+
         private static void DoGodMode(bool playerSaved, Session session, bool exceptionReturn = false)
         {
             if (!playerSaved)
@@ -1808,10 +1809,10 @@ namespace ACE.Server.Command.Handlers
 
                 // save return state to db in property string
                 session.Player.SetProperty(PropertyString.GodState, returnState);
-                session.Player.SaveBiotaToDatabase(); 
+                session.Player.SaveBiotaToDatabase();
             }
 
-            
+
 
             // Begin Godly Stats Increase
 
@@ -1880,7 +1881,7 @@ namespace ACE.Server.Command.Handlers
             Player currentPlayer = session.Player;
             Biota biota = currentPlayer.Biota;
             string returnString = session.Player.GodState;
-            
+
             if (returnString == null)
             {
                 ChatPacket.SendServerMessage(session, "Can't get any more ungodly than you already are...", ChatMessageType.Broadcast);
@@ -1890,7 +1891,7 @@ namespace ACE.Server.Command.Handlers
             {
                 try
                 {
-                   string[] returnStringArr = returnString.Split("=");
+                    string[] returnStringArr = returnString.Split("=");
 
                     // correctly formatted return string should have 240 entries
                     // if the construction of the string changes - this will need to be updated to match
@@ -1988,7 +1989,7 @@ namespace ACE.Server.Command.Handlers
             ChatPacket.SendServerMessage(session, "You are now a magic god!!!", ChatMessageType.Broadcast);
         }
 
-        
+
         [CommandHandler("modifyvital", AccessLevel.Admin, CommandHandlerFlag.None, 2, "Adjusts the maximum vital attribute for the last appraised mob/player and restores full vitals", "<Health|Stamina|Mana> <delta>")]
         public static void HandleModifyVital(Session session, params string[] parameters)
         {
@@ -2007,7 +2008,8 @@ namespace ACE.Server.Command.Handlers
             }
 
             // determine the vital type
-            if (!Enum.TryParse(parameters[0], out PropertyAttribute2nd vitalAttr)) {
+            if (!Enum.TryParse(parameters[0], out PropertyAttribute2nd vitalAttr))
+            {
                 ChatPacket.SendServerMessage(session, "Invalid vital type, valid values are: Health,Stamina,Mana", ChatMessageType.Broadcast);
                 return;
             }
@@ -2242,7 +2244,7 @@ namespace ACE.Server.Command.Handlers
                 return;
             }
 
-            session.Network.EnqueueSend(new GameMessageSystemChat($"Morphing you into {weenie.GetProperty(PropertyString.Name)} ({weenieClassDescription})... You will be logged out.", ChatMessageType.Broadcast));            
+            session.Network.EnqueueSend(new GameMessageSystemChat($"Morphing you into {weenie.GetProperty(PropertyString.Name)} ({weenieClassDescription})... You will be logged out.", ChatMessageType.Broadcast));
 
             var guid = GuidManager.NewPlayerGuid();
 
@@ -3200,7 +3202,7 @@ namespace ACE.Server.Command.Handlers
                 session.Network.EnqueueSend(new GameMessageSystemChat(info, ChatMessageType.Broadcast));
             }
         }
-      
+
         // cm <material type> <quantity> <ave. workmanship>
         [CommandHandler("cm", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld, 1, "Create a salvage bag in your inventory", "<material_type>, optional: <structure> <workmanship> <num_items>")]
         public static void HandleCM(Session session, params string[] parameters)
@@ -3325,6 +3327,28 @@ namespace ACE.Server.Command.Handlers
             msg += "Clear resets to default.\nAll options ending with Fog are continuous.\nAll options ending with Fog2 are continuous and blank radar.\nAll options ending with Sound play once and do not repeat.";
 
             return msg;
+        }
+
+        [CommandHandler("testdatfile", AccessLevel.Admin, CommandHandlerFlag.ConsoleInvoke)]
+        public static void HandleTestDatFile(Session session, params string[] parameters)
+        {
+            var portal = DatManager.PortalDat.AllFiles.FirstOrDefault(i => i.Key == 0xFFFF0001);
+            var cell = DatManager.CellDat.AllFiles.FirstOrDefault(i => i.Key == 0xFFFF0001);
+            var highres = DatManager.HighResDat.AllFiles.FirstOrDefault(i => i.Key == 0xFFFF0001);
+            var language = DatManager.LanguageDat.AllFiles.FirstOrDefault(i => i.Key == 0xFFFF0001);
+
+            var portal_iterations = DatManager.PortalDat.ReadFromDat<IterationList>(0xFFFF0001);
+            var cell_iterations = DatManager.CellDat.ReadFromDat<IterationList>(0xFFFF0001);
+            var highres_iterations = DatManager.HighResDat.ReadFromDat<IterationList>(0xFFFF0001);
+            var langeuage_iterations = DatManager.LanguageDat.ReadFromDat<IterationList>(0xFFFF0001);
+
+            Console.WriteLine($"Portal Iteratons: {portal_iterations.Iteration}, {portal_iterations.NegFirstGap}, {portal_iterations.Sorted}");
+            Console.WriteLine($"Cell Iteratons: {cell_iterations.Iteration}, {cell_iterations.NegFirstGap}, {cell_iterations.Sorted}");
+            Console.WriteLine($"HighRes Iteratons: {highres_iterations.Iteration}, {highres_iterations.NegFirstGap}, {highres_iterations.Sorted}");
+            Console.WriteLine($"Language Iteratons: {langeuage_iterations.Iteration}, {langeuage_iterations.NegFirstGap}, {langeuage_iterations.Sorted}");
+
+            var mci = new MostlyConsecutiveIntSet(portal_iterations);
+            var itList = mci.Pack();
         }
     }
 }

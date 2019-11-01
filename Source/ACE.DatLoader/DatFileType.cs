@@ -507,5 +507,18 @@ namespace ACE.DatLoader
         [DatDatabaseType(DatDatabaseType.Portal)]
         [DatFileTypeIdRange(0x0E00001D, 0x0E00001D)]
         ContractTable           = 111, // DB_TYPE_CONTRACT_TABLE_0
+
+        // custom
+        [DatDatabaseType(DatDatabaseType.Cell)]
+        [DatFileTypeIdRange(0xFFFF0001, 0xFFFF0001)]
+        CellIterations          = 112, // stru_8333B8
+
+        [DatDatabaseType(DatDatabaseType.Language)]
+        [DatFileTypeIdRange(0xFFFF0001, 0xFFFF0001)]
+        LanguageIterations      = 113, // stru_8333B8
+
+        [DatDatabaseType(DatDatabaseType.Portal)]
+        [DatFileTypeIdRange(0xFFFF0001, 0xFFFF0001)]
+        PortalIterations        = 114, // stru_8333B8
     }
 }

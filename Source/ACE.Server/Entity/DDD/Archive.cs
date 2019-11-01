@@ -331,6 +331,25 @@ namespace ACE.Entity
                 return null;
         }
 
+        public List<uint> ReadUInt32List()
+        {
+            var result = new List<uint>();
+
+            var size = ReadUInt32();
+            if (size == null)
+                return result;
+
+            for (var i = 0; i < size; i++)
+            {
+                var value = ReadUInt32();
+                if (value != null)
+                    result.Add(value.Value);
+                else
+                    break;
+            }
+            return result;
+        }
+
         public byte[] ReadBytes(uint size)
         {
             return GetBytes(size);
@@ -380,6 +399,19 @@ namespace ACE.Entity
         {
             // todo
             Array.Copy(data, 0, Buffer, CurrOffset, data.Length);
+            return true;
+        }
+
+        public bool Write(List<uint> data)
+        {
+            if (!Write(data.Count))
+                return false;
+
+            foreach (var val in data)
+            {
+                if (!Write(val))
+                    return false;
+            }
             return true;
         }
     }
