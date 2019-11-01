@@ -3340,15 +3340,45 @@ namespace ACE.Server.Command.Handlers
             var portal_iterations = DatManager.PortalDat.ReadFromDat<IterationList>(0xFFFF0001);
             var cell_iterations = DatManager.CellDat.ReadFromDat<IterationList>(0xFFFF0001);
             var highres_iterations = DatManager.HighResDat.ReadFromDat<IterationList>(0xFFFF0001);
-            var langeuage_iterations = DatManager.LanguageDat.ReadFromDat<IterationList>(0xFFFF0001);
+            var language_iterations = DatManager.LanguageDat.ReadFromDat<IterationList>(0xFFFF0001);
 
-            Console.WriteLine($"Portal Iteratons: {portal_iterations.Iteration}, {portal_iterations.NegFirstGap}, {portal_iterations.Sorted}");
-            Console.WriteLine($"Cell Iteratons: {cell_iterations.Iteration}, {cell_iterations.NegFirstGap}, {cell_iterations.Sorted}");
-            Console.WriteLine($"HighRes Iteratons: {highres_iterations.Iteration}, {highres_iterations.NegFirstGap}, {highres_iterations.Sorted}");
-            Console.WriteLine($"Language Iteratons: {langeuage_iterations.Iteration}, {langeuage_iterations.NegFirstGap}, {langeuage_iterations.Sorted}");
+            Console.WriteLine($"Portal Iteratons: {portal_iterations.Size}, {string.Join(", ", portal_iterations.Ints)}");
+            Console.WriteLine($"Cell Iteratons: {cell_iterations.Size}, {string.Join(", ", cell_iterations.Ints)}");
+            Console.WriteLine($"HighRes Iteratons: {highres_iterations.Size}, {string.Join(", ", highres_iterations.Ints)}");
+            Console.WriteLine($"Language Iteratons: {language_iterations.Size}, {string.Join(", ", language_iterations.Ints)}");
 
-            var mci = new MostlyConsecutiveIntSet(portal_iterations);
-            var itList = mci.Pack();
+            TestMCI(new MostlyConsecutiveIntSet(portal_iterations).Ints);
+            TestMCI(new MostlyConsecutiveIntSet(cell_iterations).Ints);
+            TestMCI(new MostlyConsecutiveIntSet(highres_iterations).Ints);
+            TestMCI(new MostlyConsecutiveIntSet(language_iterations).Ints);
+
+            TestMCI(new List<int>() { 1, 2, 3, 4, 5 });
+            TestMCI(new List<int>() { 1, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 });
+            TestMCI(new List<int>() { 1, 3, 5, 7, 9, 11});
+            TestMCI(new List<int>() { 1, 2, 3, 10, 11, 12 });
+            TestMCI(new List<int>() { 1, 2, 3, 5, 6, 8, 9, 10 });
+        }
+
+        public static bool TestMCI(List<int> ints)
+        {
+            var mci = new MostlyConsecutiveIntSet(ints);
+            var packed = mci.Pack();
+            var unpacked = new MostlyConsecutiveIntSet(packed);
+
+            var success = mci.Ints.Count == unpacked.Ints.Count;
+            if (success)
+            {
+                for (var i = 0; i < mci.Ints.Count; i++)
+                {
+                    if (mci.Ints[i] != unpacked.Ints[i])
+                    {
+                        success = false;
+                        break;
+                    }
+                }
+            }
+            Console.WriteLine($"< {string.Join(", ", mci.Ints)} >  == < {packed.Size}, {string.Join(", ", packed.Ints)} > ({(success ? "SUCCESS" : "FAILED")})");
+            return success;
         }
     }
 }

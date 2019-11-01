@@ -29,6 +29,12 @@ namespace ACE.Entity
             Unpack(iterationList);
         }
 
+        public MostlyConsecutiveIntSet(List<int> ints)
+        {
+            Ints = new List<int>(ints);
+            Sort();
+        }
+
         public void Add(int newInt)
         {
             Ints.Add(newInt);
@@ -57,11 +63,12 @@ namespace ACE.Entity
         public IterationList Pack()
         {
             var itList = new IterationList();
+            itList.Ints = new List<int>();
 
             Sort();
 
             var size = Ints.Count;
-            itList.Iteration = size;
+            itList.Size = size;
 
             var i = 0;
             var j = 0;
@@ -84,25 +91,28 @@ namespace ACE.Entity
                 while (j < size);
 
                 var negConsecutiveSpan = i - j;
+                //Console.WriteLine($"NegConsecutiveSpan: {negConsecutiveSpan}");
 
+                // less than 2 consecutives?
                 if (negConsecutiveSpan >= -2)
                 {
                     // does this keep adding to a list of gaps,
                     // ie. can this structure contain more than 3 elements?
                     var prevInt = Ints[i++];
-                    var masked = prevInt & 0x7FFFFFFF;
+                    var masked = prevInt & 0x7FFFFFFF;  // everything but the last / sign bit
 
-                    itList.NegFirstGap = masked;
+                    itList.Ints.Add(masked);
                 }
                 else
                 {
-                    itList.NegFirstGap = negConsecutiveSpan;
+                    itList.Ints.Add(negConsecutiveSpan);
 
                     var aCurInt = Ints[i];
-                    itList.FirstIteration = aCurInt;
+                    itList.Ints.Add(aCurInt);
 
                     // size
                     i -= negConsecutiveSpan;
+                    //Console.WriteLine($"Last branch: i: {i}");
                 }
             }
 
@@ -111,53 +121,43 @@ namespace ACE.Entity
 
         public void Unpack(IterationList iterationList)
         {
-            var iteration = iterationList.Iteration;
-            if (iteration > 100000)     // client hardcoded limit?
+            var packedSize = iterationList.Ints.Count;
+            var unpackedSize = iterationList.Size;
+
+            if (unpackedSize > 100000)     // client hardcoded limit?
                 return;
 
-            // original: set size, remove subset?
-            Ints = Enumerable.Repeat(0, iteration).ToList();
-
-            if (iteration == 0)
-            {
-                Sorted = true;
-                return;
-            }
-
-            var negFirstGap = iterationList.NegFirstGap;
-            var firstGap = -negFirstGap;
-
-            var firstIteration = 0;
-
-            if (negFirstGap >= 0)
-            {
-                // modify iteration?
-            }
-            else
-            {
-                firstIteration = iterationList.FirstIteration;
-
-                if (firstGap <= 0 && iteration >= 0)
-                {
-                    Sorted = true;
-                    return;
-                }
-            }
+            Ints = new List<int>();
 
             var i = 0;
-            var curIteration = firstIteration;
 
-            while (i < iteration)
+            while (i < packedSize)
             {
-                Ints[i++] = curIteration++;
+                var nextInt = iterationList.Ints[i++];
 
-                // check what this does here
-                if (i >= firstGap && i >= iteration)
+                if (nextInt >= 0)
                 {
-                    Sorted = true;
-                    return;
+                    // single iteration
+                    if ((nextInt & 0x40000000) != 0)
+                        nextInt |= -2147483648;     // 0x80000000
+
+                    Ints.Add(nextInt);
+                }
+                else
+                {
+                    // span
+                    var spanSize = -nextInt;
+
+                    var startIteration = iterationList.Ints[i++];
+
+                    var curIteration = startIteration;
+
+                    for (var j = 0; j < spanSize; j++)
+                        Ints.Add(curIteration++);
                 }
             }
+
+            Sorted = true;
         }
 
         public void Pack(Archive archive)
