@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
+using log4net;
+
 using ACE.Entity.Enum;
 using ACE.Server.Physics.BSP;
 using ACE.Server.Physics.Animation;
@@ -13,6 +15,8 @@ namespace ACE.Server.Physics.Common
 {
     public class EnvCell: ObjCell, IEquatable<EnvCell>
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public int NumSurfaces;
         //public List<Surface> Surfaces;
         public CellStruct CellStructure;
@@ -62,10 +66,19 @@ namespace ACE.Server.Physics.Common
             SeenOutside = envCell.SeenOutside;
 
             EnvironmentID = envCell.EnvironmentId;
-            Environment = DBObj.GetEnvironment(EnvironmentID);
-            CellStructureID = envCell.CellStructure;    // environment can contain multiple?
-            if (Environment.Cells != null && Environment.Cells.ContainsKey(CellStructureID))
-                CellStructure = new CellStruct(Environment.Cells[CellStructureID]);
+
+            if (EnvironmentID >= 0xD000000 && EnvironmentID <= 0xD00FFFF)
+            {
+                Environment = DBObj.GetEnvironment(EnvironmentID);
+                CellStructureID = envCell.CellStructure;    // environment can contain multiple?
+                if (Environment.Cells != null && Environment.Cells.ContainsKey(CellStructureID))
+                    CellStructure = new CellStruct(Environment.Cells[CellStructureID]);
+            }
+            else
+            {
+                log.Error($"EnvCell {ID:X8} contains bad environment {EnvironmentID:X8}");
+                Environment = new DatLoader.FileTypes.Environment();
+            }
 
             NumSurfaces = envCell.Surfaces.Count;
         }
