@@ -349,5 +349,14 @@ namespace ACE.Server.Command.Handlers
             // update client
             session.Network.EnqueueSend(new GameEventPlayerDescription(session));
         }
+
+        [CommandHandler("reportbusy", AccessLevel.Player, CommandHandlerFlag.RequiresWorld, 0, "Reports player stuck in busy state.")]
+        public static void HandleReportBusy(Session session, params string[] parameters)
+        {
+            log.Error($"{session.Player.Name} has sent a report of being stuck in busy state!");
+            log.Error(session.Player.IsBusyStackTrace);
+
+            session.Network.EnqueueSend(new GameMessageSystemChat($"Thank you for reporting being stuck in busy state\nInformation to help trace this issue has been logged.", ChatMessageType.Broadcast));
+        }
     }
 }
