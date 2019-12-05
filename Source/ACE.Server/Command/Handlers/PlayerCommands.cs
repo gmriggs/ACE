@@ -354,6 +354,7 @@ namespace ACE.Server.Command.Handlers
         public static void HandleReportBusy(Session session, params string[] parameters)
         {
             log.Error($"{session.Player.Name} has sent a report of being stuck in busy state!");
+            log.Error($"{session.Player.Name}.IsBusy={session.Player.IsBusy}");
             log.Error(session.Player.IsBusyStackTrace);
 
             session.Network.EnqueueSend(new GameMessageSystemChat($"Thank you for reporting being stuck in busy state\nInformation to help trace this issue has been logged.", ChatMessageType.Broadcast));
