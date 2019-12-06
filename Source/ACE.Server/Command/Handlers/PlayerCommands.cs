@@ -350,14 +350,20 @@ namespace ACE.Server.Command.Handlers
             session.Network.EnqueueSend(new GameEventPlayerDescription(session));
         }
 
-        [CommandHandler("reportbusy", AccessLevel.Player, CommandHandlerFlag.RequiresWorld, 0, "Reports player stuck in busy state.")]
+        [CommandHandler("reportbusy", AccessLevel.Player, CommandHandlerFlag.RequiresWorld, "Reports player stuck in busy state.")]
         public static void HandleReportBusy(Session session, params string[] parameters)
         {
             log.Error($"{session.Player.Name} has sent a report of being stuck in busy state!");
             log.Error($"{session.Player.Name}.IsBusy={session.Player.IsBusy}");
-            log.Error(session.Player.IsBusyStackTrace);
+            var busyTime = (DateTime.UtcNow - session.Player.LastBusyTime).TotalSeconds;
+            log.Error($"{session.Player.Name}.IsBusyTime={busyTime}s");
 
-            session.Network.EnqueueSend(new GameMessageSystemChat($"Thank you for reporting being stuck in busy state\nInformation to help trace this issue has been logged.", ChatMessageType.Broadcast));
+            log.Error(session.Player.IsBusyStackTrace);
+            session.Player.ReportBusy = true;
+
+            var serverBusy = session.Player.IsBusy && busyTime > 5.0f ? "" : "Are you sure you're stuck in busy state on server? This can be seen if actions repeatedly fail with 'You're too busy!'\nDo you have perma-hourglass, but actions succeed on server?\n";
+
+            session.Network.EnqueueSend(new GameMessageSystemChat($"Thank you for reporting being stuck in busy state\n{serverBusy}Information to help trace this issue has been logged.", ChatMessageType.Broadcast));
         }
     }
 }

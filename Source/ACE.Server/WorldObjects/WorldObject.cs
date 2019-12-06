@@ -67,7 +67,11 @@ namespace ACE.Server.WorldObjects
         public DateTime? ItemManaDepletionMessageTimestamp { get; set; } = null;
         public DateTime? ItemManaConsumptionTimestamp { get; set; } = null;
 
+        public DateTime LastBusyTime;
+
         public string IsBusyStackTrace;
+
+        public bool ReportBusy;
 
         private bool isBusy;
         public bool IsBusy
@@ -78,7 +82,16 @@ namespace ACE.Server.WorldObjects
                 isBusy = value;
 
                 if (isBusy)
+                {
+                    LastBusyTime = DateTime.UtcNow;
                     IsBusyStackTrace = System.Environment.StackTrace;
+                }
+                else if (ReportBusy)
+                {
+                    log.Error($"{Name}.IsBusy completed after {(DateTime.UtcNow - LastBusyTime).TotalSeconds}s");
+                    log.Error(System.Environment.StackTrace);
+                    ReportBusy = false;
+                }
             }
         }
 
