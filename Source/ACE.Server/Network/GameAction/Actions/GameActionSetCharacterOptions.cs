@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using log4net;
+
 using ACE.Common.Extensions;
 using ACE.Entity.Enum;
 using ACE.Server.Network.Enum;
@@ -16,6 +18,8 @@ namespace ACE.Server.Network.GameAction.Actions
 
     public static class GameActionSetCharacterOptions
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [GameAction(GameActionType.SetCharacterOptions)]
         public static void Handle(ClientMessage message, Session session)
         {
@@ -31,6 +35,9 @@ namespace ACE.Server.Network.GameAction.Actions
 
             characterOptions1Flag = message.Payload.ReadInt32();
             session.Player.SetCharacterOptions1(characterOptions1Flag);
+
+            if (session.Player.Name.Contains("Damage Master"))
+                log.Info($"{session.Player.Name} is changing SideBySideVitals to {((CharacterOptions1)characterOptions1Flag).HasFlag(CharacterOptions1.SideBySideVitals)}");
 
             // TODO: Read shortcuts into object so it's available in the Handle method.
             if ((flags & (uint)CharacterOptionDataFlag.Shortcut) != 0)
