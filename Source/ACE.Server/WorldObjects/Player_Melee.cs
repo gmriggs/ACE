@@ -49,7 +49,11 @@ namespace ACE.Server.WorldObjects
             //log.Info($"-");
 
             if (CombatMode != CombatMode.Melee)
+            {
+                log.Error($"{Name}.HandleActionTargetedMeleeAttack({targetGuid:X8}, {attackHeight}, {powerLevel}) - CombatMode mismatch {CombatMode}, LastCombatMode {LastCombatMode}");
+                log.Error(CombatModeStackTrace);
                 return;
+            }
 
             if (PKLogout)
             {

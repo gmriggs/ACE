@@ -626,11 +626,17 @@ namespace ACE.Server.WorldObjects
             return PlayerKillerStatus.HasFlag(PlayerKillerStatus.PKLite) && new ObjectGuid(killerGuid ?? 0).IsPlayer() && killerGuid != Guid.Full;
         }
 
+        public CombatMode LastCombatMode;
+
+        public string CombatModeStackTrace;
+
         /// <summary>
         /// This method processes the Game Action (F7B1) Change Combat Mode (0x0053)
         /// </summary>
         public void HandleActionChangeCombatMode(CombatMode newCombatMode)
         {
+            LastCombatMode = newCombatMode;
+
             if (DateTime.UtcNow >= NextUseTime)
                 HandleActionChangeCombatMode_Inner(newCombatMode);
             else

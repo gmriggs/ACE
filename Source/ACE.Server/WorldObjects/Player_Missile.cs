@@ -39,7 +39,11 @@ namespace ACE.Server.WorldObjects
         public void HandleActionTargetedMissileAttack(uint targetGuid, uint attackHeight, float accuracyLevel)
         {
             if (CombatMode != CombatMode.Missile)
+            {
+                log.Error($"{Name}.HandleActionTargetedMissileAttack({targetGuid:X8}, {attackHeight}, {accuracyLevel}) - CombatMode mismatch {CombatMode}, LastCombatMode: {LastCombatMode}");
+                log.Error(CombatModeStackTrace);
                 return;
+            }
 
             if (PKLogout)
             {

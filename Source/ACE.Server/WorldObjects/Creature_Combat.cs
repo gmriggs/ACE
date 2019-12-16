@@ -16,7 +16,18 @@ namespace ACE.Server.WorldObjects
 {
     partial class Creature
     {
-        public CombatMode CombatMode { get; private set; }
+        private CombatMode _combatMode;
+
+        public CombatMode CombatMode
+        {
+            get => _combatMode;
+            set
+            {
+                _combatMode = value;
+                if (this is Player player)
+                    player.CombatModeStackTrace = Environment.StackTrace;
+            }
+        }
 
         /// <summary>
         /// The list of combat maneuvers performable by this creature

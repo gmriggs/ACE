@@ -74,7 +74,11 @@ namespace ACE.Server.WorldObjects
         public void HandleActionCastTargetedSpell(uint targetGuid, uint spellId, bool builtInSpell = false)
         {
             if (CombatMode != CombatMode.Magic)
+            {
+                log.Error($"{Name}.HandleActionCastTargetedSpell({targetGuid:X8}, {spellId}, {builtInSpell}) - CombatMode mismatch {CombatMode}, LastCombatMode: {LastCombatMode}");
+                log.Error(CombatModeStackTrace);
                 return;
+            }
 
             if (PKLogout)
             {
@@ -189,7 +193,11 @@ namespace ACE.Server.WorldObjects
             //Console.WriteLine($"{Name}.HandleActionCastUnTargetedSpell({spellId}");
 
             if (CombatMode != CombatMode.Magic)
+            {
+                log.Error($"{Name}.HandleActionMagicCastUnTargetedSpell({spellId}) - CombatMode mismatch {CombatMode}, LastCombatMode {LastCombatMode}");
+                log.Error(CombatModeStackTrace);
                 return;
+            }
 
             if (PKLogout)
             {
