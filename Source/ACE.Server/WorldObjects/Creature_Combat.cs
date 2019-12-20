@@ -63,6 +63,8 @@ namespace ACE.Server.WorldObjects
 
             if (combatMode != CombatMode.NonCombat && CurrentMotionState.Stance == combatStance)
             {
+                CombatMode = combatMode;
+
                 queueTime = 0.0f;
                 return 0.0f;
             }
