@@ -158,6 +158,8 @@ namespace ACE.Server.WorldObjects
 
             RecordCast = new RecordCast(this);
 
+            CombatModeLog = new CombatModeLog(this);
+
             return; // todo
 
             // =======================================

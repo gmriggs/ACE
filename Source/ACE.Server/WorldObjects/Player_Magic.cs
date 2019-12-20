@@ -80,8 +80,12 @@ namespace ACE.Server.WorldObjects
             if (CombatMode != CombatMode.Magic)
             {
                 log.Error($"{Name}.HandleActionCastTargetedSpell({targetGuid:X8}, {spellId}, {builtInSpell}) - CombatMode mismatch {CombatMode}, LastCombatMode: {LastCombatMode}");
-                log.Error(CombatModeStackTrace);
-                return;
+                CombatModeLog.ShowState();
+
+                if (LastCombatMode == CombatMode.Magic)
+                    CombatMode = CombatMode.Magic;
+                else
+                    return;
             }
 
             if (PKLogout)
@@ -202,8 +206,12 @@ namespace ACE.Server.WorldObjects
             if (CombatMode != CombatMode.Magic)
             {
                 log.Error($"{Name}.HandleActionMagicCastUnTargetedSpell({spellId}) - CombatMode mismatch {CombatMode}, LastCombatMode {LastCombatMode}");
-                log.Error(CombatModeStackTrace);
-                return;
+                CombatModeLog.ShowState();
+
+                if (LastCombatMode == CombatMode.Magic)
+                    CombatMode = CombatMode.Magic;
+                else
+                    return;
             }
 
             if (PKLogout)

@@ -25,7 +25,7 @@ namespace ACE.Server.WorldObjects
             {
                 _combatMode = value;
                 if (this is Player player)
-                    player.CombatModeStackTrace = Environment.StackTrace;
+                    player.CombatModeLog?.Add($"CombatMode = {_combatMode}");
             }
         }
 

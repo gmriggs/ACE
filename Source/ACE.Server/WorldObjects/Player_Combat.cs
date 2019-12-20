@@ -46,6 +46,8 @@ namespace ACE.Server.WorldObjects
 
         public DateTime NextRefillTime;
 
+        public CombatModeLog CombatModeLog;
+
         public double LastPkAttackTimestamp
         {
             get => GetProperty(PropertyFloat.LastPkAttackTimestamp) ?? 0;
@@ -635,6 +637,8 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public void HandleActionChangeCombatMode(CombatMode newCombatMode)
         {
+            CombatModeLog.Add($"HandleActionChangeCombatMode({newCombatMode})");
+
             LastCombatMode = newCombatMode;
 
             if (DateTime.UtcNow >= NextUseTime)

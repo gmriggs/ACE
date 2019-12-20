@@ -41,8 +41,12 @@ namespace ACE.Server.WorldObjects
             if (CombatMode != CombatMode.Missile)
             {
                 log.Error($"{Name}.HandleActionTargetedMissileAttack({targetGuid:X8}, {attackHeight}, {accuracyLevel}) - CombatMode mismatch {CombatMode}, LastCombatMode: {LastCombatMode}");
-                log.Error(CombatModeStackTrace);
-                return;
+                CombatModeLog.ShowState();
+
+                if (LastCombatMode == CombatMode.Missile)
+                    CombatMode = CombatMode.Missile;
+                else
+                    return;
             }
 
             if (PKLogout)
