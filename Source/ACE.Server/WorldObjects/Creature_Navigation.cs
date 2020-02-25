@@ -312,6 +312,24 @@ namespace ACE.Server.WorldObjects
         {
             // TODO: change parameters to accept an optional MoveToParameters
 
+            // todo: use physics MoveToManager
+            // todo: handle landblock updates
+            if (setLoc)
+            {
+                PhysicsObj.SetPositionSimple(new Physics.Common.Position(position), true);
+                if (PhysicsObj.CurCell == null)
+                {
+                    // revert
+                    PhysicsObj.SetPositionSimple(new Physics.Common.Position(Location), true);
+                    if (PhysicsObj.CurCell == null)
+                    {
+                        log.Error($"{Name} ({Guid}) - SetPositionSimple({position}) CurCell is null, even after reverting to {Location}!");
+                    }
+                    return;
+                }
+                Location = new Position(position);
+            }
+
             var motion = new Motion(this, position);
             motion.MovementType = MovementType.MoveToPosition;
             //motion.Flag |= MovementParams.CanCharge | MovementParams.FailWalk | MovementParams.UseFinalHeading | MovementParams.MoveAway;
@@ -330,14 +348,6 @@ namespace ACE.Server.WorldObjects
                 motion.RunRate = runRate;
             else
                 motion.MoveToParameters.MovementParameters &= ~MovementParams.CanRun;
-
-            // todo: use physics MoveToManager
-            // todo: handle landblock updates
-            if (setLoc)
-            {
-                Location = new Position(position);
-                PhysicsObj.SetPositionSimple(new Physics.Common.Position(position), true);
-            }
 
             EnqueueBroadcastMotion(motion);
         }

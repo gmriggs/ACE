@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using log4net;
 
+using ACE.Common;
 using ACE.Database;
 using ACE.Database.Models.Shard;
 using ACE.Entity;
@@ -145,6 +147,38 @@ namespace ACE.Server.Entity
                 RemoveQueue.Dequeue();
                 FreeSlot(result.objectGuid);
             }
+
+            var removeGuids = RemoveQueue.Select(i => i.objectGuid).ToHashSet();
+
+            foreach (var kvp in Spawned)
+            {
+                var guid = kvp.Key;
+                var woi = kvp.Value;
+
+                if (!woi.Spawned || removeGuids.Contains(woi.Guid.Full))
+                    continue;
+
+                var wo = woi.TryGetWorldObject();
+                if (wo == null)
+                {
+                    log.Error($"{Generator.Name} ({Generator.Guid:X8}) - WeakRef to {guid:X8} has gone null!");
+
+                    /*var entry = SpawnLog.FirstOrDefault(i => i.StartsWith(guid.ToString("X8")));
+                    log.Error(entry);*/
+                }
+                else if (wo.PhysicsObj == null)
+                {
+                    // normal scenario for generated objects in containers
+                    //log.Error($"{Generator.Name} ({Generator.Guid:X8}) - PhysicsObj is null for {wo.Name} ({wo.Guid})!");
+                }
+                else if (wo.PhysicsObj.CurCell == null)
+                {
+                    log.Error($"{Generator.Name} ({Generator.Guid:X8}) - CurCell is null for {wo.Name} ({wo.Guid})!");
+                    log.Error($"CreationTimestamp: {wo.CreationTimestamp}, CurrentTime: {Time.GetUnixTime()}");
+
+                    // add to remove queue?
+                }
+            }
         }
 
         /// <summary>
@@ -183,6 +217,8 @@ namespace ACE.Server.Entity
             }
         }
 
+        //public List<string> SpawnLog = new List<string>();
+
         /// <summary>
         /// Spawns generator objects at the correct SpawnTime
         /// Called on heartbeat ticks every ~5 seconds
@@ -213,8 +249,12 @@ namespace ACE.Server.Entity
                         foreach (var obj in objects)
                         {
                             var woi = new WorldObjectInfo(obj);
+                            if (obj.SpawnFailed)
+                                woi.Spawned = false;
 
                             Spawned.Add(obj.Guid.Full, woi);
+
+                            //SpawnLog.Add($"{obj.Guid} @ {obj.PhysicsObj?.Position}, CurCell {obj.PhysicsObj?.CurCell.ID:X8} - {obj.Name}");
                         }
                     }
 

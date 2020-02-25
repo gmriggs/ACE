@@ -41,6 +41,8 @@ namespace ACE.Server.Entity
         public readonly uint WeenieClassId;
         public readonly WeenieType WeenieType;
 
+        public bool Spawned = true;
+
         public WorldObjectInfo(WorldObject worldObject)
         {
             WorldObjectRef = new WeakReference<WorldObject>(worldObject);

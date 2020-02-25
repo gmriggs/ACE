@@ -169,6 +169,8 @@ namespace ACE.Server.WorldObjects
             //if (creature != null) AllowEdgeSlide = true;
         }
 
+        public bool SpawnFailed;
+
         public bool AddPhysicsObj()
         {
             if (PhysicsObj.CurCell != null)
@@ -200,6 +202,7 @@ namespace ACE.Server.WorldObjects
             {
                 PhysicsObj.DestroyObject();
                 PhysicsObj = null;
+                SpawnFailed = true;
                 //Console.WriteLine($"AddPhysicsObj: failure: {Name} @ {cell.ID.ToString("X8")} - {Location.Pos} - {Location.Rotation} - SetupID: {SetupTableId.ToString("X8")}, MTableID: {MotionTableId.ToString("X8")}");
                 return false;
             }
