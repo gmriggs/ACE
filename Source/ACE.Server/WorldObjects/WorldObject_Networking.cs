@@ -219,7 +219,17 @@ namespace ACE.Server.WorldObjects
 
         private void SerializeModelData(BinaryWriter writer)
         {
-            var objDesc = CalculateObjDesc();
+            ACE.Entity.ObjDesc objDesc = null;
+            try
+            {
+                objDesc = CalculateObjDesc();
+            }
+            catch (Exception e)
+            {
+                log.Error(e);
+                log.Error($"{Name} ({Guid}).SerializeModelData() - wcid {WeenieClassId} has bad data somewhere");
+                return;
+            }
 
             writer.Write((byte)0x11);
             writer.Write((byte)objDesc.SubPalettes.Count);
