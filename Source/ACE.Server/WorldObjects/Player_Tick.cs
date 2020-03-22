@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using ACE.Common;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Factories;
 using ACE.Server.Managers;
@@ -419,6 +421,12 @@ namespace ACE.Server.WorldObjects
 
                 var landblockUpdate = Location.Cell >> 16 != newPosition.Cell >> 16;
 
+                if (Location.Cell != newPosition.Cell)
+                {
+                    if (!OnCellChanged(newPosition))
+                        return false;
+                }
+
                 Location = newPosition;
 
                 if (RecordCast.Enabled)
@@ -486,6 +494,35 @@ namespace ACE.Server.WorldObjects
             Location = new ACE.Entity.Position(blockcell, pos, rotate);
 
             return landblockUpdate;
+        }
+
+        public bool OnCellChanged(ACE.Entity.Position newPosition)
+        {
+            if (!FastTick || IgnoreHouseBarriers)
+                return true;
+
+            var newLandblock = LandblockManager.GetLandblock(new ACE.Entity.LandblockId(newPosition.Cell), false);
+
+            var newCell = newLandblock.IsDungeon ? newPosition.Cell : newPosition.GetOutdoorCell();
+
+            if (!HouseCell.HouseCells.TryGetValue(newCell, out var houseGuid))
+                return true;
+
+            //Console.WriteLine($"Checking house restrictions for {newCell:X8}");
+
+            var houses = new HashSet<House>();
+            CheckHouseRestrictions_GetHouse(houseGuid, houses);
+
+            foreach (var house in houses)
+            {
+                if (!house.HasPermission(this))
+                {
+                    log.Warn($"{Name} tried to move into a restricted house cell from {Location} to {newPosition}");
+                    Teleport(house.BootSpot.Location);
+                    return false;
+                }
+            }
+            return true;
         }
 
         private bool gagNoticeSent = false;
