@@ -302,6 +302,19 @@ namespace ACE.Server.WorldObjects
                 return;
             }
 
+            if (player != null && targetPlayer != null)
+            {
+                // Ensure not attacking across housing boundary
+                if (!player.CheckHouseRestrictions(targetPlayer))
+                {
+                    player.SendWeenieErrorWithString(WeenieErrorWithString.YouFailToAffect_AcrossHouseBoundary, targetPlayer.Name);
+
+                    targetPlayer.SendWeenieErrorWithString(WeenieErrorWithString._FailsToAffectYouAcrossHouseBoundary, player.Name);
+
+                    return;
+                }
+            }
+
             var critical = false;
             var critDefended = false;
             var overpower = false;

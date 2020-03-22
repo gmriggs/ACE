@@ -100,11 +100,20 @@ namespace ACE.Server.WorldObjects
                 return;
             }
 
-            var creatureTarget = target as Creature;
-            if (creatureTarget == null)
+            if (!(target is Creature creatureTarget))
             {
                 log.Warn($"{Name}.HandleActionTargetedMeleeAttack({targetGuid:X8}, {AttackHeight}, {powerLevel}) - target guid not creature");
                 return;
+            }
+
+            if (target is Player playerTarget)
+            {
+                // Ensure not attacking across housing boundary
+                if (!CheckHouseRestrictions(playerTarget))
+                {
+                    SendWeenieErrorWithString(WeenieErrorWithString.YouFailToAffect_AcrossHouseBoundary, playerTarget.Name);
+                    return;
+                }
             }
 
             // perform verifications

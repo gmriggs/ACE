@@ -105,6 +105,16 @@ namespace ACE.Server.WorldObjects
             if (!CanDamage(target))
                 return;     // werror?
 
+            if (target is Player playerTarget)
+            {
+                // Ensure not attacking across housing boundary
+                if (!CheckHouseRestrictions(playerTarget))
+                {
+                    SendWeenieErrorWithString(WeenieErrorWithString.YouFailToAffect_AcrossHouseBoundary, playerTarget.Name);
+                    return;
+                }
+            }
+
             //log.Info($"{Name}.HandleActionTargetedMissileAttack({targetGuid:X8}, {attackHeight}, {accuracyLevel})");
 
             AttackTarget = target;
