@@ -335,7 +335,7 @@ namespace ACE.Server.WorldObjects
                 return weaponDamage;
             }
 
-            var maxDamage = attackPart.DVal;
+            var maxDamage = (int)Math.Round(attackPart.DVal * PropertyManager.GetDouble("monster_melee_damage").Item);
             var variance = attackPart.DVar;
 
             var baseDamage = new BaseDamage(maxDamage, variance);
