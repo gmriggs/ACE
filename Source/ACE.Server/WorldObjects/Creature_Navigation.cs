@@ -2,10 +2,12 @@ using System;
 using System.Numerics;
 using ACE.Entity;
 using ACE.Entity.Enum;
+using ACE.Entity.Enum.Properties;
 using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Physics.Animation;
 using ACE.Server.Physics.Extensions;
+using ACE.Server.Network.GameMessages.Messages;
 
 namespace ACE.Server.WorldObjects
 {
@@ -289,20 +291,47 @@ namespace ACE.Server.WorldObjects
             if (DebugMove)
                 Console.WriteLine($"{Name}.MoveTo({target.Name}, {runRate}) - CurPos: {Location.ToLOCString()} - DestPos: {AttackTarget.Location.ToLOCString()} - TargetDist: {Vector3.Distance(Location.ToGlobal(), AttackTarget.Location.ToGlobal())}");
 
-            if (this is Player) return;
+            var motion = GetMoveToMotion(target, runRate);
 
+            CurrentMotionState = motion;
+
+            EnqueueBroadcastMotion(motion);
+        }
+
+        public Motion GetMoveToMotion(WorldObject target, float runRate)
+        {
             var motion = new Motion(this, target, MovementType.MoveToObject);
-            motion.MoveToParameters.MovementParameters |= MovementParams.CanCharge | MovementParams.FailWalk | MovementParams.UseFinalHeading | MovementParams.Sticky | MovementParams.MoveAway;
+            motion.MoveToParameters.MovementParameters |= MovementParams.CanCharge | MovementParams.FailWalk | MovementParams.UseFinalHeading | MovementParams.Sticky | MovementParams.MoveAway | MovementParams.StopCompletely;
             motion.MoveToParameters.WalkRunThreshold = 1.0f;
+
+            // TODO: check distanceToObject sync
 
             if (runRate > 0)
                 motion.RunRate = runRate;
             else
                 motion.MoveToParameters.MovementParameters &= ~MovementParams.CanRun;
 
-            CurrentMotionState = motion;
+            return motion;
+        }
 
-            EnqueueBroadcastMotion(motion);
+        public virtual void BroadcastMoveTo(Player player)
+        {
+            Motion motion = null;
+
+            if (AttackTarget != null)
+            {
+                // move to object
+                motion = GetMoveToMotion(AttackTarget, RunRate);
+            }
+            else
+            {
+                // move to position
+                var home = GetPosition(PositionType.Home);
+
+                motion = GetMoveToPosition(home, RunRate, 1.0f);
+            }
+
+            player.Session.Network.EnqueueSend(new GameMessageUpdateMotion(this, motion));
         }
 
         /// <summary>
@@ -310,7 +339,7 @@ namespace ACE.Server.WorldObjects
         /// </summary>
         public void MoveTo(Position position, float runRate = 1.0f, bool setLoc = true, float? walkRunThreshold = null, float? speed = null)
         {
-            // TODO: change parameters to accept an optional MoveToParameters
+            var motion = GetMoveToPosition(position, runRate, walkRunThreshold, speed);
 
             // todo: use physics MoveToManager
             // todo: handle landblock updates
@@ -329,6 +358,13 @@ namespace ACE.Server.WorldObjects
                 }
                 Location = new Position(position);
             }
+
+            EnqueueBroadcastMotion(motion);
+        }
+
+        public Motion GetMoveToPosition(Position position, float runRate = 1.0f, float? walkRunThreshold = null, float? speed = null)
+        {
+            // TODO: change parameters to accept an optional MoveToParameters
 
             var motion = new Motion(this, position);
             motion.MovementType = MovementType.MoveToPosition;
@@ -349,7 +385,7 @@ namespace ACE.Server.WorldObjects
             else
                 motion.MoveToParameters.MovementParameters &= ~MovementParams.CanRun;
 
-            EnqueueBroadcastMotion(motion);
+            return motion;
         }
     }
 }

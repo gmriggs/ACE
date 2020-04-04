@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Numerics;
 
 using ACE.Common;
 using ACE.Entity.Enum;
@@ -140,6 +141,9 @@ namespace ACE.Server.WorldObjects
                 OnMoveToState_ServerMethod(moveToState);
             else
                 OnMoveToState_ClientMethod(moveToState);
+
+            if (MagicState.IsCasting && MagicState.PendingTurnRelease && moveToState.RawMotionState.TurnCommand == 0)
+                OnTurnRelease();
         }
 
         public void OnMoveToState_ClientMethod(MoveToState moveToState)
@@ -252,7 +256,7 @@ namespace ACE.Server.WorldObjects
                     RequestedLocation = null;
                 }
 
-                if (FastTick && PhysicsObj.IsMovingOrAnimating)
+                if (FastTick && PhysicsObj.IsMovingOrAnimating || PhysicsObj.Velocity != Vector3.Zero)
                     UpdatePlayerPhysics();
 
                 InUpdate = false;
@@ -281,6 +285,9 @@ namespace ACE.Server.WorldObjects
             PhysicsObj.update_object();
 
             // sync ace position?
+            Location.Rotation = PhysicsObj.Position.Frame.Orientation;
+
+            if (!FastTick) return;
 
             // this fixes some differences between client movement (DoMotion/StopMotion) and server movement (apply_raw_movement)
             //
@@ -301,6 +308,9 @@ namespace ACE.Server.WorldObjects
                 }
                 LastMoveToState = null;
             }
+
+            if (MagicState.IsCasting && MagicState.PendingTurnRelease)
+                CheckTurn();
         }
 
         /// <summary>
@@ -401,6 +411,8 @@ namespace ACE.Server.WorldObjects
                             CheckMonsters();
                         }
                     }
+                    else
+                        PhysicsObj.Position.Frame.Orientation = newPosition.Rotation;
                 }
 
                 // double update path: landblock physics update -> updateplayerphysics() -> update_object_server() -> Teleport() -> updateplayerphysics() -> return to end of original branch

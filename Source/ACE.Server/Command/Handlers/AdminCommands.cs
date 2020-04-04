@@ -1,28 +1,30 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Threading;
 
 using log4net;
 
+using ACE.Common.Extensions;
 using ACE.Database;
 using ACE.Database.Models.Auth;
 using ACE.Database.Models.Shard;
-using ACE.Database.Models.World;
 using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Entity.Models;
 using ACE.Server.Entity;
 using ACE.Server.Factories;
 using ACE.Server.Managers;
 using ACE.Server.Network;
+using ACE.Server.Network.Enum;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.WorldObjects;
-using ACE.Server.Network.Enum;
 using ACE.Server.WorldObjects.Entity;
 
+using Biota = ACE.Database.Models.Shard.Biota;
 using Position = ACE.Entity.Position;
 
 namespace ACE.Server.Command.Handlers
@@ -2014,7 +2016,8 @@ namespace ACE.Server.Command.Handlers
             }
 
             // determine the vital type
-            if (!Enum.TryParse(parameters[0], out PropertyAttribute2nd vitalAttr)) {
+            if (!Enum.TryParse(parameters[0], out PropertyAttribute2nd vitalAttr))
+            {
                 ChatPacket.SendServerMessage(session, "Invalid vital type, valid values are: Health,Stamina,Mana", ChatMessageType.Broadcast);
                 return;
             }
@@ -2241,11 +2244,11 @@ namespace ACE.Server.Command.Handlers
                 return;
             }
 
-            if (weenie.Type != (int)WeenieType.Creature && weenie.Type != (int)WeenieType.Cow
-                && weenie.Type != (int)WeenieType.Admin && weenie.Type != (int)WeenieType.Sentinel && weenie.Type != (int)WeenieType.Vendor
-                && weenie.Type != (int)WeenieType.Pet && weenie.Type != (int)WeenieType.CombatPet)
+            if (weenie.WeenieType != WeenieType.Creature && weenie.WeenieType != WeenieType.Cow
+                && weenie.WeenieType != WeenieType.Admin && weenie.WeenieType != WeenieType.Sentinel && weenie.WeenieType != WeenieType.Vendor
+                && weenie.WeenieType != WeenieType.Pet && weenie.WeenieType != WeenieType.CombatPet)
             {
-                session.Network.EnqueueSend(new GameMessageSystemChat($"Weenie {weenie.GetProperty(PropertyString.Name)} ({weenieClassDescription}) is of WeenieType.{Enum.GetName(typeof(WeenieType), weenie.Type)} ({weenie.Type}), unable to morph because that is not allowed.", ChatMessageType.Broadcast));
+                session.Network.EnqueueSend(new GameMessageSystemChat($"Weenie {weenie.GetProperty(PropertyString.Name)} ({weenieClassDescription}) is of WeenieType.{Enum.GetName(typeof(WeenieType), weenie.WeenieType)} ({weenie.WeenieType}), unable to morph because that is not allowed.", ChatMessageType.Broadcast));
                 return;
             }
 
@@ -2281,7 +2284,7 @@ namespace ACE.Server.Command.Handlers
                 player.Character.CharacterOptions2 = session.Player.Character.CharacterOptions2;
 
                 //var wearables = weenie.GetCreateList((sbyte)DestinationType.Wield);
-                var wearables = weenie.WeeniePropertiesCreateList.Where(x => x.DestinationType == (int)DestinationType.Wield || x.DestinationType == (int)DestinationType.WieldTreasure).ToList();
+                var wearables = weenie.PropertiesCreateList.Where(x => x.DestinationType == DestinationType.Wield || x.DestinationType == DestinationType.WieldTreasure).ToList();
                 foreach (var wearable in wearables)
                 {
                     var weenieOfWearable = DatabaseManager.World.GetCachedWeenie(wearable.WeenieClassId);
@@ -2296,14 +2299,14 @@ namespace ACE.Server.Command.Handlers
 
                     if (wearable.Palette > 0)
                         worldObject.PaletteTemplate = wearable.Palette;
-                    if (wearable.Shade > 0)
+                    if (wearable.Shade >= 0)
                         worldObject.Shade = wearable.Shade;
 
                     player.TryEquipObjectWithNetworking(worldObject, worldObject.ValidLocations ?? 0);
                 }
 
-                var containables = weenie.WeeniePropertiesCreateList.Where(x => x.DestinationType == (int)DestinationType.Contain || x.DestinationType == (int)DestinationType.Shop
-                || x.DestinationType == (int)DestinationType.Treasure || x.DestinationType == (int)DestinationType.ContainTreasure || x.DestinationType == (int)DestinationType.ShopTreasure).ToList();
+                var containables = weenie.PropertiesCreateList.Where(x => x.DestinationType == DestinationType.Contain || x.DestinationType == DestinationType.Shop
+                || x.DestinationType == DestinationType.Treasure || x.DestinationType == DestinationType.ContainTreasure || x.DestinationType == DestinationType.ShopTreasure).ToList();
                 foreach (var containable in containables)
                 {
                     var weenieOfWearable = DatabaseManager.World.GetCachedWeenie(containable.WeenieClassId);
@@ -2318,7 +2321,7 @@ namespace ACE.Server.Command.Handlers
 
                     if (containable.Palette > 0)
                         worldObject.PaletteTemplate = containable.Palette;
-                    if (containable.Shade > 0)
+                    if (containable.Shade >= 0)
                         worldObject.Shade = containable.Shade;
                     player.TryAddToInventory(worldObject);
                 }
@@ -3049,7 +3052,7 @@ namespace ACE.Server.Command.Handlers
                 session.Network.EnqueueSend(new GameMessageSystemChat(info, ChatMessageType.Broadcast));
             }
         }
-      
+
         // cm <material type> <quantity> <ave. workmanship>
         [CommandHandler("cm", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld, 1, "Create a salvage bag in your inventory", "<material_type>, optional: <structure> <workmanship> <num_items>")]
         public static void HandleCM(Session session, params string[] parameters)
@@ -3174,6 +3177,51 @@ namespace ACE.Server.Command.Handlers
             msg += "Clear resets to default.\nAll options ending with Fog are continuous.\nAll options ending with Fog2 are continuous and blank radar.\nAll options ending with Sound play once and do not repeat.";
 
             return msg;
+        }
+
+        [CommandHandler("movetome", AccessLevel.Admin, CommandHandlerFlag.RequiresWorld, "Moves the last appraised object to the current player location.")]
+        public static void HandleMoveToMe(Session session, params string[] parameters)
+        {
+            var obj = CommandHandlerHelper.GetLastAppraisedObject(session);
+
+            if (obj == null)
+                return;
+
+            if (obj.CurrentLandblock == null)
+            {
+                session.Network.EnqueueSend(new GameMessageSystemChat($"{obj.Name} ({obj.Guid}) is not a landblock object", ChatMessageType.Broadcast));
+                return;
+            }
+
+            if (obj is Player)
+            {
+                HandleTeleToMe(session, new string[] { obj.Name });
+                return;
+            }
+
+            var prevLoc = obj.Location;
+            var newLoc = new Position(session.Player.Location);
+            newLoc.Rotation = prevLoc.Rotation;     // keep previous rotation
+
+            var setPos = new Physics.Common.SetPosition(newLoc.PhysPosition(), Physics.Common.SetPositionFlags.Teleport | Physics.Common.SetPositionFlags.Slide);
+            var result = obj.PhysicsObj.SetPosition(setPos);
+
+            if (result != Physics.Common.SetPositionError.OK)
+            {
+                session.Network.EnqueueSend(new GameMessageSystemChat($"Failed to move {obj.Name} ({obj.Guid}) to current location: {result}", ChatMessageType.Broadcast));
+                return;
+
+            }
+            session.Network.EnqueueSend(new GameMessageSystemChat($"Moving {obj.Name} ({obj.Guid}) to current location", ChatMessageType.Broadcast));
+
+            obj.Location = obj.PhysicsObj.Position.ACEPosition();
+
+            if (prevLoc.Landblock != obj.Location.Landblock)
+            {
+                LandblockManager.RelocateObjectForPhysics(obj, true);
+            }
+
+            obj.SendUpdatePosition(true);
         }
     }
 }

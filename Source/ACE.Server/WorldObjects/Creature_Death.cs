@@ -12,6 +12,7 @@ using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Factories;
 using ACE.Server.Managers;
+using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
 
 namespace ACE.Server.WorldObjects
@@ -31,8 +32,8 @@ namespace ACE.Server.WorldObjects
             IsTurning = false;
             IsMoving = false;
 
-            EmoteManager.OnDeath(lastDamager?.TryGetAttacker());
-
+            QuestManager.OnDeath(lastDamager?.TryGetAttacker());
+            
             OnDeath_GrantXP();
 
             if (IsGenerator)
@@ -57,11 +58,10 @@ namespace ACE.Server.WorldObjects
 
                 var killerMsg = string.Format(deathMessage.Killer, Name);
 
-                // todo: verify message type
                 var playerKiller = lastDamager.TryGetAttacker() as Player;
 
                 if (playerKiller != null)
-                    playerKiller.Session.Network.EnqueueSend(new GameMessageSystemChat(killerMsg, ChatMessageType.Broadcast));
+                    playerKiller.Session.Network.EnqueueSend(new GameEventKillerNotification(playerKiller.Session, killerMsg));
             }
             return deathMessage;
         }
@@ -101,6 +101,8 @@ namespace ACE.Server.WorldObjects
             // broadcast death animation
             var motionDeath = new Motion(MotionStance.NonCombat, MotionCommand.Dead);
             var deathAnimLength = ExecuteMotion(motionDeath);
+
+            EmoteManager.OnDeath(lastDamager?.TryGetAttacker());
 
             var dieChain = new ActionChain();
 
@@ -254,7 +256,9 @@ namespace ACE.Server.WorldObjects
                     corpse.Biota.BiotaPropertiesTextureMap.Add(new Database.Models.Shard.BiotaPropertiesTextureMap { ObjectId = corpse.Guid.Full, Index = textureChange.PartIndex, OldId = textureChange.OldTexture, NewId = textureChange.NewTexture, Order = i++ });
             }
 
-            corpse.Location = new Position(Location);
+            // use the physics location for accuracy,
+            // especially while jumping
+            corpse.Location = PhysicsObj.Position.ACEPosition();
 
             corpse.VictimId = Guid.Full;
             corpse.Name = $"{prefix} of {Name}";
@@ -283,7 +287,9 @@ namespace ACE.Server.WorldObjects
 
             bool saveCorpse = false;
 
-            if (this is Player player)
+            var player = this as Player;
+
+            if (player != null)
             {
                 corpse.SetPosition(PositionType.Location, corpse.Location);
                 var dropped = player.CalculateDeathItems(corpse);
@@ -336,18 +342,28 @@ namespace ACE.Server.WorldObjects
             if (CanGenerateRare && killer != null)
                 corpse.GenerateRare(killer);
 
+            corpse.InitPhysicsObj();
+
+            // persist the original creature velocity (only used for falling) to corpse
+            corpse.PhysicsObj.Velocity = PhysicsObj.Velocity;
+
             corpse.EnterWorld();
 
-            if (this is Player p)
+            if (player != null)
             {
                 if (corpse.PhysicsObj == null || corpse.PhysicsObj.Position == null)
-                    log.Debug($"[CORPSE] {Name}'s corpse (0x{corpse.Guid}) failed to spawn! Tried at {p.Location.ToLOCString()}");
+                    log.Debug($"[CORPSE] {Name}'s corpse (0x{corpse.Guid}) failed to spawn! Tried at {player.Location.ToLOCString()}");
                 else
                     log.Debug($"[CORPSE] {Name}'s corpse (0x{corpse.Guid}) is located at {corpse.PhysicsObj.Position}");
             }
 
             if (saveCorpse)
+            {
                 corpse.SaveBiotaToDatabase();
+
+                foreach (var item in corpse.Inventory.Values)
+                    item.SaveBiotaToDatabase();
+            }
         }
 
         public bool CanGenerateRare

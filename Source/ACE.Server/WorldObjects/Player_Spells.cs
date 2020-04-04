@@ -8,6 +8,7 @@ using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
+using ACE.Server.Managers;
 using ACE.Server.Network.Structure;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
@@ -454,7 +455,12 @@ namespace ACE.Server.WorldObjects
         public void HandleSpellHooks(Spell spell)
         {
             HandleMaxVitalUpdate(spell);
-            HandleRunRateUpdate(spell);
+
+            // unsure if spell hook was here in retail,
+            // but this has the potential to take the client out of autorun mode
+            // which causes them to stop if they hit a turn key afterwards
+            if (PropertyManager.GetBool("runrate_add_hooks").Item)
+                HandleRunRateUpdate(spell);
         }
 
         /// <summary>
@@ -496,6 +502,8 @@ namespace ACE.Server.WorldObjects
             // cleans up bugged chars with dangling item set spells
             // from previous bugs
 
+            var allPossessions = GetAllPossessions().ToDictionary(i => i.Guid.Full, i => i);
+
             // this is a legacy method, but is still a decent failsafe to catch any existing issues
 
             // get active item enchantments
@@ -504,14 +512,12 @@ namespace ACE.Server.WorldObjects
             foreach (var enchantment in enchantments)
             {
                 // if this item is not equipped, remove enchantment
-
-                if (!EquippedObjects.TryGetValue(new ObjectGuid(enchantment.CasterObjectId), out var item))
+                if (!allPossessions.TryGetValue(enchantment.CasterObjectId, out var item))
                 {
-                    // this can fail for item sets, so disabling this section
-                    /*var spell = new Spell(enchantment.SpellId, false);
+                    var spell = new Spell(enchantment.SpellId, false);
                     log.Error($"{Name}.AuditItemSpells(): removing spell {spell.Name} from non-equipped item");
 
-                    EnchantmentManager.Dispel(enchantment);*/
+                    EnchantmentManager.Dispel(enchantment);
                     continue;
                 }
 

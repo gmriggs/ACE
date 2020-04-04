@@ -5,19 +5,19 @@ using System.Linq;
 
 using ACE.Common;
 using ACE.Database;
-using ACE.Database.Models.Shard;
-using ACE.Database.Models.World;
 using ACE.DatLoader;
 using ACE.DatLoader.FileTypes;
 using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Entity.Models;
 using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
-using ACE.Server.Network;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
 using ACE.Server.Managers;
+
+using Biota = ACE.Database.Models.Shard.Biota;
 
 namespace ACE.Server.WorldObjects
 {
@@ -55,7 +55,7 @@ namespace ACE.Server.WorldObjects
 
         public bool TooBusyToRecall
         {
-            get => IsBusy || Teleporting;
+            get => IsBusy || Teleporting || suicideInProgress;
         }
 
         public void HandleActionTeleToHouse()
@@ -616,6 +616,8 @@ namespace ACE.Server.WorldObjects
             if (UnderLifestoneProtection)
                 LifestoneProtectionDispel();
 
+            HandlePreTeleportVisibility(newPosition);
+
             UpdatePlayerPosition(new Position(newPosition), true);
         }
 
@@ -670,7 +672,7 @@ namespace ACE.Server.WorldObjects
             EnqueueBroadcastPhysicsState();
         }
 
-        public void SendTeleportedViaMagicMessage(WorldObject itemCaster, Server.Entity.Spell spell)
+        public void SendTeleportedViaMagicMessage(WorldObject itemCaster, Spell spell)
         {
             if (itemCaster == null)
                 Session.Network.EnqueueSend(new GameMessageSystemChat($"You have been teleported.", ChatMessageType.Magic));

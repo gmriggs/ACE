@@ -5,16 +5,17 @@ using System.Linq;
 using log4net;
 
 using ACE.Common;
-using ACE.Database.Models.Shard;
-using ACE.Database.Models.World;
 using ACE.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Entity.Models;
 using ACE.Server.Entity;
 using ACE.Server.Factories;
 using ACE.Server.Managers;
 using ACE.Server.Network.GameMessages.Messages;
+
+using Biota = ACE.Database.Models.Shard.Biota;
 
 namespace ACE.Server.WorldObjects
 {
@@ -46,6 +47,10 @@ namespace ACE.Server.WorldObjects
         public Corpse(Biota biota) : base(biota)
         {
             SetEphemeralValues();
+
+            // for player corpses restored from database,
+            // ensure any floating corpses fall to the ground
+            BumpVelocity = true;
         }
 
         private void SetEphemeralValues()

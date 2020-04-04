@@ -51,9 +51,16 @@ namespace ACE.Server.WorldObjects
             //log.Info($"-");
 
             if (CombatMode != CombatMode.Melee)
-                return;
+            {
+                log.Error($"{Name}.HandleActionTargetedMeleeAttack({targetGuid:X8}, {attackHeight}, {powerLevel}) - CombatMode mismatch {CombatMode}, LastCombatMode {LastCombatMode}");
 
-            if (IsBusy)
+                if (LastCombatMode == CombatMode.Melee)
+                    CombatMode = CombatMode.Melee;
+                else
+                    return;
+            }
+
+            if (IsBusy || Teleporting || suicideInProgress)
             {
                 SendWeenieError(WeenieError.YoureTooBusy);
                 return;
@@ -89,7 +96,7 @@ namespace ACE.Server.WorldObjects
 
             if (target == null)
             {
-                log.Warn($"{Name}.HandleActionTargetedMeleeAttack({targetGuid:X8}, {AttackHeight}, {powerLevel}) - couldn't find target guid");
+                //log.Debug($"{Name}.HandleActionTargetedMeleeAttack({targetGuid:X8}, {AttackHeight}, {powerLevel}) - couldn't find target guid");
                 return;
             }
 
@@ -100,14 +107,7 @@ namespace ACE.Server.WorldObjects
                 return;
             }
 
-            // perform verifications
-            if (IsBusy || Teleporting)
-            {
-                Session.Network.EnqueueSend(new GameEventWeenieError(Session, WeenieError.YoureTooBusy));
-                return;
-            }
-
-            if (!CanDamage(creatureTarget))
+            if (!CanDamage(creatureTarget) || !creatureTarget.IsAlive)
                 return;     // werror?
 
             //log.Info($"{Name}.HandleActionTargetedMeleeAttack({targetGuid:X8}, {attackHeight}, {powerLevel})");
@@ -121,17 +121,39 @@ namespace ACE.Server.WorldObjects
 
             var attackSequence = ++AttackSequence;
 
-            if (IsStickyDistance(target) && IsDirectVisible(target))
+            if (NextRefillTime > DateTime.UtcNow)
+            {
+                var delayTime = (float)(NextRefillTime - DateTime.UtcNow).TotalSeconds;
+
+                var actionChain = new ActionChain();
+                actionChain.AddDelaySeconds(delayTime);
+                actionChain.AddAction(this, () =>
+                {
+                    if (!creatureTarget.IsAlive) return;
+
+                    HandleActionTargetedMeleeAttack_Inner(target, attackSequence);
+                });
+                actionChain.EnqueueChain();
+            }
+            else
+                HandleActionTargetedMeleeAttack_Inner(target, attackSequence);
+        }
+
+        public static readonly float MeleeDistance  = 0.6f;
+        public static readonly float StickyDistance = 4.0f;
+        public static readonly float RepeatDistance = 16.0f;
+
+        public void HandleActionTargetedMeleeAttack_Inner(WorldObject target, int attackSequence)
+        {
+            var dist = GetCylinderDistance(target);
+
+            if (dist <= MeleeDistance || dist <= StickyDistance && IsMeleeVisible(target))
             {
                 // sticky melee
                 var rotateTime = Rotate(target);
 
-                var delayTime = rotateTime;
-                if (NextRefillTime > DateTime.UtcNow.AddSeconds(delayTime))
-                    delayTime = (float)(NextRefillTime - DateTime.UtcNow).TotalSeconds;
-
                 var actionChain = new ActionChain();
-                actionChain.AddDelaySeconds(delayTime);
+                actionChain.AddDelaySeconds(rotateTime);
                 actionChain.AddAction(this, () => Attack(target, attackSequence));
                 actionChain.EnqueueChain();
             }
@@ -190,7 +212,7 @@ namespace ACE.Server.WorldObjects
             if (AttackSequence != attackSequence)
                 return;
 
-            if (CombatMode != CombatMode.Melee || MeleeTarget == null || !IsAlive)
+            if (CombatMode != CombatMode.Melee || MeleeTarget == null || IsBusy || !IsAlive || suicideInProgress)
             {
                 OnAttackDone();
                 return;
@@ -285,18 +307,20 @@ namespace ACE.Server.WorldObjects
                 Session.Network.EnqueueSend(new GameEventAttackDone(Session));
                 Attacking = false;
 
-                if (creature.IsAlive && GetCharacterOption(CharacterOption.AutoRepeatAttacks))
+                // powerbar refill timing
+                var refillMod = IsDualWieldAttack ? 0.8f : 1.0f;    // dual wield powerbar refills 20% faster
+
+                PowerLevel = AttackQueue.Fetch();
+
+                var nextRefillTime = PowerLevel * refillMod;
+                NextRefillTime = DateTime.UtcNow.AddSeconds(nextRefillTime);
+
+                var dist = GetCylinderDistance(target);
+
+                if (creature.IsAlive && GetCharacterOption(CharacterOption.AutoRepeatAttacks) && (dist <= MeleeDistance || dist <= StickyDistance && IsMeleeVisible(target)))
                 {
                     Session.Network.EnqueueSend(new GameEventCombatCommenceAttack(Session));
                     Session.Network.EnqueueSend(new GameEventAttackDone(Session));
-
-                    // powerbar refill timing
-                    var refillMod = IsDualWieldAttack ? 0.8f : 1.0f;    // dual wield powerbar refills 20% faster
-
-                    PowerLevel = AttackQueue.Fetch();
-
-                    var nextRefillTime = PowerLevel * refillMod;
-                    NextRefillTime = DateTime.UtcNow.AddSeconds(nextRefillTime);
 
                     var nextAttack = new ActionChain();
                     nextAttack.AddDelaySeconds(nextRefillTime);
@@ -341,6 +365,10 @@ namespace ACE.Server.WorldObjects
             CurrentMotionState = motion;
 
             EnqueueBroadcastMotion(motion);
+
+            if (FastTick)
+                PhysicsObj.stick_to_object(target.Guid.Full);
+
             return animLength;
         }
 
@@ -376,14 +404,6 @@ namespace ACE.Server.WorldObjects
             //Console.WriteLine($"{motion}");
 
             return motion;
-        }
-
-        public bool IsStickyDistance(WorldObject target)
-        {
-            var cylDist = (float)Physics.Common.Position.CylinderDistance(PhysicsObj.GetRadius(), PhysicsObj.GetHeight(), PhysicsObj.Position,
-                target.PhysicsObj.GetRadius(), target.PhysicsObj.GetHeight(), target.PhysicsObj.Position);
-
-            return cylDist <= 4.0f;
         }
     }
 }
