@@ -112,12 +112,9 @@ namespace ACE.Server.WorldObjects
             {
                 GenerateWieldList();
 
-                if (!(this is CombatPet)) //combat pets normally wouldn't have these items, but due to subbing in code currently, sometimes they do. this skips them for now.
-                {
-                    GenerateWieldedTreasure();
+                GenerateWieldedTreasure();
 
-                    EquipInventoryItems();
-                }
+                EquipInventoryItems();
 
                 // TODO: fix tod data
                 Health.Current = Health.MaxValue;
@@ -131,6 +128,9 @@ namespace ACE.Server.WorldObjects
 
             selectedTargets = new Dictionary<uint, WorldObjectInfo>();
         }
+
+        // verify logic
+        public bool IsNPC => !(this is Player) && !Attackable && TargetingTactic == TargetingTactic.None;
 
         public void GenerateNewFace()
         {

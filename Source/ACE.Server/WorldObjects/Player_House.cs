@@ -74,7 +74,7 @@ namespace ACE.Server.WorldObjects
                 if (allegianceMinLevel == -1)
                     allegianceMinLevel = slumlord.AllegianceMinLevel.Value;
 
-                if (Allegiance == null || AllegianceNode.Rank < allegianceMinLevel)
+                if (allegianceMinLevel > 0 && (Allegiance == null || AllegianceNode.Rank < allegianceMinLevel))
                 {
                     Session.Network.EnqueueSend(new GameEventWeenieErrorWithString(Session, WeenieErrorWithString.YouMustBeAboveAllegianceRank_ToBuyHouse, allegianceMinLevel.ToString()));
                     return;
@@ -1001,7 +1001,7 @@ namespace ACE.Server.WorldObjects
             }
 
             house.OpenStatus = openStatus;
-            house.Biota.SetProperty(PropertyBool.Open, house.OpenStatus, house.BiotaDatabaseLock);
+            house.Biota.SetProperty(PropertyBool.Open, house.OpenStatus, house.BiotaDatabaseLock, out _);
             house.ChangesDetected = true;
             house.UpdateRestrictionDB();
 
