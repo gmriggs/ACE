@@ -157,7 +157,7 @@ namespace ACE.Server.Entity
 
         public Landblock(LandblockId id)
         {
-            //log.Debug($"Landblock({(id.Raw | 0xFFFF):X8})");
+            log.Debug($"Landblock({(id.Raw | 0xFFFF):X8})");
 
             Id = id;
 
