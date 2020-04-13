@@ -163,7 +163,7 @@ namespace ACE.Server.Entity
                 var wo = woi.TryGetWorldObject();
                 if (wo == null)
                 {
-                    log.Error($"{Generator.Name} ({Generator.Guid:X8}) - WeakRef to {guid:X8} has gone null!");
+                    log.Error($"{Generator.Name} ({Generator.Guid:X8}) - WeakRef to {guid:X8} has gone null! - {Generator.Location?.ToLOCString()}");
 
                     /*var entry = SpawnLog.FirstOrDefault(i => i.StartsWith(guid.ToString("X8")));
                     log.Error(entry);*/
@@ -175,7 +175,7 @@ namespace ACE.Server.Entity
                 }
                 else if (wo.PhysicsObj.CurCell == null)
                 {
-                    log.Error($"{Generator.Name} ({Generator.Guid:X8}) - CurCell is null for {wo.Name} ({wo.Guid})!");
+                    log.Error($"{Generator.Name} ({Generator.Guid:X8}) - CurCell is null for {wo.Name} ({wo.Guid})! - {Generator.Location?.ToLOCString()}");
                     log.Error($"CreationTimestamp: {wo.CreationTimestamp}, CurrentTime: {Time.GetUnixTime()}");
 
                     // add to remove queue?
