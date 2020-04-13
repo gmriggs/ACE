@@ -338,6 +338,9 @@ namespace ACE.Server.Entity
                 else
                     success = Spawn_Default(obj);
 
+                if (!success)
+                    obj.SpawnFailed = true;
+
                 // if first spawn fails, don't continually attempt to retry
                 if (success || FirstSpawn)
                     spawned.Add(obj);
