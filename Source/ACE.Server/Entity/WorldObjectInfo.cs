@@ -41,7 +41,7 @@ namespace ACE.Server.Entity
         public readonly uint WeenieClassId;
         public readonly WeenieType WeenieType;
 
-        public bool Spawned = true;
+        public bool GeneratorMonitor;
 
         public WorldObjectInfo(WorldObject worldObject)
         {

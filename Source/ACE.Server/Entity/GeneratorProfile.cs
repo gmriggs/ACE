@@ -157,7 +157,7 @@ namespace ACE.Server.Entity
                 var guid = kvp.Key;
                 var woi = kvp.Value;
 
-                if (!woi.Spawned || removeGuids.Contains(woi.Guid.Full))
+                if (!woi.GeneratorMonitor || removeGuids.Contains(woi.Guid.Full))
                     continue;
 
                 var wo = woi.TryGetWorldObject();
@@ -251,8 +251,7 @@ namespace ACE.Server.Entity
                         foreach (var obj in objects)
                         {
                             var woi = new WorldObjectInfo(obj);
-                            if (obj.SpawnFailed)
-                                woi.Spawned = false;
+                            woi.GeneratorMonitor = obj.GeneratorMonitor;
 
                             Spawned.Add(obj.Guid.Full, woi);
 
@@ -338,8 +337,8 @@ namespace ACE.Server.Entity
                 else
                     success = Spawn_Default(obj);
 
-                if (!success)
-                    obj.SpawnFailed = true;
+                if (success && !RegenLocationType.HasFlag(RegenLocationType.Shop))
+                    obj.GeneratorMonitor = true;
 
                 // if first spawn fails, don't continually attempt to retry
                 if (success || FirstSpawn)

@@ -181,7 +181,7 @@ namespace ACE.Server.WorldObjects
                 PhysicsObj.Velocity = new Vector3(0, 0, 0.5f);
         }
 
-        public bool SpawnFailed;
+        public bool GeneratorMonitor;
 
         public bool AddPhysicsObj()
         {
@@ -214,7 +214,6 @@ namespace ACE.Server.WorldObjects
             {
                 PhysicsObj.DestroyObject();
                 PhysicsObj = null;
-                SpawnFailed = true;
                 //Console.WriteLine($"AddPhysicsObj: failure: {Name} @ {cell.ID.ToString("X8")} - {Location.Pos} - {Location.Rotation} - SetupID: {SetupTableId.ToString("X8")}, MTableID: {MotionTableId.ToString("X8")}");
                 return false;
             }
