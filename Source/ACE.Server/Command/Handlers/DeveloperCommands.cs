@@ -2954,6 +2954,33 @@ namespace ACE.Server.Command.Handlers
             LastTestAim = wo;
         }
 
+        [CommandHandler("load-landblock", AccessLevel.Developer, CommandHandlerFlag.None, 1, "Loads a landblock by XXYY id")]
+        public static void HandleLoadLandblock(Session session, params string[] parameters)
+        {
+            if (!uint.TryParse(parameters[0].TrimStart("0x"), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var landblockId))
+            {
+                CommandHandlerHelper.WriteOutputInfo(session, $"{parameters[0]} is not a valid landblock id", ChatMessageType.Broadcast);
+                return;
+            }
+
+            if (landblockId <= 0xFFFF)
+                landblockId <<= 16;
+
+            landblockId |= 0xFFFF;
+
+            var lbid = new LandblockId(landblockId);
+
+            if (LandblockManager.IsLoaded(lbid))
+            {
+                CommandHandlerHelper.WriteOutputInfo(session, $"{parameters[0]} is already loaded", ChatMessageType.Broadcast);
+                return;
+            }
+
+            var landblock = LandblockManager.GetLandblock(lbid, true);
+
+            CommandHandlerHelper.WriteOutputInfo(session, $"Loading 0x{landblockId:X8}", ChatMessageType.Broadcast);
+        }
+
         [CommandHandler("reload-landblock", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld, "Reloads the current landblock.")]
         public static void HandleReloadLandblocks(Session session, params string[] parameters)
         {
