@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Numerics;
 using ACE.Entity.Enum;
+using ACE.Server.Managers;
 using ACE.Server.Network.Sequence;
 using ACE.Server.Physics;
 using ACE.Server.WorldObjects;
@@ -69,9 +70,11 @@ namespace ACE.Server.Network.Structure
             if (PlacementID != null)
                 flags |= PositionFlags.HasPlacementID;
 
-            if (WorldObject.PhysicsObj != null && (WorldObject.PhysicsObj.TransientState & TransientStateFlags.OnWalkable) != 0)
-                flags |= PositionFlags.IsGrounded;
-
+            if (WorldObject.PhysicsObj != null && WorldObject.PhysicsObj.TransientState.HasFlag(TransientStateFlags.OnWalkable))
+            {
+                if (!PropertyManager.GetBool("alt_jump_pos").Item || WorldObject.Velocity == Vector3.Zero)
+                    flags |= PositionFlags.IsGrounded;
+            }
             if (Rotation.W == 0.0f)
                 flags |= PositionFlags.OrientationHasNoW;
             if (Rotation.X == 0.0f)
