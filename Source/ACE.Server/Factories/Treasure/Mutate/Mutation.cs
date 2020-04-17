@@ -25,7 +25,5 @@ namespace ACE.Server.Factories.Treasure.Mutate
 
             return success;
         }
-
-
     }
 }
