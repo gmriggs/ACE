@@ -12,7 +12,8 @@ namespace ACE.Database.Models.World
 
         public uint Id { get; set; }
         public uint MutationOutcomeId { get; set; }
-        public float Probability { get; set; }
+        public uint Idx { get; set; }
+        public double Probability { get; set; }
 
         public virtual MutationOutcome MutationOutcome { get; set; }
         public virtual ICollection<MutationEffect> MutationEffect { get; set; }

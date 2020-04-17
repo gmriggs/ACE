@@ -22,6 +22,7 @@ namespace ACE.Database.Models.World
         public virtual DbSet<LandblockInstance> LandblockInstance { get; set; }
         public virtual DbSet<LandblockInstanceLink> LandblockInstanceLink { get; set; }
         public virtual DbSet<Mutation> Mutation { get; set; }
+        public virtual DbSet<MutationChance> MutationChance { get; set; }
         public virtual DbSet<MutationEffect> MutationEffect { get; set; }
         public virtual DbSet<MutationEffectArgument> MutationEffectArgument { get; set; }
         public virtual DbSet<MutationEffectList> MutationEffectList { get; set; }
@@ -307,37 +308,43 @@ namespace ACE.Database.Models.World
             {
                 entity.ToTable("mutation");
 
+                entity.HasIndex(e => e.MutationId)
+                    .HasName("mutation_Id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idx).HasColumnName("idx");
+
+                entity.Property(e => e.MutationId).HasColumnName("mutation_Id");
+            });
+
+            modelBuilder.Entity<MutationChance>(entity =>
+            {
+                entity.ToTable("mutation_chance");
+
+                entity.HasIndex(e => e.MutationId)
+                    .HasName("mutation_Id");
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.MutationId).HasColumnName("mutation_Id");
+
+                entity.HasOne(d => d.Mutation)
+                    .WithMany(p => p.MutationChance)
+                    .HasForeignKey(d => d.MutationId)
+                    .HasConstraintName("mutation_chance_mutation_id");
             });
 
             modelBuilder.Entity<MutationEffect>(entity =>
             {
                 entity.ToTable("mutation_effect");
 
-                entity.HasIndex(e => e.Arg1)
-                    .HasName("arg1")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Arg2)
-                    .HasName("arg2")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.ArgQuality)
-                    .HasName("arg_Quality")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.MutationEffectListId)
                     .HasName("mutation_Effect_List_Id");
 
                 entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Arg1).HasColumnName("arg1");
-
-                entity.Property(e => e.Arg2).HasColumnName("arg2");
-
-                entity.Property(e => e.ArgQuality).HasColumnName("arg_Quality");
 
                 entity.Property(e => e.EffectType).HasColumnName("effect_Type");
 
@@ -353,15 +360,16 @@ namespace ACE.Database.Models.World
             {
                 entity.ToTable("mutation_effect_argument");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.MutationEffectId)
+                    .HasName("mutation_effect_argument_mutation_effect_id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.ArgType).HasColumnName("arg_Type");
 
                 entity.Property(e => e.DoubleVal).HasColumnName("double_Val");
 
-                entity.Property(e => e.EffectType)
-                    .HasColumnName("effect_Type")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.EffectType).HasColumnName("effect_Type");
 
                 entity.Property(e => e.IntVal)
                     .HasColumnName("int_Val")
@@ -371,6 +379,8 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.MinVal).HasColumnName("min_Val");
 
+                entity.Property(e => e.MutationEffectId).HasColumnName("mutation_Effect_Id");
+
                 entity.Property(e => e.StatIdx)
                     .HasColumnName("stat_Idx")
                     .HasColumnType("int(11)");
@@ -379,23 +389,10 @@ namespace ACE.Database.Models.World
                     .HasColumnName("stat_Type")
                     .HasColumnType("int(11)");
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.MutationEffectArgumentIdNavigation)
-                    .HasPrincipalKey<MutationEffect>(p => p.Arg1)
-                    .HasForeignKey<MutationEffectArgument>(d => d.Id)
-                    .HasConstraintName("mutation_effect_argument_mutation_effect_arg1");
-
-                entity.HasOne(d => d.Id1)
-                    .WithOne(p => p.MutationEffectArgumentId1)
-                    .HasPrincipalKey<MutationEffect>(p => p.Arg2)
-                    .HasForeignKey<MutationEffectArgument>(d => d.Id)
-                    .HasConstraintName("mutation_effect_argument_mutation_effect_arg2");
-
-                entity.HasOne(d => d.Id2)
-                    .WithOne(p => p.MutationEffectArgumentId2)
-                    .HasPrincipalKey<MutationEffect>(p => p.ArgQuality)
-                    .HasForeignKey<MutationEffectArgument>(d => d.Id)
-                    .HasConstraintName("mutation_effect_argument_mutation_effect_arg_Quality");
+                entity.HasOne(d => d.MutationEffect)
+                    .WithMany(p => p.MutationEffectArgument)
+                    .HasForeignKey(d => d.MutationEffectId)
+                    .HasConstraintName("mutation_effect_argument_mutation_effect_id");
             });
 
             modelBuilder.Entity<MutationEffectList>(entity =>
@@ -406,6 +403,8 @@ namespace ACE.Database.Models.World
                     .HasName("mutation_Outcome_Id");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Idx).HasColumnName("idx");
 
                 entity.Property(e => e.MutationOutcomeId).HasColumnName("mutation_Outcome_Id");
 
