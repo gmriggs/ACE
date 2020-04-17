@@ -9,7 +9,7 @@ namespace ACE.Database.Models.World
         public uint TreasureType { get; set; }
         public int Tier { get; set; }
         public float LootQualityMod { get; set; }
-        public int UnknownChances { get; set; }
+        public int UnknownChances { get; set; }     // Heritage
         public int ItemChance { get; set; }
         public int ItemMinAmount { get; set; }
         public int ItemMaxAmount { get; set; }
