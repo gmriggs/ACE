@@ -1,38 +1,57 @@
+using System.Linq;
+
 using log4net;
 
 using ACE.Entity.Enum;
 using ACE.Server.WorldObjects;
 
-namespace ACE.Server.Factories.Treasure.Struct
+namespace ACE.Server.Factories.Treasure.Mutate
 {
     public class MutationEffect
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public EffectArgument Quality;
-        public MutationEffectType Type;
-        public EffectArgument Arg1;
-        public EffectArgument Arg2;
+        //public EffectArgument Quality;
+        //public MutationEffectType Type;
+        //public EffectArgument Arg1;
+        //public EffectArgument Arg2;
 
-        public bool TryMutate(WorldObject item)
+        public static Database.Models.World.MutationEffectArgument GetQuality(Database.Models.World.MutationEffect effect)
+        {
+            return effect.MutationEffectArgument.FirstOrDefault(i => i.ArgType == 0);
+        }
+
+        public static Database.Models.World.MutationEffectArgument GetArg1(Database.Models.World.MutationEffect effect)
+        {
+            return effect.MutationEffectArgument.FirstOrDefault(i => i.ArgType == 1);
+        }
+
+        public static Database.Models.World.MutationEffectArgument GetArg2(Database.Models.World.MutationEffect effect)
+        {
+            return effect.MutationEffectArgument.FirstOrDefault(i => i.ArgType == 2);
+        }
+
+        public static bool TryMutate(Database.Models.World.MutationEffect effect, WorldObject item)
         {
             // type:enum - invalid, double, int32, quality (2 int32s: type and quality), float range (min, max), variable index (int32)
             // a=b,a+=b,a-=b,a*=b,a/=b,a=a<b?b:a+c,a=a>b?b:a-c,a+=b*c,a+=b/c,a-=b*c,a-=b/c,a=b+c,a=b-c,a=b*c,a=b/c
 
             // do not make changes to the members since this object will be reused
 
-            var result = new EffectArgument(Quality);
-            var arg1 = new EffectArgument(Arg1);
-            var arg2 = new EffectArgument(Arg2);
+            var result = new EffectArgument(GetQuality(effect));
+            var arg1 = new EffectArgument(GetArg1(effect));
+            var arg2 = new EffectArgument(GetArg2(effect));
 
             result.ResolveValue(item);
             arg1.ResolveValue(item);
             arg2.ResolveValue(item);
 
-            if (!Validate(item, result, arg1, arg2))
+            var type = (MutationEffectType)effect.EffectType;
+
+            if (!Validate(item, result, arg1, arg2, type))
                 return false;
 
-            switch (Type)
+            switch (type)
             {
                 case MutationEffectType.Assign:
 
@@ -110,26 +129,26 @@ namespace ACE.Server.Factories.Treasure.Struct
                     break;
             }
 
-            Quality.StoreValue(item, result);
+            result.StoreValue(item);
 
             return true;
         }
 
-        public bool Validate(WorldObject item, EffectArgument result, EffectArgument arg1, EffectArgument arg2)
+        public static bool Validate(WorldObject item, EffectArgument result, EffectArgument arg1, EffectArgument arg2, MutationEffectType type)
         {
             if (!result.IsValid)
             {
-                log.Error($"{item.Name} ({item.Guid}).TryMutate({Type}) - result invalid");
+                log.Error($"{item.Name} ({item.Guid}).TryMutate({type}) - result invalid");
                 return false;
             }
 
             if (!arg1.IsValid)
             {
-                log.Error($"{item.Name} ({item.Guid}).TryMutate({Type}) - argument 1 invalid");
+                log.Error($"{item.Name} ({item.Guid}).TryMutate({type}) - argument 1 invalid");
                 return false;
             }
 
-            switch (Type)
+            switch (type)
             {
                 case MutationEffectType.AtLeastAdd:
                 case MutationEffectType.AtMostSubtract:
@@ -144,7 +163,7 @@ namespace ACE.Server.Factories.Treasure.Struct
 
                     if (!arg2.IsValid)
                     {
-                        log.Error($"{item.Name} ({item.Guid}).TryMutate({Type}) - argument 2 invalid");
+                        log.Error($"{item.Name} ({item.Guid}).TryMutate({type}) - argument 2 invalid");
                         return false;
                     }
                     break;

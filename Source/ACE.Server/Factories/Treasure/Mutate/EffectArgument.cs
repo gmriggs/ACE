@@ -6,7 +6,7 @@ using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using ACE.Server.WorldObjects;
 
-namespace ACE.Server.Factories.Treasure.Struct
+namespace ACE.Server.Factories.Treasure.Mutate
 {
     public partial class EffectArgument
     {
@@ -57,16 +57,19 @@ namespace ACE.Server.Factories.Treasure.Struct
             Max = max;
         }
 
-        public EffectArgument(EffectArgument other)
+        public EffectArgument(Database.Models.World.MutationEffectArgument other)
         {
-            Type = other.Type;
-            RawData = other.RawData;
-            DoubleVal = other.DoubleVal;
-            IntVal = other.IntVal;
-            StatType = other.StatType;
-            StatIdx = other.StatIdx;
-            Min = other.Min;
-            Max = other.Max;
+            if (other == null)
+                return;
+
+            Type = (EffectArgumentType)other.EffectType;
+            //RawData = other.RawData;
+            DoubleVal = other.DoubleVal ?? 0.0;
+            IntVal = other.IntVal ?? 0;
+            StatType = (StatType)(other.StatType ?? 0);
+            StatIdx = other.StatIdx ?? 0;
+            Min = other.MinVal ?? 0.0f;
+            Max = other.MaxVal ?? 0.0f;
         }
 
         public object GetValue()
@@ -177,11 +180,11 @@ namespace ACE.Server.Factories.Treasure.Struct
             return IsValid;
         }
 
-        public bool StoreValue(WorldObject item, EffectArgument result)
+        public bool StoreValue(WorldObject item)
         {
             // here the resolved value (result) is applied to the qualities specified by our value
 
-            if (!result.IsValid)
+            if (!IsValid)
                 return false;
 
             switch (Type)
@@ -191,19 +194,19 @@ namespace ACE.Server.Factories.Treasure.Struct
                     switch (StatType)
                     {
                         case StatType.Int:
-                            item.SetProperty((PropertyInt)StatIdx, result.ToInt());
+                            item.SetProperty((PropertyInt)StatIdx, ToInt());
                             break;
 
                         case StatType.Bool:
-                            item.SetProperty((PropertyBool)StatIdx, Convert.ToBoolean(result.ToInt()));
+                            item.SetProperty((PropertyBool)StatIdx, Convert.ToBoolean(ToInt()));
                             break;
 
                         case StatType.Float:
-                            item.SetProperty((PropertyFloat)StatIdx, result.ToDouble());
+                            item.SetProperty((PropertyFloat)StatIdx, ToDouble());
                             break;
 
                         case StatType.DID:
-                            item.SetProperty((PropertyDataId)StatIdx, (uint)result.ToInt());
+                            item.SetProperty((PropertyDataId)StatIdx, (uint)ToInt());
                             break;
                     }
                     break;

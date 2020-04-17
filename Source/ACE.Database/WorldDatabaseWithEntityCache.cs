@@ -353,6 +353,42 @@ namespace ACE.Database
 
 
         // =====================================
+        // Mutation
+        // =====================================
+
+        private readonly Dictionary<uint, List<Mutation>> mutationFilterCache = new Dictionary<uint, List<Mutation>>();
+
+        public override List<Mutation> GetMutationFilter(uint mutationFilterId)
+        {
+            var mutationFilter = base.GetMutationFilter(mutationFilterId);
+
+            lock (mutationFilterCache)
+            {
+                // We double check before commiting the mutation filter.
+                // We could be in this lock, and queued up behind us is an attempt to add a result for the same mutation filter
+                if (!mutationFilterCache.TryGetValue(mutationFilterId, out var value))
+                {
+                    mutationFilterCache.Add(mutationFilterId, mutationFilter);
+                }
+                else
+                    return value;
+            }
+
+            return mutationFilter;
+        }
+
+        public List<Mutation> GetCachedMutationFilter(uint mutationFilterId)
+        {
+            lock (mutationFilterCache)
+            {
+                if (mutationFilterCache.TryGetValue(mutationFilterId, out var value))
+                    return value;
+            }
+            return GetMutationFilter(mutationFilterId);     // This will add the reuslt into the cache
+        }
+
+
+        // =====================================
         // Encounter
         // =====================================
 

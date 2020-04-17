@@ -286,7 +286,7 @@ namespace ACE.Server.Factories.Treasure
             return new List<TreasureChance>();
         }
 
-        public static List<TreasureChance> GetBootPalette()
+        public static List<TreasureChance> GetLeatherPalette()
         {
             return new List<TreasureChance>();
         }

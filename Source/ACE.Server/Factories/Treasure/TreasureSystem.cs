@@ -5,9 +5,11 @@ using System.Linq;
 using log4net;
 
 using ACE.Common;
+using ACE.Database;
 using ACE.Database.Models.World;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Server.Factories.Treasure.Mutate;
 using ACE.Entity.Models;
 using ACE.Server.Managers;
 using ACE.Server.WorldObjects;
@@ -171,10 +173,10 @@ namespace ACE.Server.Factories.Treasure
                     if (MutateItem(item, false, treasureDeath.Tier, treasureDeath.LootQualityMod, treasureClass))
                     {
                         var filterId = item.GetProperty(PropertyDataId.TsysMutationFilter) ?? 0;
-                        var filter = GetMutationFilter(filterId);
-                        if (!filter != null)
+                        var filter = DatabaseManager.World.GetCachedMutationFilter(filterId);
+                        if (filter != null)
                         {
-                            filter.TryMutate(item, treasureDeath.Tier);
+                            MutationFilter.TryMutate(filter, item, treasureDeath.Tier);
                         }
                         log.Info("Adding item");
                         retval.Add(item);
@@ -192,10 +194,10 @@ namespace ACE.Server.Factories.Treasure
                     if (MutateItem(item, true, treasureDeath.Tier, treasureDeath.LootQualityMod, treasureClass))
                     {
                         var filterId = item.GetProperty(PropertyDataId.TsysMutationFilter) ?? 0;
-                        var filter = GetMutationFilter(filterId);
-                        if (!filter != null)
+                        var filter = DatabaseManager.World.GetCachedMutationFilter(filterId);
+                        if (filter != null)
                         {
-                            filter.TryMutate(item, treasureDeath.Tier);
+                            MutationFilter.TryMutate(filter, item, treasureDeath.Tier);
                         }
                         log.Info("Adding magic item");
                         retval.Add(item);
@@ -359,7 +361,7 @@ namespace ACE.Server.Factories.Treasure
                 return false;
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 3, PropertyDataId.Setup) && !Modify3DObject(item, roll))
+            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 3, (int)PropertyDataId.Setup) && !Modify3DObject(item, roll))
             {
                 log.Error($"Failed to update DID properties");
                 return false;
@@ -819,7 +821,7 @@ namespace ACE.Server.Factories.Treasure
                 case TreasureItemClass.TwoHandedWeapon:
                 case TreasureItemClass.Caster:
 
-                    newPalette = TreasureTables.GetPalette(roll.Material, GetColorCodeIndex(roll.TSysMutationData));
+                    newPalette = TreasureTables.GetPalette((int)roll.Material, (int)GetColorCodeIndex(roll.TSysMutationData));
                     break;
 
                 case TreasureItemClass.Gem:
@@ -830,7 +832,7 @@ namespace ACE.Server.Factories.Treasure
                         log.Error($"No material found for gem. Aborting");
                         return false;
                     }
-                    newPalette = TreasureTables.GetPalette(gemMaterial, 8);
+                    newPalette = TreasureTables.GetPalette((int)gemMaterial, 8);
                     break;
 
                 case TreasureItemClass.Clothing:
@@ -843,7 +845,7 @@ namespace ACE.Server.Factories.Treasure
 
                     if (luck > fancy)
                     {
-                        newPalette = TreasureTables.GetPalette(roll.Material, GetColorCodeIndex(roll.TSysMutationData));
+                        newPalette = TreasureTables.GetPalette((int)roll.Material, (int)GetColorCodeIndex(roll.TSysMutationData));
                     }
                     else
                     {
@@ -859,7 +861,7 @@ namespace ACE.Server.Factories.Treasure
 
                     if (luck > fancy)
                     {
-                        newPalette = TreasureTables.GetPalette(roll.Material, GetColorCodeIndex(roll.TSysMutationData));
+                        newPalette = TreasureTables.GetPalette((int)roll.Material, (int)GetColorCodeIndex(roll.TSysMutationData));
                     }
                     else
                     {
@@ -1012,7 +1014,7 @@ namespace ACE.Server.Factories.Treasure
             while (spellsAssigned < numEnchantments && numAttempts > 0)
             {
                 var luck = ThreadSafeRandom.Next(0.0f, 1.0f);
-                int spellId = TreasureTables.GetSpellCompWcid(spellGroup);
+                int spellId = TreasureTables.GetSpellCompWcid(spellGroup, roll.QualityModifier);
 
                 if (!spells.Any(i => i.Item1 == spellId))
                 {
@@ -1631,7 +1633,7 @@ namespace ACE.Server.Factories.Treasure
             return 1.0f + ((workmanship - 1.0f) / 9.0f);
         }
 
-        public static int GetItemManaChargeMod(TreasureItemClass treasureClass, int wcid)
+        public static int GetItemManaChargeMod(TreasureItemClass treasureClass, uint wcid)
         {
             int min = 0;
             int max = 0;
@@ -1835,7 +1837,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static int GetGemModifiedBaseValue(MaterialType material, int value)
         {
-            var mod = TreasureTables.GetMaterialValueMod(material);
+            var mod = TreasureTables.GetMaterialValueMod((int)material);
             return (int)(value * mod);
         }
 
@@ -1850,7 +1852,7 @@ namespace ACE.Server.Factories.Treasure
             modVal = (int)modVal;
             modVal *= 10.0;
 
-            var materialMod = TreasureTables.GetMaterialValueMod(roll.Material);
+            var materialMod = TreasureTables.GetMaterialValueMod((int)roll.Material);
 
             var newVal = modVal / 10 * materialMod * 0.016 + roll.GemValue;
             newVal *= (roll.WorkmanshipMod + roll.QualityModifier) / 2;
@@ -1862,7 +1864,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static int GetNewItemValue(TreasureRoll roll, int value)
         {
-            var materialMod = TreasureTables.GetMaterialValueMod(roll.Material);
+            var materialMod = TreasureTables.GetMaterialValueMod((int)roll.Material);
 
             var newValue = value / 3.0f + materialMod * GetTreasureValueFromWealthRating(roll.Tier) + roll.GemValue;
 
@@ -1910,7 +1912,7 @@ namespace ACE.Server.Factories.Treasure
         public static bool AdjustItemStrings(WorldObject item, TreasureRoll roll)
         {
             var modifyName = TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 4, (int)PropertyString.Name);
-            var modifyLongDesc = TreasureTables.GetMutationQualityFilters(roll.MutateFilter, 4, (int)PropertyString.LongDesc);
+            var modifyLongDesc = TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 4, (int)PropertyString.LongDesc);
 
             if (!modifyName && !modifyLongDesc)
                 return true;
@@ -1992,7 +1994,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static string GetItemSpellDescription(uint spellId)
         {
-            return TreasureTables.GetSpellDescriptor(spellId);
+            return TreasureTables.GetSpellDescriptor((int)spellId);
         }
 
         public static int GetMaterialCodeIndex(int uStandardModData)

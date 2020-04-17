@@ -1,26 +1,36 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using ACE.Server.WorldObjects;
 
-namespace ACE.Server.Factories.Treasure.Struct
+namespace ACE.Server.Factories.Treasure.Mutate
 {
     public class MutationOutcome
     {
-        public List<MutationEffectList> EffectLists;
+        //public List<MutationEffectList> EffectLists;
 
-        public bool TryMutate(WorldObject item, double roll)
+        public static bool TryMutate(Database.Models.World.MutationOutcome outcome, WorldObject item, double roll)
         {
             var mutated = false;
 
-            foreach (var effectList in EffectLists)
+            // FIXME
+            var idx = 0;
+            do
             {
-                if (effectList.Probability < roll)
-                    continue;
+                var currentList = outcome.MutationEffectList.Where(i => i.Idx == idx);
+                if (currentList.Count() == 0)
+                    return mutated;
+                foreach (var effectList in currentList)
+                {
+                    if (effectList.Probability < roll)
+                        continue;
 
-                mutated = effectList.TryMutate(item);
-                break;
+                    mutated &= MutationEffectList.TryMutate(effectList, item);
+                    return mutated;
+                }
+                idx++;
             }
-            return mutated;
+            while (true);
         }
     }
 }

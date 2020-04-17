@@ -268,6 +268,25 @@ namespace ACE.Database
 
 
         // =====================================
+        // Mutation
+        // =====================================
+
+        public virtual List<Mutation> GetMutationFilter(uint mutationFilterId)
+        {
+            var results = new List<Mutation>();
+
+            using (var context = new WorldDbContext())
+            {
+                context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+                return context.Mutation.Where(r => r.MutationId == (ushort)mutationFilterId)
+                    .Include(r => r.MutationChance)
+                    .Include(r => r.MutationOutcome).ToList();
+            }
+        }
+
+
+        // =====================================
         // Encounter
         // =====================================
 

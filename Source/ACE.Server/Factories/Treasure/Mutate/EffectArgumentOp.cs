@@ -1,6 +1,6 @@
 using ACE.Entity.Enum;
 
-namespace ACE.Server.Factories.Treasure.Struct
+namespace ACE.Server.Factories.Treasure.Mutate
 {
     public partial class EffectArgument
     {

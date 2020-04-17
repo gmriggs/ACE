@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using ACE.Common;
 using ACE.Server.WorldObjects;
 
-namespace ACE.Server.Factories.Treasure.Struct
+namespace ACE.Server.Factories.Treasure.Mutate
 {
     public class MutationFilter
     {
-        public List<Mutation> Mutations;
+        //public List<Mutation> Mutations;
 
-        public bool TryMutate(WorldObject item, int tier)
+        public static bool TryMutate(List<Database.Models.World.Mutation> mutationFilter, WorldObject item, int tier)
         {
             var roll = ThreadSafeRandom.Next(0.0f, 1.0f);
 
             var success = true;
 
-            foreach (var mutation in Mutations)
-                success &= mutation.TryMutate(item, tier, roll);
+            foreach (var mutation in mutationFilter)
+                success &= Mutation.TryMutate(mutation, item, tier, roll);
 
             return success;
         }

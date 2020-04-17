@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ACE.Common;
 using ACE.Database;
 using ACE.Database.Models.World;
+using ACE.Entity.Enum;
 using ACE.Server.Factories.Treasure.Struct;
 
 namespace ACE.Server.Factories.Treasure
@@ -67,7 +68,7 @@ namespace ACE.Server.Factories.Treasure
         private static List<TreasureChanceHeritage> materialColorCode;
         private static List<TreasureChance> materialColorByCode;
         private static List<TreasureChance> clothingPalette;
-        private static List<TreasureChance> bootPalette;
+        private static List<TreasureChance> leatherPalette;
         private static List<TreasureChance> metalPalette;
         private static List<TreasureChance> meleeWeaponItemSpell;
         private static List<TreasureChance> missileWeaponItemSpell;
@@ -143,7 +144,7 @@ namespace ACE.Server.Factories.Treasure
             qualityLevel = TreasureDatabase.GetQualityLevel();
             materialColorCode = TreasureDatabase.GetMaterialColorCode();
             clothingPalette = TreasureDatabase.GetClothingPalette();
-            bootPalette = TreasureDatabase.GetBootPalette();
+            leatherPalette = TreasureDatabase.GetLeatherPalette();
             metalPalette = TreasureDatabase.GetMetalPalette();
             meleeWeaponItemSpell = TreasureDatabase.GetMeleeWeaponItemSpell();
             missileWeaponItemSpell = TreasureDatabase.GetMissileWeaponItemSpell();
@@ -468,7 +469,7 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(clothingWcid[heritage].Chances, tier);
         }
 
-        public static bool GetMutationQualityFilter(int mutateFilter, int statType, int idx)
+        public static bool GetMutationQualityFilter(uint mutateFilter, int statType, int idx)
         {
             // 1 = PropertyInt
             // 2 = PropertyFloat
@@ -487,44 +488,44 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(workmanshipDist, tier, -qualityMod);
         }
 
-        public static int GetMaterialDist(int group, int tier, int qualityMod)
+        public static MaterialType GetMaterialDist(int group, int tier, int qualityMod)
         {
-            return GetChance(materialCodeDist[group].Chances, tier);
+            return (MaterialType)GetChance(materialCodeDist[group].Chances, tier);
         }
 
-        public static int GetCeramicMaterial(int tier, double qualityMod)
+        public static MaterialType GetCeramicMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialCeramic, tier, qualityMod);
+            return (MaterialType)GetChance(materialCeramic, tier, qualityMod);
         }
 
-        public static int GetClothMaterial(int tier, double qualityMod)
+        public static MaterialType GetClothMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialCloth, tier, qualityMod);
+            return (MaterialType)GetChance(materialCloth, tier, qualityMod);
         }
 
-        public static int GetGemMaterial(int tier, double qualityMod)
+        public static MaterialType GetGemMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialGem, tier, qualityMod);
+            return (MaterialType)GetChance(materialGem, tier, qualityMod);
         }
 
-        public static int GetLeatherMaterial(int tier, double qualityMod)
+        public static MaterialType GetLeatherMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialLeather, tier, qualityMod);
+            return (MaterialType)GetChance(materialLeather, tier, qualityMod);
         }
 
-        public static int GetMetalMaterial(int tier, double qualityMod)
+        public static MaterialType GetMetalMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialMetal, tier, qualityMod);
+            return (MaterialType)GetChance(materialMetal, tier, qualityMod);
         }
 
-        public static int GetStoneMaterial(int tier, double qualityMod)
+        public static MaterialType GetStoneMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialStone, tier, qualityMod);
+            return (MaterialType)GetChance(materialStone, tier, qualityMod);
         }
 
-        public static int GetWoodMaterial(int tier, double qualityMod)
+        public static MaterialType GetWoodMaterial(int tier, double qualityMod)
         {
-            return GetChance(materialWood, tier, qualityMod);
+            return (MaterialType)GetChance(materialWood, tier, qualityMod);
         }
 
         public static int GetGemDist(int group, int tier, double qualityMod)
@@ -532,9 +533,9 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(gemCodeDist[group].Chances, tier);
         }
 
-        public static int GetGemMaterialByClass(int index)
+        public static MaterialType GetGemMaterialByClass(int index)
         {
-            return GetChance(gemMaterialChance, index);
+            return (MaterialType)GetChance(gemMaterialChance, index);
         }
 
         public static int GetGemClass(int tier)
@@ -567,9 +568,9 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(clothingPalette, 1);
         }
 
-        public static int GetBootColor()
+        public static int GetLeatherColor()
         {
-            return GetChance(bootPalette, 2);
+            return GetChance(leatherPalette, 2);
         }
 
         public static int GetMetalColor()
@@ -689,7 +690,7 @@ namespace ACE.Server.Factories.Treasure
             return GetProgression(cantripProgression, cantrip, level);
         }
 
-        public static double GetMaterialValueByMod(int material)
+        public static double GetMaterialValueMod(int material)
         {
             return materialValueMod[material];
         }
