@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -21,6 +21,11 @@ namespace ACE.Database.Models.World
         public virtual DbSet<HousePortal> HousePortal { get; set; }
         public virtual DbSet<LandblockInstance> LandblockInstance { get; set; }
         public virtual DbSet<LandblockInstanceLink> LandblockInstanceLink { get; set; }
+        public virtual DbSet<Mutation> Mutation { get; set; }
+        public virtual DbSet<MutationEffect> MutationEffect { get; set; }
+        public virtual DbSet<MutationEffectArgument> MutationEffectArgument { get; set; }
+        public virtual DbSet<MutationEffectList> MutationEffectList { get; set; }
+        public virtual DbSet<MutationOutcome> MutationOutcome { get; set; }
         public virtual DbSet<PointsOfInterest> PointsOfInterest { get; set; }
         public virtual DbSet<Quest> Quest { get; set; }
         public virtual DbSet<Recipe> Recipe { get; set; }
@@ -104,7 +109,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_Id");
@@ -147,7 +152,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.WeenieClassId).HasColumnName("weenie_Class_Id");
@@ -171,7 +176,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.Name)
@@ -212,7 +217,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.ObjCellId).HasColumnName("obj_Cell_Id");
@@ -226,7 +231,8 @@ namespace ACE.Database.Models.World
 
             modelBuilder.Entity<LandblockInstance>(entity =>
             {
-                entity.HasKey(e => e.Guid);
+                entity.HasKey(e => e.Guid)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("landblock_instance");
 
@@ -254,7 +260,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.ObjCellId).HasColumnName("obj_Cell_Id");
@@ -286,7 +292,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.ParentGuid).HasColumnName("parent_GUID");
@@ -295,6 +301,137 @@ namespace ACE.Database.Models.World
                     .WithMany(p => p.LandblockInstanceLink)
                     .HasForeignKey(d => d.ParentGuid)
                     .HasConstraintName("instance_link");
+            });
+
+            modelBuilder.Entity<Mutation>(entity =>
+            {
+                entity.ToTable("mutation");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+            });
+
+            modelBuilder.Entity<MutationEffect>(entity =>
+            {
+                entity.ToTable("mutation_effect");
+
+                entity.HasIndex(e => e.Arg1)
+                    .HasName("arg1")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Arg2)
+                    .HasName("arg2")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.ArgQuality)
+                    .HasName("arg_Quality")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.MutationEffectListId)
+                    .HasName("mutation_Effect_List_Id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Arg1).HasColumnName("arg1");
+
+                entity.Property(e => e.Arg2).HasColumnName("arg2");
+
+                entity.Property(e => e.ArgQuality).HasColumnName("arg_Quality");
+
+                entity.Property(e => e.EffectType).HasColumnName("effect_Type");
+
+                entity.Property(e => e.MutationEffectListId).HasColumnName("mutation_Effect_List_Id");
+
+                entity.HasOne(d => d.MutationEffectList)
+                    .WithMany(p => p.MutationEffect)
+                    .HasForeignKey(d => d.MutationEffectListId)
+                    .HasConstraintName("mutation_effect_mutation_effect_list_id");
+            });
+
+            modelBuilder.Entity<MutationEffectArgument>(entity =>
+            {
+                entity.ToTable("mutation_effect_argument");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.DoubleVal).HasColumnName("double_Val");
+
+                entity.Property(e => e.EffectType)
+                    .HasColumnName("effect_Type")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IntVal)
+                    .HasColumnName("int_Val")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.MaxVal).HasColumnName("max_Val");
+
+                entity.Property(e => e.MinVal).HasColumnName("min_Val");
+
+                entity.Property(e => e.StatIdx)
+                    .HasColumnName("stat_Idx")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.StatType)
+                    .HasColumnName("stat_Type")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.MutationEffectArgumentIdNavigation)
+                    .HasPrincipalKey<MutationEffect>(p => p.Arg1)
+                    .HasForeignKey<MutationEffectArgument>(d => d.Id)
+                    .HasConstraintName("mutation_effect_argument_mutation_effect_arg1");
+
+                entity.HasOne(d => d.Id1)
+                    .WithOne(p => p.MutationEffectArgumentId1)
+                    .HasPrincipalKey<MutationEffect>(p => p.Arg2)
+                    .HasForeignKey<MutationEffectArgument>(d => d.Id)
+                    .HasConstraintName("mutation_effect_argument_mutation_effect_arg2");
+
+                entity.HasOne(d => d.Id2)
+                    .WithOne(p => p.MutationEffectArgumentId2)
+                    .HasPrincipalKey<MutationEffect>(p => p.ArgQuality)
+                    .HasForeignKey<MutationEffectArgument>(d => d.Id)
+                    .HasConstraintName("mutation_effect_argument_mutation_effect_arg_Quality");
+            });
+
+            modelBuilder.Entity<MutationEffectList>(entity =>
+            {
+                entity.ToTable("mutation_effect_list");
+
+                entity.HasIndex(e => e.MutationOutcomeId)
+                    .HasName("mutation_Outcome_Id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.MutationOutcomeId).HasColumnName("mutation_Outcome_Id");
+
+                entity.Property(e => e.Probability).HasColumnName("probability");
+
+                entity.HasOne(d => d.MutationOutcome)
+                    .WithMany(p => p.MutationEffectList)
+                    .HasForeignKey(d => d.MutationOutcomeId)
+                    .HasConstraintName("mutation_effect_list_mutation_outcome_id");
+            });
+
+            modelBuilder.Entity<MutationOutcome>(entity =>
+            {
+                entity.ToTable("mutation_outcome");
+
+                entity.HasIndex(e => e.MutationId)
+                    .HasName("mutation_Id");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.MutationId).HasColumnName("mutation_Id");
+
+                entity.HasOne(d => d.Mutation)
+                    .WithMany(p => p.MutationOutcome)
+                    .HasForeignKey(d => d.MutationId)
+                    .HasConstraintName("mutation_outcome_mutation_id");
             });
 
             modelBuilder.Entity<PointsOfInterest>(entity =>
@@ -310,7 +447,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.Name)
@@ -334,7 +471,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.MaxSolves)
@@ -390,7 +527,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.SalvageType).HasColumnName("salvage_Type");
@@ -980,7 +1117,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.Link)
@@ -1121,7 +1258,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.LootQualityMod).HasColumnName("loot_Quality_Mod");
@@ -1246,7 +1383,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.PaletteId).HasColumnName("palette_Id");
@@ -1300,7 +1437,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.PatchVersion)
@@ -1310,7 +1447,8 @@ namespace ACE.Database.Models.World
 
             modelBuilder.Entity<Weenie>(entity =>
             {
-                entity.HasKey(e => e.ClassId);
+                entity.HasKey(e => e.ClassId)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("weenie");
 
@@ -1328,7 +1466,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.LastModified)
                     .HasColumnName("last_Modified")
                     .HasColumnType("datetime")
-                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'")
+                    .HasDefaultValueSql("'current_timestamp()'")
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.Type)
