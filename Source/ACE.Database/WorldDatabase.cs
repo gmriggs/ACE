@@ -281,7 +281,10 @@ namespace ACE.Database
 
                 return context.Mutation.Where(r => r.MutationId == (ushort)mutationFilterId)
                     .Include(r => r.MutationChance)
-                    .Include(r => r.MutationOutcome).ToList();
+                    .Include(r => r.MutationOutcome)
+                        .ThenInclude(r => r.MutationEffectList)
+                            .ThenInclude(r => r.MutationEffect)
+                                .ThenInclude(r => r.MutationEffectArgument).ToList();
             }
         }
 
