@@ -539,9 +539,14 @@ namespace ACE.Server.Factories.Treasure
             return cantripProgression;
         }
 
-        public static Dictionary<int, int> GetMaterialValueMod(WorldDbContext ctx)
+        public static Dictionary<MaterialType, double> GetMaterialValueMod(WorldDbContext ctx)
         {
-            return new Dictionary<int, int>();
+            var materialValueMod = new Dictionary<MaterialType, double>();
+
+            foreach (var kvp in LootTables.materialModifier)
+                materialValueMod.Add((MaterialType)kvp.Key, kvp.Value);
+
+            return materialValueMod;
         }
 
         public static Dictionary<int, List<int>> GetScrollWcidProgression(WorldDbContext ctx)

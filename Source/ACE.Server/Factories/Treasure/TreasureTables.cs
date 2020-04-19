@@ -86,7 +86,7 @@ namespace ACE.Server.Factories.Treasure
         private static List<TreasureTable> meleeCantrip { get; set; }
         private static List<TreasureTable> jewelryCantrip { get; set; }
         private static Dictionary<int, List<int>> cantripProgression { get; set; }
-        private static Dictionary<int, int> materialValueMod { get; set; }
+        private static Dictionary<MaterialType, double> materialValueMod { get; set; }
         private static Dictionary<int, List<int>> scrollWcidProgression { get; set; }
 
         public static bool LoadTables()
@@ -732,7 +732,7 @@ namespace ACE.Server.Factories.Treasure
             return GetProgression(cantripProgression, cantrip, level);
         }
 
-        public static double GetMaterialValueMod(int material)
+        public static double GetMaterialValueMod(MaterialType material)
         {
             return materialValueMod[material];
         }

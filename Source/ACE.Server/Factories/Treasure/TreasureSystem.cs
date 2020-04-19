@@ -956,7 +956,7 @@ namespace ACE.Server.Factories.Treasure
                 retval = false;
             }
 
-            if (item.SpellDID != null || item.Biota.PropertiesSpellBook.Count > 0)
+            if (item.SpellDID != null || item.Biota.PropertiesSpellBook?.Count > 0)
             {
                 item.UiEffects = (item.UiEffects ?? 0) | UiEffects.Magical;
             }
@@ -1620,18 +1620,21 @@ namespace ACE.Server.Factories.Treasure
 
             int maxMana = 0;
 
-            foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
+            if (item.Biota.PropertiesSpellBook != null)
             {
-                var spell = new Entity.Spell(spellId);
+                foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
+                {
+                    var spell = new Entity.Spell(spellId);
 
-                if (spell.NotFound)
-                {
-                    log.Error($"Unknown spell: {spellId}");
-                }
-                else
-                {
-                    if (spell.BaseMana > maxMana)
-                        maxMana = (int)spell.BaseMana;
+                    if (spell.NotFound)
+                    {
+                        log.Error($"Unknown spell: {spellId}");
+                    }
+                    else
+                    {
+                        if (spell.BaseMana > maxMana)
+                            maxMana = (int)spell.BaseMana;
+                    }
                 }
             }
             return maxMana;
@@ -1835,10 +1838,13 @@ namespace ACE.Server.Factories.Treasure
                 spellSum += roll.Tier;
             }
 
-            foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
+            if (item.Biota.PropertiesSpellBook != null)
             {
-                //spellSum += DetermineSpellLevel(spellId);  // TODO: fix for real spell level
-                spellSum += roll.Tier;
+                foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
+                {
+                    //spellSum += DetermineSpellLevel(spellId);  // TODO: fix for real spell level
+                    spellSum += roll.Tier;
+                }
             }
 
             value += spellSum * 10;
@@ -1859,7 +1865,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static int GetGemModifiedBaseValue(MaterialType material, int value)
         {
-            var mod = TreasureTables.GetMaterialValueMod((int)material);
+            var mod = TreasureTables.GetMaterialValueMod(material);
             return (int)(value * mod);
         }
 
@@ -1874,7 +1880,7 @@ namespace ACE.Server.Factories.Treasure
             modVal = (int)modVal;
             modVal *= 10.0;
 
-            var materialMod = TreasureTables.GetMaterialValueMod((int)roll.Material);
+            var materialMod = TreasureTables.GetMaterialValueMod(roll.Material);
 
             var newVal = modVal / 10 * materialMod * 0.016 + roll.GemValue;
             newVal *= (roll.WorkmanshipMod + roll.QualityModifier) / 2;
@@ -1886,7 +1892,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static int GetNewItemValue(TreasureRoll roll, int value)
         {
-            var materialMod = TreasureTables.GetMaterialValueMod((int)roll.Material);
+            var materialMod = TreasureTables.GetMaterialValueMod(roll.Material);
 
             var newValue = value / 3.0f + materialMod * GetTreasureValueFromWealthRating(roll.Tier) + roll.GemValue;
 
@@ -1978,7 +1984,7 @@ namespace ACE.Server.Factories.Treasure
                 {
                     spellDesc = GetItemSpellDescription(item.SpellDID.Value);
                 }
-                else
+                else if (item.Biota.PropertiesSpellBook != null)
                 {
                     foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
                     {

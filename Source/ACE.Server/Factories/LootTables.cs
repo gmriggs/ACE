@@ -11,7 +11,7 @@ namespace ACE.Server.Factories
         /// <summary>
         /// A mapping of MaterialTypes to value modifiers
         /// </summary>
-        private static Dictionary<int, double> materialModifier = new Dictionary<int, double>()
+        public static Dictionary<int, double> materialModifier = new Dictionary<int, double>()
         {
             { 1,  1.0 }, // Ceramic
             { 2,  1.5 }, // Porcelain
