@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
@@ -224,6 +225,19 @@ namespace ACE.Server.Command.Handlers
             var success = TreasureSystem.MutateItem(item, hasMagic, tier, qualityMod, TreasureItemClass.BowWeapon);
 
             CommandHandlerHelper.WriteOutputInfo(session, $"TryMutateItem: {success}");
+        }
+
+        [CommandHandler("show-mutation-filters", AccessLevel.Admin, CommandHandlerFlag.None, "Shows all of the PropertyInt.MutateFilters on the system")]
+        public static void HandleShowMutationFilters(Session session, params string[] parameters)
+        {
+            var allMutationFilters = TreasureTables.GetAllMutationFilters();
+
+            foreach (var kvp in allMutationFilters.OrderBy(i => i.Key))
+            {
+                Console.WriteLine($"{kvp.Key:X8}:");
+                kvp.Value.Output();
+                Console.WriteLine();
+            }
         }
     }
 }

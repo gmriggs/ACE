@@ -485,6 +485,11 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(clothingWcid[heritage], tier);
         }
 
+        public static Dictionary<uint, QualityFilter> GetAllMutationFilters()
+        {
+            return mutationFilters;
+        }
+
         public static QualityFilter GetMutationFilters(uint mutateFilterDID)
         {
             if (mutationFilters.TryGetValue(mutateFilterDID, out var filterTable))

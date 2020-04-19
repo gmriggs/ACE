@@ -296,9 +296,9 @@ namespace ACE.Server.Factories.Treasure
             return clothing;
         }
 
-        public static Dictionary<uint, PropertyFilter> GetQualityFilter(WorldDbContext ctx)
+        public static Dictionary<uint, QualityFilter> GetQualityFilter(WorldDbContext ctx)
         {
-            var qualityFilters = new Dictionary<uint, PropertyFilter>();
+            var qualityFilters = new Dictionary<uint, QualityFilter>();
 
             var results = ctx.TreasureMutateFilter.ToList();
 
@@ -306,7 +306,7 @@ namespace ACE.Server.Factories.Treasure
             {
                 if (!qualityFilters.TryGetValue((uint)result.Id, out var qualityFilter))
                 {
-                    qualityFilter = new PropertyFilter();
+                    qualityFilter = new QualityFilter();
                     qualityFilters.Add((uint)result.Id, qualityFilter);
                 }
                 qualityFilter.Add((QualityFilterType)result.QualityType, result.QualityID);
