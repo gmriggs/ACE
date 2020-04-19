@@ -12,6 +12,7 @@ using ACE.Common;
 using ACE.Database;
 using ACE.DatLoader;
 using ACE.Server.Command;
+using ACE.Server.Factories.Treasure;
 using ACE.Server.Managers;
 using ACE.Server.Network.Managers;
 
@@ -221,6 +222,9 @@ namespace ACE.Server
             }
             else
                 log.Info("Precaching World Database Disabled...");
+
+            log.Info("Initializing TreasureManager...");
+            TreasureTables.LoadTables();
 
             log.Info("Initializing PlayerManager...");
             PlayerManager.Initialize();
