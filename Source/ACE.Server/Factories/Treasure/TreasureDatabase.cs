@@ -1,377 +1,470 @@
 using System.Collections.Generic;
+using System.Linq;
 
+using ACE.Database.Models.World;
 using ACE.Server.Factories.Treasure.Struct;
 
 namespace ACE.Server.Factories.Treasure
 {
     public class TreasureDatabase
     {
-        public static List<TreasureTable> GetDeathTreasure()
+        public static List<TreasureDeath> GetDeathTreasure(WorldDbContext ctx)
+        {
+            return ctx.TreasureDeath.ToList();
+        }
+
+        public static List<TreasureTable> GetTreasureGroup(WorldDbContext ctx)
         {
             return new List<TreasureTable>();
         }
 
-        public static List<TreasureTable> GetTreasureGroup()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static Dictionary<int, int> GetHeritageSubtype()
+        public static Dictionary<int, int> GetHeritageSubtype(WorldDbContext ctx)
         {
             return new Dictionary<int, int>();
         }
 
-        public static List<TreasureTable> GetHeritageDist()
+        public static List<TreasureTable> GetHeritageDist(WorldDbContext ctx)
+        {
+            return ctx.TreasureHeritage.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetGemClass(WorldDbContext ctx)
+        {
+            return ctx.TreasureGemClassTier.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, int> GetGemClassValue(WorldDbContext ctx)
+        {
+            var gemValue = new Dictionary<int, int>();
+
+            foreach (var result in ctx.TreasureGemClass)
+            {
+                gemValue.Add(result.Class, result.Value);
+            }
+            return gemValue;
+        }
+
+        public static List<TreasureTable> GetGemWcid(WorldDbContext ctx)
         {
             return new List<TreasureTable>();
         }
 
-        public static List<TreasureTable> GetGemClass()
+        public static List<TreasureTable> GetJewelryWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureJewelry.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetArtWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureArt.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetManaStoneWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureManaStone.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetConsumableWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureConsumable.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetHealKitWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureHealKit.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetLockpickWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureLockpick.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetSpellCompWcid(WorldDbContext ctx)
         {
             return new List<TreasureTable>();
         }
 
-        public static Dictionary<int, int> GetGemClassValue()
+        public static List<TreasureTable> GetScrollWcid(WorldDbContext ctx)
         {
-            return new Dictionary<int, int>();
+            return ctx.TreasureScroll.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetGemWcid()
+        public static List<TreasureTable> GetSpellLevel(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureSpellLevel.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetJewelryWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetArtWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetManaStoneWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetConsumableWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetHealKitWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetLockpickWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetSpellCompWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetScrollWcid()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetSpellLevel()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static Dictionary<int, List<int>> GetSpellProgression()
+        public static Dictionary<int, List<int>> GetSpellProgression(WorldDbContext ctx)
         {
             return new Dictionary<int, List<int>>();
         }
 
-        public static List<SpellDescriptor> GetSpellDescriptor()
+        public static List<SpellDescriptor> GetSpellDescriptor(WorldDbContext ctx)
         {
             return new List<SpellDescriptor>();
         }
 
-        public static List<TreasureTable> GetWeaponDist()
+        public static List<TreasureTable> GetWeaponDist(WorldDbContext ctx)
+        {
+            return ctx.TreasureWeapon.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponAxeWcid(WorldDbContext ctx)
+        {
+            var axes = new Dictionary<int, List<TreasureTable>>();
+
+            axes[1] = ctx.TreasureWeaponAxe1.Select(i => new TreasureTable(i)).ToList();
+            axes[2] = ctx.TreasureWeaponAxe2.Select(i => new TreasureTable(i)).ToList();
+            axes[3] = ctx.TreasureWeaponAxe3.Select(i => new TreasureTable(i)).ToList();
+
+            return axes;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponBowWcid(WorldDbContext ctx)
+        {
+            var bows = new Dictionary<int, List<TreasureTable>>();
+
+            bows[1] = ctx.TreasureWeaponBow1.Select(i => new TreasureTable(i)).ToList();
+            bows[2] = ctx.TreasureWeaponBow2.Select(i => new TreasureTable(i)).ToList();
+            bows[3] = ctx.TreasureWeaponBow3.Select(i => new TreasureTable(i)).ToList();
+
+            return bows;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponDaggerWcid(WorldDbContext ctx)
+        {
+            var daggers = new Dictionary<int, List<TreasureTable>>();
+
+            daggers[1] = ctx.TreasureWeaponDagger1.Select(i => new TreasureTable(i)).ToList();
+            daggers[2] = ctx.TreasureWeaponDagger2.Select(i => new TreasureTable(i)).ToList();
+            daggers[3] = ctx.TreasureWeaponDagger3.Select(i => new TreasureTable(i)).ToList();
+
+            return daggers;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponMaceWcid(WorldDbContext ctx)
+        {
+            var maces = new Dictionary<int, List<TreasureTable>>();
+
+            maces[1] = ctx.TreasureWeaponMace1.Select(i => new TreasureTable(i)).ToList();
+            maces[2] = ctx.TreasureWeaponMace2.Select(i => new TreasureTable(i)).ToList();
+            maces[3] = ctx.TreasureWeaponMace3.Select(i => new TreasureTable(i)).ToList();
+
+            return maces;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponSpearWcid(WorldDbContext ctx)
+        {
+            var spears = new Dictionary<int, List<TreasureTable>>();
+
+            spears[1] = ctx.TreasureWeaponSpear1.Select(i => new TreasureTable(i)).ToList();
+            spears[2] = ctx.TreasureWeaponSpear2.Select(i => new TreasureTable(i)).ToList();
+            spears[3] = ctx.TreasureWeaponSpear3.Select(i => new TreasureTable(i)).ToList();
+
+            return spears;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponStaffWcid(WorldDbContext ctx)
+        {
+            var staves = new Dictionary<int, List<TreasureTable>>();
+
+            staves[1] = ctx.TreasureWeaponStaff1.Select(i => new TreasureTable(i)).ToList();
+            staves[2] = ctx.TreasureWeaponStaff2.Select(i => new TreasureTable(i)).ToList();
+            staves[3] = ctx.TreasureWeaponStaff3.Select(i => new TreasureTable(i)).ToList();
+
+            return staves;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponSwordWcid(WorldDbContext ctx)
+        {
+            var swords = new Dictionary<int, List<TreasureTable>>();
+
+            swords[1] = ctx.TreasureWeaponSword1.Select(i => new TreasureTable(i)).ToList();
+            swords[2] = ctx.TreasureWeaponSword2.Select(i => new TreasureTable(i)).ToList();
+            swords[3] = ctx.TreasureWeaponSword3.Select(i => new TreasureTable(i)).ToList();
+
+            return swords;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetWeaponUAWcid(WorldDbContext ctx)
+        {
+            var unarmed = new Dictionary<int, List<TreasureTable>>();
+
+            unarmed[1] = ctx.TreasureWeaponUnarmed1.Select(i => new TreasureTable(i)).ToList();
+            unarmed[2] = ctx.TreasureWeaponUnarmed2.Select(i => new TreasureTable(i)).ToList();
+            unarmed[3] = ctx.TreasureWeaponUnarmed3.Select(i => new TreasureTable(i)).ToList();
+
+            return unarmed;
+        }
+
+        public static List<TreasureTable> GetWeaponCrossbowWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureWeaponCrossbow.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetWeaponAtlatlWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureWeaponAtlatl.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetTwoHandedWcid(WorldDbContext ctx)
+        {
+            //return ctx.TreasureTwoHanded.Select(i => new TreasureTable(i)).ToList();
+            return new List<TreasureTable>();
+        }
+
+        public static List<TreasureTable> GetCasterWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureCaster.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetArmorDist(WorldDbContext ctx)
+        {
+            return ctx.TreasureArmor.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetLeatherArmorWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureArmorLeather.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetStuddedLeatherArmorWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureArmorStuddedLeather.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetChainmailArmorWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureArmorChainmail.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetPlatemailArmorWcid(WorldDbContext ctx)
+        {
+            var platemail = new Dictionary<int, List<TreasureTable>>();
+
+            platemail[1] = ctx.TreasureArmorPlatemail1.Select(i => new TreasureTable(i)).ToList();
+            platemail[2] = ctx.TreasureArmorPlatemail2.Select(i => new TreasureTable(i)).ToList();
+            platemail[3] = ctx.TreasureArmorPlatemail3.Select(i => new TreasureTable(i)).ToList();
+
+            return platemail;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetHeritageLowArmorWcid(WorldDbContext ctx)
+        {
+            var heritageArmorLow = new Dictionary<int, List<TreasureTable>>();
+
+            heritageArmorLow[1] = ctx.TreasureArmorHeritageLow1.Select(i => new TreasureTable(i)).ToList();
+            heritageArmorLow[2] = ctx.TreasureArmorHeritageLow2.Select(i => new TreasureTable(i)).ToList();
+            heritageArmorLow[3] = ctx.TreasureArmorHeritageLow3.Select(i => new TreasureTable(i)).ToList();
+
+            return heritageArmorLow;
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetHeritageHighArmorWcid(WorldDbContext ctx)
+        {
+            var heritageArmorHigh = new Dictionary<int, List<TreasureTable>>();
+
+            heritageArmorHigh[1] = ctx.TreasureArmorHeritageHigh1.Select(i => new TreasureTable(i)).ToList();
+            heritageArmorHigh[2] = ctx.TreasureArmorHeritageHigh2.Select(i => new TreasureTable(i)).ToList();
+            heritageArmorHigh[3] = ctx.TreasureArmorHeritageHigh3.Select(i => new TreasureTable(i)).ToList();
+
+            return heritageArmorHigh;
+        }
+
+        public static List<TreasureTable> GetCovenantArmorWcid(WorldDbContext ctx)
+        {
+            return ctx.TreasureArmorCovenant.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetClothingWcid(WorldDbContext ctx)
+        {
+            var clothing = new Dictionary<int, List<TreasureTable>>();
+
+            clothing[1] = ctx.TreasureClothing1.Select(i => new TreasureTable(i)).ToList();
+            clothing[2] = ctx.TreasureClothing2.Select(i => new TreasureTable(i)).ToList();
+            clothing[3] = ctx.TreasureClothing3.Select(i => new TreasureTable(i)).ToList();
+
+            return clothing;
+        }
+
+        public static List<TreasureTable> GetQualityFilter(WorldDbContext ctx)
         {
             return new List<TreasureTable>();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponAxeWcid()
+        public static List<TreasureTable> GetWorkmanshipDist(WorldDbContext ctx)
+        {
+            return ctx.TreasureWorkmanshipDist.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetMaterialCodeDist(WorldDbContext ctx)
         {
             return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponBowWcid()
+        public static List<TreasureTable> GetMaterialCeramic(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialCeramic.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetMaterialCloth(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialCloth.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetMaterialGem(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialGem.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetMaterialLeather(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialLeather.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetMaterialMetal(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialMetal.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetMaterialStone(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialStone.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static List<TreasureTable> GetMaterialWood(WorldDbContext ctx)
+        {
+            return ctx.TreasureMaterialWood.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetGemCodeDist(WorldDbContext ctx)
         {
             return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponDaggerWcid()
+        public static List<TreasureTable> GetGemMaterialChance(WorldDbContext ctx)
+        {
+            return new List<TreasureTable>();
+        }
+
+        public static Dictionary<int, List<double>> GetQualityMod(WorldDbContext ctx)
+        {
+            var qualityMod = new Dictionary<int, List<double>>();
+
+            foreach (var result in ctx.TreasureQualityMod)
+            {
+                qualityMod.Add(result.QualityMod, new List<double>() { result._1, result._2, result._3, result._4, result._5, result._6, result._7, result._8 });
+            }
+            return qualityMod;
+        }
+
+        public static List<TreasureTable> GetQualityLevel(WorldDbContext ctx)
+        {
+            return ctx.TreasureQualityLevel.Select(i => new TreasureTable(i)).ToList();
+        }
+
+        public static Dictionary<int, List<TreasureTable>> GetMaterialColorCode(WorldDbContext ctx)
         {
             return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponMaceWcid()
+        public static List<TreasureTable> GetClothingPalette(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            return ctx.TreasureClothingPalette.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponSpearWcid()
+        public static List<TreasureTable> GetLeatherPalette(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            return ctx.TreasureArmorLeatherPalette.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponStaffWcid()
+        public static List<TreasureTable> GetMetalPalette(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            return ctx.TreasureArmorMetalPalette.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponSwordWcid()
+        public static List<TreasureTable> GetMeleeWeaponItemSpell(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            return ctx.TreasureWeaponMeleeSpell.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetWeaponUAWcid()
+        public static List<TreasureTable> GetMissileWeaponItemSpell(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            return ctx.TreasureWeaponMissileSpell.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetWeaponCrossbowWcid()
+        public static List<TreasureTable> GetCasterItemSpell(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureCasterSpell.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetWeaponAtlatlWcid()
+        public static List<TreasureTable> GetArmorItemSpell(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureItemBaneSpell.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetTwoHandedWcid()
+        public static List<TreasureTable> GetSpellCodeDist(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureSpellDist.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetCasterWcid()
+        public static List<TreasureTable> GetOrbCastableSpell(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureCasterOrbSpell.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetArmorDist()
+        public static List<TreasureTable> GetWandStaffCastableSpell(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureCasterWandStaffSpell.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetLeatherArmorWcid()
+        public static List<TreasureTable> GetArmorClothingCantrip(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureCantripArmorDist.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetStuddedLeatherArmorWcid()
+        public static List<TreasureTable> GetCasterCantrip(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureCantripCasterDist.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetChainmailArmorWcid()
+        public static List<TreasureTable> GetMissileCantrip(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureCantripMissileDist.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetPlatemailArmorWcid()
-        {
-            return new Dictionary<int, List<TreasureTable>>();
-        }
-
-        public static Dictionary<int, List<TreasureTable>> GetHeritageLowArmorWcid()
-        {
-            return new Dictionary<int, List<TreasureTable>>();
-        }
-
-        public static Dictionary<int, List<TreasureTable>> GetHeritageHighArmorWcid()
-        {
-            return new Dictionary<int, List<TreasureTable>>();
-        }
-
-        public static List<TreasureTable> GetCovenantArmorWcid()
+        public static List<TreasureTable> GetShieldCantrip(WorldDbContext ctx)
         {
             return new List<TreasureTable>();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetClothingWcid()
+        public static List<TreasureTable> GetMeleeCantrip(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            return ctx.TreasureCantripMeleeDist.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static List<TreasureTable> GetQualityFilter()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetWorkmanshipDist()
+        public static List<TreasureTable> GetJewelryCantrip(WorldDbContext ctx)
         {
             return new List<TreasureTable>();
         }
 
-        public static Dictionary<int, List<TreasureTable>> GetMaterialCodeDist()
+        public static Dictionary<int, List<int>> GetCantripProgression(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            var cantripProgression = new Dictionary<int, List<int>>();
+
+            foreach (var result in ctx.TreasureCantripLevelProgression)
+            {
+                cantripProgression.Add((int)result.Id, new List<int>() { result.Minor, result.Major, result.Epic, result.Lego });
+            }
+            return cantripProgression;
         }
 
-        public static List<TreasureTable> GetMaterialCeramic()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMaterialCloth()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMaterialGem()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMaterialLeather()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMaterialMetal()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMaterialStone()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMaterialWood()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static Dictionary<int, List<TreasureTable>> GetGemCodeDist()
-        {
-            return new Dictionary<int, List<TreasureTable>>();
-        }
-
-        public static List<TreasureTable> GetGemMaterialChance()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static Dictionary<int, List<double>> GetQualityMod()
-        {
-            return new Dictionary<int, List<double>>();
-        }
-
-        public static List<TreasureTable> GetQualityLevel()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static Dictionary<int, List<TreasureTable>> GetMaterialColorCode()
-        {
-            return new Dictionary<int, List<TreasureTable>>();
-        }
-
-        public static List<TreasureTable> GetClothingPalette()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetLeatherPalette()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMetalPalette()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMeleeWeaponItemSpell()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMissileWeaponItemSpell()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetCasterItemSpell()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetArmorItemSpell()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetSpellCodeDist()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetOrbCastableSpell()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetWandStaffCastableSpell()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetArmorClothingCantrip()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetCasterCantrip()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMissileCantrip()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetShieldCantrip()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetMeleeCantrip()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static List<TreasureTable> GetJewelryCantrip()
-        {
-            return new List<TreasureTable>();
-        }
-
-        public static Dictionary<int, List<int>> GetCantripProgression()
-        {
-            return new Dictionary<int, List<int>>();
-        }
-
-        public static Dictionary<int, int> GetMaterialValueMod()
+        public static Dictionary<int, int> GetMaterialValueMod(WorldDbContext ctx)
         {
             return new Dictionary<int, int>();
         }
 
-        public static Dictionary<int, List<int>> GetScrollWcidProgression()
+        public static Dictionary<int, List<int>> GetScrollWcidProgression(WorldDbContext ctx)
         {
             return new Dictionary<int, List<int>>();
         }

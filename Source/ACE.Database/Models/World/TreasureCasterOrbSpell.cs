@@ -6,8 +6,8 @@ namespace ACE.Database.Models.World
     public partial class TreasureCasterOrbSpell
     {
         public uint Id { get; set; }
-        public int? Tier { get; set; }
-        public int? Spell { get; set; }
-        public double? Chance { get; set; }
+        public int Tier { get; set; }
+        public int Spell { get; set; }
+        public double Chance { get; set; }
     }
 }

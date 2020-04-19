@@ -6,8 +6,8 @@ namespace ACE.Database.Models.World
     public partial class TreasureClothingPalette
     {
         public uint Id { get; set; }
-        public int? Type { get; set; }
-        public int? Color { get; set; }
-        public double? Chance { get; set; }
+        public int Type { get; set; }
+        public int Color { get; set; }
+        public double Chance { get; set; }
     }
 }

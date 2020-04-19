@@ -9,6 +9,6 @@ namespace ACE.Database.Models.World
         public int Class { get; set; }
         public int Material { get; set; }
         public double Chance { get; set; }
-        public int? Wcid { get; set; }
+        public int Wcid { get; set; }
     }
 }

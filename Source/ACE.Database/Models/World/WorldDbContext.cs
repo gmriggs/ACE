@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -187,14 +187,9 @@ namespace ACE.Database.Models.World
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var config = Common.ConfigManager.Config.MySql.World;
-
-                optionsBuilder.UseMySql($"server={config.Host};port={config.Port};user={config.Username};password={config.Password};database={config.Database}");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySql("server=localhost;port=3307;user=root;password=MorbidMonkey01;database=ace_world");
             }
-
-#if DEBUG
-            optionsBuilder.EnableSensitiveDataLogging(true);
-#endif
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1347,7 +1342,9 @@ namespace ACE.Database.Models.World
                     .HasColumnName("armor_Subtable")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1360,7 +1357,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1377,7 +1376,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1394,7 +1395,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1411,7 +1414,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1428,7 +1433,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1445,7 +1452,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1462,7 +1471,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1479,7 +1490,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1496,7 +1509,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1513,7 +1528,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Color)
                     .HasColumnName("color")
@@ -1530,7 +1547,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Color)
                     .HasColumnName("color")
@@ -1547,7 +1566,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Color)
                     .HasColumnName("color")
@@ -1564,7 +1585,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1581,7 +1604,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1598,7 +1623,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1615,9 +1642,13 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Max).HasColumnName("max");
+                entity.Property(e => e.Max)
+                    .HasColumnName("max")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e.Min).HasColumnName("min");
+                entity.Property(e => e.Min)
+                    .HasColumnName("min")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.QualityLevel)
                     .HasColumnName("quality_Level")
@@ -1630,7 +1661,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1664,11 +1697,17 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e.Max).HasColumnName("max");
+                entity.Property(e => e.Max)
+                    .HasColumnName("max")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e.Min).HasColumnName("min");
+                entity.Property(e => e.Min)
+                    .HasColumnName("min")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.QualityLevel)
                     .HasColumnName("quality_Level")
@@ -1681,7 +1720,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1698,7 +1739,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1715,7 +1758,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Level)
                     .HasColumnName("level")
@@ -1755,7 +1800,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1772,7 +1819,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1789,7 +1838,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1806,7 +1857,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
@@ -1823,7 +1876,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1840,7 +1895,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1857,7 +1914,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1874,7 +1933,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -1891,7 +1952,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1908,7 +1971,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1925,7 +1990,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -1942,7 +2009,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Color)
                     .HasColumnName("color")
@@ -1959,7 +2028,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2088,7 +2159,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.GemClass)
                     .HasColumnName("gem_Class")
@@ -2105,7 +2178,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
@@ -2126,7 +2201,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2143,7 +2220,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Dist)
                     .HasColumnName("dist")
@@ -2183,7 +2262,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -2234,7 +2315,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2268,7 +2351,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2303,7 +2388,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2320,7 +2407,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2358,7 +2447,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Color)
                     .HasColumnName("color")
@@ -2379,7 +2470,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Group)
                     .HasColumnName("group")
@@ -2400,7 +2493,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2435,7 +2530,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2452,7 +2549,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2473,9 +2572,12 @@ namespace ACE.Database.Models.World
                     .HasColumnName("material")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Multiplier).HasColumnName("multiplier");
+                entity.Property(e => e.Multiplier)
+                    .HasColumnName("multiplier")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasColumnName("name")
                     .HasColumnType("varchar(50)");
             });
@@ -2486,7 +2588,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2503,7 +2607,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Material)
                     .HasColumnName("material")
@@ -2559,7 +2665,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2576,7 +2684,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.QualityLevel)
                     .HasColumnName("quality_Level")
@@ -2597,21 +2707,37 @@ namespace ACE.Database.Models.World
                     .HasColumnName("quality_Mod")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e._1).HasColumnName("1");
+                entity.Property(e => e._1)
+                    .HasColumnName("1")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._2).HasColumnName("2");
+                entity.Property(e => e._2)
+                    .HasColumnName("2")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._3).HasColumnName("3");
+                entity.Property(e => e._3)
+                    .HasColumnName("3")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._4).HasColumnName("4");
+                entity.Property(e => e._4)
+                    .HasColumnName("4")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._5).HasColumnName("5");
+                entity.Property(e => e._5)
+                    .HasColumnName("5")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._6).HasColumnName("6");
+                entity.Property(e => e._6)
+                    .HasColumnName("6")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._7).HasColumnName("7");
+                entity.Property(e => e._7)
+                    .HasColumnName("7")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e._8).HasColumnName("8");
+                entity.Property(e => e._8)
+                    .HasColumnName("8")
+                    .HasColumnType("double(22,0)");
             });
 
             modelBuilder.Entity<TreasureScroll>(entity =>
@@ -2620,7 +2746,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2640,6 +2768,7 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasColumnName("name")
                     .HasColumnType("varchar(100)");
 
@@ -2687,6 +2816,7 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasColumnName("name")
                     .HasColumnType("varchar(100)");
 
@@ -2703,6 +2833,7 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Words)
+                    .IsRequired()
                     .HasColumnName("words")
                     .HasColumnType("varchar(50)");
             });
@@ -2714,6 +2845,7 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Descriptor)
+                    .IsRequired()
                     .HasColumnName("descriptor")
                     .HasColumnType("varchar(50)");
 
@@ -2726,6 +2858,7 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasColumnName("name")
                     .HasColumnType("varchar(100)");
 
@@ -2748,7 +2881,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Group)
                     .HasColumnName("group")
@@ -2765,7 +2900,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Level)
                     .HasColumnName("level")
@@ -2782,7 +2919,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Level)
                     .HasColumnName("level")
@@ -2843,7 +2982,9 @@ namespace ACE.Database.Models.World
                     .HasColumnName("adjust_Tier")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2885,7 +3026,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2902,7 +3045,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2919,9 +3064,13 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Max).HasColumnName("max");
+                entity.Property(e => e.Max)
+                    .HasColumnName("max")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e.Min).HasColumnName("min");
+                entity.Property(e => e.Min)
+                    .HasColumnName("min")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.QualityLevel)
                     .HasColumnName("quality_Level")
@@ -2934,7 +3083,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2951,7 +3102,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2968,7 +3121,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -2985,7 +3140,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3002,7 +3159,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3019,7 +3178,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3036,7 +3197,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3053,7 +3216,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3070,7 +3235,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3087,7 +3254,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3104,7 +3273,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3121,7 +3292,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3138,7 +3311,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3155,7 +3330,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -3172,7 +3349,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Spell)
                     .HasColumnName("spell")
@@ -3208,7 +3387,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3225,7 +3406,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3242,7 +3425,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3259,9 +3444,13 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Max).HasColumnName("max");
+                entity.Property(e => e.Max)
+                    .HasColumnName("max")
+                    .HasColumnType("double(22,0)");
 
-                entity.Property(e => e.Min).HasColumnName("min");
+                entity.Property(e => e.Min)
+                    .HasColumnName("min")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.QualityLevel)
                     .HasColumnName("quality_Level")
@@ -3274,7 +3463,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3291,7 +3482,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3308,7 +3501,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3325,7 +3520,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3342,7 +3539,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3359,7 +3558,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3376,7 +3577,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3393,7 +3596,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3410,7 +3615,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -3488,7 +3695,9 @@ namespace ACE.Database.Models.World
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Chance).HasColumnName("chance");
+                entity.Property(e => e.Chance)
+                    .HasColumnName("chance")
+                    .HasColumnType("double(22,0)");
 
                 entity.Property(e => e.Tier)
                     .HasColumnName("tier")
@@ -4282,6 +4491,8 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.AnglesY).HasColumnName("angles_Y");
 
                 entity.Property(e => e.AnglesZ).HasColumnName("angles_Z");
+
+                entity.Property(e => e.Instance).HasColumnName("instance");
 
                 entity.Property(e => e.ObjCellId).HasColumnName("obj_Cell_Id");
 

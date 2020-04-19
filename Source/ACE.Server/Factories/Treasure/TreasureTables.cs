@@ -11,7 +11,7 @@ namespace ACE.Server.Factories.Treasure
 {
     public class TreasureTables
     {
-        private static List<TreasureTable> deathTreasure;
+        private static List<TreasureDeath> deathTreasure;
         private static List<TreasureTable> treasureGroup;
         private static Dictionary<int, int> heritageSubtype;
         private static List<TreasureTable> heritageDist;
@@ -88,81 +88,91 @@ namespace ACE.Server.Factories.Treasure
 
         public static bool LoadTables()
         {
-            deathTreasure = TreasureDatabase.GetDeathTreasure();
-            treasureGroup = TreasureDatabase.GetTreasureGroup();
-            heritageSubtype = TreasureDatabase.GetHeritageSubtype();
-            heritageDist = TreasureDatabase.GetHeritageDist();
-            gemClass = TreasureDatabase.GetGemClass();
-            gemClassValue = TreasureDatabase.GetGemClassValue();
-            gemWcid = TreasureDatabase.GetGemWcid();
-            jewelryWcid = TreasureDatabase.GetJewelryWcid();
-            artWcid = TreasureDatabase.GetArtWcid();
-            manaStoneWcid = TreasureDatabase.GetManaStoneWcid();
-            consumableWcid = TreasureDatabase.GetConsumableWcid();
-            healKitWcid = TreasureDatabase.GetHealKitWcid();
-            lockpickWcid = TreasureDatabase.GetLockpickWcid();
-            spellCompWcid = TreasureDatabase.GetSpellCompWcid();
-            scrollWcid = TreasureDatabase.GetScrollWcid();
-            spellLevel = TreasureDatabase.GetSpellLevel();
-            spellProgression = TreasureDatabase.GetSpellProgression();
-            spellDesc = TreasureDatabase.GetSpellDescriptor();
-            weaponDist = TreasureDatabase.GetWeaponDist();
-            weaponAxeWcid = TreasureDatabase.GetWeaponAxeWcid();
-            weaponBowWcid = TreasureDatabase.GetWeaponBowWcid();
-            weaponDaggerWcid = TreasureDatabase.GetWeaponDaggerWcid();
-            weaponMaceWcid = TreasureDatabase.GetWeaponMaceWcid();
-            weaponSpearWcid = TreasureDatabase.GetWeaponSpearWcid();
-            weaponStaffWcid = TreasureDatabase.GetWeaponStaffWcid();
-            weaponUAWcid = TreasureDatabase.GetWeaponUAWcid();
-            weaponCrossbowWcid = TreasureDatabase.GetWeaponCrossbowWcid();
-            weaponAtlatlWcid = TreasureDatabase.GetWeaponAtlatlWcid();
-            weaponTwoHandedWcid = TreasureDatabase.GetTwoHandedWcid();
-            casterWcid = TreasureDatabase.GetCasterWcid();
-            armorDist = TreasureDatabase.GetArmorDist();
-            leatherArmorWcid = TreasureDatabase.GetLeatherArmorWcid();
-            studdedLeatherArmorWcid = TreasureDatabase.GetStuddedLeatherArmorWcid();
-            chainmailArmorWcid = TreasureDatabase.GetChainmailArmorWcid();
-            platemailArmorWcid = TreasureDatabase.GetPlatemailArmorWcid();
-            heritageLowArmorWcid = TreasureDatabase.GetHeritageLowArmorWcid();
-            heritageHighArmorWcid = TreasureDatabase.GetHeritageHighArmorWcid();
-            covenantArmorWcid = TreasureDatabase.GetCovenantArmorWcid();
-            clothingWcid = TreasureDatabase.GetClothingWcid();
-            qualityFilter = TreasureDatabase.GetQualityFilter();
-            workmanshipDist = TreasureDatabase.GetWorkmanshipDist();
-            materialCodeDist = TreasureDatabase.GetMaterialCodeDist();
-            materialCeramic = TreasureDatabase.GetMaterialCeramic();
-            materialCloth = TreasureDatabase.GetMaterialCloth();
-            materialGem = TreasureDatabase.GetMaterialGem();
-            materialLeather = TreasureDatabase.GetMaterialLeather();
-            materialMetal = TreasureDatabase.GetMaterialMetal();
-            materialStone = TreasureDatabase.GetMaterialStone();
-            materialWood = TreasureDatabase.GetMaterialWood();
-            gemCodeDist = TreasureDatabase.GetGemCodeDist();
-            gemMaterialChance = TreasureDatabase.GetGemMaterialChance();
-            qualityMod = TreasureDatabase.GetQualityMod();
-            qualityLevel = TreasureDatabase.GetQualityLevel();
-            materialColorCode = TreasureDatabase.GetMaterialColorCode();
-            clothingPalette = TreasureDatabase.GetClothingPalette();
-            leatherPalette = TreasureDatabase.GetLeatherPalette();
-            metalPalette = TreasureDatabase.GetMetalPalette();
-            meleeWeaponItemSpell = TreasureDatabase.GetMeleeWeaponItemSpell();
-            missileWeaponItemSpell = TreasureDatabase.GetMissileWeaponItemSpell();
-            casterItemSpell = TreasureDatabase.GetCasterItemSpell();
-            armorItemSpell = TreasureDatabase.GetArmorItemSpell();
-            spellCodeDist = TreasureDatabase.GetSpellCodeDist();
-            orbCastableSpell = TreasureDatabase.GetOrbCastableSpell();
-            wandStaffCastableSpell = TreasureDatabase.GetWandStaffCastableSpell();
-            armorClothingCantrip = TreasureDatabase.GetArmorClothingCantrip();
-            casterCantrip = TreasureDatabase.GetCasterCantrip();
-            missileCantrip = TreasureDatabase.GetMissileCantrip();
-            shieldCantrip = TreasureDatabase.GetShieldCantrip();
-            meleeCantrip = TreasureDatabase.GetMeleeCantrip();
-            jewelryCantrip = TreasureDatabase.GetJewelryCantrip();
-            cantripProgression = TreasureDatabase.GetCantripProgression();
-            materialValueMod = TreasureDatabase.GetMaterialValueMod();
-            scrollWcidProgression = TreasureDatabase.GetScrollWcidProgression();
-
-            return false;
+            try
+            {
+                using (var ctx = new WorldDbContext())
+                {
+                    deathTreasure = TreasureDatabase.GetDeathTreasure(ctx);
+                    treasureGroup = TreasureDatabase.GetTreasureGroup(ctx);
+                    heritageSubtype = TreasureDatabase.GetHeritageSubtype(ctx);
+                    heritageDist = TreasureDatabase.GetHeritageDist(ctx);
+                    gemClass = TreasureDatabase.GetGemClass(ctx);
+                    gemClassValue = TreasureDatabase.GetGemClassValue(ctx);
+                    gemWcid = TreasureDatabase.GetGemWcid(ctx);
+                    jewelryWcid = TreasureDatabase.GetJewelryWcid(ctx);
+                    artWcid = TreasureDatabase.GetArtWcid(ctx);
+                    manaStoneWcid = TreasureDatabase.GetManaStoneWcid(ctx);
+                    consumableWcid = TreasureDatabase.GetConsumableWcid(ctx);
+                    healKitWcid = TreasureDatabase.GetHealKitWcid(ctx);
+                    lockpickWcid = TreasureDatabase.GetLockpickWcid(ctx);
+                    spellCompWcid = TreasureDatabase.GetSpellCompWcid(ctx);
+                    scrollWcid = TreasureDatabase.GetScrollWcid(ctx);
+                    spellLevel = TreasureDatabase.GetSpellLevel(ctx);
+                    spellProgression = TreasureDatabase.GetSpellProgression(ctx);
+                    spellDesc = TreasureDatabase.GetSpellDescriptor(ctx);
+                    weaponDist = TreasureDatabase.GetWeaponDist(ctx);
+                    weaponAxeWcid = TreasureDatabase.GetWeaponAxeWcid(ctx);
+                    weaponBowWcid = TreasureDatabase.GetWeaponBowWcid(ctx);
+                    weaponDaggerWcid = TreasureDatabase.GetWeaponDaggerWcid(ctx);
+                    weaponMaceWcid = TreasureDatabase.GetWeaponMaceWcid(ctx);
+                    weaponSpearWcid = TreasureDatabase.GetWeaponSpearWcid(ctx);
+                    weaponStaffWcid = TreasureDatabase.GetWeaponStaffWcid(ctx);
+                    weaponUAWcid = TreasureDatabase.GetWeaponUAWcid(ctx);
+                    weaponCrossbowWcid = TreasureDatabase.GetWeaponCrossbowWcid(ctx);
+                    weaponAtlatlWcid = TreasureDatabase.GetWeaponAtlatlWcid(ctx);
+                    weaponTwoHandedWcid = TreasureDatabase.GetTwoHandedWcid(ctx);
+                    casterWcid = TreasureDatabase.GetCasterWcid(ctx);
+                    armorDist = TreasureDatabase.GetArmorDist(ctx);
+                    leatherArmorWcid = TreasureDatabase.GetLeatherArmorWcid(ctx);
+                    studdedLeatherArmorWcid = TreasureDatabase.GetStuddedLeatherArmorWcid(ctx);
+                    chainmailArmorWcid = TreasureDatabase.GetChainmailArmorWcid(ctx);
+                    platemailArmorWcid = TreasureDatabase.GetPlatemailArmorWcid(ctx);
+                    heritageLowArmorWcid = TreasureDatabase.GetHeritageLowArmorWcid(ctx);
+                    heritageHighArmorWcid = TreasureDatabase.GetHeritageHighArmorWcid(ctx);
+                    covenantArmorWcid = TreasureDatabase.GetCovenantArmorWcid(ctx);
+                    clothingWcid = TreasureDatabase.GetClothingWcid(ctx);
+                    qualityFilter = TreasureDatabase.GetQualityFilter(ctx);
+                    workmanshipDist = TreasureDatabase.GetWorkmanshipDist(ctx);
+                    materialCodeDist = TreasureDatabase.GetMaterialCodeDist(ctx);
+                    materialCeramic = TreasureDatabase.GetMaterialCeramic(ctx);
+                    materialCloth = TreasureDatabase.GetMaterialCloth(ctx);
+                    materialGem = TreasureDatabase.GetMaterialGem(ctx);
+                    materialLeather = TreasureDatabase.GetMaterialLeather(ctx);
+                    materialMetal = TreasureDatabase.GetMaterialMetal(ctx);
+                    materialStone = TreasureDatabase.GetMaterialStone(ctx);
+                    materialWood = TreasureDatabase.GetMaterialWood(ctx);
+                    gemCodeDist = TreasureDatabase.GetGemCodeDist(ctx);
+                    gemMaterialChance = TreasureDatabase.GetGemMaterialChance(ctx);
+                    qualityMod = TreasureDatabase.GetQualityMod(ctx);
+                    qualityLevel = TreasureDatabase.GetQualityLevel(ctx);
+                    materialColorCode = TreasureDatabase.GetMaterialColorCode(ctx);
+                    clothingPalette = TreasureDatabase.GetClothingPalette(ctx);
+                    leatherPalette = TreasureDatabase.GetLeatherPalette(ctx);
+                    metalPalette = TreasureDatabase.GetMetalPalette(ctx);
+                    meleeWeaponItemSpell = TreasureDatabase.GetMeleeWeaponItemSpell(ctx);
+                    missileWeaponItemSpell = TreasureDatabase.GetMissileWeaponItemSpell(ctx);
+                    casterItemSpell = TreasureDatabase.GetCasterItemSpell(ctx);
+                    armorItemSpell = TreasureDatabase.GetArmorItemSpell(ctx);
+                    spellCodeDist = TreasureDatabase.GetSpellCodeDist(ctx);
+                    orbCastableSpell = TreasureDatabase.GetOrbCastableSpell(ctx);
+                    wandStaffCastableSpell = TreasureDatabase.GetWandStaffCastableSpell(ctx);
+                    armorClothingCantrip = TreasureDatabase.GetArmorClothingCantrip(ctx);
+                    casterCantrip = TreasureDatabase.GetCasterCantrip(ctx);
+                    missileCantrip = TreasureDatabase.GetMissileCantrip(ctx);
+                    shieldCantrip = TreasureDatabase.GetShieldCantrip(ctx);
+                    meleeCantrip = TreasureDatabase.GetMeleeCantrip(ctx);
+                    jewelryCantrip = TreasureDatabase.GetJewelryCantrip(ctx);
+                    cantripProgression = TreasureDatabase.GetCantripProgression(ctx);
+                    materialValueMod = TreasureDatabase.GetMaterialValueMod(ctx);
+                    scrollWcidProgression = TreasureDatabase.GetScrollWcidProgression(ctx);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            return true;
         }
 
         public static TreasureDeath GetDeathTreasureData(int deathTreasureValue)
