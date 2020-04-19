@@ -281,14 +281,16 @@ namespace ACE.Server.Factories.Treasure
                 if (roll.TreasureItemClass != TreasureItemClass.Gem)
                 {
                     if (SelectMaterialType(roll))
-                    {
                         item.MaterialType = roll.Material;
-                    }
 
-                    if (SelectGemCount(roll) && SelectGemType(roll))
+                    // should this be an else?
+                    if (SelectGemCount(roll))
                     {
-                        item.GemCount = roll.GemCount;
-                        item.GemType = roll.GemType;
+                        if (SelectGemType(roll))
+                        {
+                            item.GemCount = roll.GemCount;
+                            item.GemType = roll.GemType;
+                        }
                     }
                 }
             }

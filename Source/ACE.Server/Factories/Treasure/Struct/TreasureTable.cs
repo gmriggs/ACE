@@ -260,6 +260,13 @@ namespace ACE.Server.Factories.Treasure.Struct
             Chance = gem.Chance;
         }
 
+        public TreasureTable(TreasureGemMaterial gem, bool wcid = false)
+        {
+            Index = gem.Class;
+            Lookup = wcid ? gem.Wcid : gem.Material;
+            Chance = gem.Chance;
+        }
+
         public TreasureTable(TreasureHealKit healKit)
         {
             Index = healKit.Tier;

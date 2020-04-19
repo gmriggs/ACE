@@ -34,7 +34,7 @@ namespace ACE.Server.Factories.Treasure
             return ctx.TreasureGemClass.Select(i => new TreasureTable(i)).ToList();
         }
 
-        public static Dictionary<int, int> GetGemClassValue(WorldDbContext ctx)
+        public static Dictionary<int, int> GetGemValue(WorldDbContext ctx)
         {
             var gemValue = new Dictionary<int, int>();
 
@@ -47,7 +47,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static List<TreasureTable> GetGemWcid(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureGemMaterial.Select(i => new TreasureTable(i, true)).ToList();
         }
 
         public static List<TreasureTable> GetJewelryWcid(WorldDbContext ctx)
@@ -392,7 +392,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static List<TreasureTable> GetGemMaterialChance(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            return ctx.TreasureGemMaterial.Select(i => new TreasureTable(i, false)).ToList();
         }
 
         public static Dictionary<int, List<double>> GetQualityMod(WorldDbContext ctx)

@@ -100,7 +100,7 @@ namespace ACE.Server.Factories.Treasure
                     heritageSubtype = TreasureDatabase.GetHeritageSubtype(ctx);
                     heritageDist = TreasureDatabase.GetHeritageDist(ctx);
                     gemClass = TreasureDatabase.GetGemClass(ctx);
-                    gemClassValue = TreasureDatabase.GetGemClassValue(ctx);
+                    gemClassValue = TreasureDatabase.GetGemValue(ctx);
                     gemWcid = TreasureDatabase.GetGemWcid(ctx);
                     jewelryWcid = TreasureDatabase.GetJewelryWcid(ctx);
                     artWcid = TreasureDatabase.GetArtWcid(ctx);
@@ -579,9 +579,9 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(gemCodeDist[group], tier);
         }
 
-        public static MaterialType GetGemMaterialByClass(int index)
+        public static MaterialType GetGemMaterialByClass(int gemClass)
         {
-            return (MaterialType)GetChance(gemMaterialChance, index);
+            return (MaterialType)GetChance(gemMaterialChance, gemClass);
         }
 
         public static int GetGemClass(int tier)
