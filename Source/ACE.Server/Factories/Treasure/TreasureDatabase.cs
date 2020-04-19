@@ -6,374 +6,374 @@ namespace ACE.Server.Factories.Treasure
 {
     public class TreasureDatabase
     {
-        public static List<TreasureChance> GetDeathTreasure()
+        public static List<TreasureTable> GetDeathTreasure()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetTreasureGroup()
+        public static List<TreasureTable> GetTreasureGroup()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetHeritageSubtype()
+        public static Dictionary<int, int> GetHeritageSubtype()
         {
-            return new List<TreasureChance>();
+            return new Dictionary<int, int>();
         }
 
-        public static List<TreasureChance> GetHeritageDist()
+        public static List<TreasureTable> GetHeritageDist()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetGemClass()
+        public static List<TreasureTable> GetGemClass()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<int> GetGemClassValue()
+        public static Dictionary<int, int> GetGemClassValue()
         {
-            return new List<int>();
+            return new Dictionary<int, int>();
         }
 
-        public static List<TreasureChance> GetGemWcid()
+        public static List<TreasureTable> GetGemWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetJewelryWcid()
+        public static List<TreasureTable> GetJewelryWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetArtWcid()
+        public static List<TreasureTable> GetArtWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetManaStoneWcid()
+        public static List<TreasureTable> GetManaStoneWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetConsumableWcid()
+        public static List<TreasureTable> GetConsumableWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetHealKitWcid()
+        public static List<TreasureTable> GetHealKitWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetLockpickWcid()
+        public static List<TreasureTable> GetLockpickWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetSpellCompWcid()
+        public static List<TreasureTable> GetSpellCompWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetScrollWcid()
+        public static List<TreasureTable> GetScrollWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetSpellLevel()
+        public static List<TreasureTable> GetSpellLevel()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureProgression> GetSpellProgression()
+        public static Dictionary<int, List<int>> GetSpellProgression()
         {
-            return new List<TreasureProgression>();
+            return new Dictionary<int, List<int>>();
         }
 
-        public static List<SpellDesc> GetSpellDescriptor()
+        public static List<SpellDescriptor> GetSpellDescriptor()
         {
-            return new List<SpellDesc>();
+            return new List<SpellDescriptor>();
         }
 
-        public static List<TreasureChance> GetWeaponDist()
+        public static List<TreasureTable> GetWeaponDist()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponAxeWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponAxeWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponBowWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponBowWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponDaggerWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponDaggerWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponMaceWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponMaceWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponSpearWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponSpearWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponStaffWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponStaffWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponSwordWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponSwordWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponUAWcid()
+        public static Dictionary<int, List<TreasureTable>> GetWeaponUAWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponCrossbowWcid()
+        public static List<TreasureTable> GetWeaponCrossbowWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetWeaponAtlatlWcid()
+        public static List<TreasureTable> GetWeaponAtlatlWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetTwoHandedWcid()
+        public static List<TreasureTable> GetTwoHandedWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetCasterWcid()
+        public static List<TreasureTable> GetCasterWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetArmorDist()
+        public static List<TreasureTable> GetArmorDist()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetLeatherArmorWcid()
+        public static List<TreasureTable> GetLeatherArmorWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetStuddedLeatherArmorWcid()
+        public static List<TreasureTable> GetStuddedLeatherArmorWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetChainmailArmorWcid()
+        public static List<TreasureTable> GetChainmailArmorWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetPlatemailArmorWcid()
+        public static Dictionary<int, List<TreasureTable>> GetPlatemailArmorWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetHeritageLowArmorWcid()
+        public static Dictionary<int, List<TreasureTable>> GetHeritageLowArmorWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChanceHeritage> GetHeritageHighArmorWcid()
+        public static Dictionary<int, List<TreasureTable>> GetHeritageHighArmorWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChance> GetCovenantArmorWcid()
+        public static List<TreasureTable> GetCovenantArmorWcid()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetClothingWcid()
+        public static Dictionary<int, List<TreasureTable>> GetClothingWcid()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChance> GetQualityFilter()
+        public static List<TreasureTable> GetQualityFilter()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetWorkmanshipDist()
+        public static List<TreasureTable> GetWorkmanshipDist()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetMaterialCodeDist()
+        public static Dictionary<int, List<TreasureTable>> GetMaterialCodeDist()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChance> GetMaterialCeramic()
+        public static List<TreasureTable> GetMaterialCeramic()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMaterialCloth()
+        public static List<TreasureTable> GetMaterialCloth()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMaterialGem()
+        public static List<TreasureTable> GetMaterialGem()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMaterialLeather()
+        public static List<TreasureTable> GetMaterialLeather()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMaterialMetal()
+        public static List<TreasureTable> GetMaterialMetal()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMaterialStone()
+        public static List<TreasureTable> GetMaterialStone()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMaterialWood()
+        public static List<TreasureTable> GetMaterialWood()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetGemCodeDist()
+        public static Dictionary<int, List<TreasureTable>> GetGemCodeDist()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChance> GetGemMaterialChance()
+        public static List<TreasureTable> GetGemMaterialChance()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<QualityMod> GetQualityMod()
+        public static Dictionary<int, List<double>> GetQualityMod()
         {
-            return new List<QualityMod>();
+            return new Dictionary<int, List<double>>();
         }
 
-        public static List<TreasureChance> GetQualityLevel()
+        public static List<TreasureTable> GetQualityLevel()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChanceHeritage> GetMaterialColorCode()
+        public static Dictionary<int, List<TreasureTable>> GetMaterialColorCode()
         {
-            return new List<TreasureChanceHeritage>();
+            return new Dictionary<int, List<TreasureTable>>();
         }
 
-        public static List<TreasureChance> GetClothingPalette()
+        public static List<TreasureTable> GetClothingPalette()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetLeatherPalette()
+        public static List<TreasureTable> GetLeatherPalette()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMetalPalette()
+        public static List<TreasureTable> GetMetalPalette()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMeleeWeaponItemSpell()
+        public static List<TreasureTable> GetMeleeWeaponItemSpell()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMissileWeaponItemSpell()
+        public static List<TreasureTable> GetMissileWeaponItemSpell()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetCasterItemSpell()
+        public static List<TreasureTable> GetCasterItemSpell()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetArmorItemSpell()
+        public static List<TreasureTable> GetArmorItemSpell()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetSpellCodeDist()
+        public static List<TreasureTable> GetSpellCodeDist()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetOrbCastableSpell()
+        public static List<TreasureTable> GetOrbCastableSpell()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetWandStaffCastableSpell()
+        public static List<TreasureTable> GetWandStaffCastableSpell()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetArmorClothingCantrip()
+        public static List<TreasureTable> GetArmorClothingCantrip()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetCasterCantrip()
+        public static List<TreasureTable> GetCasterCantrip()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMissileCantrip()
+        public static List<TreasureTable> GetMissileCantrip()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetShieldCantrip()
+        public static List<TreasureTable> GetShieldCantrip()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetMeleeCantrip()
+        public static List<TreasureTable> GetMeleeCantrip()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureChance> GetJewelryCantrip()
+        public static List<TreasureTable> GetJewelryCantrip()
         {
-            return new List<TreasureChance>();
+            return new List<TreasureTable>();
         }
 
-        public static List<TreasureProgression> GetCantripProgression()
+        public static Dictionary<int, List<int>> GetCantripProgression()
         {
-            return new List<TreasureProgression>();
+            return new Dictionary<int, List<int>>();
         }
 
-        public static List<double> GetMaterialValueMod()
+        public static Dictionary<int, int> GetMaterialValueMod()
         {
-            return new List<double>();
+            return new Dictionary<int, int>();
         }
 
-        public static List<TreasureProgression> GetScrollWcidProgression()
+        public static Dictionary<int, List<int>> GetScrollWcidProgression()
         {
-            return new List<TreasureProgression>();
+            return new Dictionary<int, List<int>>();
         }
     }
 }

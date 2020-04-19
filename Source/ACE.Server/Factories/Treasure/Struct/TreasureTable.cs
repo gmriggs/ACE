@@ -1,9 +1,9 @@
 namespace ACE.Server.Factories.Treasure.Struct
 {
-    public class TreasureChance
+    public class TreasureTable
     {
         public int Index;
-        public float Chance;
         public int Lookup;
+        public double Chance;
     }
 }

@@ -1,9 +1,9 @@
 namespace ACE.Server.Factories.Treasure.Struct
 {
-    public class SpellDesc
+    public class SpellDescriptor
     {
         public int SpellId;
-        public bool IsHidden;
         public string Descriptor;
+        public bool IsHidden;
     }
 }
