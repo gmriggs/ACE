@@ -15,9 +15,9 @@
 DROP TABLE IF EXISTS `treasure_armor`;
 CREATE TABLE IF NOT EXISTS `treasure_armor` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `armor_Subtable` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `armor_Subtable` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf16;
 
@@ -114,9 +114,9 @@ INSERT INTO `treasure_armor` (`id`, `tier`, `armor_Subtable`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_chainmail`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_chainmail` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf16;
 
@@ -345,9 +345,9 @@ INSERT INTO `treasure_armor_chainmail` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_covenant`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_covenant` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf16;
 
@@ -480,9 +480,9 @@ INSERT INTO `treasure_armor_covenant` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_heritage_high1`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_heritage_high1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf16;
 
@@ -567,9 +567,9 @@ INSERT INTO `treasure_armor_heritage_high1` (`id`, `tier`, `wcid`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_armor_heritage_high2`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_heritage_high2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf16;
 
@@ -666,9 +666,9 @@ INSERT INTO `treasure_armor_heritage_high2` (`id`, `tier`, `wcid`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_armor_heritage_high3`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_heritage_high3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf16;
 
@@ -741,9 +741,9 @@ INSERT INTO `treasure_armor_heritage_high3` (`id`, `tier`, `wcid`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_armor_heritage_low1`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_heritage_low1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf16;
 
@@ -804,9 +804,9 @@ INSERT INTO `treasure_armor_heritage_low1` (`id`, `tier`, `wcid`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_armor_heritage_low2`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_heritage_low2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf16;
 
@@ -843,9 +843,9 @@ INSERT INTO `treasure_armor_heritage_low2` (`id`, `tier`, `wcid`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_armor_heritage_low3`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_heritage_low3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -894,9 +894,9 @@ INSERT INTO `treasure_armor_heritage_low3` (`id`, `tier`, `wcid`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_armor_leather`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_leather` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=utf16;
 
@@ -1149,9 +1149,9 @@ INSERT INTO `treasure_armor_leather` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_leather_palette`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_leather_palette` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` int(11) DEFAULT NULL,
-  `color` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `color` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -1200,9 +1200,9 @@ INSERT INTO `treasure_armor_leather_palette` (`id`, `type`, `color`, `chance`) V
 DROP TABLE IF EXISTS `treasure_armor_metal_palette`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_metal_palette` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` int(11) DEFAULT NULL,
-  `color` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `color` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf16;
 
@@ -1233,9 +1233,9 @@ INSERT INTO `treasure_armor_metal_palette` (`id`, `type`, `color`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_armor_palette`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_palette` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` int(11) DEFAULT NULL,
-  `color` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `color` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -1338,9 +1338,9 @@ INSERT INTO `treasure_armor_palette` (`id`, `type`, `color`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_platemail1`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_platemail1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf16;
 
@@ -1557,9 +1557,9 @@ INSERT INTO `treasure_armor_platemail1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_platemail2`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_platemail2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=utf16;
 
@@ -1800,9 +1800,9 @@ INSERT INTO `treasure_armor_platemail2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_platemail3`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_platemail3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf16;
 
@@ -2007,9 +2007,9 @@ INSERT INTO `treasure_armor_platemail3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_armor_resistance`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_resistance` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `quality_Level` int(11) DEFAULT NULL,
-  `min` double DEFAULT NULL,
-  `max` double DEFAULT NULL,
+  `quality_Level` int(11) NOT NULL,
+  `min` double NOT NULL,
+  `max` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16;
 
@@ -2034,9 +2034,9 @@ INSERT INTO `treasure_armor_resistance` (`id`, `quality_Level`, `min`, `max`) VA
 DROP TABLE IF EXISTS `treasure_armor_studded_leather`;
 CREATE TABLE IF NOT EXISTS `treasure_armor_studded_leather` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf16;
 
@@ -2400,10 +2400,10 @@ INSERT INTO `treasure_art` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_burden_mod`;
 CREATE TABLE IF NOT EXISTS `treasure_burden_mod` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `quality_Level` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
-  `min` double DEFAULT NULL,
-  `max` double DEFAULT NULL,
+  `quality_Level` int(11) NOT NULL,
+  `chance` double NOT NULL,
+  `min` double NOT NULL,
+  `max` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16;
 
@@ -2428,9 +2428,9 @@ INSERT INTO `treasure_burden_mod` (`id`, `quality_Level`, `chance`, `min`, `max`
 DROP TABLE IF EXISTS `treasure_cantrip_armor_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_armor_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=685 DEFAULT CHARSET=utf16;
 
@@ -3127,9 +3127,9 @@ INSERT INTO `treasure_cantrip_armor_dist` (`id`, `tier`, `spell`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_cantrip_caster_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_caster_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=493 DEFAULT CHARSET=utf16;
 
@@ -3634,9 +3634,9 @@ INSERT INTO `treasure_cantrip_caster_dist` (`id`, `tier`, `spell`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_cantrip_level_chance`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_level_chance` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf16;
 
@@ -3713,10 +3713,10 @@ INSERT INTO `treasure_cantrip_level_chance` (`id`, `tier`, `level`, `chance`) VA
 DROP TABLE IF EXISTS `treasure_cantrip_level_progression`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_level_progression` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `minor` int(11) DEFAULT NULL,
-  `major` int(11) DEFAULT NULL,
-  `epic` int(11) DEFAULT NULL,
-  `lego` int(11) DEFAULT NULL,
+  `minor` int(11) NOT NULL,
+  `major` int(11) NOT NULL,
+  `epic` int(11) NOT NULL,
+  `lego` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf16;
 
@@ -3875,9 +3875,9 @@ INSERT INTO `treasure_cantrip_level_progression` (`id`, `minor`, `major`, `epic`
 DROP TABLE IF EXISTS `treasure_cantrip_magic_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_magic_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=601 DEFAULT CHARSET=utf16;
 
@@ -4490,9 +4490,9 @@ INSERT INTO `treasure_cantrip_magic_dist` (`id`, `tier`, `spell`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_cantrip_melee_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_melee_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=469 DEFAULT CHARSET=utf16;
 
@@ -4973,9 +4973,9 @@ INSERT INTO `treasure_cantrip_melee_dist` (`id`, `tier`, `spell`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_cantrip_missile_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_missile_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=457 DEFAULT CHARSET=utf16;
 
@@ -5444,9 +5444,9 @@ INSERT INTO `treasure_cantrip_missile_dist` (`id`, `tier`, `spell`, `chance`) VA
 DROP TABLE IF EXISTS `treasure_cantrip_spell_tier`;
 CREATE TABLE IF NOT EXISTS `treasure_cantrip_spell_tier` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `count` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf16;
 
@@ -5555,9 +5555,9 @@ INSERT INTO `treasure_cantrip_spell_tier` (`id`, `tier`, `count`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_caster`;
 CREATE TABLE IF NOT EXISTS `treasure_caster` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf16;
 
@@ -5678,9 +5678,9 @@ INSERT INTO `treasure_caster` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_caster_orb_spell`;
 CREATE TABLE IF NOT EXISTS `treasure_caster_orb_spell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf16;
 
@@ -5849,9 +5849,9 @@ INSERT INTO `treasure_caster_orb_spell` (`id`, `tier`, `spell`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_caster_spell`;
 CREATE TABLE IF NOT EXISTS `treasure_caster_spell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf16;
 
@@ -5888,9 +5888,9 @@ INSERT INTO `treasure_caster_spell` (`id`, `tier`, `spell`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_caster_wand_staff_spell`;
 CREATE TABLE IF NOT EXISTS `treasure_caster_wand_staff_spell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf16;
 
@@ -5987,9 +5987,9 @@ INSERT INTO `treasure_caster_wand_staff_spell` (`id`, `tier`, `spell`, `chance`)
 DROP TABLE IF EXISTS `treasure_clothing1`;
 CREATE TABLE IF NOT EXISTS `treasure_clothing1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf16;
 
@@ -6110,9 +6110,9 @@ INSERT INTO `treasure_clothing1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_clothing2`;
 CREATE TABLE IF NOT EXISTS `treasure_clothing2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf16;
 
@@ -6317,9 +6317,9 @@ INSERT INTO `treasure_clothing2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_clothing3`;
 CREATE TABLE IF NOT EXISTS `treasure_clothing3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf16;
 
@@ -6488,9 +6488,9 @@ INSERT INTO `treasure_clothing3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_clothing_palette`;
 CREATE TABLE IF NOT EXISTS `treasure_clothing_palette` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` int(11) DEFAULT NULL,
-  `color` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `color` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -6539,9 +6539,9 @@ INSERT INTO `treasure_clothing_palette` (`id`, `type`, `color`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_consumable`;
 CREATE TABLE IF NOT EXISTS `treasure_consumable` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=utf16;
 
@@ -6886,20 +6886,20 @@ INSERT INTO `treasure_consumable` (`id`, `tier`, `wcid`, `chance`) VALUES
 	(336, 6, 27325, 0.25);
 /*!40000 ALTER TABLE `treasure_consumable` ENABLE KEYS */;
 
--- Dumping structure for table ace_world.treasure_gem
-DROP TABLE IF EXISTS `treasure_gem`;
-CREATE TABLE IF NOT EXISTS `treasure_gem` (
+-- Dumping structure for table ace_world.treasure_gem_material
+DROP TABLE IF EXISTS `treasure_gem_material`;
+CREATE TABLE IF NOT EXISTS `treasure_gem_material` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `class` int(11) NOT NULL,
   `material` int(11) NOT NULL,
   `chance` double NOT NULL,
-  `wcid` int(11) DEFAULT NULL,
+  `wcid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf16;
 
--- Dumping data for table ace_world.treasure_gem: ~41 rows (approximately)
-/*!40000 ALTER TABLE `treasure_gem` DISABLE KEYS */;
-INSERT INTO `treasure_gem` (`id`, `class`, `material`, `chance`, `wcid`) VALUES
+-- Dumping data for table ace_world.treasure_gem_material: ~41 rows (approximately)
+/*!40000 ALTER TABLE `treasure_gem_material` DISABLE KEYS */;
+INSERT INTO `treasure_gem_material` (`id`, `class`, `material`, `chance`, `wcid`) VALUES
 	(1, 1, 10, 0.13, 2413),
 	(2, 1, 14, 0.13, 2414),
 	(3, 1, 28, 0.13, 2415),
@@ -6941,41 +6941,41 @@ INSERT INTO `treasure_gem` (`id`, `class`, `material`, `chance`, `wcid`) VALUES
 	(39, 6, 21, 0.29, 2410),
 	(40, 6, 38, 0.29, 2411),
 	(41, 6, 39, 0.29, 2412);
-/*!40000 ALTER TABLE `treasure_gem` ENABLE KEYS */;
+/*!40000 ALTER TABLE `treasure_gem_material` ENABLE KEYS */;
 
--- Dumping structure for table ace_world.treasure_gem_class
-DROP TABLE IF EXISTS `treasure_gem_class`;
-CREATE TABLE IF NOT EXISTS `treasure_gem_class` (
+-- Dumping structure for table ace_world.treasure_gem_value
+DROP TABLE IF EXISTS `treasure_gem_value`;
+CREATE TABLE IF NOT EXISTS `treasure_gem_value` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `class` int(11) DEFAULT NULL,
-  `value` int(11) DEFAULT NULL,
+  `class` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf16;
 
--- Dumping data for table ace_world.treasure_gem_class: ~6 rows (approximately)
-/*!40000 ALTER TABLE `treasure_gem_class` DISABLE KEYS */;
-INSERT INTO `treasure_gem_class` (`id`, `class`, `value`) VALUES
+-- Dumping data for table ace_world.treasure_gem_value: ~6 rows (approximately)
+/*!40000 ALTER TABLE `treasure_gem_value` DISABLE KEYS */;
+INSERT INTO `treasure_gem_value` (`id`, `class`, `value`) VALUES
 	(1, 1, 10),
 	(2, 2, 50),
 	(3, 3, 100),
 	(4, 4, 250),
 	(5, 5, 500),
 	(6, 6, 1000);
-/*!40000 ALTER TABLE `treasure_gem_class` ENABLE KEYS */;
+/*!40000 ALTER TABLE `treasure_gem_value` ENABLE KEYS */;
 
--- Dumping structure for table ace_world.treasure_gem_class_tier
-DROP TABLE IF EXISTS `treasure_gem_class_tier`;
-CREATE TABLE IF NOT EXISTS `treasure_gem_class_tier` (
+-- Dumping structure for table ace_world.treasure_gem_class
+DROP TABLE IF EXISTS `treasure_gem_class`;
+CREATE TABLE IF NOT EXISTS `treasure_gem_class` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `gem_Class` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `gem_Class` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
--- Dumping data for table ace_world.treasure_gem_class_tier: ~36 rows (approximately)
-/*!40000 ALTER TABLE `treasure_gem_class_tier` DISABLE KEYS */;
-INSERT INTO `treasure_gem_class_tier` (`id`, `tier`, `gem_Class`, `chance`) VALUES
+-- Dumping data for table ace_world.treasure_gem_class: ~36 rows (approximately)
+/*!40000 ALTER TABLE `treasure_gem_class` DISABLE KEYS */;
+INSERT INTO `treasure_gem_class` (`id`, `tier`, `gem_Class`, `chance`) VALUES
 	(1, 1, 1, 0.9),
 	(2, 1, 2, 0.1),
 	(3, 1, 3, 0),
@@ -7012,16 +7012,16 @@ INSERT INTO `treasure_gem_class_tier` (`id`, `tier`, `gem_Class`, `chance`) VALU
 	(34, 6, 4, 0.2),
 	(35, 6, 5, 0.3),
 	(36, 6, 6, 0.5);
-/*!40000 ALTER TABLE `treasure_gem_class_tier` ENABLE KEYS */;
+/*!40000 ALTER TABLE `treasure_gem_class` ENABLE KEYS */;
 
 -- Dumping structure for table ace_world.treasure_gem_dist
 DROP TABLE IF EXISTS `treasure_gem_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_gem_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `group` int(11) DEFAULT NULL,
-  `tier` int(11) DEFAULT NULL,
-  `count` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `group` int(11) NOT NULL,
+  `tier` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=487 DEFAULT CHARSET=utf16;
 
@@ -7520,9 +7520,9 @@ INSERT INTO `treasure_gem_dist` (`id`, `group`, `tier`, `count`, `chance`) VALUE
 DROP TABLE IF EXISTS `treasure_heal_kit`;
 CREATE TABLE IF NOT EXISTS `treasure_heal_kit` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -7571,9 +7571,9 @@ INSERT INTO `treasure_heal_kit` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_heritage`;
 CREATE TABLE IF NOT EXISTS `treasure_heritage` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `dist` int(11) DEFAULT NULL,
-  `heritage` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `dist` int(11) NOT NULL,
+  `heritage` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf16;
 
@@ -7716,9 +7716,9 @@ INSERT INTO `treasure_item` (`id`, `treasure_Item_Name`, `roll_Type`, `treasure_
 DROP TABLE IF EXISTS `treasure_item_bane_spell`;
 CREATE TABLE IF NOT EXISTS `treasure_item_bane_spell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf16;
 
@@ -7958,9 +7958,9 @@ INSERT INTO `treasure_jewelry` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_lockpick`;
 CREATE TABLE IF NOT EXISTS `treasure_lockpick` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -8108,9 +8108,9 @@ INSERT INTO `treasure_magic` (`id`, `item_Table`, `treasure_Item_Table`, `chance
 DROP TABLE IF EXISTS `treasure_mana_stone`;
 CREATE TABLE IF NOT EXISTS `treasure_mana_stone` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -8159,9 +8159,9 @@ INSERT INTO `treasure_mana_stone` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_material_ceramic`;
 CREATE TABLE IF NOT EXISTS `treasure_material_ceramic` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16;
 
@@ -8186,9 +8186,9 @@ INSERT INTO `treasure_material_ceramic` (`id`, `tier`, `material`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_material_cloth`;
 CREATE TABLE IF NOT EXISTS `treasure_material_cloth` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -8231,10 +8231,10 @@ INSERT INTO `treasure_material_cloth` (`id`, `tier`, `material`, `chance`) VALUE
 DROP TABLE IF EXISTS `treasure_material_color_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_material_color_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `material` int(11) DEFAULT NULL,
-  `group` int(11) DEFAULT NULL,
-  `color` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `material` int(11) NOT NULL,
+  `group` int(11) NOT NULL,
+  `color` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8829 DEFAULT CHARSET=utf16;
 
@@ -17075,10 +17075,10 @@ INSERT INTO `treasure_material_color_dist` (`id`, `material`, `group`, `color`, 
 DROP TABLE IF EXISTS `treasure_material_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_material_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `group` int(11) DEFAULT NULL,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `group` int(11) NOT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=769 DEFAULT CHARSET=utf16;
 
@@ -17859,9 +17859,9 @@ INSERT INTO `treasure_material_dist` (`id`, `group`, `tier`, `material`, `chance
 DROP TABLE IF EXISTS `treasure_material_gem`;
 CREATE TABLE IF NOT EXISTS `treasure_material_gem` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf16;
 
@@ -17915,9 +17915,9 @@ INSERT INTO `treasure_material_gem` (`id`, `tier`, `material`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_material_leather`;
 CREATE TABLE IF NOT EXISTS `treasure_material_leather` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf16;
 
@@ -17954,9 +17954,9 @@ INSERT INTO `treasure_material_leather` (`id`, `tier`, `material`, `chance`) VAL
 DROP TABLE IF EXISTS `treasure_material_metal`;
 CREATE TABLE IF NOT EXISTS `treasure_material_metal` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf16;
 
@@ -18017,9 +18017,9 @@ INSERT INTO `treasure_material_metal` (`id`, `tier`, `material`, `chance`) VALUE
 DROP TABLE IF EXISTS `treasure_material_mod`;
 CREATE TABLE IF NOT EXISTS `treasure_material_mod` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `material` int(11) DEFAULT NULL,
-  `multiplier` double DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
+  `material` int(11) NOT NULL,
+  `multiplier` double NOT NULL,
+  `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf16;
 
@@ -18104,9 +18104,9 @@ INSERT INTO `treasure_material_mod` (`id`, `material`, `multiplier`, `name`) VAL
 DROP TABLE IF EXISTS `treasure_material_stone`;
 CREATE TABLE IF NOT EXISTS `treasure_material_stone` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -18155,9 +18155,9 @@ INSERT INTO `treasure_material_stone` (`id`, `tier`, `material`, `chance`) VALUE
 DROP TABLE IF EXISTS `treasure_material_wood`;
 CREATE TABLE IF NOT EXISTS `treasure_material_wood` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `material` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `material` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -18269,9 +18269,9 @@ INSERT INTO `treasure_mundane` (`id`, `item_Table`, `treasure_Item_Table`, `chan
 DROP TABLE IF EXISTS `treasure_mutate_filter`;
 CREATE TABLE IF NOT EXISTS `treasure_mutate_filter` (
   `pid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id` int(11) DEFAULT NULL,
-  `quality_Type` int(11) DEFAULT NULL,
-  `quality_I_D` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `quality_Type` int(11) NOT NULL,
+  `quality_I_D` int(11) NOT NULL,
   PRIMARY KEY (`pid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf16;
 
@@ -18345,9 +18345,9 @@ INSERT INTO `treasure_mutate_filter` (`pid`, `id`, `quality_Type`, `quality_I_D`
 DROP TABLE IF EXISTS `treasure_pea`;
 CREATE TABLE IF NOT EXISTS `treasure_pea` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -18396,9 +18396,9 @@ INSERT INTO `treasure_pea` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_quality_level`;
 CREATE TABLE IF NOT EXISTS `treasure_quality_level` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `quality_Level` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `quality_Level` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf16;
 
@@ -18507,15 +18507,15 @@ INSERT INTO `treasure_quality_level` (`id`, `tier`, `quality_Level`, `chance`) V
 DROP TABLE IF EXISTS `treasure_quality_mod`;
 CREATE TABLE IF NOT EXISTS `treasure_quality_mod` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `quality_Mod` int(11) DEFAULT NULL,
-  `1` double DEFAULT NULL,
-  `2` double DEFAULT NULL,
-  `3` double DEFAULT NULL,
-  `4` double DEFAULT NULL,
-  `5` double DEFAULT NULL,
-  `6` double DEFAULT NULL,
-  `7` double DEFAULT NULL,
-  `8` double DEFAULT NULL,
+  `quality_Mod` int(11) NOT NULL,
+  `1` double NOT NULL,
+  `2` double NOT NULL,
+  `3` double NOT NULL,
+  `4` double NOT NULL,
+  `5` double NOT NULL,
+  `6` double NOT NULL,
+  `7` double NOT NULL,
+  `8` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf16;
 
@@ -18539,9 +18539,9 @@ INSERT INTO `treasure_quality_mod` (`id`, `quality_Mod`, `1`, `2`, `3`, `4`, `5`
 DROP TABLE IF EXISTS `treasure_scroll`;
 CREATE TABLE IF NOT EXISTS `treasure_scroll` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1393 DEFAULT CHARSET=utf16;
 
@@ -19946,8 +19946,8 @@ INSERT INTO `treasure_scroll` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_spell_base`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_base` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `power` int(11) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `power` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
@@ -25851,19 +25851,19 @@ INSERT INTO `treasure_spell_base` (`id`, `name`, `power`) VALUES
 DROP TABLE IF EXISTS `treasure_spell_data`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_data` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `spell_I_D` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `family` int(11) DEFAULT NULL,
-  `family_Override` int(11) DEFAULT NULL,
-  `words` varchar(50) DEFAULT NULL,
-  `duration` int(11) DEFAULT NULL,
-  `diff` int(11) DEFAULT NULL,
-  `is_Fellow` int(11) DEFAULT NULL,
-  `is_Off` int(11) DEFAULT NULL,
-  `is_Untargeted` int(11) DEFAULT NULL,
-  `is_Instant` int(11) DEFAULT NULL,
-  `school_I_D` int(11) DEFAULT NULL,
-  `turn_To` int(11) DEFAULT NULL,
+  `spell_I_D` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `family` int(11) NOT NULL,
+  `family_Override` int(11) NOT NULL,
+  `words` varchar(50) NOT NULL,
+  `duration` int(11) NOT NULL,
+  `diff` int(11) NOT NULL,
+  `is_Fellow` int(11) NOT NULL,
+  `is_Off` int(11) NOT NULL,
+  `is_Untargeted` int(11) NOT NULL,
+  `is_Instant` int(11) NOT NULL,
+  `school_I_D` int(11) NOT NULL,
+  `turn_To` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6267 DEFAULT CHARSET=utf16;
 
@@ -32142,13 +32142,13 @@ INSERT INTO `treasure_spell_data` (`id`, `spell_I_D`, `name`, `family`, `family_
 DROP TABLE IF EXISTS `treasure_spell_desc`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_desc` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `spell_I_D` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `diff` int(11) DEFAULT NULL,
-  `mana` int(11) DEFAULT NULL,
-  `target_Type` int(11) DEFAULT NULL,
-  `descriptor` varchar(50) DEFAULT NULL,
-  `no_Desc_Entry` int(11) DEFAULT NULL,
+  `spell_I_D` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `diff` int(11) NOT NULL,
+  `mana` int(11) NOT NULL,
+  `target_Type` int(11) NOT NULL,
+  `descriptor` varchar(50) NOT NULL,
+  `no_Desc_Entry` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6268 DEFAULT CHARSET=utf16;
 
@@ -38428,9 +38428,9 @@ INSERT INTO `treasure_spell_desc` (`id`, `spell_I_D`, `name`, `diff`, `mana`, `t
 DROP TABLE IF EXISTS `treasure_spell_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `group` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `group` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf16;
 
@@ -38612,9 +38612,9 @@ INSERT INTO `treasure_spell_dist` (`id`, `group`, `spell`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_spell_level`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_level` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -38663,9 +38663,9 @@ INSERT INTO `treasure_spell_level` (`id`, `tier`, `level`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_spell_level_chance`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_level_chance` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -38714,14 +38714,14 @@ INSERT INTO `treasure_spell_level_chance` (`id`, `tier`, `level`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_spell_level_progression`;
 CREATE TABLE IF NOT EXISTS `treasure_spell_level_progression` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lvl1` int(11) DEFAULT NULL,
-  `lvl2` int(11) DEFAULT NULL,
-  `lvl3` int(11) DEFAULT NULL,
-  `lvl4` int(11) DEFAULT NULL,
-  `lvl5` int(11) DEFAULT NULL,
-  `lvl6` int(11) DEFAULT NULL,
-  `lvl7` int(11) DEFAULT NULL,
-  `lvl8` int(11) DEFAULT 0,
+  `lvl1` int(11) NOT NULL,
+  `lvl2` int(11) NOT NULL,
+  `lvl3` int(11) NOT NULL,
+  `lvl4` int(11) NOT NULL,
+  `lvl5` int(11) NOT NULL,
+  `lvl6` int(11) NOT NULL,
+  `lvl7` int(11) NOT NULL,
+  `lvl8` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf16;
 
@@ -39004,9 +39004,9 @@ INSERT INTO `treasure_spell_level_progression` (`id`, `lvl1`, `lvl2`, `lvl3`, `l
 DROP TABLE IF EXISTS `treasure_tier_adjust`;
 CREATE TABLE IF NOT EXISTS `treasure_tier_adjust` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `adjust_Tier` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `adjust_Tier` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf16;
 
@@ -42744,9 +42744,9 @@ INSERT INTO `treasure_wcid` (`wcid`, `weenie_Name`, `t_Sys_Int`, `did_Mut`, `t_S
 DROP TABLE IF EXISTS `treasure_weapon`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `weapon_Subtable` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `weapon_Subtable` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf16;
 
@@ -42825,9 +42825,9 @@ INSERT INTO `treasure_weapon` (`id`, `tier`, `weapon_Subtable`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_atlatl`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_atlatl` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf16;
 
@@ -42894,9 +42894,9 @@ INSERT INTO `treasure_weapon_atlatl` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_attack_defense_mod`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_attack_defense_mod` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `quality_Level` int(11) DEFAULT NULL,
-  `min` double DEFAULT NULL,
-  `max` double DEFAULT NULL,
+  `quality_Level` int(11) NOT NULL,
+  `min` double NOT NULL,
+  `max` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16;
 
@@ -42921,9 +42921,9 @@ INSERT INTO `treasure_weapon_attack_defense_mod` (`id`, `quality_Level`, `min`, 
 DROP TABLE IF EXISTS `treasure_weapon_axe1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_axe1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -43026,9 +43026,9 @@ INSERT INTO `treasure_weapon_axe1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_axe2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_axe2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -43131,9 +43131,9 @@ INSERT INTO `treasure_weapon_axe2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_axe3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_axe3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -43236,9 +43236,9 @@ INSERT INTO `treasure_weapon_axe3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_bow1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_bow1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -43341,9 +43341,9 @@ INSERT INTO `treasure_weapon_bow1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_bow2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_bow2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf16;
 
@@ -43410,9 +43410,9 @@ INSERT INTO `treasure_weapon_bow2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_bow3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_bow3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf16;
 
@@ -43479,9 +43479,9 @@ INSERT INTO `treasure_weapon_bow3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_crossbow`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_crossbow` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf16;
 
@@ -43548,9 +43548,9 @@ INSERT INTO `treasure_weapon_crossbow` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_dagger1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_dagger1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -43593,9 +43593,9 @@ INSERT INTO `treasure_weapon_dagger1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_dagger2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_dagger2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -43698,9 +43698,9 @@ INSERT INTO `treasure_weapon_dagger2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_dagger3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_dagger3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -43803,9 +43803,9 @@ INSERT INTO `treasure_weapon_dagger3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_mace1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_mace1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf16;
 
@@ -43938,9 +43938,9 @@ INSERT INTO `treasure_weapon_mace1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_mace2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_mace2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf16;
 
@@ -44073,9 +44073,9 @@ INSERT INTO `treasure_weapon_mace2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_mace3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_mace3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf16;
 
@@ -44208,9 +44208,9 @@ INSERT INTO `treasure_weapon_mace3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_melee_spell`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_melee_spell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf16;
 
@@ -44247,9 +44247,9 @@ INSERT INTO `treasure_weapon_melee_spell` (`id`, `tier`, `spell`, `chance`) VALU
 DROP TABLE IF EXISTS `treasure_weapon_missile_spell`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_missile_spell` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `spell` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `spell` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf16;
 
@@ -44280,9 +44280,9 @@ INSERT INTO `treasure_weapon_missile_spell` (`id`, `tier`, `spell`, `chance`) VA
 DROP TABLE IF EXISTS `treasure_weapon_skill_remap`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_skill_remap` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wcid` int(11) DEFAULT NULL,
-  `skill` int(11) DEFAULT NULL,
-  `subskill` int(11) DEFAULT NULL,
+  `wcid` int(11) NOT NULL,
+  `skill` int(11) NOT NULL,
+  `subskill` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1706 DEFAULT CHARSET=utf16;
 
@@ -46000,9 +46000,9 @@ INSERT INTO `treasure_weapon_skill_remap` (`id`, `wcid`, `skill`, `subskill`) VA
 DROP TABLE IF EXISTS `treasure_weapon_spear1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_spear1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -46105,9 +46105,9 @@ INSERT INTO `treasure_weapon_spear1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_spear2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_spear2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -46210,9 +46210,9 @@ INSERT INTO `treasure_weapon_spear2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_spear3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_spear3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -46315,9 +46315,9 @@ INSERT INTO `treasure_weapon_spear3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_speed_mod`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_speed_mod` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `quality_Level` int(11) DEFAULT NULL,
-  `min` double DEFAULT NULL,
-  `max` double DEFAULT NULL,
+  `quality_Level` int(11) NOT NULL,
+  `min` double NOT NULL,
+  `max` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf16;
 
@@ -46336,9 +46336,9 @@ INSERT INTO `treasure_weapon_speed_mod` (`id`, `quality_Level`, `min`, `max`) VA
 DROP TABLE IF EXISTS `treasure_weapon_staff1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_staff1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -46381,9 +46381,9 @@ INSERT INTO `treasure_weapon_staff1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_staff2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_staff2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -46426,9 +46426,9 @@ INSERT INTO `treasure_weapon_staff2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_staff3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_staff3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -46471,9 +46471,9 @@ INSERT INTO `treasure_weapon_staff3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_sword1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_sword1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf16;
 
@@ -46612,9 +46612,9 @@ INSERT INTO `treasure_weapon_sword1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_sword2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_sword2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf16;
 
@@ -46753,9 +46753,9 @@ INSERT INTO `treasure_weapon_sword2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_sword3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_sword3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf16;
 
@@ -46894,9 +46894,9 @@ INSERT INTO `treasure_weapon_sword3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_unarmed1`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_unarmed1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf16;
 
@@ -46999,9 +46999,9 @@ INSERT INTO `treasure_weapon_unarmed1` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_unarmed2`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_unarmed2` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -47044,9 +47044,9 @@ INSERT INTO `treasure_weapon_unarmed2` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_weapon_unarmed3`;
 CREATE TABLE IF NOT EXISTS `treasure_weapon_unarmed3` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `wcid` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `wcid` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf16;
 
@@ -47090,9 +47090,9 @@ INSERT INTO `treasure_weapon_unarmed3` (`id`, `tier`, `wcid`, `chance`) VALUES
 DROP TABLE IF EXISTS `treasure_workmanship_dist`;
 CREATE TABLE IF NOT EXISTS `treasure_workmanship_dist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tier` int(11) DEFAULT NULL,
-  `workmanship` int(11) DEFAULT NULL,
-  `chance` double DEFAULT NULL,
+  `tier` int(11) NOT NULL,
+  `workmanship` int(11) NOT NULL,
+  `chance` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf16;
 

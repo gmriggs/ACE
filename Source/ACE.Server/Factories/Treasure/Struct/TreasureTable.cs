@@ -253,7 +253,7 @@ namespace ACE.Server.Factories.Treasure.Struct
             Chance = dist.Chance;
         }
 
-        public TreasureTable(TreasureGemClassTier gem)
+        public TreasureTable(TreasureGemClass gem)
         {
             Index = gem.Tier;
             Lookup = gem.GemClass;

@@ -31,14 +31,14 @@ namespace ACE.Server.Factories.Treasure
 
         public static List<TreasureTable> GetGemClass(WorldDbContext ctx)
         {
-            return ctx.TreasureGemClassTier.Select(i => new TreasureTable(i)).ToList();
+            return ctx.TreasureGemClass.Select(i => new TreasureTable(i)).ToList();
         }
 
         public static Dictionary<int, int> GetGemClassValue(WorldDbContext ctx)
         {
             var gemValue = new Dictionary<int, int>();
 
-            foreach (var result in ctx.TreasureGemClass)
+            foreach (var result in ctx.TreasureGemValue)
             {
                 gemValue.Add(result.Class, result.Value);
             }
