@@ -193,8 +193,9 @@ namespace ACE.Server.Command.Handlers
         public static void TestLootGen2(Session session, params string[] parameters)
         {
             uint yumiWcid = 363;
+            uint hauberkPlatemail = 72;
 
-            uint itemWcid = yumiWcid;
+            uint itemWcid = hauberkPlatemail;
 
             var item = WorldObjectFactory.CreateNewWorldObject(itemWcid);
 
@@ -220,7 +221,7 @@ namespace ACE.Server.Command.Handlers
 
             bool hasMagic = false;
             int tier = 6;
-            double qualityMod = 1.0;
+            double qualityMod = 0.0;    // default value?
 
             var success = TreasureSystem.MutateItem(item, hasMagic, tier, qualityMod, TreasureItemClass.BowWeapon);
 
