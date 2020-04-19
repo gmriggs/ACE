@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ACE.Database.Models.World;
+using ACE.Entity.Enum;
 using ACE.Server.Factories.Treasure.Struct;
 
 namespace ACE.Server.Factories.Treasure
@@ -295,9 +296,9 @@ namespace ACE.Server.Factories.Treasure
             return clothing;
         }
 
-        public static Dictionary<uint, QualityFilter> GetQualityFilter(WorldDbContext ctx)
+        public static Dictionary<uint, PropertyFilter> GetQualityFilter(WorldDbContext ctx)
         {
-            var qualityFilters = new Dictionary<uint, QualityFilter>();
+            var qualityFilters = new Dictionary<uint, PropertyFilter>();
 
             var results = ctx.TreasureMutateFilter.ToList();
 
@@ -305,10 +306,10 @@ namespace ACE.Server.Factories.Treasure
             {
                 if (!qualityFilters.TryGetValue((uint)result.Id, out var qualityFilter))
                 {
-                    qualityFilter = new QualityFilter();
+                    qualityFilter = new PropertyFilter();
                     qualityFilters.Add((uint)result.Id, qualityFilter);
                 }
-                qualityFilter.Add(result.QualityID, result.QualityType);
+                qualityFilter.Add((QualityFilterType)result.QualityType, result.QualityID);
             }
             return qualityFilters;
         }

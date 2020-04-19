@@ -244,11 +244,29 @@ namespace ACE.Server.Factories.Treasure
             return MutateTreasure(item, roll);
         }
 
+        public static void ShowMutationFilters(WorldObject item)
+        {
+            var mutateFilterId = item.GetProperty(PropertyDataId.MutateFilter);
+
+            if (mutateFilterId == null)
+                return;
+
+            var mutateFilters = TreasureTables.GetMutationFilters(mutateFilterId.Value);
+
+            if (mutateFilters == null)
+                return;
+
+            Console.WriteLine($"{item.Name} ({item.WeenieClassId}) - MutateFilter: {mutateFilterId:X8}");
+            mutateFilters.Output();
+        }
+
         public static bool MutateTreasure(WorldObject item, TreasureRoll roll)
         {
             roll.TSysMutationData = (uint)(item.TsysMutationData ?? 0);
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.ItemWorkmanship))
+            ShowMutationFilters(item);
+
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyInt.ItemWorkmanship))
             {
                 if (!SelectWorkmanshipLevel(roll.WeenieClassId, roll.Tier, ref roll.Workmanship, ref roll.WorkmanshipMod, roll.LuckBonus))
                 {
@@ -275,7 +293,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 2, (int)PropertyFloat.WeaponOffense))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyFloat.WeaponOffense))
             {
                 if (!SetQualityLevel(ModQuality.Attack, roll, roll.LuckBonus, ref roll.QLWeaponOffense))
                 {
@@ -283,7 +301,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.Damage))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyInt.Damage))
             {
                 if (!SetQualityLevel(ModQuality.DamageInt, roll, roll.LuckBonus, ref roll.QLWeaponDamageInt))
                 {
@@ -291,7 +309,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 2, (int)PropertyFloat.WeaponDefense))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyFloat.WeaponDefense))
             {
                 if (!SetQualityLevel(ModQuality.Defense, roll, roll.LuckBonus, ref roll.QLWeaponDefense))
                 {
@@ -299,7 +317,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.ArmorLevel))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyInt.ArmorLevel))
             {
                 if (!SetQualityLevel(ModQuality.ArmorLevel, roll, roll.LuckBonus, ref roll.QLArmorLevel))
                 {
@@ -307,7 +325,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.ShieldValue))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyInt.ShieldValue))
             {
                 if (!SetQualityLevel(ModQuality.ArmorLevel, roll, roll.LuckBonus, ref roll.QLShieldLevel))
                 {
@@ -315,7 +333,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.EncumbranceVal))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyInt.EncumbranceVal))
             {
                 if (!SetQualityLevel(ModQuality.EncumbranceVal, roll, roll.LuckBonus, ref roll.QLArmorEncumbrance))
                 {
@@ -323,7 +341,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 2, (int)PropertyFloat.ArmorModVsFire))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyFloat.ArmorModVsFire))
             {
                 if (!SetQualityLevel(ModQuality.FireResistance, roll, roll.LuckBonus, ref roll.QLArmorVsFire))
                 {
@@ -331,7 +349,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 2, (int)PropertyFloat.ArmorModVsCold))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyFloat.ArmorModVsCold))
             {
                 if (!SetQualityLevel(ModQuality.ColdResistance, roll, roll.LuckBonus, ref roll.QLArmorVsCold))
                 {
@@ -339,7 +357,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 2, (int)PropertyFloat.ArmorModVsAcid))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyFloat.ArmorModVsAcid))
             {
                 if (!SetQualityLevel(ModQuality.AcidResistance, roll, roll.LuckBonus, ref roll.QLArmorVsAcid))
                 {
@@ -347,7 +365,7 @@ namespace ACE.Server.Factories.Treasure
                 }
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 2, (int)PropertyFloat.ArmorModVsElectric))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyFloat.ArmorModVsElectric))
             {
                 if (!SetQualityLevel(ModQuality.ElectricResistance, roll, roll.LuckBonus, ref roll.QLArmorVsLightning))
                 {
@@ -361,7 +379,7 @@ namespace ACE.Server.Factories.Treasure
                 return false;
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 3, (int)PropertyDataId.Setup) && !Modify3DObject(item, roll))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyDataId.Setup) && !Modify3DObject(item, roll))
             {
                 log.Error($"Failed to update DID properties");
                 return false;
@@ -373,7 +391,7 @@ namespace ACE.Server.Factories.Treasure
                 return false;
             }
 
-            if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.Value) && !SetNewItemValue(item, roll))
+            if (TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyInt.Value) && !SetNewItemValue(item, roll))
             {
                 log.Error($"Failed to set item value. Aborting");
                 return false;
@@ -1913,8 +1931,8 @@ namespace ACE.Server.Factories.Treasure
 
         public static bool AdjustItemStrings(WorldObject item, TreasureRoll roll)
         {
-            var modifyName = TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 4, (int)PropertyString.Name);
-            var modifyLongDesc = TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 4, (int)PropertyString.LongDesc);
+            var modifyName = TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyString.Name);
+            var modifyLongDesc = TreasureTables.GetMutationFilter(roll.MutateFilter, PropertyString.LongDesc);
 
             if (!modifyName && !modifyLongDesc)
                 return true;

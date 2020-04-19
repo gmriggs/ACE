@@ -6,7 +6,9 @@ using ACE.Common;
 using ACE.Database;
 using ACE.Database.Models.World;
 using ACE.Entity.Enum;
+using ACE.Entity.Enum.Properties;
 using ACE.Server.Factories.Treasure.Struct;
+using ACE.Server.WorldObjects;
 
 namespace ACE.Server.Factories.Treasure
 {
@@ -52,7 +54,7 @@ namespace ACE.Server.Factories.Treasure
         private static Dictionary<int, List<TreasureTable>> heritageHighArmorWcid { get; set; }
         private static List<TreasureTable> covenantArmorWcid { get; set; }
         private static Dictionary<int, List<TreasureTable>> clothingWcid { get; set; }
-        private static Dictionary<uint, QualityFilter> qualityFilter { get; set; }
+        private static Dictionary<uint, QualityFilter> mutationFilters { get; set; }
         private static List<TreasureTable> workmanshipDist { get; set; }
         private static Dictionary<int, List<TreasureTable>> materialCodeDist { get; set; }
         private static List<TreasureTable> materialCeramic { get; set; }
@@ -132,7 +134,7 @@ namespace ACE.Server.Factories.Treasure
                     heritageHighArmorWcid = TreasureDatabase.GetHeritageHighArmorWcid(ctx);
                     covenantArmorWcid = TreasureDatabase.GetCovenantArmorWcid(ctx);
                     clothingWcid = TreasureDatabase.GetClothingWcid(ctx);
-                    qualityFilter = TreasureDatabase.GetQualityFilter(ctx);
+                    mutationFilters = TreasureDatabase.GetQualityFilter(ctx);
                     workmanshipDist = TreasureDatabase.GetWorkmanshipDist(ctx);
                     materialCodeDist = TreasureDatabase.GetMaterialCodeDist(ctx);
                     materialCeramic = TreasureDatabase.GetMaterialCeramic(ctx);
@@ -483,21 +485,43 @@ namespace ACE.Server.Factories.Treasure
             return GetChance(clothingWcid[heritage], tier);
         }
 
-        public static bool GetMutationQualityFilter(uint mutateFilter, int statType, int idx)
+        public static QualityFilter GetMutationFilters(uint mutateFilterDID)
         {
-            // 1 = PropertyInt
-            // 2 = PropertyFloat
-            // 3 = PropertyDataId
-            // 4 = PropertyString
+            if (mutationFilters.TryGetValue(mutateFilterDID, out var filterTable))
+                return filterTable;
+            else
+                return null;
+        }
 
-            // float chance -> int idx conversion: verify no precision error?
-            if (!qualityFilter.TryGetValue(mutateFilter, out var filter))
+        public static bool GetMutationFilter(uint mutateFilterDID, QualityFilterType propType, int idx)
+        {
+            if (!mutationFilters.TryGetValue(mutateFilterDID, out var filters))
                 return false;
 
-            if (!filter.Filters.TryGetValue(statType, out var typeFilter))
+            if (!filters.Filters.TryGetValue(propType, out var propFilter))
                 return false;
 
-            return typeFilter.Contains(idx);
+            return propFilter.Contains(idx);
+        }
+
+        public static bool GetMutationFilter(uint mutateFilterDID, PropertyInt prop)
+        {
+            return GetMutationFilter(mutateFilterDID, QualityFilterType.PropertyInt, (int)prop);
+        }
+
+        public static bool GetMutationFilter(uint mutateFilterDID, PropertyFloat prop)
+        {
+            return GetMutationFilter(mutateFilterDID, QualityFilterType.PropertyFloat, (int)prop);
+        }
+
+        public static bool GetMutationFilter(uint mutateFilterDID, PropertyDataId prop)
+        {
+            return GetMutationFilter(mutateFilterDID, QualityFilterType.PropertyDataId, (int)prop);
+        }
+
+        public static bool GetMutationFilter(uint mutateFilterDID, PropertyString prop)
+        {
+            return GetMutationFilter(mutateFilterDID, QualityFilterType.PropertyString, (int)prop);
         }
 
         public static int GetWorkmanship(int tier, double qualityMod)
