@@ -96,7 +96,15 @@ namespace ACE.Server.Factories.Treasure
 
         public static Dictionary<int, List<int>> GetSpellProgression(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<int>>();
+            var spellProgression = new Dictionary<int, List<int>>();
+
+            var results = ctx.TreasureSpellLevelProgression.ToList();
+
+            // verify key
+            foreach (var result in results)
+                spellProgression.Add((int)result.Id, new List<int>() { result.Lvl1, result.Lvl2, result.Lvl3, result.Lvl4, result.Lvl5, result.Lvl6, result.Lvl7, result.Lvl8 });
+
+            return spellProgression;
         }
 
         public static List<SpellDescriptor> GetSpellDescriptor(WorldDbContext ctx)
@@ -287,9 +295,22 @@ namespace ACE.Server.Factories.Treasure
             return clothing;
         }
 
-        public static List<TreasureTable> GetQualityFilter(WorldDbContext ctx)
+        public static Dictionary<uint, QualityFilter> GetQualityFilter(WorldDbContext ctx)
         {
-            return new List<TreasureTable>();
+            var qualityFilters = new Dictionary<uint, QualityFilter>();
+
+            var results = ctx.TreasureMutateFilter.ToList();
+
+            foreach (var result in results)
+            {
+                if (!qualityFilters.TryGetValue((uint)result.Id, out var qualityFilter))
+                {
+                    qualityFilter = new QualityFilter();
+                    qualityFilters.Add((uint)result.Id, qualityFilter);
+                }
+                qualityFilter.Add(result.QualityID, result.QualityType);
+            }
+            return qualityFilters;
         }
 
         public static List<TreasureTable> GetWorkmanshipDist(WorldDbContext ctx)
@@ -299,7 +320,20 @@ namespace ACE.Server.Factories.Treasure
 
         public static Dictionary<int, List<TreasureTable>> GetMaterialCodeDist(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            var materialDist = new Dictionary<int, List<TreasureTable>>();
+
+            var results = ctx.TreasureMaterialDist.ToList();
+
+            foreach (var result in results)
+            {
+                if (!materialDist.TryGetValue(result.Group, out var group))
+                {
+                    group = new List<TreasureTable>();
+                    materialDist.Add(result.Group, group);
+                }
+                group.Add(new TreasureTable(result));
+            }
+            return materialDist;
         }
 
         public static List<TreasureTable> GetMaterialCeramic(WorldDbContext ctx)
@@ -339,7 +373,20 @@ namespace ACE.Server.Factories.Treasure
 
         public static Dictionary<int, List<TreasureTable>> GetGemCodeDist(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            var gemCodeDist = new Dictionary<int, List<TreasureTable>>();
+
+            var results = ctx.TreasureGemDist.ToList();
+
+            foreach (var result in results)
+            {
+                if (!gemCodeDist.TryGetValue(result.Group, out var group))
+                {
+                    group = new List<TreasureTable>();
+                    gemCodeDist.Add(result.Group, group);
+                }
+                group.Add(new TreasureTable(result));
+            }
+            return gemCodeDist;
         }
 
         public static List<TreasureTable> GetGemMaterialChance(WorldDbContext ctx)
@@ -365,7 +412,20 @@ namespace ACE.Server.Factories.Treasure
 
         public static Dictionary<int, List<TreasureTable>> GetMaterialColorCode(WorldDbContext ctx)
         {
-            return new Dictionary<int, List<TreasureTable>>();
+            var materialColorDist = new Dictionary<int, List<TreasureTable>>();
+
+            var results = ctx.TreasureMaterialColorDist.ToList();
+
+            foreach (var result in results)
+            {
+                if (!materialColorDist.TryGetValue(result.Group, out var group))
+                {
+                    group = new List<TreasureTable>();
+                    materialColorDist.Add(result.Group, group);
+                }
+                group.Add(new TreasureTable(result));
+            }
+            return materialColorDist;
         }
 
         public static List<TreasureTable> GetClothingPalette(WorldDbContext ctx)

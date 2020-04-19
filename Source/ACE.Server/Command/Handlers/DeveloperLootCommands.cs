@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using ACE.DatLoader;
-using ACE.DatLoader.FileTypes;
+
 using ACE.Entity.Enum;
+using ACE.Entity.Enum.Properties;
 using ACE.Server.Factories;
+using ACE.Server.Factories.Treasure;
 using ACE.Server.Network;
+
 namespace ACE.Server.Command.Handlers
 {
     public static class DeveloperLootCommands
@@ -70,7 +70,7 @@ namespace ACE.Server.Command.Handlers
                 case "all":
                     break;
                 case "-log":
-                    logstats = true;                    
+                    logstats = true;
                     break;
                 case "":
                     break;
@@ -100,6 +100,7 @@ namespace ACE.Server.Command.Handlers
                 return;
             }
         }
+
         [CommandHandler("testlootgencorpse", AccessLevel.Admin, CommandHandlerFlag.ConsoleInvoke, 1, "Generates Corpses for testing LootFactories", "<DID> <number corpses> <display table - melee, missile, caster, armor, pet, aetheria>")]
         public static void TestLootGeneratorCorpse(Session session, params string[] parameters)
         {
@@ -185,6 +186,44 @@ namespace ACE.Server.Command.Handlers
                     return;
             }
             Console.WriteLine(LootGenerationFactory_Test.TestLootGenMonster(Convert.ToUInt32(monsterDID), numberItemsGenerate, logstats, displayTable));
+        }
+
+        [CommandHandler("testlootgen2", AccessLevel.Admin, CommandHandlerFlag.None, "Preliminary tests for moro's loot system")]
+        public static void TestLootGen2(Session session, params string[] parameters)
+        {
+            uint yumiWcid = 363;
+
+            uint itemWcid = yumiWcid;
+
+            var item = WorldObjectFactory.CreateNewWorldObject(itemWcid);
+
+            if (item == null)
+            {
+                CommandHandlerHelper.WriteOutputInfo(session, $"Couldn't find wcid {itemWcid}", ChatMessageType.Broadcast);
+                return;
+            }
+
+            var tSysMutationDataInt = item.GetProperty(PropertyInt.TsysMutationData);
+            var tSysMutationDataDid = item.GetProperty(PropertyDataId.TsysMutationFilter);
+            var mutateFilter = item.GetProperty(PropertyDataId.MutateFilter);
+
+            // other fields
+            var creationMutationFilter = item.GetProperty(PropertyDataId.CreationMutationFilter);
+            var augmentationMutationFilter = item.GetProperty(PropertyDataId.AugmentationMutationFilter);
+
+            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyInt.TsysMutationData: {tSysMutationDataInt:X8}");
+            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.TsysMutationFilter: {tSysMutationDataDid:X8}");
+            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.MutateFilter: {mutateFilter:X8}");
+            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.CreationMutationFilter: {creationMutationFilter:X8}");
+            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.MutateFilter: {augmentationMutationFilter:X8}");
+
+            bool hasMagic = false;
+            int tier = 6;
+            double qualityMod = 1.0;
+
+            var success = TreasureSystem.MutateItem(item, hasMagic, tier, qualityMod, TreasureItemClass.BowWeapon);
+
+            CommandHandlerHelper.WriteOutputInfo(session, $"TryMutateItem: {success}");
         }
     }
 }

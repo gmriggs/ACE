@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using ACE.Common;
 using ACE.Database;
@@ -11,80 +12,80 @@ namespace ACE.Server.Factories.Treasure
 {
     public class TreasureTables
     {
-        private static List<TreasureDeath> deathTreasure;
-        private static List<TreasureTable> treasureGroup;
-        private static Dictionary<int, int> heritageSubtype;
-        private static List<TreasureTable> heritageDist;
-        private static List<TreasureTable> gemClass;
-        private static Dictionary<int, int> gemClassValue;
-        private static List<TreasureTable> gemWcid;
-        private static List<TreasureTable> jewelryWcid;
-        private static List<TreasureTable> artWcid;
-        private static List<TreasureTable> manaStoneWcid;
-        private static List<TreasureTable> consumableWcid;
-        private static List<TreasureTable> healKitWcid;
-        private static List<TreasureTable> lockpickWcid;
-        private static List<TreasureTable> spellCompWcid;
-        private static List<TreasureTable> scrollWcid;
-        private static List<TreasureTable> spellLevel;
-        private static Dictionary<int, List<int>> spellProgression;
-        private static List<SpellDescriptor> spellDesc;
-        private static List<TreasureTable> weaponDist;
-        private static Dictionary<int, List<TreasureTable>> weaponAxeWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponBowWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponDaggerWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponMaceWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponSpearWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponStaffWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponSwordWcid;
-        private static Dictionary<int, List<TreasureTable>> weaponUAWcid;
-        private static List<TreasureTable> weaponCrossbowWcid;
-        private static List<TreasureTable> weaponAtlatlWcid;
-        private static List<TreasureTable> weaponTwoHandedWcid;
-        private static List<TreasureTable> casterWcid;
-        private static List<TreasureTable> armorDist;
-        private static List<TreasureTable> leatherArmorWcid;
-        private static List<TreasureTable> studdedLeatherArmorWcid;
-        private static List<TreasureTable> chainmailArmorWcid;
-        private static Dictionary<int, List<TreasureTable>> platemailArmorWcid;
-        private static Dictionary<int, List<TreasureTable>> heritageLowArmorWcid;
-        private static Dictionary<int, List<TreasureTable>> heritageHighArmorWcid;
-        private static List<TreasureTable> covenantArmorWcid;
-        private static Dictionary<int, List<TreasureTable>> clothingWcid;
-        private static List<TreasureTable> qualityFilter;
-        private static List<TreasureTable> workmanshipDist;
-        private static Dictionary<int, List<TreasureTable>> materialCodeDist;
-        private static List<TreasureTable> materialCeramic;
-        private static List<TreasureTable> materialCloth;
-        private static List<TreasureTable> materialGem;
-        private static List<TreasureTable> materialLeather;
-        private static List<TreasureTable> materialMetal;
-        private static List<TreasureTable> materialStone;
-        private static List<TreasureTable> materialWood;
-        private static Dictionary<int, List<TreasureTable>> gemCodeDist;
-        private static List<TreasureTable> gemMaterialChance;
-        private static Dictionary<int, List<double>> qualityMod;
-        private static List<TreasureTable> qualityLevel;
-        private static Dictionary<int, List<TreasureTable>> materialColorCode;
-        private static List<TreasureTable> clothingPalette;
-        private static List<TreasureTable> leatherPalette;
-        private static List<TreasureTable> metalPalette;
-        private static List<TreasureTable> meleeWeaponItemSpell;
-        private static List<TreasureTable> missileWeaponItemSpell;
-        private static List<TreasureTable> casterItemSpell;
-        private static List<TreasureTable> armorItemSpell;
-        private static List<TreasureTable> spellCodeDist;
-        private static List<TreasureTable> orbCastableSpell;
-        private static List<TreasureTable> wandStaffCastableSpell;
-        private static List<TreasureTable> armorClothingCantrip;
-        private static List<TreasureTable> casterCantrip;
-        private static List<TreasureTable> missileCantrip;
-        private static List<TreasureTable> shieldCantrip;
-        private static List<TreasureTable> meleeCantrip;
-        private static List<TreasureTable> jewelryCantrip;
-        private static Dictionary<int, List<int>> cantripProgression;
-        private static Dictionary<int, int> materialValueMod;
-        private static Dictionary<int, List<int>> scrollWcidProgression;
+        private static List<TreasureDeath> deathTreasure { get; set; }
+        private static List<TreasureTable> treasureGroup { get; set; }
+        private static Dictionary<int, int> heritageSubtype { get; set; }
+        private static List<TreasureTable> heritageDist { get; set; }
+        private static List<TreasureTable> gemClass { get; set; }
+        private static Dictionary<int, int> gemClassValue { get; set; }
+        private static List<TreasureTable> gemWcid { get; set; }
+        private static List<TreasureTable> jewelryWcid { get; set; }
+        private static List<TreasureTable> artWcid { get; set; }
+        private static List<TreasureTable> manaStoneWcid { get; set; }
+        private static List<TreasureTable> consumableWcid { get; set; }
+        private static List<TreasureTable> healKitWcid { get; set; }
+        private static List<TreasureTable> lockpickWcid { get; set; }
+        private static List<TreasureTable> spellCompWcid { get; set; }
+        private static List<TreasureTable> scrollWcid { get; set; }
+        private static List<TreasureTable> spellLevel { get; set; }
+        private static Dictionary<int, List<int>> spellProgression { get; set; }
+        private static List<SpellDescriptor> spellDesc { get; set; }
+        private static List<TreasureTable> weaponDist { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponAxeWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponBowWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponDaggerWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponMaceWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponSpearWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponStaffWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponSwordWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> weaponUAWcid { get; set; }
+        private static List<TreasureTable> weaponCrossbowWcid { get; set; }
+        private static List<TreasureTable> weaponAtlatlWcid { get; set; }
+        private static List<TreasureTable> weaponTwoHandedWcid { get; set; }
+        private static List<TreasureTable> casterWcid { get; set; }
+        private static List<TreasureTable> armorDist { get; set; }
+        private static List<TreasureTable> leatherArmorWcid { get; set; }
+        private static List<TreasureTable> studdedLeatherArmorWcid { get; set; }
+        private static List<TreasureTable> chainmailArmorWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> platemailArmorWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> heritageLowArmorWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> heritageHighArmorWcid { get; set; }
+        private static List<TreasureTable> covenantArmorWcid { get; set; }
+        private static Dictionary<int, List<TreasureTable>> clothingWcid { get; set; }
+        private static Dictionary<uint, QualityFilter> qualityFilter { get; set; }
+        private static List<TreasureTable> workmanshipDist { get; set; }
+        private static Dictionary<int, List<TreasureTable>> materialCodeDist { get; set; }
+        private static List<TreasureTable> materialCeramic { get; set; }
+        private static List<TreasureTable> materialCloth { get; set; }
+        private static List<TreasureTable> materialGem { get; set; }
+        private static List<TreasureTable> materialLeather { get; set; }
+        private static List<TreasureTable> materialMetal { get; set; }
+        private static List<TreasureTable> materialStone { get; set; }
+        private static List<TreasureTable> materialWood { get; set; }
+        private static Dictionary<int, List<TreasureTable>> gemCodeDist { get; set; }
+        private static List<TreasureTable> gemMaterialChance { get; set; }
+        private static Dictionary<int, List<double>> qualityMod { get; set; }
+        private static List<TreasureTable> qualityLevel { get; set; }
+        private static Dictionary<int, List<TreasureTable>> materialColorCode { get; set; }
+        private static List<TreasureTable> clothingPalette { get; set; }
+        private static List<TreasureTable> leatherPalette { get; set; }
+        private static List<TreasureTable> metalPalette { get; set; }
+        private static List<TreasureTable> meleeWeaponItemSpell { get; set; }
+        private static List<TreasureTable> missileWeaponItemSpell { get; set; }
+        private static List<TreasureTable> casterItemSpell { get; set; }
+        private static List<TreasureTable> armorItemSpell { get; set; }
+        private static List<TreasureTable> spellCodeDist { get; set; }
+        private static List<TreasureTable> orbCastableSpell { get; set; }
+        private static List<TreasureTable> wandStaffCastableSpell { get; set; }
+        private static List<TreasureTable> armorClothingCantrip { get; set; }
+        private static List<TreasureTable> casterCantrip { get; set; }
+        private static List<TreasureTable> missileCantrip { get; set; }
+        private static List<TreasureTable> shieldCantrip { get; set; }
+        private static List<TreasureTable> meleeCantrip { get; set; }
+        private static List<TreasureTable> jewelryCantrip { get; set; }
+        private static Dictionary<int, List<int>> cantripProgression { get; set; }
+        private static Dictionary<int, int> materialValueMod { get; set; }
+        private static Dictionary<int, List<int>> scrollWcidProgression { get; set; }
 
         public static bool LoadTables()
         {
@@ -189,10 +190,14 @@ namespace ACE.Server.Factories.Treasure
 
             var chanceTotal = 0.0;
 
-            foreach (var tt in table)
+            // TODO: this should be converted into a dictionary
+            // this temporary structure is slightly slower, but makes for easier debugging
+            var pretable = table.Where(i => i.Index == index).ToList();
+
+            foreach (var tt in pretable)
             {
-                if (tt.Index == index)
-                {
+                //if (tt.Index == index)
+                //{
                     chanceTotal += tt.Chance;
 
                     if (reverse ? chanceTotal < luck : luck < chanceTotal)
@@ -200,7 +205,7 @@ namespace ACE.Server.Factories.Treasure
                         retVal = tt.Lookup;
                         break;
                     }
-                }
+                //}
             }
             return retVal;
         }
@@ -484,12 +489,15 @@ namespace ACE.Server.Factories.Treasure
             // 2 = PropertyFloat
             // 3 = PropertyDataId
             // 4 = PropertyString
-            foreach (var filter in qualityFilter)
-            {
-                if (filter.Index == mutateFilter && filter.Lookup == statType && filter.Chance == idx)
-                    return true;
-            }
-            return false;
+
+            // float chance -> int idx conversion: verify no precision error?
+            if (!qualityFilter.TryGetValue(mutateFilter, out var filter))
+                return false;
+
+            if (!filter.Filters.TryGetValue(statType, out var typeFilter))
+                return false;
+
+            return typeFilter.Contains(idx);
         }
 
         public static int GetWorkmanship(int tier, double qualityMod)

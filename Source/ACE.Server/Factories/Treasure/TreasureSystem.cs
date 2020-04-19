@@ -225,18 +225,18 @@ namespace ACE.Server.Factories.Treasure
             if (item.WeenieType == WeenieType.Scroll)
                 return true;
 
-            var roll = new TreasureRoll();
-            roll.WeenieClassId = item.WeenieClassId;
-            roll.HasMagic = isMagic;
-            roll.HasStandardMods = true;
-            roll.LuckBonus = qualityMod;
-            roll.MutateFilter = 0;
-
             if (item.GetProperty(PropertyDataId.MutateFilter) == null)
             {
                 log.Warn($"{item.Name} ({item.WeenieClassId}) missing PropertyDataId.MutateFilter");
                 return false;
             }
+
+            var roll = new TreasureRoll();
+            roll.WeenieClassId = item.WeenieClassId;
+            roll.HasMagic = isMagic;
+            roll.HasStandardMods = true;
+            roll.LuckBonus = qualityMod;
+            roll.MutateFilter = (uint)item.GetProperty(PropertyDataId.MutateFilter);
 
             roll.Tier = tier;
             roll.TreasureItemClass = treasureClass;
@@ -246,7 +246,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static bool MutateTreasure(WorldObject item, TreasureRoll roll)
         {
-            var tSysMutationData = item.TsysMutationData ?? 0;
+            roll.TSysMutationData = (uint)(item.TsysMutationData ?? 0);
 
             if (TreasureTables.GetMutationQualityFilter(roll.MutateFilter, 1, (int)PropertyInt.ItemWorkmanship))
             {
@@ -415,6 +415,8 @@ namespace ACE.Server.Factories.Treasure
                 log.Error($"No material found for {roll.TSysMutationData}");
                 return false;
             }
+
+            var _material = (MaterialType)materialIdx;
 
             var baseMaterial = TreasureTables.GetMaterialDist(materialIdx, roll.Tier, 0);
             var material = MaterialType.Unknown;

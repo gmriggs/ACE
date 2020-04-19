@@ -246,6 +246,13 @@ namespace ACE.Server.Factories.Treasure.Struct
             Chance = consumable.Chance;
         }
 
+        public TreasureTable(TreasureGemDist dist)
+        {
+            Index = dist.Tier;
+            Lookup = dist.Count;
+            Chance = dist.Chance;
+        }
+
         public TreasureTable(TreasureGemClassTier gem)
         {
             Index = gem.Tier;
@@ -307,6 +314,20 @@ namespace ACE.Server.Factories.Treasure.Struct
             Index = manaStone.Tier;
             Lookup = manaStone.Wcid;
             Chance = manaStone.Chance;
+        }
+
+        public TreasureTable(TreasureMaterialDist dist)
+        {
+            Index = dist.Tier;
+            Lookup = dist.Material;
+            Chance = dist.Chance;
+        }
+
+        public TreasureTable(TreasureMaterialColorDist dist)
+        {
+            Index = dist.Color;
+            Lookup = dist.Material;
+            Chance = dist.Chance;
         }
 
         public TreasureTable(TreasureMaterialCeramic ceramic)
