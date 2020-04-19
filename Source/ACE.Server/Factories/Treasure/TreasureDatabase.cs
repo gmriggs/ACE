@@ -413,6 +413,25 @@ namespace ACE.Server.Factories.Treasure
 
         public static Dictionary<int, List<TreasureTable>> GetMaterialColorCode(WorldDbContext ctx)
         {
+            var materialColor = new Dictionary<int, List<TreasureTable>>();
+
+            var results = ctx.TreasureMaterialColor.ToList();
+
+            foreach (var result in results)
+            {
+                if (!materialColor.TryGetValue((int)result.MaterialId, out var group))
+                {
+                    group = new List<TreasureTable>();
+                    materialColor.Add((int)result.MaterialId, group);
+                }
+                group.Add(new TreasureTable(result));
+            }
+            return materialColor;
+        }
+
+
+        public static Dictionary<int, List<TreasureTable>> GetMaterialColorDist(WorldDbContext ctx)
+        {
             var materialColorDist = new Dictionary<int, List<TreasureTable>>();
 
             var results = ctx.TreasureMaterialColorDist.ToList();

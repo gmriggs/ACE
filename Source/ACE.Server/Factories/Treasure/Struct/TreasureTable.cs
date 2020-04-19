@@ -323,6 +323,13 @@ namespace ACE.Server.Factories.Treasure.Struct
             Chance = manaStone.Chance;
         }
 
+        public TreasureTable(TreasureMaterialColor palette)
+        {
+            Index = (int)palette.ColorCode;
+            Lookup = (int)palette.PaletteTemplate;
+            Chance = palette.Probability;
+        }
+
         public TreasureTable(TreasureMaterialDist dist)
         {
             Index = dist.Tier;
