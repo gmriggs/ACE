@@ -44,11 +44,119 @@ namespace ACE.Database.Models.World
         public virtual DbSet<RecipeRequirementsInt> RecipeRequirementsInt { get; set; }
         public virtual DbSet<RecipeRequirementsString> RecipeRequirementsString { get; set; }
         public virtual DbSet<Spell> Spell { get; set; }
+        public virtual DbSet<TreasureArmor> TreasureArmor { get; set; }
+        public virtual DbSet<TreasureArmorChainmail> TreasureArmorChainmail { get; set; }
+        public virtual DbSet<TreasureArmorCovenant> TreasureArmorCovenant { get; set; }
+        public virtual DbSet<TreasureArmorHeritageHigh1> TreasureArmorHeritageHigh1 { get; set; }
+        public virtual DbSet<TreasureArmorHeritageHigh2> TreasureArmorHeritageHigh2 { get; set; }
+        public virtual DbSet<TreasureArmorHeritageHigh3> TreasureArmorHeritageHigh3 { get; set; }
+        public virtual DbSet<TreasureArmorHeritageLow1> TreasureArmorHeritageLow1 { get; set; }
+        public virtual DbSet<TreasureArmorHeritageLow2> TreasureArmorHeritageLow2 { get; set; }
+        public virtual DbSet<TreasureArmorHeritageLow3> TreasureArmorHeritageLow3 { get; set; }
+        public virtual DbSet<TreasureArmorLeather> TreasureArmorLeather { get; set; }
+        public virtual DbSet<TreasureArmorLeatherPalette> TreasureArmorLeatherPalette { get; set; }
+        public virtual DbSet<TreasureArmorMetalPalette> TreasureArmorMetalPalette { get; set; }
+        public virtual DbSet<TreasureArmorPalette> TreasureArmorPalette { get; set; }
+        public virtual DbSet<TreasureArmorPlatemail1> TreasureArmorPlatemail1 { get; set; }
+        public virtual DbSet<TreasureArmorPlatemail2> TreasureArmorPlatemail2 { get; set; }
+        public virtual DbSet<TreasureArmorPlatemail3> TreasureArmorPlatemail3 { get; set; }
+        public virtual DbSet<TreasureArmorResistance> TreasureArmorResistance { get; set; }
+        public virtual DbSet<TreasureArmorStuddedLeather> TreasureArmorStuddedLeather { get; set; }
+        public virtual DbSet<TreasureArt> TreasureArt { get; set; }
+        public virtual DbSet<TreasureBurdenMod> TreasureBurdenMod { get; set; }
+        public virtual DbSet<TreasureCantripArmorDist> TreasureCantripArmorDist { get; set; }
+        public virtual DbSet<TreasureCantripCasterDist> TreasureCantripCasterDist { get; set; }
+        public virtual DbSet<TreasureCantripLevelChance> TreasureCantripLevelChance { get; set; }
+        public virtual DbSet<TreasureCantripLevelProgression> TreasureCantripLevelProgression { get; set; }
+        public virtual DbSet<TreasureCantripMagicDist> TreasureCantripMagicDist { get; set; }
+        public virtual DbSet<TreasureCantripMeleeDist> TreasureCantripMeleeDist { get; set; }
+        public virtual DbSet<TreasureCantripMissileDist> TreasureCantripMissileDist { get; set; }
+        public virtual DbSet<TreasureCantripSpellTier> TreasureCantripSpellTier { get; set; }
+        public virtual DbSet<TreasureCaster> TreasureCaster { get; set; }
+        public virtual DbSet<TreasureCasterOrbSpell> TreasureCasterOrbSpell { get; set; }
+        public virtual DbSet<TreasureCasterSpell> TreasureCasterSpell { get; set; }
+        public virtual DbSet<TreasureCasterWandStaffSpell> TreasureCasterWandStaffSpell { get; set; }
+        public virtual DbSet<TreasureClothing1> TreasureClothing1 { get; set; }
+        public virtual DbSet<TreasureClothing2> TreasureClothing2 { get; set; }
+        public virtual DbSet<TreasureClothing3> TreasureClothing3 { get; set; }
+        public virtual DbSet<TreasureClothingPalette> TreasureClothingPalette { get; set; }
+        public virtual DbSet<TreasureConsumable> TreasureConsumable { get; set; }
         public virtual DbSet<TreasureDeath> TreasureDeath { get; set; }
+        public virtual DbSet<TreasureGem> TreasureGem { get; set; }
+        public virtual DbSet<TreasureGemClass> TreasureGemClass { get; set; }
+        public virtual DbSet<TreasureGemClassTier> TreasureGemClassTier { get; set; }
+        public virtual DbSet<TreasureGemDist> TreasureGemDist { get; set; }
+        public virtual DbSet<TreasureHealKit> TreasureHealKit { get; set; }
+        public virtual DbSet<TreasureHeritage> TreasureHeritage { get; set; }
+        public virtual DbSet<TreasureItem> TreasureItem { get; set; }
+        public virtual DbSet<TreasureItemBaneSpell> TreasureItemBaneSpell { get; set; }
+        public virtual DbSet<TreasureItemChance> TreasureItemChance { get; set; }
+        public virtual DbSet<TreasureJewelry> TreasureJewelry { get; set; }
+        public virtual DbSet<TreasureLockpick> TreasureLockpick { get; set; }
+        public virtual DbSet<TreasureMagic> TreasureMagic { get; set; }
+        public virtual DbSet<TreasureManaStone> TreasureManaStone { get; set; }
         public virtual DbSet<TreasureMaterialBase> TreasureMaterialBase { get; set; }
+        public virtual DbSet<TreasureMaterialCeramic> TreasureMaterialCeramic { get; set; }
+        public virtual DbSet<TreasureMaterialCloth> TreasureMaterialCloth { get; set; }
         public virtual DbSet<TreasureMaterialColor> TreasureMaterialColor { get; set; }
+        public virtual DbSet<TreasureMaterialColorDist> TreasureMaterialColorDist { get; set; }
+        public virtual DbSet<TreasureMaterialDist> TreasureMaterialDist { get; set; }
+        public virtual DbSet<TreasureMaterialGem> TreasureMaterialGem { get; set; }
         public virtual DbSet<TreasureMaterialGroups> TreasureMaterialGroups { get; set; }
+        public virtual DbSet<TreasureMaterialLeather> TreasureMaterialLeather { get; set; }
+        public virtual DbSet<TreasureMaterialMetal> TreasureMaterialMetal { get; set; }
+        public virtual DbSet<TreasureMaterialMod> TreasureMaterialMod { get; set; }
+        public virtual DbSet<TreasureMaterialStone> TreasureMaterialStone { get; set; }
+        public virtual DbSet<TreasureMaterialWood> TreasureMaterialWood { get; set; }
+        public virtual DbSet<TreasureMundane> TreasureMundane { get; set; }
+        public virtual DbSet<TreasureMutateFilter> TreasureMutateFilter { get; set; }
+        public virtual DbSet<TreasurePea> TreasurePea { get; set; }
+        public virtual DbSet<TreasureQualityLevel> TreasureQualityLevel { get; set; }
+        public virtual DbSet<TreasureQualityMod> TreasureQualityMod { get; set; }
+        public virtual DbSet<TreasureScroll> TreasureScroll { get; set; }
+        public virtual DbSet<TreasureSpellBase> TreasureSpellBase { get; set; }
+        public virtual DbSet<TreasureSpellData> TreasureSpellData { get; set; }
+        public virtual DbSet<TreasureSpellDesc> TreasureSpellDesc { get; set; }
+        public virtual DbSet<TreasureSpellDist> TreasureSpellDist { get; set; }
+        public virtual DbSet<TreasureSpellLevel> TreasureSpellLevel { get; set; }
+        public virtual DbSet<TreasureSpellLevelChance> TreasureSpellLevelChance { get; set; }
+        public virtual DbSet<TreasureSpellLevelProgression> TreasureSpellLevelProgression { get; set; }
+        public virtual DbSet<TreasureTierAdjust> TreasureTierAdjust { get; set; }
+        public virtual DbSet<TreasureWcid> TreasureWcid { get; set; }
+        public virtual DbSet<TreasureWeapon> TreasureWeapon { get; set; }
+        public virtual DbSet<TreasureWeaponAtlatl> TreasureWeaponAtlatl { get; set; }
+        public virtual DbSet<TreasureWeaponAttackDefenseMod> TreasureWeaponAttackDefenseMod { get; set; }
+        public virtual DbSet<TreasureWeaponAxe1> TreasureWeaponAxe1 { get; set; }
+        public virtual DbSet<TreasureWeaponAxe2> TreasureWeaponAxe2 { get; set; }
+        public virtual DbSet<TreasureWeaponAxe3> TreasureWeaponAxe3 { get; set; }
+        public virtual DbSet<TreasureWeaponBow1> TreasureWeaponBow1 { get; set; }
+        public virtual DbSet<TreasureWeaponBow2> TreasureWeaponBow2 { get; set; }
+        public virtual DbSet<TreasureWeaponBow3> TreasureWeaponBow3 { get; set; }
+        public virtual DbSet<TreasureWeaponCrossbow> TreasureWeaponCrossbow { get; set; }
+        public virtual DbSet<TreasureWeaponDagger1> TreasureWeaponDagger1 { get; set; }
+        public virtual DbSet<TreasureWeaponDagger2> TreasureWeaponDagger2 { get; set; }
+        public virtual DbSet<TreasureWeaponDagger3> TreasureWeaponDagger3 { get; set; }
+        public virtual DbSet<TreasureWeaponMace1> TreasureWeaponMace1 { get; set; }
+        public virtual DbSet<TreasureWeaponMace2> TreasureWeaponMace2 { get; set; }
+        public virtual DbSet<TreasureWeaponMace3> TreasureWeaponMace3 { get; set; }
+        public virtual DbSet<TreasureWeaponMeleeSpell> TreasureWeaponMeleeSpell { get; set; }
+        public virtual DbSet<TreasureWeaponMissileSpell> TreasureWeaponMissileSpell { get; set; }
+        public virtual DbSet<TreasureWeaponSkillRemap> TreasureWeaponSkillRemap { get; set; }
+        public virtual DbSet<TreasureWeaponSpear1> TreasureWeaponSpear1 { get; set; }
+        public virtual DbSet<TreasureWeaponSpear2> TreasureWeaponSpear2 { get; set; }
+        public virtual DbSet<TreasureWeaponSpear3> TreasureWeaponSpear3 { get; set; }
+        public virtual DbSet<TreasureWeaponSpeedMod> TreasureWeaponSpeedMod { get; set; }
+        public virtual DbSet<TreasureWeaponStaff1> TreasureWeaponStaff1 { get; set; }
+        public virtual DbSet<TreasureWeaponStaff2> TreasureWeaponStaff2 { get; set; }
+        public virtual DbSet<TreasureWeaponStaff3> TreasureWeaponStaff3 { get; set; }
+        public virtual DbSet<TreasureWeaponSword1> TreasureWeaponSword1 { get; set; }
+        public virtual DbSet<TreasureWeaponSword2> TreasureWeaponSword2 { get; set; }
+        public virtual DbSet<TreasureWeaponSword3> TreasureWeaponSword3 { get; set; }
+        public virtual DbSet<TreasureWeaponUnarmed1> TreasureWeaponUnarmed1 { get; set; }
+        public virtual DbSet<TreasureWeaponUnarmed2> TreasureWeaponUnarmed2 { get; set; }
+        public virtual DbSet<TreasureWeaponUnarmed3> TreasureWeaponUnarmed3 { get; set; }
         public virtual DbSet<TreasureWielded> TreasureWielded { get; set; }
+        public virtual DbSet<TreasureWorkmanshipDist> TreasureWorkmanshipDist { get; set; }
         public virtual DbSet<Version> Version { get; set; }
         public virtual DbSet<Weenie> Weenie { get; set; }
         public virtual DbSet<WeeniePropertiesAnimPart> WeeniePropertiesAnimPart { get; set; }
@@ -1229,6 +1337,639 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.Wcid).HasColumnName("wcid");
             });
 
+            modelBuilder.Entity<TreasureArmor>(entity =>
+            {
+                entity.ToTable("treasure_armor");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.ArmorSubtable)
+                    .HasColumnName("armor_Subtable")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorChainmail>(entity =>
+            {
+                entity.ToTable("treasure_armor_chainmail");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorCovenant>(entity =>
+            {
+                entity.ToTable("treasure_armor_covenant");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorHeritageHigh1>(entity =>
+            {
+                entity.ToTable("treasure_armor_heritage_high1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorHeritageHigh2>(entity =>
+            {
+                entity.ToTable("treasure_armor_heritage_high2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorHeritageHigh3>(entity =>
+            {
+                entity.ToTable("treasure_armor_heritage_high3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorHeritageLow1>(entity =>
+            {
+                entity.ToTable("treasure_armor_heritage_low1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorHeritageLow2>(entity =>
+            {
+                entity.ToTable("treasure_armor_heritage_low2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorHeritageLow3>(entity =>
+            {
+                entity.ToTable("treasure_armor_heritage_low3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorLeather>(entity =>
+            {
+                entity.ToTable("treasure_armor_leather");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorLeatherPalette>(entity =>
+            {
+                entity.ToTable("treasure_armor_leather_palette");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Color)
+                    .HasColumnName("color")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorMetalPalette>(entity =>
+            {
+                entity.ToTable("treasure_armor_metal_palette");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Color)
+                    .HasColumnName("color")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorPalette>(entity =>
+            {
+                entity.ToTable("treasure_armor_palette");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Color)
+                    .HasColumnName("color")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorPlatemail1>(entity =>
+            {
+                entity.ToTable("treasure_armor_platemail1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorPlatemail2>(entity =>
+            {
+                entity.ToTable("treasure_armor_platemail2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorPlatemail3>(entity =>
+            {
+                entity.ToTable("treasure_armor_platemail3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorResistance>(entity =>
+            {
+                entity.ToTable("treasure_armor_resistance");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Max).HasColumnName("max");
+
+                entity.Property(e => e.Min).HasColumnName("min");
+
+                entity.Property(e => e.QualityLevel)
+                    .HasColumnName("quality_Level")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArmorStuddedLeather>(entity =>
+            {
+                entity.ToTable("treasure_armor_studded_leather");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureArt>(entity =>
+            {
+                entity.ToTable("treasure_art");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureBurdenMod>(entity =>
+            {
+                entity.ToTable("treasure_burden_mod");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Max).HasColumnName("max");
+
+                entity.Property(e => e.Min).HasColumnName("min");
+
+                entity.Property(e => e.QualityLevel)
+                    .HasColumnName("quality_Level")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripArmorDist>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_armor_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripCasterDist>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_caster_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripLevelChance>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_level_chance");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Level)
+                    .HasColumnName("level")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripLevelProgression>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_level_progression");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Epic)
+                    .HasColumnName("epic")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lego)
+                    .HasColumnName("lego")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Major)
+                    .HasColumnName("major")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Minor)
+                    .HasColumnName("minor")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripMagicDist>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_magic_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripMeleeDist>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_melee_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripMissileDist>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_missile_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCantripSpellTier>(entity =>
+            {
+                entity.ToTable("treasure_cantrip_spell_tier");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Count)
+                    .HasColumnName("count")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCaster>(entity =>
+            {
+                entity.ToTable("treasure_caster");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCasterOrbSpell>(entity =>
+            {
+                entity.ToTable("treasure_caster_orb_spell");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCasterSpell>(entity =>
+            {
+                entity.ToTable("treasure_caster_spell");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureCasterWandStaffSpell>(entity =>
+            {
+                entity.ToTable("treasure_caster_wand_staff_spell");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureClothing1>(entity =>
+            {
+                entity.ToTable("treasure_clothing1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureClothing2>(entity =>
+            {
+                entity.ToTable("treasure_clothing2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureClothing3>(entity =>
+            {
+                entity.ToTable("treasure_clothing3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureClothingPalette>(entity =>
+            {
+                entity.ToTable("treasure_clothing_palette");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Color)
+                    .HasColumnName("color")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureConsumable>(entity =>
+            {
+                entity.ToTable("treasure_consumable");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
             modelBuilder.Entity<TreasureDeath>(entity =>
             {
                 entity.ToTable("treasure_death");
@@ -1305,6 +2046,239 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(10)");
             });
 
+            modelBuilder.Entity<TreasureGem>(entity =>
+            {
+                entity.ToTable("treasure_gem");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Class)
+                    .HasColumnName("class")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureGemClass>(entity =>
+            {
+                entity.ToTable("treasure_gem_class");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Class)
+                    .HasColumnName("class")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Value)
+                    .HasColumnName("value")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureGemClassTier>(entity =>
+            {
+                entity.ToTable("treasure_gem_class_tier");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.GemClass)
+                    .HasColumnName("gem_Class")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureGemDist>(entity =>
+            {
+                entity.ToTable("treasure_gem_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Count)
+                    .HasColumnName("count")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Group)
+                    .HasColumnName("group")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureHealKit>(entity =>
+            {
+                entity.ToTable("treasure_heal_kit");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureHeritage>(entity =>
+            {
+                entity.ToTable("treasure_heritage");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Dist)
+                    .HasColumnName("dist")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Heritage)
+                    .HasColumnName("heritage")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureItem>(entity =>
+            {
+                entity.ToTable("treasure_item");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.RollType)
+                    .HasColumnName("roll_Type")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TreasureItemName)
+                    .IsRequired()
+                    .HasColumnName("treasure_Item_Name")
+                    .HasColumnType("varchar(50)");
+
+                entity.Property(e => e.TreasureItemTableName)
+                    .IsRequired()
+                    .HasColumnName("treasure_Item_Table_Name")
+                    .HasColumnType("varchar(50)");
+            });
+
+            modelBuilder.Entity<TreasureItemBaneSpell>(entity =>
+            {
+                entity.ToTable("treasure_item_bane_spell");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureItemChance>(entity =>
+            {
+                entity.ToTable("treasure_item_chance");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.ItemTable)
+                    .HasColumnName("item_Table")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TreasureItemTable)
+                    .HasColumnName("treasure_Item_Table")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureJewelry>(entity =>
+            {
+                entity.ToTable("treasure_jewelry");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureLockpick>(entity =>
+            {
+                entity.ToTable("treasure_lockpick");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMagic>(entity =>
+            {
+                entity.ToTable("treasure_magic");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.ItemTable)
+                    .HasColumnName("item_Table")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TreasureItemTable)
+                    .HasColumnName("treasure_Item_Table")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureManaStone>(entity =>
+            {
+                entity.ToTable("treasure_mana_stone");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
             modelBuilder.Entity<TreasureMaterialBase>(entity =>
             {
                 entity.ToTable("treasure_material_base");
@@ -1321,6 +2295,40 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.Probability).HasColumnName("probability");
 
                 entity.Property(e => e.Tier).HasColumnName("tier");
+            });
+
+            modelBuilder.Entity<TreasureMaterialCeramic>(entity =>
+            {
+                entity.ToTable("treasure_material_ceramic");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialCloth>(entity =>
+            {
+                entity.ToTable("treasure_material_cloth");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<TreasureMaterialColor>(entity =>
@@ -1344,6 +2352,65 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.Probability).HasColumnName("probability");
             });
 
+            modelBuilder.Entity<TreasureMaterialColorDist>(entity =>
+            {
+                entity.ToTable("treasure_material_color_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Color)
+                    .HasColumnName("color")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Group)
+                    .HasColumnName("group")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialDist>(entity =>
+            {
+                entity.ToTable("treasure_material_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Group)
+                    .HasColumnName("group")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialGem>(entity =>
+            {
+                entity.ToTable("treasure_material_gem");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
             modelBuilder.Entity<TreasureMaterialGroups>(entity =>
             {
                 entity.ToTable("treasure_material_groups");
@@ -1360,6 +2427,998 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.Probability).HasColumnName("probability");
 
                 entity.Property(e => e.Tier).HasColumnName("tier");
+            });
+
+            modelBuilder.Entity<TreasureMaterialLeather>(entity =>
+            {
+                entity.ToTable("treasure_material_leather");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialMetal>(entity =>
+            {
+                entity.ToTable("treasure_material_metal");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialMod>(entity =>
+            {
+                entity.ToTable("treasure_material_mod");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Multiplier).HasColumnName("multiplier");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasColumnType("varchar(50)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialStone>(entity =>
+            {
+                entity.ToTable("treasure_material_stone");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMaterialWood>(entity =>
+            {
+                entity.ToTable("treasure_material_wood");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Material)
+                    .HasColumnName("material")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMundane>(entity =>
+            {
+                entity.ToTable("treasure_mundane");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.ItemTable)
+                    .HasColumnName("item_Table")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TreasureItemTable)
+                    .HasColumnName("treasure_Item_Table")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureMutateFilter>(entity =>
+            {
+                entity.HasKey(e => e.Pid)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("treasure_mutate_filter");
+
+                entity.Property(e => e.Pid).HasColumnName("pid");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.QualityID)
+                    .HasColumnName("quality_I_D")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.QualityType)
+                    .HasColumnName("quality_Type")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasurePea>(entity =>
+            {
+                entity.ToTable("treasure_pea");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureQualityLevel>(entity =>
+            {
+                entity.ToTable("treasure_quality_level");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.QualityLevel)
+                    .HasColumnName("quality_Level")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureQualityMod>(entity =>
+            {
+                entity.ToTable("treasure_quality_mod");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.QualityMod)
+                    .HasColumnName("quality_Mod")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e._1).HasColumnName("1");
+
+                entity.Property(e => e._2).HasColumnName("2");
+
+                entity.Property(e => e._3).HasColumnName("3");
+
+                entity.Property(e => e._4).HasColumnName("4");
+
+                entity.Property(e => e._5).HasColumnName("5");
+
+                entity.Property(e => e._6).HasColumnName("6");
+
+                entity.Property(e => e._7).HasColumnName("7");
+
+                entity.Property(e => e._8).HasColumnName("8");
+            });
+
+            modelBuilder.Entity<TreasureScroll>(entity =>
+            {
+                entity.ToTable("treasure_scroll");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureSpellBase>(entity =>
+            {
+                entity.ToTable("treasure_spell_base");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasColumnType("varchar(100)");
+
+                entity.Property(e => e.Power)
+                    .HasColumnName("power")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureSpellData>(entity =>
+            {
+                entity.ToTable("treasure_spell_data");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Diff)
+                    .HasColumnName("diff")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Duration)
+                    .HasColumnName("duration")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Family)
+                    .HasColumnName("family")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.FamilyOverride)
+                    .HasColumnName("family_Override")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IsFellow)
+                    .HasColumnName("is_Fellow")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IsInstant)
+                    .HasColumnName("is_Instant")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IsOff)
+                    .HasColumnName("is_Off")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IsUntargeted)
+                    .HasColumnName("is_Untargeted")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasColumnType("varchar(100)");
+
+                entity.Property(e => e.SchoolID)
+                    .HasColumnName("school_I_D")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.SpellID)
+                    .HasColumnName("spell_I_D")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TurnTo)
+                    .HasColumnName("turn_To")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Words)
+                    .HasColumnName("words")
+                    .HasColumnType("varchar(50)");
+            });
+
+            modelBuilder.Entity<TreasureSpellDesc>(entity =>
+            {
+                entity.ToTable("treasure_spell_desc");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Descriptor)
+                    .HasColumnName("descriptor")
+                    .HasColumnType("varchar(50)");
+
+                entity.Property(e => e.Diff)
+                    .HasColumnName("diff")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Mana)
+                    .HasColumnName("mana")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasColumnType("varchar(100)");
+
+                entity.Property(e => e.NoDescEntry)
+                    .HasColumnName("no_Desc_Entry")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.SpellID)
+                    .HasColumnName("spell_I_D")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TargetType)
+                    .HasColumnName("target_Type")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureSpellDist>(entity =>
+            {
+                entity.ToTable("treasure_spell_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Group)
+                    .HasColumnName("group")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureSpellLevel>(entity =>
+            {
+                entity.ToTable("treasure_spell_level");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Level)
+                    .HasColumnName("level")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureSpellLevelChance>(entity =>
+            {
+                entity.ToTable("treasure_spell_level_chance");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Level)
+                    .HasColumnName("level")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureSpellLevelProgression>(entity =>
+            {
+                entity.ToTable("treasure_spell_level_progression");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Lvl1)
+                    .HasColumnName("lvl1")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl2)
+                    .HasColumnName("lvl2")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl3)
+                    .HasColumnName("lvl3")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl4)
+                    .HasColumnName("lvl4")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl5)
+                    .HasColumnName("lvl5")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl6)
+                    .HasColumnName("lvl6")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl7)
+                    .HasColumnName("lvl7")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Lvl8)
+                    .HasColumnName("lvl8")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
+            });
+
+            modelBuilder.Entity<TreasureTierAdjust>(entity =>
+            {
+                entity.ToTable("treasure_tier_adjust");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AdjustTier)
+                    .HasColumnName("adjust_Tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWcid>(entity =>
+            {
+                entity.HasKey(e => e.Wcid)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("treasure_wcid");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.DidMut)
+                    .HasColumnName("did_Mut")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TSysDID)
+                    .HasColumnName("t_Sys_D_I_D")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TSysInt)
+                    .HasColumnName("t_Sys_Int")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.WeenieName)
+                    .IsRequired()
+                    .HasColumnName("weenie_Name")
+                    .HasColumnType("varchar(50)");
+            });
+
+            modelBuilder.Entity<TreasureWeapon>(entity =>
+            {
+                entity.ToTable("treasure_weapon");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.WeaponSubtable)
+                    .HasColumnName("weapon_Subtable")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponAtlatl>(entity =>
+            {
+                entity.ToTable("treasure_weapon_atlatl");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponAttackDefenseMod>(entity =>
+            {
+                entity.ToTable("treasure_weapon_attack_defense_mod");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Max).HasColumnName("max");
+
+                entity.Property(e => e.Min).HasColumnName("min");
+
+                entity.Property(e => e.QualityLevel)
+                    .HasColumnName("quality_Level")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponAxe1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_axe1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponAxe2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_axe2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponAxe3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_axe3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponBow1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_bow1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponBow2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_bow2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponBow3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_bow3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponCrossbow>(entity =>
+            {
+                entity.ToTable("treasure_weapon_crossbow");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponDagger1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_dagger1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponDagger2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_dagger2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponDagger3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_dagger3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponMace1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_mace1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponMace2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_mace2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponMace3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_mace3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponMeleeSpell>(entity =>
+            {
+                entity.ToTable("treasure_weapon_melee_spell");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponMissileSpell>(entity =>
+            {
+                entity.ToTable("treasure_weapon_missile_spell");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Spell)
+                    .HasColumnName("spell")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSkillRemap>(entity =>
+            {
+                entity.ToTable("treasure_weapon_skill_remap");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Skill)
+                    .HasColumnName("skill")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Subskill)
+                    .HasColumnName("subskill")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSpear1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_spear1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSpear2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_spear2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSpear3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_spear3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSpeedMod>(entity =>
+            {
+                entity.ToTable("treasure_weapon_speed_mod");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Max).HasColumnName("max");
+
+                entity.Property(e => e.Min).HasColumnName("min");
+
+                entity.Property(e => e.QualityLevel)
+                    .HasColumnName("quality_Level")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponStaff1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_staff1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponStaff2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_staff2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponStaff3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_staff3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSword1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_sword1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSword2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_sword2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSword3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_sword3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponUnarmed1>(entity =>
+            {
+                entity.ToTable("treasure_weapon_unarmed1");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponUnarmed2>(entity =>
+            {
+                entity.ToTable("treasure_weapon_unarmed2");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponUnarmed3>(entity =>
+            {
+                entity.ToTable("treasure_weapon_unarmed3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<TreasureWielded>(entity =>
@@ -1421,6 +3480,23 @@ namespace ACE.Database.Models.World
                 entity.Property(e => e.Unknown9).HasColumnName("unknown_9");
 
                 entity.Property(e => e.WeenieClassId).HasColumnName("weenie_Class_Id");
+            });
+
+            modelBuilder.Entity<TreasureWorkmanshipDist>(entity =>
+            {
+                entity.ToTable("treasure_workmanship_dist");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Workmanship)
+                    .HasColumnName("workmanship")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<Version>(entity =>
