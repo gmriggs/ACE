@@ -275,11 +275,13 @@ namespace ACE.Database
         {
             var results = new List<Mutation>();
 
+            var shortId = (ushort)mutationFilterId;
+
             using (var context = new WorldDbContext())
             {
                 context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-                return context.Mutation.Where(r => r.MutationId == (ushort)mutationFilterId)
+                return context.Mutation.Where(r => r.MutationId == shortId)
                     .Include(r => r.MutationChance)
                     .Include(r => r.MutationOutcome)
                         .ThenInclude(r => r.MutationEffectList)

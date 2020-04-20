@@ -1,8 +1,11 @@
 using System;
+using System.Globalization;
 using System.Linq;
 
+using ACE.Database;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
+using ACE.Server.Factories.Treasure.Mutate;
 using ACE.Server.Factories;
 using ACE.Server.Factories.Treasure;
 using ACE.Server.Network;
@@ -189,7 +192,7 @@ namespace ACE.Server.Command.Handlers
             Console.WriteLine(LootGenerationFactory_Test.TestLootGenMonster(Convert.ToUInt32(monsterDID), numberItemsGenerate, logstats, displayTable));
         }
 
-        [CommandHandler("testlootgen2", AccessLevel.Admin, CommandHandlerFlag.None, "Preliminary tests for moro's loot system")]
+        [CommandHandler("testlootgen2", AccessLevel.Admin, CommandHandlerFlag.ConsoleInvoke, "Preliminary tests for moro's loot system")]
         public static void TestLootGen2(Session session, params string[] parameters)
         {
             uint yumiWcid = 363;
@@ -201,7 +204,7 @@ namespace ACE.Server.Command.Handlers
 
             if (item == null)
             {
-                CommandHandlerHelper.WriteOutputInfo(session, $"Couldn't find wcid {itemWcid}", ChatMessageType.Broadcast);
+                Console.WriteLine($"Couldn't find wcid {itemWcid}", ChatMessageType.Broadcast);
                 return;
             }
 
@@ -213,11 +216,11 @@ namespace ACE.Server.Command.Handlers
             var creationMutationFilter = item.GetProperty(PropertyDataId.CreationMutationFilter);
             var augmentationMutationFilter = item.GetProperty(PropertyDataId.AugmentationMutationFilter);
 
-            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyInt.TsysMutationData: {tSysMutationDataInt:X8}");
-            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.TsysMutationFilter: {tSysMutationDataDid:X8}");
-            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.MutateFilter: {mutateFilter:X8}");
-            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.CreationMutationFilter: {creationMutationFilter:X8}");
-            CommandHandlerHelper.WriteOutputInfo(session, $"PropertyDataId.MutateFilter: {augmentationMutationFilter:X8}");
+            Console.WriteLine($"PropertyInt.TsysMutationData: {tSysMutationDataInt:X8}");
+            Console.WriteLine($"PropertyDataId.TsysMutationFilter: {tSysMutationDataDid:X8}");
+            Console.WriteLine($"PropertyDataId.MutateFilter: {mutateFilter:X8}");
+            Console.WriteLine($"PropertyDataId.CreationMutationFilter: {creationMutationFilter:X8}");
+            Console.WriteLine($"PropertyDataId.MutateFilter: {augmentationMutationFilter:X8}");
 
             bool hasMagic = false;
             int tier = 6;
@@ -225,10 +228,10 @@ namespace ACE.Server.Command.Handlers
 
             var success = TreasureSystem.MutateItem(item, hasMagic, tier, qualityMod, TreasureItemClass.BowWeapon);
 
-            CommandHandlerHelper.WriteOutputInfo(session, $"TryMutateItem: {success}");
+            Console.WriteLine($"TryMutateItem: {success}");
         }
 
-        [CommandHandler("show-mutation-filters", AccessLevel.Admin, CommandHandlerFlag.None, "Shows all of the PropertyInt.MutateFilters on the system")]
+        [CommandHandler("show-mutation-filters", AccessLevel.Admin, CommandHandlerFlag.ConsoleInvoke, "Shows all of the PropertyInt.MutateFilters on the system")]
         public static void HandleShowMutationFilters(Session session, params string[] parameters)
         {
             var allMutationFilters = TreasureTables.GetAllMutationFilters();
@@ -240,5 +243,94 @@ namespace ACE.Server.Command.Handlers
                 Console.WriteLine();
             }
         }
+
+        [CommandHandler("show-mutations", AccessLevel.Admin, CommandHandlerFlag.ConsoleInvoke, 1, "Shows all of the possible mutations for a 0x38 PropertyDID.TsysMutationFilter", "a 0x38 record id")]
+        public static void HandleShowMutations(Session session, params string[] parameters)
+        {
+            if (!uint.TryParse(parameters[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var tSysMutationFilter))
+            {
+                Console.WriteLine($"Couldn't parse {parameters[0]}");
+                return;
+            }
+
+            if (tSysMutationFilter < 0x38000000)
+                tSysMutationFilter = 0x38000000 | tSysMutationFilter;
+
+            var mutations = DatabaseManager.World.GetCachedMutationFilter(tSysMutationFilter);
+
+            if (mutations == null)
+            {
+                Console.WriteLine($"Couldn't find mutation filter {tSysMutationFilter:X8}");
+                return;
+            }
+
+            foreach (var mutation in mutations)
+            {
+                foreach (var outcome in mutation.MutationOutcome)
+                {
+                    foreach (var effectList in outcome.MutationEffectList)
+                    {
+                        foreach (var effect in effectList.MutationEffect)
+                        {
+                            foreach (var _arg in effect.MutationEffectArgument)
+                            {
+                                var arg = new EffectArgument(_arg);
+
+                                switch (arg.Type)
+                                {
+                                    case EffectArgumentType.Int:
+                                        Console.WriteLine($"Int: {arg.IntVal}");
+                                        break;
+
+                                    case EffectArgumentType.Double:
+                                        Console.WriteLine($"Double: {arg.DoubleVal}");
+                                        break;
+
+                                    case EffectArgumentType.Quality:
+
+                                        switch (arg.StatType)
+                                        {
+                                            case StatType.Int:
+                                                Console.WriteLine($"PropertyInt.{(PropertyInt)arg.StatIdx}");
+                                                break;
+
+                                            case StatType.Bool:
+                                                Console.WriteLine($"PropertyBool.{(PropertyBool)arg.StatIdx}");
+                                                break;
+
+                                            case StatType.Float:
+                                                Console.WriteLine($"PropertyFloat.{(PropertyFloat)arg.StatIdx}");
+                                                break;
+
+                                            case StatType.DID:
+                                                Console.WriteLine($"PropertyDataId.{(PropertyDataId)arg.StatIdx}");
+                                                break;
+
+                                            default:
+                                                Console.WriteLine($"Unkown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}");
+                                                break;
+                                        }
+                                        break;
+
+                                    case EffectArgumentType.Random:
+                                        Console.WriteLine($"Range: {arg.Min} - {arg.Max}");
+                                        break;
+
+                                    case EffectArgumentType.Variable:
+                                        Console.WriteLine($"Variable");
+                                        break;
+
+                                    default:
+                                        Console.WriteLine($"Unknown EffectArgumentType: {arg.Type}");
+                                        break;
+                                        
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
