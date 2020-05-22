@@ -1409,18 +1409,23 @@ namespace ACE.Server.Physics
                     // compare: rabbits occasionally spawning in buildings in yaraq,
                     // vs. lich tower @ 3D31FFFF
 
-                    var sortCell = LScape.get_landcell(newPos.ObjCellID) as SortCell;
-                    if (sortCell == null || !sortCell.has_building())
+                    var objCell = LScape.get_landcell(newPos.ObjCellID);
+
+                    if (!objCell.HasPhysicsBSP)
                     {
-                        // set to ground pos
-                        var landblock = LScape.get_landblock(newPos.ObjCellID);
-                        var groundZ = landblock.GetZ(newPos.Frame.Origin) + 0.05f;
+                        var sortCell = objCell as SortCell;
 
-                        if (Math.Abs(newPos.Frame.Origin.Z - groundZ) > ScatterThreshold_Z)
-                            log.Debug($"{Name} ({ID:X8}).SetScatterPositionInternal() - tried to spawn outdoor object @ {newPos} ground Z {groundZ} (diff: {newPos.Frame.Origin.Z - groundZ}), investigate ScatterThreshold_Z");
-                        else
+                        if (sortCell == null || !sortCell.has_building())
+                        {
+                            // set to ground pos
+                            var landblock = LScape.get_landblock(newPos.ObjCellID);
+                            var groundZ = landblock.GetZ(newPos.Frame.Origin) + 0.05f;
+
+                            /*if (Math.Abs(newPos.Frame.Origin.Z - groundZ) > ScatterThreshold_Z)
+                                log.Debug($"{Name} ({ID:X8}).SetScatterPositionInternal() - tried to spawn outdoor object @ {newPos} ground Z {groundZ} (diff: {newPos.Frame.Origin.Z - groundZ}), investigate ScatterThreshold_Z");
+                            else*/
                             newPos.Frame.Origin.Z = groundZ;
-
+                        }
                     }
                     //else
                         //indoors = true;
@@ -2092,7 +2097,16 @@ namespace ACE.Server.Physics
             if (PartArray != null && PartArray.GetNumCylsphere() != 0 && !State.HasFlag(PhysicsState.HasPhysicsBSP))
                 ObjCell.find_cell_list(Position, PartArray.GetNumCylsphere(), PartArray.GetCylSphere(), CellArray, null);
             else
+            {
                 find_bbox_cell_list(CellArray);
+
+                // server custom
+                foreach (var cell in CellArray.Cells.Values)
+                {
+                    if (cell != null)
+                        cell.HasPhysicsBSP = true;
+                }
+            }
 
             remove_shadows_from_cells();
             add_shadows_to_cell(CellArray);

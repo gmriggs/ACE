@@ -31,6 +31,9 @@ namespace ACE.Server.Physics.Common
         public List<uint> VoyeurTable;
         public Landblock CurLandblock;
 
+        // server custom
+        public bool HasPhysicsBSP;
+
         /// <summary>
         /// Returns TRUE if this is a house cell that can be protected by a housing barrier
         /// </summary>
