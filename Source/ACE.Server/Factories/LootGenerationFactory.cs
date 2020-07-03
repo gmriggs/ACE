@@ -1039,9 +1039,9 @@ namespace ACE.Server.Factories
                     wo.Biota.GetOrAddKnownSpell(spellID, wo.BiotaDatabaseLock, out _);
                 }
             }
-            int spellcraft = GetSpellcraft(wo, numSpells, profile.Tier);
+            int spellcraft = GetSpellcraft(wo);
             wo.ItemSpellcraft = spellcraft;
-            wo.ItemDifficulty = GetDifficulty(wo, profile.Tier, spellcraft);
+            wo.ItemDifficulty = GetDifficulty(wo, spellcraft);
             return wo;
         }
 
@@ -1488,7 +1488,7 @@ namespace ACE.Server.Factories
             return workmanship;
         }
 
-        private static int GetSpellcraft(WorldObject wo, int spellAmount, int tier)
+        private static int GetSpellcraft(WorldObject wo)
         {
             float minItemSpellCraftRange = 0.0f;
             float maxItemSpellCraftRange = 0.0f;
@@ -1528,7 +1528,6 @@ namespace ACE.Server.Factories
 
             var rng = ThreadSafeRandom.Next(minItemSpellCraftRange, maxItemSpellCraftRange);
 
-            // should this be clamped to 1 on the lower end?
             var itemSpellCraft = (int)Math.Floor(maxSpellDiff * rng);
 
             return itemSpellCraft;
@@ -1537,7 +1536,7 @@ namespace ACE.Server.Factories
         /// <summary>
         /// Rolls for the Arcane Lore requirement for an item
         /// </summary>
-        private static int GetDifficulty(WorldObject wo, int tier, int itemspellcraft)
+        private static int GetDifficulty(WorldObject wo, int itemspellcraft)
         {
             // factors:
 
@@ -1552,6 +1551,7 @@ namespace ACE.Server.Factories
 
             // - tier no longer used?
 
+            // heritage limit
             var heritageMod = wo.Heritage.HasValue ? 0.75f : 1.0f;
 
             var arcane = itemspellcraft * heritageMod * 1.9f;  // where does this factor come from?
@@ -1571,9 +1571,11 @@ namespace ACE.Server.Factories
 
             arcane += spellAddon + epicAddon + legAddon;
 
+            // allegiance limit
             var rankMod = wo.ItemAllegianceRankLimit ?? 1.0f;
             arcane /= 1.0f + rankMod;
 
+            // wield difficulty
             var wieldReq = 1.0f;
 
             if (wo.WieldDifficulty != null && wo.WieldDifficulty != 150 && wo.WieldDifficulty != 180)
