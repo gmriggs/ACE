@@ -1490,7 +1490,6 @@ namespace ACE.Server.Factories
 
         private static int GetSpellcraft(WorldObject wo, int spellAmount, int tier)
         {
-
             float minItemSpellCraftRange = 0.0f;
             float maxItemSpellCraftRange = 0.0f;
 
@@ -1514,81 +1513,81 @@ namespace ACE.Server.Factories
 
             // Getting the spell difficulty - Maybe a better way to do this.
             var maxSpellLevel = wo.GetMaxSpellLevel();
-            int maxSpellDiff = 1;
 
-            if (maxSpellLevel == 2)
-                maxSpellDiff = 50;
-            else if (maxSpellLevel == 3)
-                maxSpellDiff = 100;
-            else if (maxSpellLevel == 4)
-                maxSpellDiff = 150;
-            else if (maxSpellLevel == 5)
-                maxSpellDiff = 200;
-            else if (maxSpellLevel == 6)
-                maxSpellDiff = 250;
-            else if (maxSpellLevel == 7)
-                maxSpellDiff = 300;
-            else if (maxSpellLevel == 8)
-                maxSpellDiff = 400;  
+            int maxSpellDiff = maxSpellLevel switch
+            {
+                2 => 50,
+                3 => 100,
+                4 => 150,
+                5 => 200,
+                6 => 250,
+                7 => 300,
+                8 => 400,
+                _ => 1
+            };
 
-            var tItemSpellCraft = maxSpellDiff * ThreadSafeRandom.Next(minItemSpellCraftRange, maxItemSpellCraftRange);
+            var rng = ThreadSafeRandom.Next(minItemSpellCraftRange, maxItemSpellCraftRange);
 
-            if (tItemSpellCraft < 0)
-                tItemSpellCraft = 0;
+            // should this be clamped to 1 on the lower end?
+            var itemSpellCraft = (int)Math.Floor(maxSpellDiff * rng);
 
-            int finalItemSpellCraft = (int)Math.Floor(tItemSpellCraft);
-
-            return finalItemSpellCraft;
-
+            return itemSpellCraft;
         }
 
+        /// <summary>
+        /// Rolls for the Arcane Lore requirement for an item
+        /// </summary>
         private static int GetDifficulty(WorldObject wo, int tier, int itemspellcraft)
         {
-            int wieldReq = 1;
-            int sc = 0;  
-            int spc = 1;
-            int epicAddon = 0;
-            int legAddon = 0;
+            // factors:
 
-            spc = wo.Biota.PropertiesSpellBook.Count();
+            // - heritage limit
 
-            if (wo.EpicCantrips.Count > 0)
-                epicAddon = ThreadSafeRandom.Next(1, 5) * wo.EpicCantrips.Count;
-            if (wo.LegendaryCantrips.Count > 0)
-                legAddon = ThreadSafeRandom.Next(5, 10) * wo.LegendaryCantrips.Count;
+            // - item spellcraft
+            // - # of spells
+            // - # of epic / legendary cantrips
 
-            if (wo.ItemAllegianceRankLimit.HasValue)
-                sc = wo.ItemAllegianceRankLimit.Value;
-            if (wo.WieldDifficulty.HasValue)
-                if (wo.WieldDifficulty == 150 || wo.WieldDifficulty == 180)
-                    wieldReq = 1;
-                else
-                    wieldReq = wo.WieldDifficulty.Value;
-            else
-                wieldReq = 1;
+            // - allegiance rank limit
+            // - wield difficulty
 
-            float bq = 1.0f;
-            if (wo.Heritage.HasValue)
-                bq = 0.75f;
+            // - tier no longer used?
 
-            if (sc == 0)
-                sc = 1;
+            var heritageMod = wo.Heritage.HasValue ? 0.75f : 1.0f;
 
-            // Spell Count Addon
-            float spellAddonChance = spc * (20.0f / (spc + 2.0f));
-            float spellAddon = ThreadSafeRandom.Next(1.0f, spellAddonChance) * spc;
+            var arcane = itemspellcraft * heritageMod * 1.9f;  // where does this factor come from?
 
-            float tArcane = itemspellcraft * bq * 1.9f + spellAddon + epicAddon + legAddon;
-            tArcane /= sc + 1.0f;
-            tArcane -= wieldReq / 3.0f;
+            // spell additives
+            var spellAddon = 0.0f;
+            var numSpells = wo.Biota.PropertiesSpellBook.Count();
+            if (numSpells > 0)
+            {
+                var maxRNG = numSpells * (20.0f / (numSpells + 2.0f));
+                spellAddon = ThreadSafeRandom.Next(1.0f, maxRNG) * numSpells;
+            }
 
-            if (tArcane < 0)
-                tArcane = 0;
+            // epic / legendary additives
+            var epicAddon = wo.EpicCantrips.Count > 0 ? wo.EpicCantrips.Count * ThreadSafeRandom.Next(1, 5) : 0;
+            var legAddon = wo.LegendaryCantrips.Count > 0 ? wo.LegendaryCantrips.Count * ThreadSafeRandom.Next(5, 10) : 0;
 
-            int fArcane = (int)Math.Floor(tArcane);
-            if (fArcane < 10)
-                fArcane += 10;
-            return fArcane;
+            arcane += spellAddon + epicAddon + legAddon;
+
+            var rankMod = wo.ItemAllegianceRankLimit ?? 1.0f;
+            arcane /= 1.0f + rankMod;
+
+            var wieldReq = 1.0f;
+
+            if (wo.WieldDifficulty != null && wo.WieldDifficulty != 150 && wo.WieldDifficulty != 180)
+                wieldReq = wo.WieldDifficulty.Value;
+
+            arcane -= wieldReq / 3.0f;
+
+            int arcaneDiff = (int)Math.Floor(arcane);
+
+            // should this be adding 10, or clamped to 10 minimum?
+            if (arcaneDiff < 10)
+                arcaneDiff += 10;
+
+            return arcaneDiff;
         }
         private static int GetMaxMana(int spellAmount, int tier)
         {

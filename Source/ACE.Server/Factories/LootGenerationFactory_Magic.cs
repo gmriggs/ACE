@@ -215,7 +215,7 @@ namespace ACE.Server.Factories
             // Setting MagicD and MissileD Bonuses to null (some weenies have a value)
             wo.WeaponMagicDefense = null;
             wo.WeaponMissileDefense = null;
-            // Not sure why this is here, guessing some wienies have it by default
+            // Not sure why this is here, guessing some weenies have it by default
             wo.ItemSkillLevelLimit = null;
 
             // Setting general traits of weapon
