@@ -10,9 +10,11 @@ using ACE.Database.Models.World;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using ACE.Server.Factories.Treasure.Mutate;
+using ACE.Server.Factories.Treasure.Struct;
 using ACE.Entity.Models;
 using ACE.Server.Managers;
 using ACE.Server.WorldObjects;
+
 
 namespace ACE.Server.Factories.Treasure
 {
@@ -64,7 +66,7 @@ namespace ACE.Server.Factories.Treasure
 
         public static WorldObject RollLootItem(int group, int tier, int heritageDist, double qualityMod, out TreasureItemClass treasureClass)
         {
-            int treasureTableType = TreasureTables.GetTreasureType(group);
+            var treasureTableType = TreasureTables.GetTreasureType(group);
             int heritage = TreasureTables.GetHeritage(heritageDist);
             WorldObject retval = null;
             int wcid = 0;
@@ -73,72 +75,72 @@ namespace ACE.Server.Factories.Treasure
 
             switch (treasureTableType)
             {
-                case 1:
+                case TreasureTableType.Coins:
                     retval = WorldObjectFactory.CreateNewWorldObject(273);  // coinstack
                     retval.SetStackSize(tier * 100);    // TODO change value by tier to config
                     treasureClass = TreasureItemClass.Coins;
                     break;
 
-                case 2:
+                case TreasureTableType.Gem:
                     wcid = TreasureTables.GetGemWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.Gem;
                     break;
 
-                case 3:
+                case TreasureTableType.Jewelry:
                     wcid = TreasureTables.GetJewelryWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.Jewelry;
                     break;
 
-                case 4:
+                case TreasureTableType.ArtObject:
                     wcid = TreasureTables.GetArtObjectWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.ArtObject;
                     break;
 
-                case 5: // weapon
+                case TreasureTableType.Weapon: // weapon
                     wcid = TreasureTables.GetWeaponWcid(tier, heritage, qualityMod, ref treasureClass);
                     break;
 
-                case 6: // armor
+                case TreasureTableType.Armor: // armor
                     wcid = TreasureTables.GetArmorWcid(tier, heritage, qualityMod, ref treasureClass);
                     break;
 
-                case 7: // clothing
+                case TreasureTableType.Clothing: // clothing
                     wcid = TreasureTables.GetClothingWcid(tier, heritage);
                     treasureClass = TreasureItemClass.Clothing;
                     break;
 
-                case 8: // scroll
+                case TreasureTableType.Scroll: // scroll
                     int spellLevel = TreasureTables.GetSpellLevel(tier, qualityMod);
                     wcid = TreasureTables.GetScrollWcid(tier, spellLevel);
                     treasureClass = TreasureItemClass.Scroll;
                     break;
 
-                case 9: // caster (normally done in "weapon" above but allowing for custom tables)
+                case TreasureTableType.Caster: // caster (normally done in "weapon" above but allowing for custom tables)
                     wcid = TreasureTables.GetCasterWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.Caster;
                     break;
 
-                case 10:
+                case TreasureTableType.ManaStone:
                     wcid = TreasureTables.GetManaStoneWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.ManaStone;
                     break;
 
-                case 11:
+                case TreasureTableType.FoodDrink:
                     wcid = TreasureTables.GetConsumableWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.FoodDrink;
                     break;
 
-                case 12:
+                case TreasureTableType.HealKit:
                     wcid = TreasureTables.GetHealKitWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.HealKit;
                     break;
 
-                case 13:
+                case TreasureTableType.Lockpick:
                     wcid = TreasureTables.GetLockpickWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.Lockpick;
                     break;
 
-                case 14:
+                case TreasureTableType.SpellComponent:
                     wcid = TreasureTables.GetSpellCompWcid(tier, qualityMod);
                     treasureClass = TreasureItemClass.SpellComponent;
                     break;
@@ -1036,7 +1038,7 @@ namespace ACE.Server.Factories.Treasure
             while (spellsAssigned < numEnchantments && numAttempts > 0)
             {
                 var luck = ThreadSafeRandom.Next(0.0f, 1.0f);
-                int spellId = TreasureTables.GetSpellCompWcid(spellGroup, roll.QualityModifier);
+                int spellId = TreasureTables.GetSpell(spellGroup);
 
                 if (!spells.Any(i => i.Item1 == spellId))
                 {

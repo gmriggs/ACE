@@ -212,9 +212,9 @@ namespace ACE.Server.Factories.Treasure
             return retVal;
         }
 
-        public static int GetTreasureType(int group)
+        public static TreasureTableType GetTreasureType(int group)
         {
-            return GetChance(treasureGroup, group);
+            return (TreasureTableType)GetChance(treasureGroup, group);
         }
 
         public static int GetHeritage(int dist)
