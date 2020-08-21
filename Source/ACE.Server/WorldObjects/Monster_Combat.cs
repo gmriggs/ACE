@@ -180,6 +180,40 @@ namespace ACE.Server.WorldObjects
                         continue;
                     }
                 }
+                else if (!currentSpell.IsSelfTargeted && currentSpell.NonComponentTargetType != ItemType.None)
+                {
+                    var failed = false;
+
+                    // not self-targeted, not untargeted == targeting AttackTarget
+                    if (!Location.Indoors && AttackTarget.Location.Indoors)
+                    {
+                        // ensure target cell is visible from outdoors
+                        // every cell in regular buildings is visible from outdoors
+                        // this would only apply for outdoors -> underground caves, and landblocks that contain both traversable overworld and dungeon
+                        if (!AttackTarget.PhysicsObj.CurCell.SeenOutside)
+                            failed = true;
+                    }
+                    else if (Location.Indoors && !AttackTarget.Location.Indoors)
+                    {
+                        // ensure monster cell is visible from outdoors
+                        if (!PhysicsObj.CurCell.SeenOutside)
+                            failed = true;
+                    }
+
+                    if (failed)
+                    {
+                        // reroll attack type
+                        CurrentAttack = GetNextAttackType();
+                        it++;
+
+                        // max iterations to melee?
+                        if (it >= 30)
+                            CurrentAttack = CombatType.Melee;
+
+                        continue;
+                    }
+                }
+
                 return GetSpellMaxRange();
             }
 

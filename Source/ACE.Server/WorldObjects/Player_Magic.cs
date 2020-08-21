@@ -451,6 +451,21 @@ namespace ACE.Server.WorldObjects
                     return false;
                 }
             }
+
+            if (target?.PhysicsObj?.CurCell != null)
+            {
+                if (Location.Indoors && !target.Location.Indoors && !PhysicsObj.CurCell.SeenOutside)
+                {
+                    SendUseDoneEvent(WeenieError.MissileOutOfRange);
+                    return false;
+                }
+                if (!Location.Indoors && target.Location.Indoors && !target.PhysicsObj.CurCell.SeenOutside)
+                {
+                    SendUseDoneEvent(WeenieError.MissileOutOfRange);
+                    return false;
+                }
+            }
+
             return true;
         }
 
