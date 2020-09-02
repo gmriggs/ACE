@@ -104,7 +104,9 @@ namespace ACE.Server.WorldObjects
                 // the animation is also weird, and differs from food, in that it is the full animation
                 // instead of stopping at the 'eat/drink' point... so we pass 0.5 here?
 
-                player.ApplyConsumable(UseUserAnimation, () => UseGem(player), 0.5f);
+                var animMod = (UseUserAnimation == MotionCommand.MimeDrink || UseUserAnimation == MotionCommand.MimeEat) ? 0.5f : 1.0f;
+
+                player.ApplyConsumable(UseUserAnimation, () => UseGem(player), animMod);
             }
             else
                 UseGem(player);
@@ -128,7 +130,10 @@ namespace ACE.Server.WorldObjects
             {
                 var spell = new Spell((uint)SpellDID);
 
-                TryCastSpell(spell, player, this, false);
+                // should be 'You cast', instead of 'Item cast'
+                // omitting the item caster here, so player is also used for enchantment registry caster,
+                // which could prevent some scenarios with spamming enchantments from multiple gem sources to protect against dispels
+                player.TryCastSpell(spell, player, null, false);
             }
 
             if (UseCreateContractId > 0)

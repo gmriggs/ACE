@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using ACE.Database;
 using ACE.DatLoader;
 using ACE.DatLoader.FileTypes;
 using ACE.Entity;
@@ -15,7 +15,6 @@ using ACE.Server.Managers;
 using ACE.Server.Network;
 using ACE.Server.Network.GameEvent.Events;
 using ACE.Server.Network.GameMessages.Messages;
-using ACE.Server.Physics;
 
 namespace ACE.Server.WorldObjects
 {
@@ -148,7 +147,7 @@ namespace ACE.Server.WorldObjects
         public bool TryConsumeFromInventoryWithNetworking(uint wcid, int amount = int.MaxValue)
         {
             var items = GetInventoryItemsOfWCID(wcid);
-            items = items.OrderBy(o => o.Value).ToList();
+            //items = items.OrderBy(o => o.Value).ToList();
 
             var leftReq = amount;
             foreach (var item in items)
@@ -274,6 +273,10 @@ namespace ACE.Server.WorldObjects
                 {
                     if (result.Message != null)
                         Session.Network.EnqueueSend(result.Message);
+
+                    // handle equipment sets
+                    if (item.HasItemSet)
+                        EquipItemFromSet(item);
 
                     return true;
                 }
@@ -577,12 +580,15 @@ namespace ACE.Server.WorldObjects
             // this crouch down motion exited the animation queue immediately
 
             // here we are just skipping the animation if the player is jumping
-            if (IsJumping && PropertyManager.GetBool("jump_loot").Item)
+            if (IsJumping && PropertyManager.GetBool("allow_jump_loot").Item)
                 return MotionCommand.Invalid;
 
             MotionCommand pickupMotion;
 
             var item_location_z = objectWereReachingToward.Location.PositionZ;
+
+            if (!(objectWereReachingToward is Corpse))
+                item_location_z += objectWereReachingToward.Height * 0.5f;
 
             if (item_location_z >= Location.PositionZ + (Height * 0.90))
                 pickupMotion = MotionCommand.Pickup20; // Reach up
@@ -961,7 +967,7 @@ namespace ACE.Server.WorldObjects
                                 item.NotifyOfEvent(RegenerationType.PickUp);
 
                                 if (questSolve)
-                                    QuestManager.Update(item.Quest);
+                                    item.EmoteManager.OnQuest(this);
 
                                 if (isFromAPlayerCorpse)
                                 {
@@ -1538,7 +1544,7 @@ namespace ACE.Server.WorldObjects
                 case WieldRequirement.Skill:
 
                     // verify skill level - current / buffed
-                    var skill = GetCreatureSkill(ConvertToMoASkill((Skill)skillOrAttribute));
+                    var skill = GetCreatureSkill(ConvertToMoASkill((Skill)skillOrAttribute), false);
                     if (skill.Current < difficulty)
                         return WeenieError.SkillTooLow;
                     break;
@@ -1546,7 +1552,7 @@ namespace ACE.Server.WorldObjects
                 case WieldRequirement.RawSkill:
 
                     // verify skill level - base
-                    skill = GetCreatureSkill(ConvertToMoASkill((Skill)skillOrAttribute));
+                    skill = GetCreatureSkill(ConvertToMoASkill((Skill)skillOrAttribute), false);
                     if (skill.Base < difficulty)
                         return WeenieError.SkillTooLow;
                     break;
@@ -1586,14 +1592,14 @@ namespace ACE.Server.WorldObjects
                 case WieldRequirement.Level:
 
                     // verify player level
-                    if (Level < difficulty)
+                    if ((Level ?? 1) < difficulty)
                         return WeenieError.LevelTooLow;
                     break;
 
                 case WieldRequirement.Training:
 
                     // verify skill is trained / specialized
-                    skill = GetCreatureSkill(ConvertToMoASkill((Skill)skillOrAttribute));
+                    skill = GetCreatureSkill(ConvertToMoASkill((Skill)skillOrAttribute), false);
                     if ((int)skill.AdvancementClass < difficulty)
                         return WeenieError.SkillTooLow;
                     break;
@@ -1601,7 +1607,7 @@ namespace ACE.Server.WorldObjects
                 case WieldRequirement.IntStat:      // unused in PY16
 
                     // verify PropertyInt minimum
-                    var propInt = GetProperty((PropertyInt)skillOrAttribute);
+                    var propInt = GetProperty((PropertyInt)skillOrAttribute) ?? 0;
                     if (propInt < difficulty)
                         return WeenieError.SkillTooLow;
                     break;
@@ -1609,7 +1615,7 @@ namespace ACE.Server.WorldObjects
                 case WieldRequirement.BoolStat:     // unused in PY16
 
                     // verify PropertyBool equal
-                    var propBool = GetProperty((PropertyBool)skillOrAttribute);
+                    var propBool = GetProperty((PropertyBool)skillOrAttribute) ?? false;
                     if (propBool != Convert.ToBoolean(difficulty))
                         return WeenieError.SkillTooLow;
                     break;
@@ -1785,6 +1791,16 @@ namespace ACE.Server.WorldObjects
                         }
 
                         var newStack = WorldObjectFactory.CreateNewWorldObject(stack.WeenieClassId);
+
+                        if (newStack == null)
+                        {
+                            // this should never happen under normal circumstances,
+                            // but can happen if the player has an item in their inventory that is no longer in the world database
+                            Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, stackId, WeenieError.ActionCancelled));
+                            EnqueuePickupDone(pickupMotion);
+                            return;
+                        }
+
                         newStack.SetStackSize(amount);
 
                         if (DoHandleActionStackableSplitToContainer(stack, stackFoundInContainer, stackRootOwner, container, containerRootOwner, newStack, placementPosition, amount))
@@ -1809,6 +1825,15 @@ namespace ACE.Server.WorldObjects
             else // This is a self-contained movement
             {
                 var newStack = WorldObjectFactory.CreateNewWorldObject(stack.WeenieClassId);
+
+                if (newStack == null)
+                {
+                    // this should never happen under normal circumstances,
+                    // but can happen if the player has an item in their inventory that is no longer in the world database
+                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, stackId));
+                    return;
+                }
+
                 newStack.SetStackSize(amount);
 
                 DoHandleActionStackableSplitToContainer(stack, stackFoundInContainer, stackRootOwner, container, containerRootOwner, newStack, placementPosition, amount);
@@ -1920,6 +1945,15 @@ namespace ACE.Server.WorldObjects
                 Session.Network.EnqueueSend(new GameMessageSetStackSize(stack));
 
                 var newStack = WorldObjectFactory.CreateNewWorldObject(stack.WeenieClassId);
+
+                if (newStack == null)
+                {
+                    // this should never happen under normal circumstances,
+                    // but can happen if the player has an item in their inventory that is no longer in the world database
+                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, stackId, WeenieError.ActionCancelled));
+                    return;
+                }
+
                 newStack.SetStackSize(amount);
 
                 Session.Network.EnqueueSend(new GameMessagePrivateUpdatePropertyInt(this, PropertyInt.EncumbranceVal, EncumbranceVal ?? 0));
@@ -1965,8 +1999,8 @@ namespace ACE.Server.WorldObjects
                 return;
             }
 
-            var sourceStack = FindObject(mergeFromGuid, SearchLocations.LocationsICanMove, out var sourceStackFoundInContainer, out var sourceStackRootOwner, out _);
-            var targetStack = FindObject(mergeToGuid, SearchLocations.MyInventory | SearchLocations.MyEquippedItems | SearchLocations.LastUsedContainer, out var targetStackFoundInContainer, out var targetStackRootOwner, out _);
+            var sourceStack = FindObject(mergeFromGuid, SearchLocations.LocationsICanMove, out _, out var sourceStackRootOwner, out _);
+            var targetStack = FindObject(mergeToGuid, SearchLocations.LocationsICanMove, out _, out var targetStackRootOwner, out _);
 
             if (sourceStack == null)
             {
@@ -2062,7 +2096,7 @@ namespace ACE.Server.WorldObjects
                 return;
             }
 
-            if (!CanAddToInventory(sourceStack))
+            if (targetStackRootOwner == this && !CanMergeToInventory(sourceStack, targetStack, amount))
             {
                 Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, sourceStack.Guid.Full, WeenieError.None));
                 return;
@@ -2081,12 +2115,6 @@ namespace ACE.Server.WorldObjects
                     return;
                 }
             }
-
-            //if (!targetStackFoundInContainer.CanAddToContainer(sourceStack, false))
-            //{
-            //    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, sourceStack.Guid.Full, WeenieError.None));
-            //    return;
-            //}
 
             if ((sourceStackRootOwner == this && targetStackRootOwner != this)  || (sourceStackRootOwner != this && targetStackRootOwner == this)) // Movement is between the player and the world
             {
@@ -2146,7 +2174,7 @@ namespace ACE.Server.WorldObjects
                             return;
                         }
 
-                        if (DoHandleActionStackableMerge(sourceStack, sourceStackFoundInContainer, sourceStackRootOwner, targetStack, targetStackFoundInContainer, targetStackRootOwner, amount))
+                        if (DoHandleActionStackableMerge(sourceStack, targetStack, amount))
                         {
                             // If the client used the R key to merge a partial stack from the landscape, it also tries to add the "ghosted" item of the picked up stack to the inventory as well.
                             if (sourceStackRootOwner != this && sourceStack.StackSize > 0)
@@ -2172,99 +2200,93 @@ namespace ACE.Server.WorldObjects
             }
             else // This is a self-contained movement
             {
-                DoHandleActionStackableMerge(sourceStack, sourceStackFoundInContainer, sourceStackRootOwner, targetStack, targetStackFoundInContainer, targetStackRootOwner, amount);
+                DoHandleActionStackableMerge(sourceStack, targetStack, amount);
             }
         }
 
-        private bool DoHandleActionStackableMerge(WorldObject sourceStack, Container sourceStackFoundInContainer, Container sourceStackRootOwner, WorldObject targetStack, Container targetStackFoundInContainer, Container targetStackRootOwner, int amount)
+        private bool DoHandleActionStackableMerge(WorldObject sourceStack, WorldObject targetStack, int amount)
         {
+            var previousSourceStackCheck = sourceStack;
+            //var previousTargetStackCheck = targetStack;
+
+            sourceStack = FindObject(sourceStack.Guid, SearchLocations.LocationsICanMove, out _, out var sourceStackRootOwner, out _);
+            targetStack = FindObject(targetStack.Guid, SearchLocations.LocationsICanMove, out var targetStackFoundInContainer, out var targetStackRootOwner, out _);
+
+            if (sourceStack == null || targetStack == null)
+            {
+                Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousSourceStackCheck.Guid.Full, WeenieError.None));
+                return false;
+            }
+
+            if (targetStack == null || targetStack.MaxStackSize < targetStack.StackSize + amount)
+            {
+                Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousSourceStackCheck.Guid.Full));
+                return false;
+            }
+
             if (amount == sourceStack.StackSize && sourceStack.StackSize + targetStack.StackSize <= targetStack.MaxStackSize) // The merge will consume the entire source stack
             {
-                var pickedUpFromLandblock = false;
-                var removedFromInventory = false;
-                if (sourceStack.CurrentLandblock != null) // Movement is an item pickup off the landblock
+                Session.Network.EnqueueSend(new GameMessageInventoryRemoveObject(sourceStack));
+
+                if (sourceStackRootOwner != null) // item is contained and not on a landblock
                 {
-                    if (DoHandleActionPutItemInContainer(sourceStack, sourceStackFoundInContainer, false, targetStackFoundInContainer, targetStackRootOwner, 0))
-                        pickedUpFromLandblock = true;
+                    if (sourceStackRootOwner.TryRemoveFromInventory(sourceStack.Guid, out var stackToDestroy, true))
+                        stackToDestroy?.Destroy();
                     else
                     {
-                        Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, sourceStack.Guid.Full));
+                        Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousSourceStackCheck.Guid.Full));
                         return false;
                     }
                 }
-                else if (sourceStackRootOwner != null)
-                {
-                    if (!sourceStackRootOwner.TryRemoveFromInventory(sourceStack.Guid, out _) && (!(sourceStackRootOwner is Player playerContainer) || !playerContainer.TryDequipObjectWithNetworking(sourceStack.Guid, out _, DequipObjectAction.DequipToPack)))
-                    {
-                        Session.Network.EnqueueSend(new GameEventCommunicationTransientString(Session, "TryRemoveFromInventory failed!")); // Custom error message
-                        Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, sourceStack.Guid.Full));
-                        return false;
-                    }
-                    else
-                    {
-                        removedFromInventory = true;
-                    }
-                }
+                else // item is on the landblock and not contained
+                    sourceStack.Destroy();
 
-                if (pickedUpFromLandblock && TryRemoveFromInventory(sourceStack.Guid, true))
-                    Session.Network.EnqueueSend(new GameMessageInventoryRemoveObject(sourceStack));
-                else
-                {
-                    var previousStackCheck = sourceStack;
-
-                    sourceStack = FindObject(sourceStack.Guid, SearchLocations.LocationsICanMove, out sourceStackFoundInContainer, out sourceStackRootOwner, out _);
-
-                    if (sourceStack == null && !removedFromInventory)
-                    {
-                        Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousStackCheck.Guid.Full));
-                        return false;
-                    }
-
-                    if (removedFromInventory)
-                    {
-                        previousStackCheck.Destroy();
-                        Session.Network.EnqueueSend(new GameMessageInventoryRemoveObject(previousStackCheck));
-                    }
-                }
-
-                if (!removedFromInventory)
-                {
-                    if (pickedUpFromLandblock)
-                        sourceStack.NotifyOfEvent(RegenerationType.PickUp);
-                    sourceStack.Destroy(false);
-                }
 
                 if (!AdjustStack(targetStack, amount, targetStackFoundInContainer, targetStackRootOwner))
                     return false;
 
-                Session.Network.EnqueueSend(new GameMessageSetStackSize(targetStack));
+                if (targetStack.CurrentLandblock != null)
+                    targetStack.EnqueueBroadcast(new GameMessageSetStackSize(targetStack));
+                else
+                    Session.Network.EnqueueSend(new GameMessageSetStackSize(targetStack));
             }
             else // The merge will reduce the size of the source stack
             {
-                var previousStackCheck = sourceStack;
-                sourceStack = FindObject(sourceStack.Guid, SearchLocations.LocationsICanMove, out sourceStackFoundInContainer, out sourceStackRootOwner, out _);
+                previousSourceStackCheck = sourceStack;
+                //previousTargetStackCheck = targetStack;
+                sourceStack = FindObject(sourceStack.Guid, SearchLocations.LocationsICanMove, out var sourceStackFoundInContainer, out sourceStackRootOwner, out _);
+                targetStack = FindObject(targetStack.Guid, SearchLocations.LocationsICanMove, out targetStackFoundInContainer, out targetStackRootOwner, out _);
 
                 if (sourceStack == null || sourceStack.StackSize < amount)
                 {
-                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousStackCheck.Guid.Full));
+                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousSourceStackCheck.Guid.Full));
+                    return false;
+                }
+
+                if (targetStack == null || targetStack.MaxStackSize < targetStack.StackSize + amount)
+                {
+                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousSourceStackCheck.Guid.Full));
                     return false;
                 }
 
                 if (!AdjustStack(sourceStack, -amount, sourceStackFoundInContainer, sourceStackRootOwner))
                 {
-                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousStackCheck.Guid.Full));
+                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, previousSourceStackCheck.Guid.Full));
                     return false;
                 }
 
-                if (sourceStackRootOwner == null)
-                    EnqueueBroadcast(new GameMessageSetStackSize(sourceStack));
+                if (sourceStack.CurrentLandblock != null)
+                    sourceStack.EnqueueBroadcast(new GameMessageSetStackSize(sourceStack));
                 else
                     Session.Network.EnqueueSend(new GameMessageSetStackSize(sourceStack));
 
                 if (!AdjustStack(targetStack, amount, targetStackFoundInContainer, targetStackRootOwner))
                     return false;
 
-                Session.Network.EnqueueSend(new GameMessageSetStackSize(targetStack));
+                if (targetStack.CurrentLandblock != null)
+                    targetStack.EnqueueBroadcast(new GameMessageSetStackSize(targetStack));
+                else
+                    Session.Network.EnqueueSend(new GameMessageSetStackSize(targetStack));
             }
 
             return true;
@@ -2619,6 +2641,16 @@ namespace ACE.Server.WorldObjects
                 Session.Network.EnqueueSend(new GameMessageSetStackSize(item));
 
                 var newStack = WorldObjectFactory.CreateNewWorldObject(item.WeenieClassId);
+
+                if (newStack == null)
+                {
+                    // this should never happen under normal circumstances,
+                    // but can happen if the player has an item in their inventory that is no longer in the world database
+                    Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, item.Guid.Full));
+                    itemToGive = null;
+                    return false;
+                }
+
                 newStack.SetStackSize(amount);
 
                 Session.Network.EnqueueSend(new GameMessagePrivateUpdatePropertyInt(this, PropertyInt.EncumbranceVal, EncumbranceVal ?? 0));
@@ -2808,6 +2840,12 @@ namespace ACE.Server.WorldObjects
                 //    player.Session.Network.EnqueueSend(new GameEventCommunicationTransientString(player.Session, "You do not have enough pack space to use that!"));
                 //else //if (playerOutOfContainerSlots)
                 //    player.Session.Network.EnqueueSend(new GameEventCommunicationTransientString(player.Session, "You do not have enough container slots to use that!"));
+
+                // Font of Enlightenment and Rebirth tries to give you Attribute Reset Certificate.
+                var itemBeingGiven = DatabaseManager.World.GetCachedWeenie(weenieClassId);
+                var msg = new GameMessageSystemChat($"{emoter.Name} tries to give you {(itemStacks > 1 ? $"{itemStacks} " : "")}{(itemStacks > 1 ? itemBeingGiven.GetPluralName() : itemBeingGiven.GetName())}.", ChatMessageType.Broadcast);
+                Session.Network.EnqueueSend(msg);
+
                 return;
             }
 
@@ -2841,15 +2879,22 @@ namespace ACE.Server.WorldObjects
             {
                 log.Warn($"Player.GiveFromEmote: itemStacks <= 0: emoter: {emoter.Name} (0x{emoter.Guid}) - {emoter.WeenieClassId} | weenieClassId: {weenieClassId} | amount: {amount}");
 
-                var item = PlayerFactory.CreateIOU(weenieClassId);
-                TryCreateForGive(emoter, item);
+                if (PropertyManager.GetBool("iou_trades").Item)
+                {
+                    var item = PlayerFactory.CreateIOU(weenieClassId);
+                    TryCreateForGive(emoter, item);
+                }
             }
         }
 
         public bool TryCreateForGive(WorldObject giver, WorldObject itemBeingGiven)
         {
             if (!TryCreateInInventoryWithNetworking(itemBeingGiven))
+            {
+                var msg = new GameMessageSystemChat($"{giver.Name} tries to give you {(itemBeingGiven.StackSize > 1 ? $"{itemBeingGiven.StackSize} " : "")}{(itemBeingGiven.StackSize > 1 ? itemBeingGiven.GetPluralName() : itemBeingGiven.Name)}.", ChatMessageType.Broadcast);
+                Session.Network.EnqueueSend(msg);
                 return false;
+            }
 
             if (!(giver.GetProperty(PropertyBool.NpcInteractsSilently) ?? false))
             {

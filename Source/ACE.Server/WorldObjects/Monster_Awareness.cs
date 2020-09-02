@@ -57,6 +57,9 @@ namespace ACE.Server.WorldObjects
             MonsterState = State.Idle;
 
             PhysicsObj.CachedVelocity = Vector3.Zero;
+
+            if (RetaliateTargets != null)
+                RetaliateTargets.Clear();
         }
 
         public Tolerance Tolerance
@@ -244,8 +247,20 @@ namespace ACE.Server.WorldObjects
 
                 // ensure within 'detection radius' ?
                 var chaseDistSq = creature == AttackTarget ? MaxChaseRangeSq : VisualAwarenessRangeSq;
-                if (Location.SquaredDistanceTo(creature.Location) > chaseDistSq)
+
+                /*if (Location.SquaredDistanceTo(creature.Location) > chaseDistSq)
+                    continue;*/
+
+                if (PhysicsObj.get_distance_sq_to_object(creature.PhysicsObj, true) > chaseDistSq)
                     continue;
+
+                // if this monster belongs to a faction,
+                // ensure target does not belong to the same faction, or they have been provoked
+                if (Faction1Bits != null && creature.Faction1Bits != null && (Faction1Bits & creature.Faction1Bits) != 0)
+                {
+                    if (RetaliateTargets != null && !RetaliateTargets.Contains(creature.Guid.Full))
+                        continue;
+                }
 
                 visibleTargets.Add(creature);
             }
@@ -261,7 +276,8 @@ namespace ACE.Server.WorldObjects
             var targetDistance = new List<TargetDistance>();
 
             foreach (var target in targets)
-                targetDistance.Add(new TargetDistance(target, distSq ? Location.SquaredDistanceTo(target.Location) : Location.DistanceTo(target.Location)));
+                //targetDistance.Add(new TargetDistance(target, distSq ? Location.SquaredDistanceTo(target.Location) : Location.DistanceTo(target.Location)));
+                targetDistance.Add(new TargetDistance(target, distSq ? (float)PhysicsObj.get_distance_sq_to_object(target.PhysicsObj, true) : (float)PhysicsObj.get_distance_to_object(target.PhysicsObj, true)));
 
             return targetDistance.OrderBy(i => i.Distance).ToList();
         }
@@ -291,7 +307,7 @@ namespace ACE.Server.WorldObjects
             {
                 invRatio += 1.0f - (targetDistance.Distance / distSum);
 
-                if (rng <= invRatio)
+                if (rng < invRatio)
                     return targetDistance.Target;
             }
             // precision error?
@@ -323,10 +339,11 @@ namespace ACE.Server.WorldObjects
                 if (creature is Player player && (!player.Attackable || player.Teleporting || (player.Hidden ?? false)))
                     continue;
 
-                var distSq = Location.SquaredDistanceTo(creature.Location);
+                //var distSq = Location.SquaredDistanceTo(creature.Location);
+                var distSq = PhysicsObj.get_distance_sq_to_object(creature.PhysicsObj, true);
                 if (distSq < closestDistSq)
                 {
-                    closestDistSq = distSq;
+                    closestDistSq = (float)distSq;
                     closestTarget = creature;
                 }
             }
@@ -396,9 +413,13 @@ namespace ACE.Server.WorldObjects
                 if (CreatureType != null && CreatureType == nearbyCreature.CreatureType ||
                       FriendType != null && FriendType == nearbyCreature.CreatureType)
                 {
-                    var distSq = Location.SquaredDistanceTo(nearbyCreature.Location);
+                    //var distSq = Location.SquaredDistanceTo(nearbyCreature.Location);
+                    var distSq = PhysicsObj.get_distance_sq_to_object(nearbyCreature.PhysicsObj, true);
                     if (distSq > nearbyCreature.VisualAwarenessRangeSq)
                         continue;
+
+                    if (nearbyCreature.RetaliateTargets != null)
+                        nearbyCreature.RetaliateTargets.Add(AttackTarget.Guid.Full);
 
                     Alerted = true;
                     nearbyCreature.AttackTarget = AttackTarget;

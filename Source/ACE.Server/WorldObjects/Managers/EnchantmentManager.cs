@@ -126,9 +126,9 @@ namespace ACE.Server.WorldObjects.Managers
         /// <summary>
         /// Returns the top layers in each spell category for a StatMod type + key
         /// </summary>
-        public List<PropertiesEnchantmentRegistry> GetEnchantments_TopLayer(EnchantmentTypeFlags statModType, uint statModKey)
+        public List<PropertiesEnchantmentRegistry> GetEnchantments_TopLayer(EnchantmentTypeFlags statModType, uint statModKey, bool handleMultiple = false)
         {
-            return WorldObject.Biota.PropertiesEnchantmentRegistry.GetEnchantmentsTopLayerByStatModType(statModType, statModKey, WorldObject.BiotaDatabaseLock);
+            return WorldObject.Biota.PropertiesEnchantmentRegistry.GetEnchantmentsTopLayerByStatModType(statModType, statModKey, WorldObject.BiotaDatabaseLock, handleMultiple);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace ACE.Server.WorldObjects.Managers
                 return result;
             }
 
-            result.BuildStack(entries, spell, caster);
+            result.BuildStack(entries, spell, caster, equip);
 
             // handle cases:
             // surpassing: new spell is written to next layer
@@ -643,7 +643,7 @@ namespace ACE.Server.WorldObjects.Managers
         /// </summary>
         public virtual int GetAttributeMod(PropertyAttribute attribute)
         {
-            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Attribute, (uint)attribute);
+            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Attribute, (uint)attribute, true);
 
             var attributeMod = 0;
             foreach (var enchantment in enchantments)
@@ -682,18 +682,23 @@ namespace ACE.Server.WorldObjects.Managers
         }
 
         /// <summary>
-        /// Returns the modifier from XP enchantments, such as Augmented Understanding
+        /// Returns the additive bonus from XP enchantments, such as Augmented Understanding
         /// </summary>
-        /// <returns></returns>
-        public virtual float GetXPMod()
+        public virtual float GetXPBonus()
         {
             var enchantments = GetEnchantments(SpellCategory.TrinketXPRaising);
 
-            // multiplier
-            var modifier = 1.0f;
-            foreach (var enchantment in enchantments)
-                modifier *= enchantment.StatModValue;
+            // TODO: temporary code to handle both additive and multiplicative mods
+            // should be additive in database, update when everything is in sync
+            var modifier = 0.0f;
 
+            foreach (var enchantment in enchantments)
+            {
+                if (enchantment.StatModType.HasFlag(EnchantmentTypeFlags.Multiplicative))
+                    modifier += enchantment.StatModValue - 1.0f;
+                else
+                    modifier += enchantment.StatModValue;
+            }
             return modifier;
         }
 
@@ -702,7 +707,7 @@ namespace ACE.Server.WorldObjects.Managers
         /// </summary>
         public virtual int GetSkillMod(Skill skill)
         {
-            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Skill, (uint)skill);
+            var enchantments = GetEnchantments_TopLayer(EnchantmentTypeFlags.Skill, (uint)skill, true);
 
             var skillMod = 0;
             foreach (var enchantment in enchantments)
@@ -1166,18 +1171,23 @@ namespace ACE.Server.WorldObjects.Managers
         {
             var dots = new List<PropertiesEnchantmentRegistry>();
             var netherDots = new List<PropertiesEnchantmentRegistry>();
+            var aetheriaDots = new List<PropertiesEnchantmentRegistry>();
             var heals = new List<PropertiesEnchantmentRegistry>();
 
             foreach (var enchantment in enchantments)
             {
                 // combine DoTs from multiple sources
                 if (enchantment.StatModKey == (int)PropertyInt.DamageOverTime)
-                    dots.Add(enchantment);
-
-                if (enchantment.StatModKey == (int)PropertyInt.NetherOverTime)
+                {
+                    if (enchantment.SpellCategory == SpellCategory.AetheriaProcDamageOverTimeRaising)
+                        aetheriaDots.Add(enchantment);
+                    else
+                        dots.Add(enchantment);
+                }
+                else if (enchantment.StatModKey == (int)PropertyInt.NetherOverTime)
                     netherDots.Add(enchantment);
 
-                if (enchantment.StatModKey == (int)PropertyInt.HealOverTime)
+                else if (enchantment.StatModKey == (int)PropertyInt.HealOverTime)
                     heals.Add(enchantment);
             }
 
@@ -1187,6 +1197,9 @@ namespace ACE.Server.WorldObjects.Managers
 
             if (netherDots.Count > 0)
                 ApplyDamageTick(netherDots, DamageType.Nether);
+
+            if (aetheriaDots.Count > 0)
+                ApplyDamageTick(aetheriaDots, DamageType.Undef, true);
 
             // apply healing over time (HoTs)
             if (heals.Count > 0)
@@ -1224,7 +1237,7 @@ namespace ACE.Server.WorldObjects.Managers
         /// Applies 1 tick of damage from a DoT spell
         /// </summary>
         /// <param name="enchantments">The damage over time (DoT) spells</param>
-        public void ApplyDamageTick(List<PropertiesEnchantmentRegistry> enchantments, DamageType damageType)
+        public void ApplyDamageTick(List<PropertiesEnchantmentRegistry> enchantments, DamageType damageType, bool aetheria = false)
         {
             var creature = WorldObject as Creature;
             if (creature == null || creature.IsDead) return;
@@ -1307,7 +1320,7 @@ namespace ACE.Server.WorldObjects.Managers
                 var damageSourcePlayer = damager as Player;
                 if (damageSourcePlayer != null)
                 {
-                    creature.TakeDamageOverTime_NotifySource(damageSourcePlayer, damageType, amount);
+                    creature.TakeDamageOverTime_NotifySource(damageSourcePlayer, damageType, amount, aetheria);
 
                     if (creature.IsAlive)
                         creature.EmoteManager.OnDamage(damageSourcePlayer);

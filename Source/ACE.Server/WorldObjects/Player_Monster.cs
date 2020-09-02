@@ -24,7 +24,8 @@ namespace ACE.Server.WorldObjects
             {
                 if (monster is Player) continue;
 
-                if (Location.SquaredDistanceTo(monster.Location) <= monster.VisualAwarenessRangeSq)
+                //if (Location.SquaredDistanceTo(monster.Location) <= monster.VisualAwarenessRangeSq)
+                if (PhysicsObj.get_distance_sq_to_object(monster.PhysicsObj, true) <= monster.VisualAwarenessRangeSq)
                     AlertMonster(monster);
             }
         }
@@ -39,6 +40,9 @@ namespace ACE.Server.WorldObjects
             /*Console.WriteLine($"{Name}.OnAttackMonster({monster.Name})");
             Console.WriteLine($"Attackable: {monster.Attackable}");
             Console.WriteLine($"Tolerance: {monster.Tolerance}");*/
+
+            if (monster.RetaliateTargets != null)
+                monster.RetaliateTargets.Add(Guid.Full);
 
             if (monster.MonsterState != State.Awake && !monster.Tolerance.HasFlag(Tolerance.NoAttack))
             {

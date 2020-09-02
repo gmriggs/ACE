@@ -293,12 +293,12 @@ namespace ACE.Server.WorldObjects
             var items = new List<WorldObject>();
 
             // first search me / add all items of type.
-            var localInventory = Inventory.Values.Where(wo => wo.WeenieType == type).ToList();
+            var localInventory = Inventory.Values.Where(wo => wo.WeenieType == type).OrderBy(i => i.PlacementPosition).ToList();
 
             items.AddRange(localInventory);
 
             // next search all containers for type.. run function again for each container.
-            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).ToList();
+            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).OrderBy(i => i.PlacementPosition).ToList();
             foreach (var container in sideContainers)
                 items.AddRange(((Container)container).GetInventoryItemsOfTypeWeenieType(type));
 
@@ -313,12 +313,12 @@ namespace ACE.Server.WorldObjects
             var items = new List<WorldObject>();
 
             // search main pack / creature
-            var localInventory = Inventory.Values.Where(i => i.WeenieClassId == weenieClassId).ToList();
+            var localInventory = Inventory.Values.Where(i => i.WeenieClassId == weenieClassId).OrderBy(i => i.PlacementPosition).ToList();
 
             items.AddRange(localInventory);
 
             // next search any side containers
-            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).Select(i => i as Container).ToList();
+            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).Select(i => i as Container).OrderBy(i => i.PlacementPosition).ToList();
             foreach (var container in sideContainers)
                 items.AddRange(container.GetInventoryItemsOfWCID(weenieClassId));
 
@@ -341,12 +341,12 @@ namespace ACE.Server.WorldObjects
             var items = new List<WorldObject>();
 
             // search main pack / creature
-            var localInventory = Inventory.Values.Where(i => i.WeenieClassName.Equals(weenieClassName, StringComparison.OrdinalIgnoreCase)).ToList();
+            var localInventory = Inventory.Values.Where(i => i.WeenieClassName.Equals(weenieClassName, StringComparison.OrdinalIgnoreCase)).OrderBy(i => i.PlacementPosition).ToList();
 
             items.AddRange(localInventory);
 
             // next search any side containers
-            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).Select(i => i as Container).ToList();
+            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).Select(i => i as Container).OrderBy(i => i.PlacementPosition).ToList();
             foreach (var container in sideContainers)
                 items.AddRange(container.GetInventoryItemsOfWeenieClass(weenieClassName));
 
@@ -370,12 +370,12 @@ namespace ACE.Server.WorldObjects
             var items = new List<WorldObject>();
 
             // search main pack / creature
-            var localInventory = Inventory.Values.Where(i => i.WeenieClassName.StartsWith("tradenote")).ToList();
+            var localInventory = Inventory.Values.Where(i => i.WeenieClassName.StartsWith("tradenote")).OrderBy(i => i.PlacementPosition).ToList();
 
             items.AddRange(localInventory);
 
             // next search any side containers
-            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).Select(i => i as Container).ToList();
+            var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).Select(i => i as Container).OrderBy(i => i.PlacementPosition).ToList();
             foreach (var container in sideContainers)
                 items.AddRange(container.GetTradeNotes());
 
@@ -432,6 +432,9 @@ namespace ACE.Server.WorldObjects
             TooEncumbered = false;
             NotEnoughFreeSlots = false;
 
+            if (worldObjects.Count == 0) // There are no objects to add (e.g. 1 way trade)
+                return true;
+
             if (this is Player player && !player.HasEnoughBurdenToAddToInventory(worldObjects))
             {
                 TooEncumbered = true;
@@ -469,6 +472,21 @@ namespace ACE.Server.WorldObjects
                 return GetFreeContainerSlots() > 0;
             else
                 return GetFreeInventorySlots(includeSidePacks) > 0;
+        }
+
+        /// <summary>
+        /// Returns TRUE if there are enough free burden available to merge item and merge target will not exceed maximum stack size
+        /// </summary>
+        public bool CanMergeToInventory(WorldObject worldObject, WorldObject mergeTarget, int mergeAmout)
+        {
+            if (this is Player player && !player.HasEnoughBurdenToAddToInventory(worldObject))
+                return false;
+
+            var currentStackSize = mergeTarget.StackSize;
+            var maxStackSize = mergeTarget.MaxStackSize;
+            var newStackSize = currentStackSize + mergeAmout;
+
+            return newStackSize <= maxStackSize;
         }
 
         /// <summary>
@@ -539,6 +557,7 @@ namespace ACE.Server.WorldObjects
 
             worldObject.OwnerId = Guid.Full;
             worldObject.ContainerId = Guid.Full;
+            worldObject.Container = this;
             worldObject.PlacementPosition = placementPosition; // Server only variable that we use to remember/restore the order in which items exist in a container
 
             // Move all the existing items PlacementPosition over.
@@ -600,6 +619,7 @@ namespace ACE.Server.WorldObjects
 
                 item.OwnerId = null;
                 item.ContainerId = null;
+                item.Container = null;
                 item.PlacementPosition = null;
 
                 // Move all the existing items PlacementPosition over.
@@ -669,17 +689,24 @@ namespace ACE.Server.WorldObjects
                 else if (Viewer == player.Guid.Full)
                     Close(player);
                 else
-                {
-                    var currentViewer = "someone else";
-                    if (PropertyManager.GetBool("container_opener_name").Item)
-                    {
-                        var name = CurrentLandblock?.GetObject(Viewer)?.Name;
-                        if (name != null)
-                            currentViewer = name;
-                    }
+                    player.SendTransientError(InUseMessage);
+            }
+        }
 
-                    player.Session.Network.EnqueueSend(new GameEventCommunicationTransientString(player.Session, $"The {Name} is already in use by {currentViewer}!"));
+        public string InUseMessage
+        {
+            get
+            {
+                // verified this message was sent for corpses, instead of WeenieErrorWithString.The_IsCurrentlyInUse
+                var currentViewer = "someone else";
+
+                if (PropertyManager.GetBool("container_opener_name").Item)
+                {
+                    var name = CurrentLandblock?.GetObject(Viewer)?.Name;
+                    if (name != null)
+                        currentViewer = name;
                 }
+                return $"The {Name} is already in use by {currentViewer}!";
             }
         }
 

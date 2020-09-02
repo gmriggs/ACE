@@ -105,6 +105,7 @@ namespace ACE.Server.WorldObjects
 
         public override CombatType GetCombatType()
         {
+            // this is an unsafe function, move away from this
             var weapon = GetEquippedWeapon();
 
             if (weapon == null || weapon.CurrentWieldedLocation != EquipMask.MissileWeapon)
@@ -306,7 +307,7 @@ namespace ACE.Server.WorldObjects
 
                     //Console.WriteLine($"NoStaminaUseChance: {noStaminaUseChance}");
 
-                    if (noStaminaUseChance < ThreadSafeRandom.Next(0.0f, 1.0f))
+                    if (noStaminaUseChance <= ThreadSafeRandom.Next(0.0f, 1.0f))
                         UpdateVitalDelta(Stamina, -1);
                 }
                 else
@@ -465,6 +466,18 @@ namespace ACE.Server.WorldObjects
             var amount = (uint)Math.Round(_amount);
             var percent = (float)amount / Health.MaxValue;
 
+            var equippedCloak = EquippedCloak;
+
+            if (equippedCloak != null && Cloak.HasDamageProc(equippedCloak) && Cloak.RollProc(equippedCloak, percent))
+            {
+                var reducedAmount = Cloak.GetReducedAmount(amount);
+
+                Cloak.ShowMessage(this, source, amount, reducedAmount);
+
+                amount = reducedAmount;
+                percent = (float)amount / Health.MaxValue;
+            }
+
             // update health
             var damageTaken = (uint)-UpdateVitalDelta(Health, (int)-amount);
             DamageHistory.Add(source, damageType, damageTaken);
@@ -510,8 +523,8 @@ namespace ACE.Server.WorldObjects
             if (percent >= 0.1f)
                 EnqueueBroadcast(new GameMessageSound(Guid, Sound.Wound1, 1.0f));
 
-            if (HasCloakEquipped)
-                Cloak.TryProcSpell(this, source, percent);
+            if (equippedCloak != null && Cloak.HasProcSpell(equippedCloak))
+                Cloak.TryProcSpell(this, source, equippedCloak, percent);
 
             // if player attacker, update PK timer
             if (source is Player attacker)
@@ -696,6 +709,9 @@ namespace ACE.Server.WorldObjects
                 actionChain.AddAction(this, () => HandleActionChangeCombatMode_Inner(newCombatMode));
                 actionChain.EnqueueChain();
             }
+
+            if (IsAfk)
+                HandleActionSetAFKMode(false);
         }
 
         public void HandleActionChangeCombatMode_Inner(CombatMode newCombatMode)
@@ -1028,7 +1044,9 @@ namespace ACE.Server.WorldObjects
                     return DamageType.Slash;
             }
 
-            return damageType.SelectDamageType();
+            var powerLevel = combatType == CombatType.Melee ? (float?)PowerLevel : null;
+
+            return damageType.SelectDamageType(powerLevel);
         }
 
         public WorldObject HandArmor => EquippedObjects.Values.FirstOrDefault(i => (i.ClothingPriority & CoverageMask.Hands) > 0);
