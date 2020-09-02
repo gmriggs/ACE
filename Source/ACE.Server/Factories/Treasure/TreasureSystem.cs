@@ -735,7 +735,7 @@ namespace ACE.Server.Factories.Treasure
 
             var retval = 1.0f - (0.05f * (qualityLevel / 2) + 0.025f * roll);
 
-            return retval;
+            return (float)retval;
         }
 
         public static int GetNewArmorLevel(int qualityLevel, int currentValue)
@@ -805,14 +805,14 @@ namespace ACE.Server.Factories.Treasure
         {
             var roll = ThreadSafeRandom.Next(-1.0f, 1.0f);
             var retval = 1.0f - (0.1f * qualityLevel + 0.05f * roll);
-            return retval;
+            return (float)retval;
         }
 
         public static float GetResistModifier(int qualityLevel)
         {
             var roll = ThreadSafeRandom.Next(-0.05f, 0.15f);
             var retval = 0.15f * (qualityLevel / 2.0f) + roll;
-            return retval;
+            return (float)retval;
         }
 
         public static float GetQualityModifier(int qualityLevelSum)
@@ -1002,7 +1002,7 @@ namespace ACE.Server.Factories.Treasure
 
                 int finalSpellId = TreasureTables.GetFinalSpell(spellId, spellLevel);
 
-                var spell = new Entity.Spell(finalSpellId);
+                var spell = new Server.Entity.Spell(finalSpellId);
 
                 if (spell.Power > maxSpellPower)
                     maxSpellPower = (int)spell.Power;
@@ -1050,7 +1050,7 @@ namespace ACE.Server.Factories.Treasure
                     }
 
                     int finalSpellId = TreasureTables.GetFinalSpell(spellId, spellLevel);
-                    var spell = new Entity.Spell(finalSpellId);
+                    var spell = new Server.Entity.Spell(finalSpellId);
                     if (spell.PowerVariance > maxSpellPower)
                         maxSpellPower = (int)spell.Power;
 
@@ -1066,7 +1066,7 @@ namespace ACE.Server.Factories.Treasure
                 var spell = spells[i];
                 if (i != highestSpellLevelIndex)
                 {
-                    var luck = ThreadSafeRandom.Next(0.5f, 1.5f);
+                    var luck = (float)ThreadSafeRandom.Next(0.5f, 1.5f);
                     luck *= 5 * spell.Item2;
                     diffAdjust += luck;
                 }
@@ -1074,7 +1074,7 @@ namespace ACE.Server.Factories.Treasure
                 if (roll.TreasureItemClass == TreasureItemClass.Gem)
                 {
                     item.SpellDID = (uint)spell.Item1;
-                    item.Usable = Usable.Contained;
+                    item.ItemUseable = Usable.Contained;
                     retval = true;
                 }
                 else
@@ -1106,10 +1106,10 @@ namespace ACE.Server.Factories.Treasure
 
             item.SpellDID = (uint)finalSpellId;
 
-            item.Usable = (item.Usable ?? 0) | (Usable.Wielded | Usable.Remote | Usable.NeverWalk);
+            item.ItemUseable = (item.ItemUseable ?? 0) | (Usable.Wielded | Usable.Remote | Usable.NeverWalk);
 
             // set maxSpellPower
-            var spell = new Entity.Spell(finalSpellId);
+            var spell = new Server.Entity.Spell(finalSpellId);
             if (spell.Power > maxSpellPower)
                 maxSpellPower = (int)spell.Power;
 
@@ -1281,28 +1281,28 @@ namespace ACE.Server.Factories.Treasure
                 if (legendaryCantrips > 0)
                 {
                     finalCantripId = TreasureTables.GetFinalCantrip(cantrip, 3);
-                    var diffRoll = ThreadSafeRandom.Next(10.0f, 20.0f);
+                    var diffRoll = (float)ThreadSafeRandom.Next(10.0f, 20.0f);
                     diffAdjust += diffRoll;
                     legendaryCantrips--;
                 }
                 else if (epicCantrips > 0)
                 {
                     finalCantripId = TreasureTables.GetFinalCantrip(cantrip, 2);
-                    var diffRoll = ThreadSafeRandom.Next(10.0f, 20.0f);
+                    var diffRoll = (float)ThreadSafeRandom.Next(10.0f, 20.0f);
                     diffAdjust += diffRoll;
                     epicCantrips--;
                 }
                 else if (majorCantrips > 0)
                 {
                     finalCantripId = TreasureTables.GetFinalCantrip(cantrip, 1);
-                    var diffRoll = ThreadSafeRandom.Next(10.0f, 20.0f);
+                    var diffRoll = (float)ThreadSafeRandom.Next(10.0f, 20.0f);
                     diffAdjust += diffRoll;
                     majorCantrips--;
                 }
                 else
                 {
                     finalCantripId = cantrip;
-                    var diffRoll = ThreadSafeRandom.Next(5.0f, 10.0f);
+                    var diffRoll = (float)ThreadSafeRandom.Next(5.0f, 10.0f);
                     diffAdjust += diffRoll;
                 }
 
@@ -1601,14 +1601,14 @@ namespace ACE.Server.Factories.Treasure
                 log.Warn($"Unknown treasure class. Defaulting to 1.0");
                 return 1.0f;
             }
-            return ThreadSafeRandom.Next(min, max);
+            return (float)ThreadSafeRandom.Next(min, max);
         }
 
         public static int GetMaxSpellMana(WorldObject item, ref int castableMana)
         {
             if (item.SpellDID != null)
             {
-                var spell = new Entity.Spell(item.SpellDID.Value);
+                var spell = new Server.Entity.Spell(item.SpellDID.Value);
 
                 if (spell.NotFound)
                 {
@@ -1626,7 +1626,7 @@ namespace ACE.Server.Factories.Treasure
             {
                 foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
                 {
-                    var spell = new Entity.Spell(spellId);
+                    var spell = new Server.Entity.Spell(spellId);
 
                     if (spell.NotFound)
                     {
@@ -1990,7 +1990,7 @@ namespace ACE.Server.Factories.Treasure
                 {
                     foreach (var spellId in item.Biota.PropertiesSpellBook.Keys)
                     {
-                        var spell = new Entity.Spell(spellId);
+                        var spell = new Server.Entity.Spell(spellId);
 
                         if (spell.NotFound)
                         {
@@ -2017,7 +2017,7 @@ namespace ACE.Server.Factories.Treasure
             }
 
             if (decoration != LongDescDecoration.Undef)
-                item.AppraisalLongDescDecoration = (int)decoration;
+                item.AppraisalLongDescDecoration = (AppraisalLongDescDecorations?)decoration;
 
             return true;
         }
