@@ -1013,12 +1013,8 @@ namespace ACE.Server.Factories
             int numSpells = GetSpellDistribution(profile, out int minorCantrips, out int majorCantrips, out int epicCantrips, out int legendaryCantrips);
             int numCantrips = minorCantrips + majorCantrips + epicCantrips + legendaryCantrips;
             
-
             wo.UiEffects = UiEffects.Magical;
             wo.ManaRate = manaRate;
-
-            wo.ItemMaxMana = GetMaxMana(numSpells, profile.Tier);
-            wo.ItemCurMana = wo.ItemMaxMana;
 
             int[] shuffledValues = Enumerable.Range(0, spells.Length).ToArray();
 
@@ -1093,9 +1089,16 @@ namespace ACE.Server.Factories
                     wo.Biota.GetOrAddKnownSpell((int)spellID, wo.BiotaDatabaseLock, out _);
                 }
             }
+
+            /*wo.ItemMaxMana = GetMaxMana(numSpells, profile.Tier);
+            wo.ItemCurMana = wo.ItemMaxMana;*/
+            CalculateMaxMana(wo, numSpells, profile.Tier);
+
             int spellcraft = GetSpellcraft(wo, numSpells, profile.Tier);
             wo.ItemSpellcraft = spellcraft;
+
             wo.ItemDifficulty = GetDifficulty(wo, spellcraft);
+
             return wo;
         }
 
@@ -1494,7 +1497,7 @@ namespace ACE.Server.Factories
         private static void MutateValue_Spells(WorldObject wo)
         {
             if (wo.ItemMaxMana != null)
-                wo.Value += wo.ItemMaxMana;
+                wo.Value += wo.ItemMaxMana * 2;
 
             int spellLevelSum = 0;
 
@@ -1748,40 +1751,100 @@ namespace ACE.Server.Factories
                 fArcane += 10;
             return fArcane;
         }
-        private static int GetMaxMana(int spellAmount, int tier)
+
+        private static int GetMaxMana(int numSpells, int tier)
         {
-            int maxmana = 0;
-            switch (tier)
-            {
-                case 1:
-                    maxmana = ThreadSafeRandom.Next(200, 400) * spellAmount;
-                    break;
-                case 2:
-                    maxmana = ThreadSafeRandom.Next(400, 600) * spellAmount;
-                    break;
-                case 3:
-                    maxmana = ThreadSafeRandom.Next(600, 800) * spellAmount;
-                    break;
-                case 4:
-                    maxmana = ThreadSafeRandom.Next(800, 1000) * spellAmount;
-                    break;
-                case 5:
-                    maxmana = ThreadSafeRandom.Next(1000, 1200) * spellAmount;
-                    break;
-                case 6:
-                    maxmana = ThreadSafeRandom.Next(1200, 1400) * spellAmount;
-                    break;
-                case 7:
-                    maxmana = ThreadSafeRandom.Next(1400, 1600) * spellAmount;
-                    break;
-                case 8:
-                    maxmana = ThreadSafeRandom.Next(1600, 1800) * spellAmount;
-                    break;
-                default:
-                    break;
-            }
+            // previous ACE temporary formula
+            int minVal = tier * 200;
+            int maxVal = minVal + 200;
+
+            int maxmana = ThreadSafeRandom.Next(minVal, maxVal) * numSpells;
 
             return maxmana;
+        }
+
+        private static void CalculateMaxMana(WorldObject wo, int numSpells, int tier)
+        {
+            int maxSpellMana = GetMaxSpellMana(wo, out int castableMana);
+
+            if (castableMana != 0)
+            {
+                var castableManaMod = 1.0f;
+
+                // if not an orb, set castableManaMod to 0.5f?
+                // ace lootgen isn't even rolling to assign built-in spells yet, afaik, so revisit this
+                wo.ItemManaCost = (int)(castableMana * castableManaMod);
+            }
+
+            if (maxSpellMana != 0)
+            {
+                // set mana burn rate, assumed this is done elsewhere already
+            }
+
+            if (maxSpellMana < castableMana)
+                maxSpellMana = castableMana;
+
+            float workmanshipMod = WorkmanshipChance.GetModifier(wo.ItemWorkmanship - 1);
+            var itemType_ManaModRange = GetItemType_ManaModRange(wo);
+
+            float itemManaChargeMod = ThreadSafeRandom.Next(itemType_ManaModRange.Min, itemType_ManaModRange.Max);
+
+            wo.ItemMaxMana = (int)Math.Ceiling(maxSpellMana * workmanshipMod * itemManaChargeMod);
+            wo.ItemCurMana = wo.ItemMaxMana;
+
+            // debug info
+
+            var itemMaxMana_min = (int)Math.Ceiling(maxSpellMana * workmanshipMod * itemType_ManaModRange.Min);
+            var itemMaxMana_max = (int)Math.Ceiling(maxSpellMana * workmanshipMod * itemType_ManaModRange.Max);
+
+            Console.WriteLine($"{wo.Name}.ItemMaxMana: {itemMaxMana_min:N0} - {itemMaxMana_max:N0}");
+
+            // compare with previous function
+            var minVal = tier * 200;
+            var maxVal = minVal + 200;
+
+            Console.WriteLine($"Previous: {minVal:N0} - {maxVal:N0}");
+        }
+
+        /// <summary>
+        /// Returns the highest BaseMana cost
+        /// from all of the spells in an item's spellbook
+        /// </summary>
+        private static int GetMaxSpellMana(WorldObject wo, out int castableMana)
+        {
+            castableMana = 0;
+
+            // if caster contains built-in castable spell,
+            // set castableMana to that spell.BaseMana x 5
+            if (wo.SpellDID != null)
+            {
+                var spell = new Server.Entity.Spell(wo.SpellDID.Value);
+                castableMana = (int)spell.BaseMana * 5;
+            }
+
+            int maxSpellMana = 0;
+
+            if (wo.Biota.PropertiesSpellBook != null)
+            {
+                foreach (var spellID in wo.Biota.PropertiesSpellBook.Keys)
+                {
+                    var spell = new Server.Entity.Spell(spellID);
+
+                    if (spell.BaseMana > maxSpellMana)
+                        maxSpellMana = (int)spell.BaseMana;
+                }
+            }
+            return maxSpellMana;
+        }
+
+        private static (int Min, int Max) GetItemType_ManaModRange(WorldObject wo, bool isJewelry = false)
+        {
+            if (isJewelry)
+                return (12, 20);
+            else if (wo is Gem)
+                return (1, 1);
+            else
+                return (6, 15);
         }
 
         /// <summary>
