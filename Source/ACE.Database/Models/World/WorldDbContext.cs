@@ -62,7 +62,6 @@ namespace ACE.Database.Models.World
         public virtual DbSet<TreasureArmorPlatemail3> TreasureArmorPlatemail3 { get; set; }
         public virtual DbSet<TreasureArmorResistance> TreasureArmorResistance { get; set; }
         public virtual DbSet<TreasureArmorStuddedLeather> TreasureArmorStuddedLeather { get; set; }
-        public virtual DbSet<TreasureArt> TreasureArt { get; set; }
         public virtual DbSet<TreasureBurdenMod> TreasureBurdenMod { get; set; }
         public virtual DbSet<TreasureCantripArmorDist> TreasureCantripArmorDist { get; set; }
         public virtual DbSet<TreasureCantripCasterDist> TreasureCantripCasterDist { get; set; }
@@ -83,6 +82,7 @@ namespace ACE.Database.Models.World
         public virtual DbSet<TreasureConsumable> TreasureConsumable { get; set; }
         public virtual DbSet<TreasureDeath> TreasureDeath { get; set; }
         public virtual DbSet<TreasureGemClass> TreasureGemClass { get; set; }
+        public virtual DbSet<TreasureGemCount> TreasureGemCount { get; set; }
         public virtual DbSet<TreasureGemDist> TreasureGemDist { get; set; }
         public virtual DbSet<TreasureGemMaterial> TreasureGemMaterial { get; set; }
         public virtual DbSet<TreasureGemValue> TreasureGemValue { get; set; }
@@ -93,7 +93,7 @@ namespace ACE.Database.Models.World
         public virtual DbSet<TreasureItemChance> TreasureItemChance { get; set; }
         public virtual DbSet<TreasureJewelry> TreasureJewelry { get; set; }
         public virtual DbSet<TreasureLockpick> TreasureLockpick { get; set; }
-        public virtual DbSet<TreasureMagic> TreasureMagic { get; set; }
+        public virtual DbSet<TreasureMagicItemChance> TreasureMagicItemChance { get; set; }
         public virtual DbSet<TreasureManaStone> TreasureManaStone { get; set; }
         public virtual DbSet<TreasureMaterialBase> TreasureMaterialBase { get; set; }
         public virtual DbSet<TreasureMaterialCeramic> TreasureMaterialCeramic { get; set; }
@@ -108,7 +108,7 @@ namespace ACE.Database.Models.World
         public virtual DbSet<TreasureMaterialMod> TreasureMaterialMod { get; set; }
         public virtual DbSet<TreasureMaterialStone> TreasureMaterialStone { get; set; }
         public virtual DbSet<TreasureMaterialWood> TreasureMaterialWood { get; set; }
-        public virtual DbSet<TreasureMundane> TreasureMundane { get; set; }
+        public virtual DbSet<TreasureMundaneItemChance> TreasureMundaneItemChance { get; set; }
         public virtual DbSet<TreasureMutateFilter> TreasureMutateFilter { get; set; }
         public virtual DbSet<TreasurePea> TreasurePea { get; set; }
         public virtual DbSet<TreasureQualityLevel> TreasureQualityLevel { get; set; }
@@ -145,6 +145,7 @@ namespace ACE.Database.Models.World
         public virtual DbSet<TreasureWeaponSpear1> TreasureWeaponSpear1 { get; set; }
         public virtual DbSet<TreasureWeaponSpear2> TreasureWeaponSpear2 { get; set; }
         public virtual DbSet<TreasureWeaponSpear3> TreasureWeaponSpear3 { get; set; }
+        public virtual DbSet<TreasureWeaponSpearUnknown> TreasureWeaponSpearUnknown { get; set; }
         public virtual DbSet<TreasureWeaponSpeedMod> TreasureWeaponSpeedMod { get; set; }
         public virtual DbSet<TreasureWeaponStaff1> TreasureWeaponStaff1 { get; set; }
         public virtual DbSet<TreasureWeaponStaff2> TreasureWeaponStaff2 { get; set; }
@@ -1639,23 +1640,6 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
             });
 
-            modelBuilder.Entity<TreasureArt>(entity =>
-            {
-                entity.ToTable("treasure_art");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Chance).HasColumnName("chance");
-
-                entity.Property(e => e.Tier)
-                    .HasColumnName("tier")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Wcid)
-                    .HasColumnName("wcid")
-                    .HasColumnType("int(11)");
-            });
-
             modelBuilder.Entity<TreasureBurdenMod>(entity =>
             {
                 entity.ToTable("treasure_burden_mod");
@@ -2061,6 +2045,25 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
             });
 
+            modelBuilder.Entity<TreasureGemCount>(entity =>
+            {
+                entity.ToTable("treasure_gem_count");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Count)
+                    .HasColumnName("count")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.GemCode).HasColumnName("gem_Code");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+            });
+
             modelBuilder.Entity<TreasureGemDist>(entity =>
             {
                 entity.ToTable("treasure_gem_dist");
@@ -2243,9 +2246,9 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
             });
 
-            modelBuilder.Entity<TreasureMagic>(entity =>
+            modelBuilder.Entity<TreasureMagicItemChance>(entity =>
             {
-                entity.ToTable("treasure_magic");
+                entity.ToTable("treasure_magic_item_chance");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -2513,9 +2516,9 @@ namespace ACE.Database.Models.World
                     .HasColumnType("int(11)");
             });
 
-            modelBuilder.Entity<TreasureMundane>(entity =>
+            modelBuilder.Entity<TreasureMundaneItemChance>(entity =>
             {
-                entity.ToTable("treasure_mundane");
+                entity.ToTable("treasure_mundane_item_chance");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -3242,6 +3245,23 @@ namespace ACE.Database.Models.World
             modelBuilder.Entity<TreasureWeaponSpear3>(entity =>
             {
                 entity.ToTable("treasure_weapon_spear3");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Chance).HasColumnName("chance");
+
+                entity.Property(e => e.Tier)
+                    .HasColumnName("tier")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Wcid)
+                    .HasColumnName("wcid")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<TreasureWeaponSpearUnknown>(entity =>
+            {
+                entity.ToTable("treasure_weapon_spear_unknown");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 

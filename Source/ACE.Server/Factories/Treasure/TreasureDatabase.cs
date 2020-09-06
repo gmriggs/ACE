@@ -57,7 +57,8 @@ namespace ACE.Server.Factories.Treasure
 
         public static List<TreasureTable> GetArtWcid(WorldDbContext ctx)
         {
-            return ctx.TreasureArt.Select(i => new TreasureTable(i)).ToList();
+            //return ctx.TreasureArt.Select(i => new TreasureTable(i)).ToList();
+            return null;
         }
 
         public static List<TreasureTable> GetManaStoneWcid(WorldDbContext ctx)
