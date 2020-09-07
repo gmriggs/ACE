@@ -256,12 +256,21 @@ namespace ACE.Server.Command.Handlers
 
             foreach (var mutation in mutations)
             {
+                Console.WriteLine($"0x{tSysMutationFilter:X8} Mutation #{mutation.Idx + 1}:");
+                Console.WriteLine();
+                Console.WriteLine($"Tier chances: {string.Join(", ", mutation.MutationChance.Select(i => i.Chance))}");
+                Console.WriteLine();
+
                 foreach (var outcome in mutation.MutationOutcome)
                 {
                     foreach (var effectList in outcome.MutationEffectList)
                     {
+                        Console.WriteLine($"    - Chance: {effectList.Probability}");
+
                         foreach (var effect in effectList.MutationEffect)
                         {
+                            Console.WriteLine($"        - EffectType: {(MutationEffectType)effect.EffectType}");
+
                             foreach (var _arg in effect.MutationEffectArgument)
                             {
                                 var arg = new EffectArgument(_arg);
@@ -269,11 +278,11 @@ namespace ACE.Server.Command.Handlers
                                 switch (arg.Type)
                                 {
                                     case EffectArgumentType.Int:
-                                        Console.WriteLine($"Int: {arg.IntVal}");
+                                        Console.WriteLine($"            Int: {arg.IntVal}");
                                         break;
 
                                     case EffectArgumentType.Double:
-                                        Console.WriteLine($"Double: {arg.DoubleVal}");
+                                        Console.WriteLine($"            Double: {arg.DoubleVal}");
                                         break;
 
                                     case EffectArgumentType.Quality:
@@ -281,37 +290,37 @@ namespace ACE.Server.Command.Handlers
                                         switch (arg.StatType)
                                         {
                                             case StatType.Int:
-                                                Console.WriteLine($"PropertyInt.{(PropertyInt)arg.StatIdx}");
+                                                Console.WriteLine($"            PropertyInt.{(PropertyInt)arg.StatIdx}");
                                                 break;
 
                                             case StatType.Bool:
-                                                Console.WriteLine($"PropertyBool.{(PropertyBool)arg.StatIdx}");
+                                                Console.WriteLine($"            PropertyBool.{(PropertyBool)arg.StatIdx}");
                                                 break;
 
                                             case StatType.Float:
-                                                Console.WriteLine($"PropertyFloat.{(PropertyFloat)arg.StatIdx}");
+                                                Console.WriteLine($"            PropertyFloat.{(PropertyFloat)arg.StatIdx}");
                                                 break;
 
                                             case StatType.DID:
-                                                Console.WriteLine($"PropertyDataId.{(PropertyDataId)arg.StatIdx}");
+                                                Console.WriteLine($"            PropertyDataId.{(PropertyDataId)arg.StatIdx}");
                                                 break;
 
                                             default:
-                                                Console.WriteLine($"Unkown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}");
+                                                Console.WriteLine($"            Unkown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}");
                                                 break;
                                         }
                                         break;
 
                                     case EffectArgumentType.Random:
-                                        Console.WriteLine($"Range: {arg.Min} - {arg.Max}");
+                                        Console.WriteLine($"            Range: {arg.Min} - {arg.Max}");
                                         break;
 
                                     case EffectArgumentType.Variable:
-                                        Console.WriteLine($"Variable");
+                                        Console.WriteLine($"            Variable");
                                         break;
 
                                     default:
-                                        Console.WriteLine($"Unknown EffectArgumentType: {arg.Type}");
+                                        Console.WriteLine($"            Unknown EffectArgumentType: {arg.Type}");
                                         break;
                                         
                                 }
@@ -319,6 +328,7 @@ namespace ACE.Server.Command.Handlers
                         }
                     }
                 }
+                Console.WriteLine();
             }
         }
 

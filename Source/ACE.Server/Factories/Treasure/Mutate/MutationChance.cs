@@ -10,11 +10,7 @@ namespace ACE.Server.Factories.Treasure.Mutate
             if (tier < 0 || tier >= chances.Count)
                 return false;
 
-            // this is opposite from most rolls, 1.0 here means 100%
-            // we'll use 1 - chance to accomodate
-
-            // TODO: verify order
-            return 1.0 - chances.ElementAt(tier).Chance < roll;
+            return roll < chances.ElementAt(tier).Chance;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     return mutated;
                 foreach (var effectList in currentList)
                 {
-                    if (effectList.Probability < roll)
+                    if (roll >= effectList.Probability)
                         continue;
 
                     mutated &= MutationEffectList.TryMutate(effectList, item);
