@@ -1,0 +1,17 @@
+0x3800001D Mutation #1:
+
+Tier chances: 1
+
+    - Chance: 1
+        - EffectType: Subtract
+            PropertyInt.WeaponTime
+            Int: 50
+        - EffectType: AtLeastAdd
+            PropertyInt.WeaponTime
+            Int: 0
+            Int: 0
+        - EffectType: AtLeastAdd
+            PropertyInt.NumTimesTinkered
+            Int: 1
+            Int: 1
+

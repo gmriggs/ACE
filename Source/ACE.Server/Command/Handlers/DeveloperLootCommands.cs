@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Globalization;
 using System.Linq;
 
@@ -9,6 +10,7 @@ using ACE.Server.Factories.Treasure.Mutate;
 using ACE.Server.Factories;
 using ACE.Server.Factories.Treasure;
 using ACE.Server.Network;
+using System.Collections.Generic;
 
 namespace ACE.Server.Command.Handlers
 {
@@ -254,22 +256,66 @@ namespace ACE.Server.Command.Handlers
                 return;
             }
 
+            var lines = BuildMutationScript(tSysMutationFilter, mutations);
+
+            foreach (var line in lines)
+                Console.WriteLine(line);
+        }
+
+        [CommandHandler("output-mutations", AccessLevel.Admin, CommandHandlerFlag.ConsoleInvoke, "Outputs mutation scripts for every mutation filter on the system", "a 0x38 record id")]
+        public static void HandleOutputMutations(Session session, params string[] parameters)
+        {
+            uint firstMutationId = 1;
+            uint lastMutationId = 74;
+
+            for (uint mutationId = firstMutationId; mutationId <= lastMutationId; mutationId++)
+            {
+                var tSysMutationFilter = 0x38000000 | mutationId;
+
+                var mutations = DatabaseManager.World.GetCachedMutationFilter(tSysMutationFilter);
+
+                if (mutations == null)
+                {
+                    Console.WriteLine($"Couldn't find mutation filter {tSysMutationFilter:X8}");
+                    return;
+                }
+
+                var lines = BuildMutationScript(tSysMutationFilter, mutations);
+
+                var sep = Path.DirectorySeparatorChar;
+                var scriptFolder = Directory.GetCurrentDirectory() + sep + "MutationScript" + sep;
+
+                if (!Directory.Exists(scriptFolder))
+                    Directory.CreateDirectory(scriptFolder);
+
+                var filename = scriptFolder + tSysMutationFilter.ToString("X8") + ".txt";
+
+                File.WriteAllLines(filename, lines);
+
+                Console.WriteLine($"Wrote {filename}");
+            }
+        }
+
+        public static List<string> BuildMutationScript(uint tSysMutationFilter, List<Database.Models.World.Mutation> mutations)
+        {
+            var lines = new List<string>();
+
             foreach (var mutation in mutations)
             {
-                Console.WriteLine($"0x{tSysMutationFilter:X8} Mutation #{mutation.Idx + 1}:");
-                Console.WriteLine();
-                Console.WriteLine($"Tier chances: {string.Join(", ", mutation.MutationChance.Select(i => i.Chance))}");
-                Console.WriteLine();
+                lines.Add($"0x{tSysMutationFilter:X8} Mutation #{mutation.Idx + 1}:");
+                lines.Add("");
+                lines.Add($"Tier chances: {string.Join(", ", mutation.MutationChance.Select(i => i.Chance))}");
+                lines.Add("");
 
                 foreach (var outcome in mutation.MutationOutcome)
                 {
                     foreach (var effectList in outcome.MutationEffectList)
                     {
-                        Console.WriteLine($"    - Chance: {effectList.Probability}");
+                        lines.Add($"    - Chance: {effectList.Probability}");
 
                         foreach (var effect in effectList.MutationEffect)
                         {
-                            Console.WriteLine($"        - EffectType: {(MutationEffectType)effect.EffectType}");
+                            lines.Add($"        - EffectType: {(MutationEffectType)effect.EffectType}");
 
                             foreach (var _arg in effect.MutationEffectArgument)
                             {
@@ -278,11 +324,11 @@ namespace ACE.Server.Command.Handlers
                                 switch (arg.Type)
                                 {
                                     case EffectArgumentType.Int:
-                                        Console.WriteLine($"            Int: {arg.IntVal}");
+                                        lines.Add($"            Int: {arg.IntVal}");
                                         break;
 
                                     case EffectArgumentType.Double:
-                                        Console.WriteLine($"            Double: {arg.DoubleVal}");
+                                        lines.Add($"            Double: {arg.DoubleVal}");
                                         break;
 
                                     case EffectArgumentType.Quality:
@@ -290,47 +336,47 @@ namespace ACE.Server.Command.Handlers
                                         switch (arg.StatType)
                                         {
                                             case StatType.Int:
-                                                Console.WriteLine($"            PropertyInt.{(PropertyInt)arg.StatIdx}");
+                                                lines.Add($"            PropertyInt.{(PropertyInt)arg.StatIdx}");
                                                 break;
 
                                             case StatType.Bool:
-                                                Console.WriteLine($"            PropertyBool.{(PropertyBool)arg.StatIdx}");
+                                                lines.Add($"            PropertyBool.{(PropertyBool)arg.StatIdx}");
                                                 break;
 
                                             case StatType.Float:
-                                                Console.WriteLine($"            PropertyFloat.{(PropertyFloat)arg.StatIdx}");
+                                                lines.Add($"            PropertyFloat.{(PropertyFloat)arg.StatIdx}");
                                                 break;
 
                                             case StatType.DID:
-                                                Console.WriteLine($"            PropertyDataId.{(PropertyDataId)arg.StatIdx}");
+                                                lines.Add($"            PropertyDataId.{(PropertyDataId)arg.StatIdx}");
                                                 break;
 
                                             default:
-                                                Console.WriteLine($"            Unkown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}");
+                                                lines.Add($"            Unkown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}");
                                                 break;
                                         }
                                         break;
 
                                     case EffectArgumentType.Random:
-                                        Console.WriteLine($"            Range: {arg.Min} - {arg.Max}");
+                                        lines.Add($"            Range: {arg.Min} - {arg.Max}");
                                         break;
 
                                     case EffectArgumentType.Variable:
-                                        Console.WriteLine($"            Variable");
+                                        lines.Add($"            Variable");
                                         break;
 
                                     default:
-                                        Console.WriteLine($"            Unknown EffectArgumentType: {arg.Type}");
+                                        lines.Add($"            Unknown EffectArgumentType: {arg.Type}");
                                         break;
-                                        
+
                                 }
                             }
                         }
                     }
                 }
-                Console.WriteLine();
+                lines.Add("");
             }
+            return lines;
         }
-
     }
 }

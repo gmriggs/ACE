@@ -1,0 +1,322 @@
+0x38000033 Mutation #1:
+
+Tier chances: 1, 0, 0, 0, 0, 0
+
+    - Chance: 0.1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 10
+    - Chance: 0.3
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 20
+    - Chance: 0.7
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 30
+    - Chance: 0.9
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 40
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 50
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: -5 - 5
+        - EffectType: Assign
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Multiply
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Divide
+            Variable
+            Int: 10
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.BulkMod
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.SizeMod
+        - EffectType: Add
+            PropertyInt.Value
+            Variable
+
+0x38000033 Mutation #2:
+
+Tier chances: 0, 1, 0, 0, 0, 0
+
+    - Chance: 0.05
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 20
+    - Chance: 0.15
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 30
+    - Chance: 0.35
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 40
+    - Chance: 0.65
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 50
+    - Chance: 0.85
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 60
+    - Chance: 0.95
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 70
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 80
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: -5 - 5
+        - EffectType: Assign
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Multiply
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Divide
+            Variable
+            Int: 10
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.BulkMod
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.SizeMod
+        - EffectType: Add
+            PropertyInt.Value
+            Variable
+
+0x38000033 Mutation #3:
+
+Tier chances: 0, 0, 1, 0, 0, 0
+
+    - Chance: 0.05
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 30
+    - Chance: 0.15
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 40
+    - Chance: 0.35
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 50
+    - Chance: 0.65
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 60
+    - Chance: 0.85
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 70
+    - Chance: 0.95
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 80
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 90
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: -5 - 5
+        - EffectType: Assign
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Multiply
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Divide
+            Variable
+            Int: 10
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.BulkMod
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.SizeMod
+        - EffectType: Add
+            PropertyInt.Value
+            Variable
+
+0x38000033 Mutation #4:
+
+Tier chances: 0, 0, 0, 1, 0, 0
+
+    - Chance: 0.05
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 40
+    - Chance: 0.15
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 50
+    - Chance: 0.35
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 60
+    - Chance: 0.65
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 70
+    - Chance: 0.85
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 80
+    - Chance: 0.95
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 90
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 100
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: -5 - 5
+        - EffectType: Assign
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Multiply
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Divide
+            Variable
+            Int: 10
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.BulkMod
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.SizeMod
+        - EffectType: Add
+            PropertyInt.Value
+            Variable
+
+0x38000033 Mutation #5:
+
+Tier chances: 0, 0, 0, 0, 1, 0
+
+    - Chance: 0.05
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 50
+    - Chance: 0.15
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 60
+    - Chance: 0.35
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 70
+    - Chance: 0.65
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 80
+    - Chance: 0.85
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 90
+    - Chance: 0.95
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 100
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 110
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: -5 - 5
+        - EffectType: Assign
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Multiply
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Divide
+            Variable
+            Int: 10
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.BulkMod
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.SizeMod
+        - EffectType: Add
+            PropertyInt.Value
+            Variable
+
+0x38000033 Mutation #6:
+
+Tier chances: 0, 0, 0, 0, 0, 1
+
+    - Chance: 0.05
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 60
+    - Chance: 0.15
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 70
+    - Chance: 0.35
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 80
+    - Chance: 0.65
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 90
+    - Chance: 0.85
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 100
+    - Chance: 0.95
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 110
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Int: 120
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: -5 - 5
+        - EffectType: Assign
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Multiply
+            Variable
+            PropertyInt.ArmorLevel
+        - EffectType: Divide
+            Variable
+            Int: 10
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.BulkMod
+        - EffectType: Multiply
+            Variable
+            PropertyFloat.SizeMod
+        - EffectType: Add
+            PropertyInt.Value
+            Variable
+

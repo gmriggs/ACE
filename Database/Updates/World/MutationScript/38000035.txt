@@ -1,0 +1,16 @@
+0x38000035 Mutation #1:
+
+Tier chances: 1
+
+    - Chance: 1
+        - EffectType: Assign
+            PropertyDataId.ItemSkillLimit
+            Int: 6
+        - EffectType: Divide
+            PropertyInt.ItemSkillLevelLimit
+            Double: 0.7
+        - EffectType: AtLeastAdd
+            PropertyInt.NumTimesTinkered
+            Int: 1
+            Int: 1
+

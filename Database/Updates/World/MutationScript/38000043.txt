@@ -1,0 +1,9 @@
+0x38000043 Mutation #1:
+
+Tier chances: 1
+
+    - Chance: 1
+        - EffectType: Assign
+            PropertyBool.Retained
+            Int: 1
+

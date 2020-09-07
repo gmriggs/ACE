@@ -1,0 +1,13 @@
+0x3800002F Mutation #1:
+
+Tier chances: 1
+
+    - Chance: 1
+        - EffectType: Add
+            PropertyInt.ItemMaxMana
+            Int: 250
+        - EffectType: AtLeastAdd
+            PropertyInt.NumTimesTinkered
+            Int: 1
+            Int: 1
+

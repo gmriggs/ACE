@@ -1,0 +1,538 @@
+0x38000044 Mutation #1:
+
+Tier chances: 1, 1, 1, 0, 0, 0
+
+    - Chance: 0.12
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 100
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 200
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.23
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 100
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 160
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.34
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 100
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 145
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.45
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 200
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 250
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.56
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 200
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 205
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.67
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 200
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 185
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.78
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 300
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 300
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 0.89
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 300
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 245
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 1
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 300
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 225
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+
+0x38000044 Mutation #2:
+
+Tier chances: 0, 0, 0, 1, 1, 1
+
+    - Chance: 0.09
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 100
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 200
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.17
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 100
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 160
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.25
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 100
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 145
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.34
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 200
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 250
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.42
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 200
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 205
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.5
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 200
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 185
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 100
+    - Chance: 0.59
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 300
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 300
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 0.67
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 300
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 245
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 0.75
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 300
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 225
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 0.84
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 350
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 6
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 325
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 0.92
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 350
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 7
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 270
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+    - Chance: 1
+        - EffectType: Assign
+            PropertyInt.ArmorLevel
+            Int: 350
+        - EffectType: Assign
+            PropertyInt.WieldRequirements
+            Int: 2
+        - EffectType: Assign
+            PropertyInt.WieldSkillType
+            Int: 15
+        - EffectType: Assign
+            PropertyInt.WieldDifficulty
+            Int: 245
+        - EffectType: Add
+            PropertyInt.ArmorLevel
+            Range: 0 - 50
+
+0x38000044 Mutation #3:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.6
+    - Chance: 0.89
+        - EffectType: Add
+            PropertyFloat.ArmorModVsSlash
+            Double: 0.1
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsSlash
+            Double: 0.2
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsSlash
+            Double: 0.3
+
+0x38000044 Mutation #4:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.6
+    - Chance: 0.89
+        - EffectType: Add
+            PropertyFloat.ArmorModVsPierce
+            Double: 0.1
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsPierce
+            Double: 0.2
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsPierce
+            Double: 0.3
+
+0x38000044 Mutation #5:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.6
+    - Chance: 0.89
+        - EffectType: Add
+            PropertyFloat.ArmorModVsBludgeon
+            Double: 0.1
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsBludgeon
+            Double: 0.2
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsBludgeon
+            Double: 0.3
+
+0x38000044 Mutation #6:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.45
+    - Chance: 0.69
+        - EffectType: Add
+            PropertyFloat.ArmorModVsCold
+            Double: 0.2
+    - Chance: 0.84
+        - EffectType: Add
+            PropertyFloat.ArmorModVsCold
+            Double: 0.4
+    - Chance: 0.94
+        - EffectType: Add
+            PropertyFloat.ArmorModVsCold
+            Double: 0.6
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsCold
+            Double: 0.8
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsCold
+            Double: 1
+
+0x38000044 Mutation #7:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.45
+    - Chance: 0.69
+        - EffectType: Add
+            PropertyFloat.ArmorModVsFire
+            Double: 0.2
+    - Chance: 0.84
+        - EffectType: Add
+            PropertyFloat.ArmorModVsFire
+            Double: 0.4
+    - Chance: 0.94
+        - EffectType: Add
+            PropertyFloat.ArmorModVsFire
+            Double: 0.6
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsFire
+            Double: 0.8
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsFire
+            Double: 1
+
+0x38000044 Mutation #8:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.45
+    - Chance: 0.69
+        - EffectType: Add
+            PropertyFloat.ArmorModVsAcid
+            Double: 0.2
+    - Chance: 0.84
+        - EffectType: Add
+            PropertyFloat.ArmorModVsAcid
+            Double: 0.4
+    - Chance: 0.94
+        - EffectType: Add
+            PropertyFloat.ArmorModVsAcid
+            Double: 0.6
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsAcid
+            Double: 0.8
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsAcid
+            Double: 1
+
+0x38000044 Mutation #9:
+
+Tier chances: 1, 1, 1, 1, 1, 1
+
+    - Chance: 0.45
+    - Chance: 0.69
+        - EffectType: Add
+            PropertyFloat.ArmorModVsElectric
+            Double: 0.2
+    - Chance: 0.84
+        - EffectType: Add
+            PropertyFloat.ArmorModVsElectric
+            Double: 0.4
+    - Chance: 0.94
+        - EffectType: Add
+            PropertyFloat.ArmorModVsElectric
+            Double: 0.6
+    - Chance: 0.99
+        - EffectType: Add
+            PropertyFloat.ArmorModVsElectric
+            Double: 0.8
+    - Chance: 1
+        - EffectType: Add
+            PropertyFloat.ArmorModVsElectric
+            Double: 1
+
+0x38000044 Mutation #10:
+
+Tier chances: 0.5, 0.5, 0.5, 0.6, 0.8, 0
+
+    - Chance: 0.25
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Range: 0.65 - 0.75
+    - Chance: 0.75
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Range: 0.55 - 0.65
+    - Chance: 1
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Range: 0.45 - 0.55
+
+0x38000044 Mutation #11:
+
+Tier chances: 0, 0, 0, 0, 0, 1
+
+    - Chance: 0.25
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Range: 0.55 - 0.65
+    - Chance: 0.75
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Range: 0.45 - 0.55
+    - Chance: 1
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Range: 0.35 - 0.45
+

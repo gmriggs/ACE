@@ -1,0 +1,13 @@
+0x38000019 Mutation #1:
+
+Tier chances: 1
+
+    - Chance: 1
+        - EffectType: Multiply
+            PropertyInt.EncumbranceVal
+            Double: 0.75
+        - EffectType: AtLeastAdd
+            PropertyInt.NumTimesTinkered
+            Int: 1
+            Int: 1
+
