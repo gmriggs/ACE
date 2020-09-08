@@ -2,1219 +2,611 @@
 
 Tier chances: 1, 1, 1, 0, 0, 0
 
-    - Chance: 0.12
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 200
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.23
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 160
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.34
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 145
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.45
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.56
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 205
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.67
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 185
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.78
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.89
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 225
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
+    - Chance 0.12:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 200
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.23:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 160
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.34:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 145
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.45:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 250
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.56:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 205
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.67:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 185
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.78:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 300
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.89:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 1:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 225
+        ArmorLevel += Random(0, 50)
 
 0x38000022 Mutation #2:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance: 0.07
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 200
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.14
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 160
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.2
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 145
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.27
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.34
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 205
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.4
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 185
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.47
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.54
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.6
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 225
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.67
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.74
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 270
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.8
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.87
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.94
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 290
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 265
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
+    - Chance 0.07:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 200
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.14:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 160
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.2:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 145
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.27:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 250
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.34:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 205
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.4:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 185
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.47:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 300
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.54:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.6:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 225
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.67:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 325
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.74:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 270
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.8:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.87:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 350
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.94:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 290
+        ArmorLevel += Random(0, 40)
+
+    - Chance 1:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 265
+        ArmorLevel += Random(0, 40)
 
 0x38000022 Mutation #3:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance: 0.06
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 200
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.12
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 160
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.17
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 145
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.23
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.29
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 205
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.34
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 185
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.4
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.46
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.51
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 225
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.57
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.63
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 270
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.68
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.74
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.79
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 290
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.84
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 265
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.9
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 440
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 370
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 0.95
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 440
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 305
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 440
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 280
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
+    - Chance 0.06:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 200
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.12:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 160
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.17:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 145
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.23:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 250
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.29:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 205
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.34:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 185
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.4:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 300
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.46:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.51:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 225
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.57:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 325
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.63:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 270
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.68:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.74:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 350
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.79:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 290
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.84:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 265
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.9:
+        ArmorLevel = 440
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 370
+        ArmorLevel += Random(0, 30)
+
+    - Chance 0.95:
+        ArmorLevel = 440
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 305
+        ArmorLevel += Random(0, 30)
+
+    - Chance 1:
+        ArmorLevel = 440
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 280
+        ArmorLevel += Random(0, 30)
 
 0x38000022 Mutation #4:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.05
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 200
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.1
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 160
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.15
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 100
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 145
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.2
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.25
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 205
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 200
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 185
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 100
-    - Chance: 0.35
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.4
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.45
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 300
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 225
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.5
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.55
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 270
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.6
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 350
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 245
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 50
-    - Chance: 0.65
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.7
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 290
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.75
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 400
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 265
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 40
-    - Chance: 0.8
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 440
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 370
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 0.85
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 440
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 305
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 0.9
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 440
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 280
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 0.94
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 470
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 400
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 0.97
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 470
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 330
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ArmorLevel
-            Int: 470
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: 0 - 30
+    - Chance 0.05:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 200
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.1:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 160
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.15:
+        ArmorLevel = 100
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 145
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.2:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 250
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.25:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 205
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.3:
+        ArmorLevel = 200
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 185
+        ArmorLevel += Random(0, 100)
+
+    - Chance 0.35:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 300
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.4:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.45:
+        ArmorLevel = 300
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 225
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.5:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 325
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.55:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 270
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.6:
+        ArmorLevel = 350
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 245
+        ArmorLevel += Random(0, 50)
+
+    - Chance 0.65:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 350
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.7:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 290
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.75:
+        ArmorLevel = 400
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 265
+        ArmorLevel += Random(0, 40)
+
+    - Chance 0.8:
+        ArmorLevel = 440
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 370
+        ArmorLevel += Random(0, 30)
+
+    - Chance 0.85:
+        ArmorLevel = 440
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 305
+        ArmorLevel += Random(0, 30)
+
+    - Chance 0.9:
+        ArmorLevel = 440
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 280
+        ArmorLevel += Random(0, 30)
+
+    - Chance 0.94:
+        ArmorLevel = 470
+        WieldRequirements = RawSkill
+        WieldSkillType = 6
+        WieldDifficulty = 400
+        ArmorLevel += Random(0, 30)
+
+    - Chance 0.97:
+        ArmorLevel = 470
+        WieldRequirements = RawSkill
+        WieldSkillType = 7
+        WieldDifficulty = 330
+        ArmorLevel += Random(0, 30)
+
+    - Chance 1:
+        ArmorLevel = 470
+        WieldRequirements = RawSkill
+        WieldSkillType = 15
+        WieldDifficulty = 300
+        ArmorLevel += Random(0, 30)
 
 0x38000022 Mutation #5:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.6
-    - Chance: 0.89
-        - EffectType: Add
-            PropertyFloat.ArmorModVsSlash
-            Double: 0.1
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsSlash
-            Double: 0.2
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsSlash
-            Double: 0.3
+    - Chance 0.6:
+
+    - Chance 0.89:
+        ArmorModVsSlash += 0.1
+
+    - Chance 0.99:
+        ArmorModVsSlash += 0.2
+
+    - Chance 1:
+        ArmorModVsSlash += 0.3
 
 0x38000022 Mutation #6:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.6
-    - Chance: 0.89
-        - EffectType: Add
-            PropertyFloat.ArmorModVsPierce
-            Double: 0.1
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsPierce
-            Double: 0.2
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsPierce
-            Double: 0.3
+    - Chance 0.6:
+
+    - Chance 0.89:
+        ArmorModVsPierce += 0.1
+
+    - Chance 0.99:
+        ArmorModVsPierce += 0.2
+
+    - Chance 1:
+        ArmorModVsPierce += 0.3
 
 0x38000022 Mutation #7:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.6
-    - Chance: 0.89
-        - EffectType: Add
-            PropertyFloat.ArmorModVsBludgeon
-            Double: 0.1
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsBludgeon
-            Double: 0.2
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsBludgeon
-            Double: 0.3
+    - Chance 0.6:
+
+    - Chance 0.89:
+        ArmorModVsBludgeon += 0.1
+
+    - Chance 0.99:
+        ArmorModVsBludgeon += 0.2
+
+    - Chance 1:
+        ArmorModVsBludgeon += 0.3
 
 0x38000022 Mutation #8:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.45
-    - Chance: 0.69
-        - EffectType: Add
-            PropertyFloat.ArmorModVsCold
-            Double: 0.2
-    - Chance: 0.84
-        - EffectType: Add
-            PropertyFloat.ArmorModVsCold
-            Double: 0.4
-    - Chance: 0.94
-        - EffectType: Add
-            PropertyFloat.ArmorModVsCold
-            Double: 0.6
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsCold
-            Double: 0.8
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsCold
-            Double: 1
+    - Chance 0.45:
+
+    - Chance 0.69:
+        ArmorModVsCold += 0.2
+
+    - Chance 0.84:
+        ArmorModVsCold += 0.4
+
+    - Chance 0.94:
+        ArmorModVsCold += 0.6
+
+    - Chance 0.99:
+        ArmorModVsCold += 0.8
+
+    - Chance 1:
+        ArmorModVsCold += 1
 
 0x38000022 Mutation #9:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.45
-    - Chance: 0.69
-        - EffectType: Add
-            PropertyFloat.ArmorModVsFire
-            Double: 0.2
-    - Chance: 0.84
-        - EffectType: Add
-            PropertyFloat.ArmorModVsFire
-            Double: 0.4
-    - Chance: 0.94
-        - EffectType: Add
-            PropertyFloat.ArmorModVsFire
-            Double: 0.6
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsFire
-            Double: 0.8
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsFire
-            Double: 1
+    - Chance 0.45:
+
+    - Chance 0.69:
+        ArmorModVsFire += 0.2
+
+    - Chance 0.84:
+        ArmorModVsFire += 0.4
+
+    - Chance 0.94:
+        ArmorModVsFire += 0.6
+
+    - Chance 0.99:
+        ArmorModVsFire += 0.8
+
+    - Chance 1:
+        ArmorModVsFire += 1
 
 0x38000022 Mutation #10:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.45
-    - Chance: 0.69
-        - EffectType: Add
-            PropertyFloat.ArmorModVsAcid
-            Double: 0.2
-    - Chance: 0.84
-        - EffectType: Add
-            PropertyFloat.ArmorModVsAcid
-            Double: 0.4
-    - Chance: 0.94
-        - EffectType: Add
-            PropertyFloat.ArmorModVsAcid
-            Double: 0.6
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsAcid
-            Double: 0.8
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsAcid
-            Double: 1
+    - Chance 0.45:
+
+    - Chance 0.69:
+        ArmorModVsAcid += 0.2
+
+    - Chance 0.84:
+        ArmorModVsAcid += 0.4
+
+    - Chance 0.94:
+        ArmorModVsAcid += 0.6
+
+    - Chance 0.99:
+        ArmorModVsAcid += 0.8
+
+    - Chance 1:
+        ArmorModVsAcid += 1
 
 0x38000022 Mutation #11:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.45
-    - Chance: 0.69
-        - EffectType: Add
-            PropertyFloat.ArmorModVsElectric
-            Double: 0.2
-    - Chance: 0.84
-        - EffectType: Add
-            PropertyFloat.ArmorModVsElectric
-            Double: 0.4
-    - Chance: 0.94
-        - EffectType: Add
-            PropertyFloat.ArmorModVsElectric
-            Double: 0.6
-    - Chance: 0.99
-        - EffectType: Add
-            PropertyFloat.ArmorModVsElectric
-            Double: 0.8
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsElectric
-            Double: 1
+    - Chance 0.45:
+
+    - Chance 0.69:
+        ArmorModVsElectric += 0.2
+
+    - Chance 0.84:
+        ArmorModVsElectric += 0.4
+
+    - Chance 0.94:
+        ArmorModVsElectric += 0.6
+
+    - Chance 0.99:
+        ArmorModVsElectric += 0.8
+
+    - Chance 1:
+        ArmorModVsElectric += 1
 
 0x38000022 Mutation #12:
 
 Tier chances: 0.5, 0.5, 0.5, 0.6, 0.8, 0
 
-    - Chance: 0.25
-        - EffectType: Multiply
-            PropertyInt.EncumbranceVal
-            Range: 0.65 - 0.75
-    - Chance: 0.75
-        - EffectType: Multiply
-            PropertyInt.EncumbranceVal
-            Range: 0.55 - 0.65
-    - Chance: 1
-        - EffectType: Multiply
-            PropertyInt.EncumbranceVal
-            Range: 0.45 - 0.55
+    - Chance 0.25:
+        EncumbranceVal *= Random(0.65, 0.75)
+
+    - Chance 0.75:
+        EncumbranceVal *= Random(0.55, 0.65)
+
+    - Chance 1:
+        EncumbranceVal *= Random(0.45, 0.55)
 
 0x38000022 Mutation #13:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.25
-        - EffectType: Multiply
-            PropertyInt.EncumbranceVal
-            Range: 0.55 - 0.65
-    - Chance: 0.75
-        - EffectType: Multiply
-            PropertyInt.EncumbranceVal
-            Range: 0.45 - 0.55
-    - Chance: 1
-        - EffectType: Multiply
-            PropertyInt.EncumbranceVal
-            Range: 0.35 - 0.45
+    - Chance 0.25:
+        EncumbranceVal *= Random(0.55, 0.65)
+
+    - Chance 0.75:
+        EncumbranceVal *= Random(0.45, 0.55)
+
+    - Chance 1:
+        EncumbranceVal *= Random(0.35, 0.45)
 

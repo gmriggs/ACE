@@ -2,12 +2,7 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: Multiply
-            PropertyFloat.DamageVariance
-            Double: 0.8
-        - EffectType: AtLeastAdd
-            PropertyInt.NumTimesTinkered
-            Int: 1
-            Int: 1
+    - Chance 1:
+        DamageVariance *= 0.8
+        NumTimesTinkered >= 1, add 1
 

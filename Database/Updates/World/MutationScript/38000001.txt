@@ -2,321 +2,223 @@
 
 Tier chances: 0, 0.0625, 0.125, 0.25, 0.5, 1
 
-    - Chance: 0.17
-        - EffectType: Assign
-            PropertyInt.Value
-            Int: 1
-    - Chance: 0.34
-        - EffectType: Assign
-            PropertyInt.Value
-            Int: 2
-    - Chance: 0.51
-        - EffectType: Assign
-            PropertyInt.Value
-            Int: 3
-    - Chance: 0.68
-        - EffectType: Assign
-            PropertyInt.Value
-            Int: 4
-    - Chance: 0.83
-        - EffectType: Assign
-            PropertyInt.Value
-            Int: 5
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.Value
-            Double: 6.9
-    - Chance: 0.17
-        - EffectType: Add
-            PropertyInt.Damage
-            Range: 10 - 20
-    - Chance: 0.34
-        - EffectType: Subtract
-            PropertyInt.Damage
-            Int: 1
-    - Chance: 0.51
-        - EffectType: Multiply
-            PropertyInt.Damage
-            Double: 1.6
-    - Chance: 0.68
-        - EffectType: Divide
-            PropertyInt.Damage
-            Double: 1.6
-    - Chance: 0.83
-        - EffectType: AtLeastAdd
-            PropertyInt.Damage
-            Int: 20
-            Int: 2
-        - EffectType: AtLeastAdd
-            PropertyInt.Damage
-            Int: 20
-            Int: 2
-    - Chance: 1
-        - EffectType: AtMostSubtract
-            PropertyInt.Damage
-            Int: 5
-            Int: 1
-        - EffectType: AtMostSubtract
-            PropertyInt.Damage
-            Int: 5
-            Int: 1
+    - Chance 0.17:
+        Value = 1
+
+    - Chance 0.34:
+        Value = 2
+
+    - Chance 0.51:
+        Value = 3
+
+    - Chance 0.68:
+        Value = 4
+
+    - Chance 0.83:
+        Value = 5
+
+    - Chance 1:
+        Value = 6.9
+    - Chance 0.17:
+        Damage += Random(10, 20)
+
+    - Chance 0.34:
+        Damage -= 1
+
+    - Chance 0.51:
+        Damage *= 1.6
+
+    - Chance 0.68:
+        Damage /= 1.6
+
+    - Chance 0.83:
+        Damage >= 20, add 2
+        Damage >= 20, add 2
+
+    - Chance 1:
+        Damage <= 5, sub 1
+        Damage <= 5, sub 1
 
 0x38000001 Mutation #2:
 
 Tier chances: 0, 0.0625, 0.125, 0.25, 0.5, 1
 
-    - Chance: 1
-        - EffectType: AtMostSubtract
-            PropertyFloat.DamageVariance
-            Double: 0.2
-            Int: 0
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: AtLeastAdd
-            PropertyInt.WieldDifficulty
-            Int: 250
-            Int: 10
+    - Chance 1:
+        DamageVariance <= 0.2, sub 0
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty >= 250, add 10
 
 0x38000001 Mutation #3:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.25
-        - EffectType: Assign
-            Variable
-            Int: -1
-    - Chance: 0.75
-        - EffectType: Assign
-            Variable
-            Range: -1 - 1
-    - Chance: 1
-        - EffectType: Assign
-            Variable
-            Int: 1
+    - Chance 0.25:
+        Variable[0] = -1
+
+    - Chance 0.75:
+        Variable[0] = Random(-1, 1)
+
+    - Chance 1:
+        Variable[0] = 1
 
 0x38000001 Mutation #4:
 
 Tier chances: 0, 0.0625, 0.125, 0.25, 0.5, 1
 
-    - Chance: 1
-        - EffectType: SubtractMultiply
-            PropertyInt.EncumbranceVal
-            Variable
-            Int: 200
-        - EffectType: Add
-            Variable
-            Int: 1
-        - EffectType: AddMultiply
-            PropertyFloat.WeaponOffense
-            Variable
-            Double: 0.1
-        - EffectType: AddDivide
-            PropertyFloat.WeaponDefense
-            Variable
-            Int: 10
+    - Chance 1:
+        EncumbranceVal -= Variable[0] * 200
+        Variable[0] += 1
+        WeaponOffense += Variable[0] * 0.1
+        WeaponDefense += Variable[0] / 10
 
 0x38000001 Mutation #5:
 
 Tier chances: 0, 0.0625, 0.125, 0.25, 0.5, 1
 
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.SlayerDamageBonus
-            Double: 2
-    - Chance: 0.01
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 17
-    - Chance: 0.02
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 11
-    - Chance: 0.07
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 2
-    - Chance: 0.09
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 55
-    - Chance: 0.1
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 12
-    - Chance: 0.11
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 47
-    - Chance: 0.12
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 53
-    - Chance: 0.17
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 3
-    - Chance: 0.175
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 60
-    - Chance: 0.18
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 38
-    - Chance: 0.185
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 61
-    - Chance: 0.19
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 42
-    - Chance: 0.24
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 13
-    - Chance: 0.26
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 44
-    - Chance: 0.27
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 15
-    - Chance: 0.29
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 48
-    - Chance: 0.295
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 31
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 50
-    - Chance: 0.305
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 21
-    - Chance: 0.355
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 5
-    - Chance: 0.365
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 54
-    - Chance: 0.4
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 23
-    - Chance: 0.41
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 7
-    - Chance: 0.42
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 34
-    - Chance: 0.47
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 28
-    - Chance: 0.49
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 4
-    - Chance: 0.5
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 45
-    - Chance: 0.55
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 1
-    - Chance: 0.56
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 9
-    - Chance: 0.57
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 25
-    - Chance: 0.58
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 10
-    - Chance: 0.6
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 16
-    - Chance: 0.62
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 26
-    - Chance: 0.67
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 22
-    - Chance: 0.69
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 27
-    - Chance: 0.74
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 32
-    - Chance: 0.76
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 56
-    - Chance: 0.78
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 30
-    - Chance: 0.79
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 36
-    - Chance: 0.8
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 6
-    - Chance: 0.81
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 57
-    - Chance: 0.82
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 58
-    - Chance: 0.87
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 8
-    - Chance: 0.92
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 14
-    - Chance: 0.94
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 46
-    - Chance: 0.98
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 19
-    - Chance: 0.99
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 20
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.SlayerCreatureType
-            Int: 29
+    - Chance 1:
+        SlayerDamageBonus = 2
+    - Chance 0.01:
+        SlayerCreatureType = 17
+
+    - Chance 0.02:
+        SlayerCreatureType = 11
+
+    - Chance 0.07:
+        SlayerCreatureType = 2
+
+    - Chance 0.09:
+        SlayerCreatureType = 55
+
+    - Chance 0.1:
+        SlayerCreatureType = 12
+
+    - Chance 0.11:
+        SlayerCreatureType = 47
+
+    - Chance 0.12:
+        SlayerCreatureType = 53
+
+    - Chance 0.17:
+        SlayerCreatureType = 3
+
+    - Chance 0.175:
+        SlayerCreatureType = 60
+
+    - Chance 0.18:
+        SlayerCreatureType = 38
+
+    - Chance 0.185:
+        SlayerCreatureType = 61
+
+    - Chance 0.19:
+        SlayerCreatureType = 42
+
+    - Chance 0.24:
+        SlayerCreatureType = 13
+
+    - Chance 0.26:
+        SlayerCreatureType = 44
+
+    - Chance 0.27:
+        SlayerCreatureType = 15
+
+    - Chance 0.29:
+        SlayerCreatureType = 48
+
+    - Chance 0.295:
+        SlayerCreatureType = 31
+
+    - Chance 0.3:
+        SlayerCreatureType = 50
+
+    - Chance 0.305:
+        SlayerCreatureType = 21
+
+    - Chance 0.355:
+        SlayerCreatureType = 5
+
+    - Chance 0.365:
+        SlayerCreatureType = 54
+
+    - Chance 0.4:
+        SlayerCreatureType = 23
+
+    - Chance 0.41:
+        SlayerCreatureType = 7
+
+    - Chance 0.42:
+        SlayerCreatureType = 34
+
+    - Chance 0.47:
+        SlayerCreatureType = 28
+
+    - Chance 0.49:
+        SlayerCreatureType = 4
+
+    - Chance 0.5:
+        SlayerCreatureType = 45
+
+    - Chance 0.55:
+        SlayerCreatureType = 1
+
+    - Chance 0.56:
+        SlayerCreatureType = 9
+
+    - Chance 0.57:
+        SlayerCreatureType = 25
+
+    - Chance 0.58:
+        SlayerCreatureType = 10
+
+    - Chance 0.6:
+        SlayerCreatureType = 16
+
+    - Chance 0.62:
+        SlayerCreatureType = 26
+
+    - Chance 0.67:
+        SlayerCreatureType = 22
+
+    - Chance 0.69:
+        SlayerCreatureType = 27
+
+    - Chance 0.74:
+        SlayerCreatureType = 32
+
+    - Chance 0.76:
+        SlayerCreatureType = 56
+
+    - Chance 0.78:
+        SlayerCreatureType = 30
+
+    - Chance 0.79:
+        SlayerCreatureType = 36
+
+    - Chance 0.8:
+        SlayerCreatureType = 6
+
+    - Chance 0.81:
+        SlayerCreatureType = 57
+
+    - Chance 0.82:
+        SlayerCreatureType = 58
+
+    - Chance 0.87:
+        SlayerCreatureType = 8
+
+    - Chance 0.92:
+        SlayerCreatureType = 14
+
+    - Chance 0.94:
+        SlayerCreatureType = 46
+
+    - Chance 0.98:
+        SlayerCreatureType = 19
+
+    - Chance 0.99:
+        SlayerCreatureType = 20
+
+    - Chance 1:
+        SlayerCreatureType = 29
 

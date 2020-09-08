@@ -2,12 +2,7 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.01
-        - EffectType: AtLeastAdd
-            PropertyInt.NumTimesTinkered
-            Int: 1
-            Int: 1
+    - Chance 1:
+        WeaponDefense += 0.01
+        NumTimesTinkered >= 1, add 1
 

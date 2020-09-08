@@ -2,13 +2,7 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: AtLeastAdd
-            PropertyFloat.ManaConversionMod
-            Double: 0.01
-            Double: 0.01
-        - EffectType: AtLeastAdd
-            PropertyInt.NumTimesTinkered
-            Int: 1
-            Int: 1
+    - Chance 1:
+        ManaConversionMod >= 0.01, add 0.01
+        NumTimesTinkered >= 1, add 1
 

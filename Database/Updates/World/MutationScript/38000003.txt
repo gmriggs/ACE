@@ -2,1156 +2,717 @@
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance: 0.03
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 0
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 1
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 2
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 3
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 4
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 5
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 6
-    - Chance: 0.97
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 7
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 8
+    - Chance 0.03:
+        Damage += 0
+
+    - Chance 0.1:
+        Damage += 1
+
+    - Chance 0.2:
+        Damage += 2
+
+    - Chance 0.35:
+        Damage += 3
+
+    - Chance 0.65:
+        Damage += 4
+
+    - Chance 0.8:
+        Damage += 5
+
+    - Chance 0.9:
+        Damage += 6
+
+    - Chance 0.97:
+        Damage += 7
+
+    - Chance 1:
+        Damage += 8
 
 0x38000003 Mutation #2:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance: 0.02
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 0
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 1
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 2
-    - Chance: 0.19
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 3
-    - Chance: 0.31
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 4
-    - Chance: 0.4
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 5
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 6
-    - Chance: 0.48
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 7
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 8
-    - Chance: 0.52
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 9
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.55
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 10
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.6
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 11
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 12
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 13
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 14
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 16
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
+    - Chance 0.02:
+        Damage += 0
+
+    - Chance 0.05:
+        Damage += 1
+
+    - Chance 0.1:
+        Damage += 2
+
+    - Chance 0.19:
+        Damage += 3
+
+    - Chance 0.31:
+        Damage += 4
+
+    - Chance 0.4:
+        Damage += 5
+
+    - Chance 0.45:
+        Damage += 6
+
+    - Chance 0.48:
+        Damage += 7
+
+    - Chance 0.5:
+        Damage += 8
+
+    - Chance 0.52:
+        Damage += 9
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.55:
+        Damage += 10
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.6:
+        Damage += 11
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.75:
+        Damage += 12
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.9:
+        Damage += 13
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.95:
+        Damage += 14
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.98:
+        Damage += 15
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 1:
+        Damage += 16
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
 
 0x38000003 Mutation #3:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance: 0.02
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 9
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 10
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 11
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.25
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 12
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.4
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 13
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 14
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.48
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 15
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 16
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 250
-    - Chance: 0.6
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 17
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 18
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 19
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 20
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
+    - Chance 0.02:
+        Damage += 9
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.05:
+        Damage += 10
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.1:
+        Damage += 11
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.25:
+        Damage += 12
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.4:
+        Damage += 13
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.45:
+        Damage += 14
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.48:
+        Damage += 15
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.5:
+        Damage += 16
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 250
+
+    - Chance 0.6:
+        Damage += 17
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 0.8:
+        Damage += 18
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 0.95:
+        Damage += 19
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 1:
+        Damage += 20
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
 
 0x38000003 Mutation #4:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 17
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 0.3
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 18
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 19
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 20
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 300
-    - Chance: 0.6
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 21
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 22
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 23
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 24
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
+    - Chance 0.1:
+        Damage += 17
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 0.3:
+        Damage += 18
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 0.45:
+        Damage += 19
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 0.5:
+        Damage += 20
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 300
+
+    - Chance 0.6:
+        Damage += 21
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 0.8:
+        Damage += 22
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 0.95:
+        Damage += 23
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 1:
+        Damage += 24
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
 
 0x38000003 Mutation #5:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 21
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 0.3
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 22
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 23
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 24
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 325
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 25
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 26
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
+    - Chance 0.1:
+        Damage += 21
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 0.3:
+        Damage += 22
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 0.45:
+        Damage += 23
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 0.5:
+        Damage += 24
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 325
+
+    - Chance 0.85:
+        Damage += 25
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 350
+
+    - Chance 1:
+        Damage += 26
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 350
 
 0x38000003 Mutation #6:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 25
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 26
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 350
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 27
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 370
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 28
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 370
-    - Chance: 0.91
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 29
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 400
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 30
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 400
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 31
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 400
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.Damage
-            Int: 32
-        - EffectType: Assign
-            PropertyInt.WieldRequirements
-            Int: 2
-        - EffectType: Assign
-            PropertyInt.WieldSkillType
-            PropertyInt.WeaponSkill
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 400
+    - Chance 0.35:
+        Damage += 25
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 350
+
+    - Chance 0.5:
+        Damage += 26
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 350
+
+    - Chance 0.75:
+        Damage += 27
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 370
+
+    - Chance 0.85:
+        Damage += 28
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 370
+
+    - Chance 0.91:
+        Damage += 29
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 400
+
+    - Chance 0.95:
+        Damage += 30
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 400
+
+    - Chance 0.98:
+        Damage += 31
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 400
+
+    - Chance 1:
+        Damage += 32
+        WieldRequirements = RawSkill
+        WieldSkillType = WeaponSkill
+        WieldDifficulty = 400
 
 0x38000003 Mutation #7:
 
 Tier chances: 0.5, 0.6, 0.7, 0.8, 0.9, 1
 
-    - Chance: 0.05
-        - EffectType: Assign
-            PropertyFloat.DamageVariance
-            Double: 0.5
-    - Chance: 0.2
-        - EffectType: Assign
-            PropertyFloat.DamageVariance
-            Double: 0.45
-    - Chance: 0.5
-        - EffectType: Assign
-            PropertyFloat.DamageVariance
-            Double: 0.4
-    - Chance: 0.8
-        - EffectType: Assign
-            PropertyFloat.DamageVariance
-            Double: 0.35
-    - Chance: 0.95
-        - EffectType: Assign
-            PropertyFloat.DamageVariance
-            Double: 0.3
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.DamageVariance
-            Double: 0.25
+    - Chance 0.05:
+        DamageVariance = 0.5
+
+    - Chance 0.2:
+        DamageVariance = 0.45
+
+    - Chance 0.5:
+        DamageVariance = 0.4
+
+    - Chance 0.8:
+        DamageVariance = 0.35
+
+    - Chance 0.95:
+        DamageVariance = 0.3
+
+    - Chance 1:
+        DamageVariance = 0.25
 
 0x38000003 Mutation #8:
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance: 0.05
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.01
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.02
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.03
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.04
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.05
+    - Chance 0.05:
+
+    - Chance 0.2:
+        WeaponOffense += 0.01
+
+    - Chance 0.5:
+        WeaponOffense += 0.02
+
+    - Chance 0.8:
+        WeaponOffense += 0.03
+
+    - Chance 0.95:
+        WeaponOffense += 0.04
+
+    - Chance 1:
+        WeaponOffense += 0.05
 
 0x38000003 Mutation #9:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.02
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.03
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.04
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.05
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.06
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.07
+    - Chance 0.05:
+        WeaponOffense += 0.02
+
+    - Chance 0.2:
+        WeaponOffense += 0.03
+
+    - Chance 0.5:
+        WeaponOffense += 0.04
+
+    - Chance 0.8:
+        WeaponOffense += 0.05
+
+    - Chance 0.95:
+        WeaponOffense += 0.06
+
+    - Chance 1:
+        WeaponOffense += 0.07
 
 0x38000003 Mutation #10:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance: 0.02
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.03
-    - Chance: 0.07
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.04
-    - Chance: 0.22
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.05
-    - Chance: 0.47
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.06
-    - Chance: 0.77
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.07
-    - Chance: 0.92
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.08
-    - Chance: 0.97
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.09
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.1
+    - Chance 0.02:
+        WeaponOffense += 0.03
+
+    - Chance 0.07:
+        WeaponOffense += 0.04
+
+    - Chance 0.22:
+        WeaponOffense += 0.05
+
+    - Chance 0.47:
+        WeaponOffense += 0.06
+
+    - Chance 0.77:
+        WeaponOffense += 0.07
+
+    - Chance 0.92:
+        WeaponOffense += 0.08
+
+    - Chance 0.97:
+        WeaponOffense += 0.09
+
+    - Chance 1:
+        WeaponOffense += 0.1
 
 0x38000003 Mutation #11:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.05
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.06
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.07
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.08
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.09
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.1
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.11
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.12
+    - Chance 0.05:
+        WeaponOffense += 0.05
+
+    - Chance 0.2:
+        WeaponOffense += 0.06
+
+    - Chance 0.45:
+        WeaponOffense += 0.07
+
+    - Chance 0.75:
+        WeaponOffense += 0.08
+
+    - Chance 0.9:
+        WeaponOffense += 0.09
+
+    - Chance 0.95:
+        WeaponOffense += 0.1
+
+    - Chance 0.98:
+        WeaponOffense += 0.11
+
+    - Chance 1:
+        WeaponOffense += 0.12
 
 0x38000003 Mutation #12:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance: 0.03
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.06
-    - Chance: 0.08
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.07
-    - Chance: 0.23
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.08
-    - Chance: 0.48
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.09
-    - Chance: 0.73
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.1
-    - Chance: 0.88
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.11
-    - Chance: 0.93
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.12
-    - Chance: 0.96
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.13
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.14
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.15
+    - Chance 0.03:
+        WeaponOffense += 0.06
+
+    - Chance 0.08:
+        WeaponOffense += 0.07
+
+    - Chance 0.23:
+        WeaponOffense += 0.08
+
+    - Chance 0.48:
+        WeaponOffense += 0.09
+
+    - Chance 0.73:
+        WeaponOffense += 0.1
+
+    - Chance 0.88:
+        WeaponOffense += 0.11
+
+    - Chance 0.93:
+        WeaponOffense += 0.12
+
+    - Chance 0.96:
+        WeaponOffense += 0.13
+
+    - Chance 0.98:
+        WeaponOffense += 0.14
+
+    - Chance 1:
+        WeaponOffense += 0.15
 
 0x38000003 Mutation #13:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.07
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.08
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.09
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.1
-    - Chance: 0.55
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.11
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.12
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.13
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.14
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponOffense
-            Double: 0.15
+    - Chance 0.05:
+        WeaponOffense += 0.07
+
+    - Chance 0.1:
+        WeaponOffense += 0.08
+
+    - Chance 0.2:
+        WeaponOffense += 0.09
+
+    - Chance 0.35:
+        WeaponOffense += 0.1
+
+    - Chance 0.55:
+        WeaponOffense += 0.11
+
+    - Chance 0.75:
+        WeaponOffense += 0.12
+
+    - Chance 0.9:
+        WeaponOffense += 0.13
+
+    - Chance 0.95:
+        WeaponOffense += 0.14
+
+    - Chance 1:
+        WeaponOffense += 0.15
 
 0x38000003 Mutation #14:
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance: 0.05
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.01
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.02
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.03
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.04
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
+    - Chance 0.05:
+
+    - Chance 0.2:
+        WeaponDefense += 0.01
+
+    - Chance 0.5:
+        WeaponDefense += 0.02
+
+    - Chance 0.8:
+        WeaponDefense += 0.03
+
+    - Chance 0.95:
+        WeaponDefense += 0.04
+
+    - Chance 1:
+        WeaponDefense += 0.05
 
 0x38000003 Mutation #15:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.02
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.03
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.04
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
+    - Chance 0.05:
+        WeaponDefense += 0.02
+
+    - Chance 0.2:
+        WeaponDefense += 0.03
+
+    - Chance 0.5:
+        WeaponDefense += 0.04
+
+    - Chance 0.8:
+        WeaponDefense += 0.05
+
+    - Chance 0.95:
+        WeaponDefense += 0.06
+
+    - Chance 1:
+        WeaponDefense += 0.07
 
 0x38000003 Mutation #16:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance: 0.02
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.03
-    - Chance: 0.07
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.04
-    - Chance: 0.22
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
-    - Chance: 0.47
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 0.77
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.92
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.97
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
+    - Chance 0.02:
+        WeaponDefense += 0.03
+
+    - Chance 0.07:
+        WeaponDefense += 0.04
+
+    - Chance 0.22:
+        WeaponDefense += 0.05
+
+    - Chance 0.47:
+        WeaponDefense += 0.06
+
+    - Chance 0.77:
+        WeaponDefense += 0.07
+
+    - Chance 0.92:
+        WeaponDefense += 0.08
+
+    - Chance 0.97:
+        WeaponDefense += 0.09
+
+    - Chance 1:
+        WeaponDefense += 0.1
 
 0x38000003 Mutation #17:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.11
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.12
+    - Chance 0.05:
+        WeaponDefense += 0.05
+
+    - Chance 0.2:
+        WeaponDefense += 0.06
+
+    - Chance 0.45:
+        WeaponDefense += 0.07
+
+    - Chance 0.75:
+        WeaponDefense += 0.08
+
+    - Chance 0.9:
+        WeaponDefense += 0.09
+
+    - Chance 0.95:
+        WeaponDefense += 0.1
+
+    - Chance 0.98:
+        WeaponDefense += 0.11
+
+    - Chance 1:
+        WeaponDefense += 0.12
 
 0x38000003 Mutation #18:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance: 0.03
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 0.08
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.23
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.48
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 0.73
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
-    - Chance: 0.88
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.11
-    - Chance: 0.93
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.12
-    - Chance: 0.96
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.13
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.14
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.15
+    - Chance 0.03:
+        WeaponDefense += 0.06
+
+    - Chance 0.08:
+        WeaponDefense += 0.07
+
+    - Chance 0.23:
+        WeaponDefense += 0.08
+
+    - Chance 0.48:
+        WeaponDefense += 0.09
+
+    - Chance 0.73:
+        WeaponDefense += 0.1
+
+    - Chance 0.88:
+        WeaponDefense += 0.11
+
+    - Chance 0.93:
+        WeaponDefense += 0.12
+
+    - Chance 0.96:
+        WeaponDefense += 0.13
+
+    - Chance 0.98:
+        WeaponDefense += 0.14
+
+    - Chance 1:
+        WeaponDefense += 0.15
 
 0x38000003 Mutation #19:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
-    - Chance: 0.55
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.11
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.12
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.13
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.14
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.15
+    - Chance 0.05:
+        WeaponDefense += 0.07
+
+    - Chance 0.1:
+        WeaponDefense += 0.08
+
+    - Chance 0.2:
+        WeaponDefense += 0.09
+
+    - Chance 0.35:
+        WeaponDefense += 0.1
+
+    - Chance 0.55:
+        WeaponDefense += 0.11
+
+    - Chance 0.75:
+        WeaponDefense += 0.12
+
+    - Chance 0.9:
+        WeaponDefense += 0.13
+
+    - Chance 0.95:
+        WeaponDefense += 0.14
+
+    - Chance 1:
+        WeaponDefense += 0.15
 
 0x38000003 Mutation #20:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance: 0.1
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.005
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.01
-    - Chance: 0.7
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.015
-    - Chance: 0.9
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.02
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.025
+    - Chance 0.1:
+        WeaponMissileDefense = 1.005
+
+    - Chance 0.3:
+        WeaponMissileDefense = 1.01
+
+    - Chance 0.7:
+        WeaponMissileDefense = 1.015
+
+    - Chance 0.9:
+        WeaponMissileDefense = 1.02
+
+    - Chance 1:
+        WeaponMissileDefense = 1.025
 
 0x38000003 Mutation #21:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance: 0.1
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.005
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.01
-    - Chance: 0.7
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.015
-    - Chance: 0.9
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.02
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.025
+    - Chance 0.1:
+        WeaponMagicDefense = 1.005
+
+    - Chance 0.3:
+        WeaponMagicDefense = 1.01
+
+    - Chance 0.7:
+        WeaponMagicDefense = 1.015
+
+    - Chance 0.9:
+        WeaponMagicDefense = 1.02
+
+    - Chance 1:
+        WeaponMagicDefense = 1.025
 

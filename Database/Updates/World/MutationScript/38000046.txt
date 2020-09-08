@@ -2,12 +2,7 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: AtLeastAdd
-            PropertyInt.ImbuedEffect
-            Int: 0
-            Int: 0
-        - EffectType: Add
-            PropertyInt.ImbuedEffect
-            Int: 536870912
+    - Chance 1:
+        ImbuedEffect >= 0, add 0
+        ImbuedEffect += 536870912
 

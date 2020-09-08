@@ -2,8 +2,6 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: Assign
-            PropertyDataId.IconOverlay
-            PropertyDataId.IconOverlaySecondary
+    - Chance 1:
+        IconOverlay = IconOverlaySecondary
 

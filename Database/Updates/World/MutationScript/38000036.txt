@@ -2,15 +2,8 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ItemAllegianceRankLimit
-            Int: 0
-        - EffectType: Assign
-            PropertyInt.ItemDifficulty
-            PropertyInt.ItemSpellcraft
-        - EffectType: AtLeastAdd
-            PropertyInt.NumTimesTinkered
-            Int: 1
-            Int: 1
+    - Chance 1:
+        ItemAllegianceRankLimit = 0
+        ItemDifficulty = ItemSpellcraft
+        NumTimesTinkered >= 1, add 1
 

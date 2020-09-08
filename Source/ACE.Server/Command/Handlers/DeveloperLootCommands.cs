@@ -309,26 +309,120 @@ namespace ACE.Server.Command.Handlers
 
                 foreach (var outcome in mutation.MutationOutcome)
                 {
-                    foreach (var effectList in outcome.MutationEffectList)
+                    for (var effectListIdx = 0; effectListIdx < outcome.MutationEffectList.Count; effectListIdx++)
                     {
-                        lines.Add($"    - Chance: {effectList.Probability}");
+                        var effectList = outcome.MutationEffectList.ElementAt(effectListIdx);
 
-                        foreach (var effect in effectList.MutationEffect)
+                        lines.Add($"    - Chance {effectList.Probability}:");
+
+                        for (var effectIdx = 0; effectIdx < effectList.MutationEffect.Count; effectIdx++)
                         {
-                            lines.Add($"        - EffectType: {(MutationEffectType)effect.EffectType}");
+                            var effect = effectList.MutationEffect.ElementAt(effectIdx);
 
-                            foreach (var _arg in effect.MutationEffectArgument)
+                            //lines.Add($"        - EffectType: {(MutationEffectType)effect.EffectType}");
+
+                            var curLine = "";
+
+                            PropertyInt propInt = 0;
+
+                            for (var argIdx = 0; argIdx < effect.MutationEffectArgument.Count; argIdx++)
                             {
+                                var _arg = effect.MutationEffectArgument.ElementAt(argIdx);
+
+                                if (argIdx == 0)
+                                {
+                                    curLine += "        ";
+                                }
+
+                                if (argIdx == 1)
+                                {
+                                    switch ((MutationEffectType)effect.EffectType)
+                                    {
+                                        case MutationEffectType.Assign:
+                                        case MutationEffectType.AssignAdd:
+                                        case MutationEffectType.AssignSubtract:
+                                        case MutationEffectType.AssignMultiply:
+                                        case MutationEffectType.AssignDivide:
+                                            curLine += " = ";
+                                            break;
+
+                                        case MutationEffectType.Add:
+                                        case MutationEffectType.AddMultiply:
+                                        case MutationEffectType.AddDivide:
+                                            curLine += " += ";
+                                            break;
+
+                                        case MutationEffectType.Subtract:
+                                        case MutationEffectType.SubtractMultiply:
+                                        case MutationEffectType.SubtractDivide:
+                                            curLine += " -= ";
+                                            break;
+
+                                        case MutationEffectType.Multiply:
+                                            curLine += " *= ";
+                                            break;
+
+                                        case MutationEffectType.Divide:
+                                            curLine += " /= ";
+                                            break;
+
+                                        case MutationEffectType.AtLeastAdd:
+                                            curLine += " >= ";
+                                            break;
+
+                                        case MutationEffectType.AtMostSubtract:
+                                            curLine += " <= ";
+                                            break;
+                                    }
+                                }
+
+                                if (argIdx == 2)
+                                {
+                                    switch ((MutationEffectType)effect.EffectType)
+                                    {
+                                        case MutationEffectType.AssignAdd:
+                                            curLine += " + ";
+                                            break;
+
+                                        case MutationEffectType.AssignSubtract:
+                                            curLine += " - ";
+                                            break;
+
+                                        case MutationEffectType.AssignMultiply:
+                                        case MutationEffectType.AddMultiply:
+                                        case MutationEffectType.SubtractMultiply:
+                                            curLine += " * ";
+                                            break;
+
+                                        case MutationEffectType.AssignDivide:
+                                        case MutationEffectType.AddDivide:
+                                        case MutationEffectType.SubtractDivide:
+                                            curLine += " / ";
+                                            break;
+
+                                        case MutationEffectType.AtLeastAdd:
+                                            curLine += ", add ";
+                                            break;
+
+                                        case MutationEffectType.AtMostSubtract:
+                                            curLine += ", sub ";
+                                            break;
+                                    }
+                                }
+                                    
                                 var arg = new EffectArgument(_arg);
 
                                 switch (arg.Type)
                                 {
                                     case EffectArgumentType.Int:
-                                        lines.Add($"            Int: {arg.IntVal}");
+                                        if (argIdx == 1 && propInt == PropertyInt.WieldRequirements)
+                                            curLine += ($"{(WieldRequirement)arg.IntVal}");
+                                        else
+                                            curLine += ($"{arg.IntVal}");
                                         break;
 
                                     case EffectArgumentType.Double:
-                                        lines.Add($"            Double: {arg.DoubleVal}");
+                                        curLine += ($"{arg.DoubleVal}");
                                         break;
 
                                     case EffectArgumentType.Quality:
@@ -336,42 +430,47 @@ namespace ACE.Server.Command.Handlers
                                         switch (arg.StatType)
                                         {
                                             case StatType.Int:
-                                                lines.Add($"            PropertyInt.{(PropertyInt)arg.StatIdx}");
+                                                curLine += $"{(PropertyInt)arg.StatIdx}";
+                                                if (argIdx == 0)
+                                                    propInt = (PropertyInt)arg.StatIdx;
                                                 break;
 
                                             case StatType.Bool:
-                                                lines.Add($"            PropertyBool.{(PropertyBool)arg.StatIdx}");
+                                                curLine += $"{(PropertyBool)arg.StatIdx}";
                                                 break;
 
                                             case StatType.Float:
-                                                lines.Add($"            PropertyFloat.{(PropertyFloat)arg.StatIdx}");
+                                                curLine += $"{(PropertyFloat)arg.StatIdx}";
                                                 break;
 
                                             case StatType.DID:
-                                                lines.Add($"            PropertyDataId.{(PropertyDataId)arg.StatIdx}");
+                                                curLine += $"{(PropertyDataId)arg.StatIdx}";
                                                 break;
 
                                             default:
-                                                lines.Add($"            Unkown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}");
+                                                curLine += $"Unknown StatType: {arg.StatType}, StatIdx: {arg.StatIdx}";
                                                 break;
                                         }
                                         break;
 
                                     case EffectArgumentType.Random:
-                                        lines.Add($"            Range: {arg.Min} - {arg.Max}");
+                                        curLine += $"Random({arg.Min}, {arg.Max})";
                                         break;
 
                                     case EffectArgumentType.Variable:
-                                        lines.Add($"            Variable");
+                                        curLine += $"Variable[{arg.IntVal}]";
                                         break;
 
                                     default:
-                                        lines.Add($"            Unknown EffectArgumentType: {arg.Type}");
+                                        curLine += $"Unknown EffectArgumentType: {arg.Type}";
                                         break;
 
                                 }
                             }
+                            lines.Add(curLine);
                         }
+                        if (effectListIdx < outcome.MutationEffectList.Count - 1)
+                            lines.Add("");
                     }
                 }
                 lines.Add("");

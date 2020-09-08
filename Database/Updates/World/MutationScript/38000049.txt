@@ -2,368 +2,271 @@
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance: 0.15
-        - EffectType: Assign
-            PropertyFloat.DamageMod
-            Double: 2.43
-    - Chance: 0.5
-        - EffectType: Assign
-            PropertyFloat.DamageMod
-            Double: 2.45
-    - Chance: 0.85
-        - EffectType: Assign
-            PropertyFloat.DamageMod
-            Double: 2.47
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.DamageMod
-            Double: 2.5
+    - Chance 0.15:
+        DamageMod = 2.43
+
+    - Chance 0.5:
+        DamageMod = 2.45
+
+    - Chance 0.85:
+        DamageMod = 2.47
+
+    - Chance 1:
+        DamageMod = 2.5
 
 0x38000049 Mutation #2:
 
 Tier chances: 1, 1, 1, 1, 1, 0
 
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 1
-    - Chance: 0.7
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 2
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 3
+    - Chance 0.3:
+        ElementalDamageBonus = 1
+
+    - Chance 0.7:
+        ElementalDamageBonus = 2
+
+    - Chance 1:
+        ElementalDamageBonus = 3
 
 0x38000049 Mutation #3:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.15
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 1
-    - Chance: 0.35
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 2
-    - Chance: 0.5
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 3
-    - Chance: 0.6
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 4
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 335
-    - Chance: 0.75
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 5
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 335
-    - Chance: 0.85
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 6
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 335
-    - Chance: 0.91
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 7
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 360
-    - Chance: 0.95
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 8
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 360
-    - Chance: 0.98
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 9
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 360
-    - Chance: 1
-        - EffectType: Assign
-            PropertyInt.ElementalDamageBonus
-            Int: 10
-        - EffectType: Assign
-            PropertyInt.WieldDifficulty
-            Int: 360
+    - Chance 0.15:
+        ElementalDamageBonus = 1
+
+    - Chance 0.35:
+        ElementalDamageBonus = 2
+
+    - Chance 0.5:
+        ElementalDamageBonus = 3
+
+    - Chance 0.6:
+        ElementalDamageBonus = 4
+        WieldDifficulty = 335
+
+    - Chance 0.75:
+        ElementalDamageBonus = 5
+        WieldDifficulty = 335
+
+    - Chance 0.85:
+        ElementalDamageBonus = 6
+        WieldDifficulty = 335
+
+    - Chance 0.91:
+        ElementalDamageBonus = 7
+        WieldDifficulty = 360
+
+    - Chance 0.95:
+        ElementalDamageBonus = 8
+        WieldDifficulty = 360
+
+    - Chance 0.98:
+        ElementalDamageBonus = 9
+        WieldDifficulty = 360
+
+    - Chance 1:
+        ElementalDamageBonus = 10
+        WieldDifficulty = 360
 
 0x38000049 Mutation #4:
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance: 0.05
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.01
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.02
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.03
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.04
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
+    - Chance 0.05:
+
+    - Chance 0.2:
+        WeaponDefense += 0.01
+
+    - Chance 0.5:
+        WeaponDefense += 0.02
+
+    - Chance 0.8:
+        WeaponDefense += 0.03
+
+    - Chance 0.95:
+        WeaponDefense += 0.04
+
+    - Chance 1:
+        WeaponDefense += 0.05
 
 0x38000049 Mutation #5:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.02
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.03
-    - Chance: 0.5
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.04
-    - Chance: 0.8
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
+    - Chance 0.05:
+        WeaponDefense += 0.02
+
+    - Chance 0.2:
+        WeaponDefense += 0.03
+
+    - Chance 0.5:
+        WeaponDefense += 0.04
+
+    - Chance 0.8:
+        WeaponDefense += 0.05
+
+    - Chance 0.95:
+        WeaponDefense += 0.06
+
+    - Chance 1:
+        WeaponDefense += 0.07
 
 0x38000049 Mutation #6:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance: 0.02
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.03
-    - Chance: 0.07
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.04
-    - Chance: 0.22
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
-    - Chance: 0.47
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 0.77
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.92
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.97
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
+    - Chance 0.02:
+        WeaponDefense += 0.03
+
+    - Chance 0.07:
+        WeaponDefense += 0.04
+
+    - Chance 0.22:
+        WeaponDefense += 0.05
+
+    - Chance 0.47:
+        WeaponDefense += 0.06
+
+    - Chance 0.77:
+        WeaponDefense += 0.07
+
+    - Chance 0.92:
+        WeaponDefense += 0.08
+
+    - Chance 0.97:
+        WeaponDefense += 0.09
+
+    - Chance 1:
+        WeaponDefense += 0.1
 
 0x38000049 Mutation #7:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.05
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 0.45
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.11
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.12
+    - Chance 0.05:
+        WeaponDefense += 0.05
+
+    - Chance 0.2:
+        WeaponDefense += 0.06
+
+    - Chance 0.45:
+        WeaponDefense += 0.07
+
+    - Chance 0.75:
+        WeaponDefense += 0.08
+
+    - Chance 0.9:
+        WeaponDefense += 0.09
+
+    - Chance 0.95:
+        WeaponDefense += 0.1
+
+    - Chance 0.98:
+        WeaponDefense += 0.11
+
+    - Chance 1:
+        WeaponDefense += 0.12
 
 0x38000049 Mutation #8:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance: 0.03
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.06
-    - Chance: 0.08
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.23
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.48
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 0.73
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
-    - Chance: 0.88
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.11
-    - Chance: 0.93
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.12
-    - Chance: 0.96
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.13
-    - Chance: 0.98
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.14
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.15
+    - Chance 0.03:
+        WeaponDefense += 0.06
+
+    - Chance 0.08:
+        WeaponDefense += 0.07
+
+    - Chance 0.23:
+        WeaponDefense += 0.08
+
+    - Chance 0.48:
+        WeaponDefense += 0.09
+
+    - Chance 0.73:
+        WeaponDefense += 0.1
+
+    - Chance 0.88:
+        WeaponDefense += 0.11
+
+    - Chance 0.93:
+        WeaponDefense += 0.12
+
+    - Chance 0.96:
+        WeaponDefense += 0.13
+
+    - Chance 0.98:
+        WeaponDefense += 0.14
+
+    - Chance 1:
+        WeaponDefense += 0.15
 
 0x38000049 Mutation #9:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.07
-    - Chance: 0.1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.08
-    - Chance: 0.2
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.09
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.1
-    - Chance: 0.55
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.11
-    - Chance: 0.75
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.12
-    - Chance: 0.9
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.13
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.14
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.WeaponDefense
-            Double: 0.15
+    - Chance 0.05:
+        WeaponDefense += 0.07
+
+    - Chance 0.1:
+        WeaponDefense += 0.08
+
+    - Chance 0.2:
+        WeaponDefense += 0.09
+
+    - Chance 0.35:
+        WeaponDefense += 0.1
+
+    - Chance 0.55:
+        WeaponDefense += 0.11
+
+    - Chance 0.75:
+        WeaponDefense += 0.12
+
+    - Chance 0.9:
+        WeaponDefense += 0.13
+
+    - Chance 0.95:
+        WeaponDefense += 0.14
+
+    - Chance 1:
+        WeaponDefense += 0.15
 
 0x38000049 Mutation #10:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance: 0.1
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.005
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.01
-    - Chance: 0.7
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.015
-    - Chance: 0.9
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.02
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.WeaponMissileDefense
-            Double: 1.025
+    - Chance 0.1:
+        WeaponMissileDefense = 1.005
+
+    - Chance 0.3:
+        WeaponMissileDefense = 1.01
+
+    - Chance 0.7:
+        WeaponMissileDefense = 1.015
+
+    - Chance 0.9:
+        WeaponMissileDefense = 1.02
+
+    - Chance 1:
+        WeaponMissileDefense = 1.025
 
 0x38000049 Mutation #11:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance: 0.1
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.005
-    - Chance: 0.3
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.01
-    - Chance: 0.7
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.015
-    - Chance: 0.9
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.02
-    - Chance: 1
-        - EffectType: Assign
-            PropertyFloat.WeaponMagicDefense
-            Double: 1.025
+    - Chance 0.1:
+        WeaponMagicDefense = 1.005
+
+    - Chance 0.3:
+        WeaponMagicDefense = 1.01
+
+    - Chance 0.7:
+        WeaponMagicDefense = 1.015
+
+    - Chance 0.9:
+        WeaponMagicDefense = 1.02
+
+    - Chance 1:
+        WeaponMagicDefense = 1.025
 

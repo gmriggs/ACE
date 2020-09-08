@@ -2,12 +2,7 @@
 
 Tier chances: 1
 
-    - Chance: 1
-        - EffectType: Add
-            PropertyFloat.ArmorModVsCold
-            Double: 0.4
-        - EffectType: AtLeastAdd
-            PropertyInt.NumTimesTinkered
-            Int: 1
-            Int: 1
+    - Chance 1:
+        ArmorModVsCold += 0.4
+        NumTimesTinkered >= 1, add 1
 

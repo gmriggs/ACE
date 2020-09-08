@@ -2,329 +2,197 @@
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 10
-    - Chance: 0.15
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 20
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 30
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 40
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 50
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 60
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 70
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: -5 - 5
-        - EffectType: Assign
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Multiply
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Divide
-            Variable
-            Int: 10
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.BulkMod
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.SizeMod
-        - EffectType: Add
-            PropertyInt.Value
-            Variable
+    - Chance 0.05:
+        ArmorLevel += 10
+
+    - Chance 0.15:
+        ArmorLevel += 20
+
+    - Chance 0.35:
+        ArmorLevel += 30
+
+    - Chance 0.65:
+        ArmorLevel += 40
+
+    - Chance 0.85:
+        ArmorLevel += 50
+
+    - Chance 0.95:
+        ArmorLevel += 60
+
+    - Chance 1:
+        ArmorLevel += 70
+    - Chance 1:
+        ArmorLevel += Random(-5, 5)
+        Variable[0] = ArmorLevel
+        Variable[0] *= ArmorLevel
+        Variable[0] /= 10
+        Variable[0] *= BulkMod
+        Variable[0] *= SizeMod
+        Value += Variable[0]
 
 0x38000032 Mutation #2:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 40
-    - Chance: 0.15
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 50
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 60
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 70
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 80
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 90
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 100
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: -5 - 5
-        - EffectType: Assign
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Multiply
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Divide
-            Variable
-            Int: 10
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.BulkMod
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.SizeMod
-        - EffectType: Add
-            PropertyInt.Value
-            Variable
+    - Chance 0.05:
+        ArmorLevel += 40
+
+    - Chance 0.15:
+        ArmorLevel += 50
+
+    - Chance 0.35:
+        ArmorLevel += 60
+
+    - Chance 0.65:
+        ArmorLevel += 70
+
+    - Chance 0.85:
+        ArmorLevel += 80
+
+    - Chance 0.95:
+        ArmorLevel += 90
+
+    - Chance 1:
+        ArmorLevel += 100
+    - Chance 1:
+        ArmorLevel += Random(-5, 5)
+        Variable[0] = ArmorLevel
+        Variable[0] *= ArmorLevel
+        Variable[0] /= 10
+        Variable[0] *= BulkMod
+        Variable[0] *= SizeMod
+        Value += Variable[0]
 
 0x38000032 Mutation #3:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 70
-    - Chance: 0.15
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 80
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 90
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 100
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 110
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 120
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 130
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: -5 - 5
-        - EffectType: Assign
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Multiply
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Divide
-            Variable
-            Int: 10
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.BulkMod
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.SizeMod
-        - EffectType: Add
-            PropertyInt.Value
-            Variable
+    - Chance 0.05:
+        ArmorLevel += 70
+
+    - Chance 0.15:
+        ArmorLevel += 80
+
+    - Chance 0.35:
+        ArmorLevel += 90
+
+    - Chance 0.65:
+        ArmorLevel += 100
+
+    - Chance 0.85:
+        ArmorLevel += 110
+
+    - Chance 0.95:
+        ArmorLevel += 120
+
+    - Chance 1:
+        ArmorLevel += 130
+    - Chance 1:
+        ArmorLevel += Random(-5, 5)
+        Variable[0] = ArmorLevel
+        Variable[0] *= ArmorLevel
+        Variable[0] /= 10
+        Variable[0] *= BulkMod
+        Variable[0] *= SizeMod
+        Value += Variable[0]
 
 0x38000032 Mutation #4:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 90
-    - Chance: 0.15
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 100
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 110
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 120
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 130
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 140
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 150
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: -5 - 5
-        - EffectType: Assign
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Multiply
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Divide
-            Variable
-            Int: 10
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.BulkMod
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.SizeMod
-        - EffectType: Add
-            PropertyInt.Value
-            Variable
+    - Chance 0.05:
+        ArmorLevel += 90
+
+    - Chance 0.15:
+        ArmorLevel += 100
+
+    - Chance 0.35:
+        ArmorLevel += 110
+
+    - Chance 0.65:
+        ArmorLevel += 120
+
+    - Chance 0.85:
+        ArmorLevel += 130
+
+    - Chance 0.95:
+        ArmorLevel += 140
+
+    - Chance 1:
+        ArmorLevel += 150
+    - Chance 1:
+        ArmorLevel += Random(-5, 5)
+        Variable[0] = ArmorLevel
+        Variable[0] *= ArmorLevel
+        Variable[0] /= 10
+        Variable[0] *= BulkMod
+        Variable[0] *= SizeMod
+        Value += Variable[0]
 
 0x38000032 Mutation #5:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 100
-    - Chance: 0.15
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 110
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 120
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 130
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 140
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 150
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 160
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: -5 - 5
-        - EffectType: Assign
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Multiply
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Divide
-            Variable
-            Int: 10
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.BulkMod
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.SizeMod
-        - EffectType: Add
-            PropertyInt.Value
-            Variable
+    - Chance 0.05:
+        ArmorLevel += 100
+
+    - Chance 0.15:
+        ArmorLevel += 110
+
+    - Chance 0.35:
+        ArmorLevel += 120
+
+    - Chance 0.65:
+        ArmorLevel += 130
+
+    - Chance 0.85:
+        ArmorLevel += 140
+
+    - Chance 0.95:
+        ArmorLevel += 150
+
+    - Chance 1:
+        ArmorLevel += 160
+    - Chance 1:
+        ArmorLevel += Random(-5, 5)
+        Variable[0] = ArmorLevel
+        Variable[0] *= ArmorLevel
+        Variable[0] /= 10
+        Variable[0] *= BulkMod
+        Variable[0] *= SizeMod
+        Value += Variable[0]
 
 0x38000032 Mutation #6:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance: 0.05
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 100
-    - Chance: 0.15
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 110
-    - Chance: 0.35
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 120
-    - Chance: 0.65
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 130
-    - Chance: 0.85
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 140
-    - Chance: 0.95
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 150
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Int: 160
-    - Chance: 1
-        - EffectType: Add
-            PropertyInt.ArmorLevel
-            Range: -5 - 5
-        - EffectType: Assign
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Multiply
-            Variable
-            PropertyInt.ArmorLevel
-        - EffectType: Divide
-            Variable
-            Int: 20
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.BulkMod
-        - EffectType: Multiply
-            Variable
-            PropertyFloat.SizeMod
-        - EffectType: Add
-            PropertyInt.Value
-            Variable
+    - Chance 0.05:
+        ArmorLevel += 100
+
+    - Chance 0.15:
+        ArmorLevel += 110
+
+    - Chance 0.35:
+        ArmorLevel += 120
+
+    - Chance 0.65:
+        ArmorLevel += 130
+
+    - Chance 0.85:
+        ArmorLevel += 140
+
+    - Chance 0.95:
+        ArmorLevel += 150
+
+    - Chance 1:
+        ArmorLevel += 160
+    - Chance 1:
+        ArmorLevel += Random(-5, 5)
+        Variable[0] = ArmorLevel
+        Variable[0] *= ArmorLevel
+        Variable[0] /= 20
+        Variable[0] *= BulkMod
+        Variable[0] *= SizeMod
+        Value += Variable[0]
 
