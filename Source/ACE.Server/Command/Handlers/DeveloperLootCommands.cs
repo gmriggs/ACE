@@ -469,11 +469,9 @@ namespace ACE.Server.Command.Handlers
                             }
                             lines.Add(curLine);
                         }
-                        if (effectListIdx < outcome.MutationEffectList.Count - 1)
-                            lines.Add("");
+                        lines.Add("");
                     }
                 }
-                lines.Add("");
             }
             return lines;
         }

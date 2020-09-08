@@ -19,6 +19,7 @@ Tier chances: 0, 0.0625, 0.125, 0.25, 0.5, 1
 
     - Chance 1:
         Value = 6.9
+
     - Chance 0.17:
         Damage += Random(10, 20)
 
@@ -78,6 +79,7 @@ Tier chances: 0, 0.0625, 0.125, 0.25, 0.5, 1
 
     - Chance 1:
         SlayerDamageBonus = 2
+
     - Chance 0.01:
         SlayerCreatureType = 17
 
