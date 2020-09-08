@@ -24,7 +24,7 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     switch (b.Type)
                     {
                         case EffectArgumentType.Double:
-                            return new EffectArgument(a.IntVal + (int)b.DoubleVal);
+                            return new EffectArgument((int)(a.IntVal + b.DoubleVal));
                         case EffectArgumentType.Int:
                             return new EffectArgument(a.IntVal + b.IntVal);
                     }
@@ -56,7 +56,7 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     switch (b.Type)
                     {
                         case EffectArgumentType.Double:
-                            return new EffectArgument(a.IntVal - (int)b.DoubleVal);
+                            return new EffectArgument((int)(a.IntVal - b.DoubleVal));
                         case EffectArgumentType.Int:
                             return new EffectArgument(a.IntVal - b.IntVal);
                     }
@@ -88,7 +88,7 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     switch (b.Type)
                     {
                         case EffectArgumentType.Double:
-                            return new EffectArgument(a.IntVal * (int)b.DoubleVal);
+                            return new EffectArgument((int)(a.IntVal * b.DoubleVal));
                         case EffectArgumentType.Int:
                             return new EffectArgument(a.IntVal * b.IntVal);
                     }
@@ -109,9 +109,9 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     switch (b.Type)
                     {
                         case EffectArgumentType.Double:
-                            return new EffectArgument(a.DoubleVal / b.DoubleVal);
+                            return b.DoubleVal != 0 ? new EffectArgument(a.DoubleVal / b.DoubleVal) : a;
                         case EffectArgumentType.Int:
-                            return new EffectArgument(a.DoubleVal / b.IntVal);
+                            return b.IntVal != 0 ? new EffectArgument(a.DoubleVal / b.IntVal) : a;
                     }
                     break;
 
@@ -120,9 +120,9 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     switch (b.Type)
                     {
                         case EffectArgumentType.Double:
-                            return new EffectArgument(a.IntVal / (int)b.DoubleVal);
+                            return b.DoubleVal != 0 ? new EffectArgument((int)(a.IntVal / b.DoubleVal)) : a;
                         case EffectArgumentType.Int:
-                            return new EffectArgument(a.IntVal / b.IntVal);
+                            return b.IntVal != 0 ? new EffectArgument(a.IntVal / b.IntVal) : a;
                     }
                     break;
             }

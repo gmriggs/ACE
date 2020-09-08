@@ -80,12 +80,12 @@ namespace ACE.Server.Factories.Treasure.Mutate
 
                 case MutationEffectType.AtLeastAdd:
 
-                    result = (result < arg1) ? arg1 : result + arg2;
+                    result = (!result.IsValid || result < arg1) ? arg1 : result + arg2;
                     break;
 
                 case MutationEffectType.AtMostSubtract:
 
-                    result = (result > arg1) ? arg1 : result - arg2;
+                    result = (!result.IsValid || result > arg1) ? arg1 : result - arg2;
                     break;
 
                 case MutationEffectType.AddMultiply:

@@ -132,28 +132,38 @@ namespace ACE.Server.Factories.Treasure.Mutate
                     {
                         case StatType.Int:
 
-                            IntVal = item.GetProperty((PropertyInt)StatIdx) ?? 0;
                             Type = EffectArgumentType.Int;
-                            IsValid = true;
+                            var intVal = item.GetProperty((PropertyInt)StatIdx);
+                            if (intVal != null)
+                            {
+                                IntVal = intVal.Value;
+                                IsValid = true;
+                            }
                             break;
 
                         case StatType.Bool:
 
-                            IntVal = Convert.ToInt32(item.GetProperty((PropertyBool)StatIdx) ?? false);
                             Type = EffectArgumentType.Int;
+                            IntVal = Convert.ToInt32(item.GetProperty((PropertyBool)StatIdx) ?? false);
                             IsValid = true;
                             break;
 
                         case StatType.Float:
 
-                            DoubleVal = item.GetProperty((PropertyFloat)StatIdx) ?? 0.0;
                             Type = EffectArgumentType.Double;
+                            var doubleVal = item.GetProperty((PropertyFloat)StatIdx);
+                            if (doubleVal != null)
+                            {
+                                DoubleVal = doubleVal.Value;
+                                IsValid = true;
+                            }
                             break;
 
                         case StatType.DID:
 
-                            IntVal = (int)(item.GetProperty((PropertyDataId)StatIdx) ?? 0);
                             Type = EffectArgumentType.Int;
+                            IntVal = (int)(item.GetProperty((PropertyDataId)StatIdx) ?? 0);
+                            IsValid = true;
                             break;
                     }
 
