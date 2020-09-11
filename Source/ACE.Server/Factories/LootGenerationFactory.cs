@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 using log4net;
 
@@ -20,6 +22,9 @@ namespace ACE.Server.Factories
     public static partial class LootGenerationFactory
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        // Used for cumulative ServerPerformanceMonitor event recording
+        private static readonly ThreadLocal<Stopwatch> stopwatch = new ThreadLocal<Stopwatch>(() => new Stopwatch());
 
         static LootGenerationFactory()
         {
@@ -73,116 +78,126 @@ namespace ACE.Server.Factories
 
         public static List<WorldObject> CreateRandomLootObjects(TreasureDeath profile)
         {
-            int numItems;
-            WorldObject lootWorldObject;
+            stopwatch.Value.Restart();
 
-            LootBias lootBias = LootBias.UnBiased;
-            var loot = new List<WorldObject>();
-
-            switch (profile.TreasureType)
+            try
             {
-                case 1001:  // Mana Forge Chest, Advanced Equipment Chest, and Mixed Equipment Chest
-                case 2001:
-                    lootBias = LootBias.MixedEquipment;
-                    break;
-                case 1002:  // Armor Chest
-                case 2002:
-                    lootBias = LootBias.Armor;
-                    break;
-                case 1003:  // Magic Chest
-                case 2003:
-                    lootBias = LootBias.MagicEquipment;
-                    break;
-                case 1004:  // Weapon Chest
-                case 2004:
-                    lootBias = LootBias.Weapons;
-                    break;
-                default:    // Default to unbiased loot profile
-                    break;
-            }
+                int numItems;
+                WorldObject lootWorldObject;
 
-            // For Society Armor - Only generates 2 pieces of Society Armor.
-            // breaking it out here to Generate Armor
-            if (profile.TreasureType >= 2971 && profile.TreasureType <= 2999)
-            {
-                bool mutateYes = true;
-                numItems = ThreadSafeRandom.Next(profile.MagicItemMinAmount, profile.MagicItemMaxAmount);
+                LootBias lootBias = LootBias.UnBiased;
+                var loot = new List<WorldObject>();
 
-                for (var i = 0; i < numItems; i++)
+                switch (profile.TreasureType)
                 {
-                    lootWorldObject = CreateSocietyArmor(profile, mutateYes);
-                    if (lootWorldObject != null)
-                        loot.Add(lootWorldObject);
+                    case 1001: // Mana Forge Chest, Advanced Equipment Chest, and Mixed Equipment Chest
+                    case 2001:
+                        lootBias = LootBias.MixedEquipment;
+                        break;
+                    case 1002: // Armor Chest
+                    case 2002:
+                        lootBias = LootBias.Armor;
+                        break;
+                    case 1003: // Magic Chest
+                    case 2003:
+                        lootBias = LootBias.MagicEquipment;
+                        break;
+                    case 1004: // Weapon Chest
+                    case 2004:
+                        lootBias = LootBias.Weapons;
+                        break;
+                    default: // Default to unbiased loot profile
+                        break;
                 }
-                return loot;
-            }
 
-            var itemChance = ThreadSafeRandom.Next(1, 100);
-            if (itemChance <= profile.ItemChance)
-            {
-                numItems = ThreadSafeRandom.Next(profile.ItemMinAmount, profile.ItemMaxAmount);
-
-                for (var i = 0; i < numItems; i++)
+                // For Society Armor - Only generates 2 pieces of Society Armor.
+                // breaking it out here to Generate Armor
+                if (profile.TreasureType >= 2971 && profile.TreasureType <= 2999)
                 {
-                    // verify this works as intended. this will also be true for MixedEquipment...
-                    if (lootBias == LootBias.MagicEquipment)
-                        lootWorldObject = CreateRandomLootObjects(profile, false, LootBias.Weapons);
-                    else
-                        lootWorldObject = CreateRandomLootObjects(profile, false, lootBias);
+                    bool mutateYes = true;
+                    numItems = ThreadSafeRandom.Next(profile.MagicItemMinAmount, profile.MagicItemMaxAmount);
 
-                    if (lootWorldObject != null)
-                        loot.Add(lootWorldObject);
-                }
-            }
-
-            itemChance = ThreadSafeRandom.Next(1, 100);
-            if (itemChance <= profile.MagicItemChance)
-            {
-                numItems = ThreadSafeRandom.Next(profile.MagicItemMinAmount, profile.MagicItemMaxAmount);
-
-                for (var i = 0; i < numItems; i++)
-                {
-                    lootWorldObject = CreateRandomLootObjects(profile, true, lootBias);
-                    if (lootWorldObject != null)
-                        loot.Add(lootWorldObject);
-                }
-            }
-
-            itemChance = ThreadSafeRandom.Next(1, 100);
-            if (itemChance <= profile.MundaneItemChance)
-            {
-                double dropRate = PropertyManager.GetDouble("aetheria_drop_rate").Item;
-                double dropRateMod = 1.0 / dropRate;
-
-                // Coalesced Aetheria doesn't drop in loot tiers less than 5
-                // According to wiki, Weapon Mana Forge chests don't drop Aetheria
-                // An Aetheria drop was in addition to the normal drops of the mundane profile
-                // https://asheron.fandom.com/wiki/Announcements_-_2010/04_-_Shedding_Skin :: May 5th, 2010 entry
-                if (profile.Tier > 4 && lootBias != LootBias.Weapons && dropRate > 0)
-                {
-                    if (ThreadSafeRandom.Next(1, (int)(100 * dropRateMod)) <= 2)     // base 1% to drop aetheria?
+                    for (var i = 0; i < numItems; i++)
                     {
-                        lootWorldObject = CreateAetheria(profile.Tier);
+                        lootWorldObject = CreateSocietyArmor(profile, mutateYes);
+                        if (lootWorldObject != null)
+                            loot.Add(lootWorldObject);
+                    }
+
+                    return loot;
+                }
+
+                var itemChance = ThreadSafeRandom.Next(1, 100);
+                if (itemChance <= profile.ItemChance)
+                {
+                    numItems = ThreadSafeRandom.Next(profile.ItemMinAmount, profile.ItemMaxAmount);
+
+                    for (var i = 0; i < numItems; i++)
+                    {
+                        // verify this works as intended. this will also be true for MixedEquipment...
+                        if (lootBias == LootBias.MagicEquipment)
+                            lootWorldObject = CreateRandomLootObjects(profile, false, LootBias.Weapons);
+                        else
+                            lootWorldObject = CreateRandomLootObjects(profile, false, lootBias);
+
                         if (lootWorldObject != null)
                             loot.Add(lootWorldObject);
                     }
                 }
 
-                numItems = ThreadSafeRandom.Next(profile.MundaneItemMinAmount, profile.MundaneItemMaxAmount);
-
-                for (var i = 0; i < numItems; i++)
+                itemChance = ThreadSafeRandom.Next(1, 100);
+                if (itemChance <= profile.MagicItemChance)
                 {
-                    if (lootBias != LootBias.UnBiased)
-                        lootWorldObject = CreateRandomScroll(profile.Tier);
-                    else
-                        lootWorldObject = CreateGenericObjects(profile.Tier);
+                    numItems = ThreadSafeRandom.Next(profile.MagicItemMinAmount, profile.MagicItemMaxAmount);
 
-                    if (lootWorldObject != null)
-                        loot.Add(lootWorldObject);
+                    for (var i = 0; i < numItems; i++)
+                    {
+                        lootWorldObject = CreateRandomLootObjects(profile, true, lootBias);
+                        if (lootWorldObject != null)
+                            loot.Add(lootWorldObject);
+                    }
                 }
-            }
 
-            return loot;
+                itemChance = ThreadSafeRandom.Next(1, 100);
+                if (itemChance <= profile.MundaneItemChance)
+                {
+                    double dropRate = PropertyManager.GetDouble("aetheria_drop_rate").Item;
+                    double dropRateMod = 1.0 / dropRate;
+
+                    // Coalesced Aetheria doesn't drop in loot tiers less than 5
+                    // According to wiki, Weapon Mana Forge chests don't drop Aetheria
+                    // An Aetheria drop was in addition to the normal drops of the mundane profile
+                    // https://asheron.fandom.com/wiki/Announcements_-_2010/04_-_Shedding_Skin :: May 5th, 2010 entry
+                    if (profile.Tier > 4 && lootBias != LootBias.Weapons && dropRate > 0)
+                    {
+                        if (ThreadSafeRandom.Next(1, (int) (100 * dropRateMod)) <= 2) // base 1% to drop aetheria?
+                        {
+                            lootWorldObject = CreateAetheria(profile.Tier);
+                            if (lootWorldObject != null)
+                                loot.Add(lootWorldObject);
+                        }
+                    }
+
+                    numItems = ThreadSafeRandom.Next(profile.MundaneItemMinAmount, profile.MundaneItemMaxAmount);
+
+                    for (var i = 0; i < numItems; i++)
+                    {
+                        if (lootBias != LootBias.UnBiased)
+                            lootWorldObject = CreateRandomScroll(profile.Tier);
+                        else
+                            lootWorldObject = CreateGenericObjects(profile.Tier);
+
+                        if (lootWorldObject != null)
+                            loot.Add(lootWorldObject);
+                    }
+                }
+
+                return loot;
+            }
+            finally
+            {
+                ServerPerformanceMonitor.AddToCumulativeEvent(ServerPerformanceMonitor.CumulativeEventHistoryType.LootGenerationFactory_CreateRandomLootObjects, stopwatch.Value.Elapsed.TotalSeconds);
+            }
         }
 
         public static WorldObject CreateRandomLootObjects(TreasureDeath profile, bool isMagical, LootBias lootBias = LootBias.UnBiased)
@@ -290,8 +305,14 @@ namespace ACE.Server.Factories
                 MutateJewelry(item, profile, isMagical);
             else if (GetMutateJewelsData(item.WeenieClassId, out int gemLootMatrixIndex))
                 MutateJewels(item, profile.Tier, isMagical, gemLootMatrixIndex);
-            else if (GetMutateMeleeWeaponData(item.WeenieClassId, out int weaponType, out int subtype))
-                MutateMeleeWeapon(item, profile, isMagical, weaponType, subtype);
+            else if (GetMutateMeleeWeaponData(item.WeenieClassId))
+            {
+                if (!MutateMeleeWeapon(item, profile, isMagical))
+                {
+                    log.Warn($"[LOOT] Missing needed melee weapon properties on loot item {item.WeenieClassId} - {item.Name} for mutations");
+                    return false;
+                }
+            }
             else if (GetMutateMissileWeaponData(item.WeenieClassId, profile.Tier, out int wieldDifficulty, out bool isElemental))
                 MutateMissileWeapon(item, profile, isMagical, wieldDifficulty, isElemental);
             else if (item is PetDevice petDevice)
@@ -1439,7 +1460,7 @@ namespace ACE.Server.Factories
 
         private static int GetWorkmanship(int tier)
         {
-            int workmanship = 0;
+            /*int workmanship = 0;
             int chance = ThreadSafeRandom.Next(0, 99);
 
             switch (tier)
@@ -1524,7 +1545,9 @@ namespace ACE.Server.Factories
                     break;
             }
 
-            return workmanship;
+            return workmanship;*/
+
+            return WorkmanshipChance.Roll(tier);
         }
 
         private static int GetSpellcraft(WorldObject wo, int spellAmount, int tier)
@@ -2382,6 +2405,19 @@ namespace ACE.Server.Factories
         {
             wo.ProcSpell = (uint)cloakSpellId;
             return wo;
+        }
+
+        public static MaterialType RollGemType(int tier)
+        {
+            // previous formula
+            //return (MaterialType)ThreadSafeRandom.Next(10, 50);
+
+            // the gem class value can be further utilized for determining the item's monetary value
+            var gemClass = GemClassChance.Roll(tier);
+
+            var gemMaterial = GemMaterialChance.Roll(gemClass);
+
+            return gemMaterial;
         }
     }         
 }
