@@ -2,7 +2,7 @@
 
 Tier chances: 1
 
-    - Chance 1:
+    - Chance 100%:
         ImbuedEffect = 32
         NumTimesTinkered >= 1, add 1
 

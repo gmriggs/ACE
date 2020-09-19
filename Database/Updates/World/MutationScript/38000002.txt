@@ -2,113 +2,113 @@
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance 0.03:
+    - Chance 3%:
         Damage += 0
 
-    - Chance 0.1:
+    - Chance 7%:
         Damage += 1
 
-    - Chance 0.2:
+    - Chance 10%:
         Damage += 2
 
-    - Chance 0.35:
+    - Chance 15%:
         Damage += 3
 
-    - Chance 0.65:
+    - Chance 30%:
         Damage += 4
 
-    - Chance 0.8:
+    - Chance 15%:
         Damage += 5
 
-    - Chance 0.9:
+    - Chance 10%:
         Damage += 6
 
-    - Chance 0.97:
+    - Chance 7%:
         Damage += 7
 
-    - Chance 1:
+    - Chance 3%:
         Damage += 8
 
 0x38000002 Mutation #2:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance 0.02:
+    - Chance 2%:
         Damage += 0
 
-    - Chance 0.05:
+    - Chance 3%:
         Damage += 1
 
-    - Chance 0.1:
+    - Chance 5%:
         Damage += 2
 
-    - Chance 0.19:
+    - Chance 9%:
         Damage += 3
 
-    - Chance 0.31:
+    - Chance 12%:
         Damage += 4
 
-    - Chance 0.4:
+    - Chance 9%:
         Damage += 5
 
-    - Chance 0.45:
+    - Chance 5%:
         Damage += 6
 
-    - Chance 0.48:
+    - Chance 3%:
         Damage += 7
 
-    - Chance 0.5:
+    - Chance 2%:
         Damage += 8
 
-    - Chance 0.52:
+    - Chance 2%:
         Damage += 9
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.55:
+    - Chance 3%:
         Damage += 10
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.6:
+    - Chance 5%:
         Damage += 11
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.69:
+    - Chance 9%:
         Damage += 12
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.81:
+    - Chance 12%:
         Damage += 13
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.9:
+    - Chance 9%:
         Damage += 14
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.95:
+    - Chance 5%:
         Damage += 15
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.98:
+    - Chance 3%:
         Damage += 16
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 1:
+    - Chance 2%:
         Damage += 17
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
@@ -118,79 +118,79 @@ Tier chances: 0, 1, 0, 0, 0, 0
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance 0.02:
+    - Chance 2%:
         Damage += 9
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.05:
+    - Chance 3%:
         Damage += 10
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.1:
+    - Chance 5%:
         Damage += 11
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.19:
+    - Chance 9%:
         Damage += 12
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.31:
+    - Chance 12%:
         Damage += 13
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.4:
+    - Chance 9%:
         Damage += 14
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.45:
+    - Chance 5%:
         Damage += 15
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.48:
+    - Chance 3%:
         Damage += 16
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.5:
+    - Chance 2%:
         Damage += 17
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 250
 
-    - Chance 0.6:
+    - Chance 10%:
         Damage += 18
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 0.8:
+    - Chance 20%:
         Damage += 19
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 0.95:
+    - Chance 15%:
         Damage += 20
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 1:
+    - Chance 5%:
         Damage += 21
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
@@ -200,49 +200,49 @@ Tier chances: 0, 0, 1, 0, 0, 0
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.1:
+    - Chance 10%:
         Damage += 18
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 0.3:
+    - Chance 20%:
         Damage += 19
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 0.45:
+    - Chance 15%:
         Damage += 20
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 0.5:
+    - Chance 5%:
         Damage += 21
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 300
 
-    - Chance 0.6:
+    - Chance 10%:
         Damage += 22
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 0.8:
+    - Chance 20%:
         Damage += 23
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 0.95:
+    - Chance 15%:
         Damage += 24
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 1:
+    - Chance 5%:
         Damage += 25
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
@@ -252,37 +252,37 @@ Tier chances: 0, 0, 0, 1, 0, 0
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.1:
+    - Chance 10%:
         Damage += 22
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 0.3:
+    - Chance 20%:
         Damage += 23
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 0.45:
+    - Chance 15%:
         Damage += 24
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 0.5:
+    - Chance 5%:
         Damage += 25
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 325
 
-    - Chance 0.85:
+    - Chance 35%:
         Damage += 26
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 350
 
-    - Chance 1:
+    - Chance 15%:
         Damage += 27
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
@@ -292,61 +292,61 @@ Tier chances: 0, 0, 0, 0, 1, 0
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.35:
+    - Chance 35%:
         Damage += 26
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 350
 
-    - Chance 0.5:
+    - Chance 15%:
         Damage += 27
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 350
 
-    - Chance 0.58:
+    - Chance 8%:
         Damage += 28
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 370
 
-    - Chance 0.68:
+    - Chance 10%:
         Damage += 29
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 370
 
-    - Chance 0.78:
+    - Chance 10%:
         Damage += 30
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 370
 
-    - Chance 0.85:
+    - Chance 7%:
         Damage += 31
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 370
 
-    - Chance 0.91:
+    - Chance 6%:
         Damage += 32
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 400
 
-    - Chance 0.95:
+    - Chance 4%:
         Damage += 33
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 400
 
-    - Chance 0.98:
+    - Chance 3%:
         Damage += 34
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
         WieldDifficulty = 400
 
-    - Chance 1:
+    - Chance 2%:
         Damage += 35
         WieldRequirements = RawSkill
         WieldSkillType = WeaponSkill
@@ -356,384 +356,384 @@ Tier chances: 0, 0, 0, 0, 0, 1
 
 Tier chances: 0.5, 0.6, 0.7, 0.8, 0.9, 1
 
-    - Chance 0.1:
+    - Chance 10%:
         DamageVariance = 0.5
 
-    - Chance 0.3:
+    - Chance 20%:
         DamageVariance = 0.475
 
-    - Chance 0.7:
+    - Chance 40%:
         DamageVariance = 0.45
 
-    - Chance 0.9:
+    - Chance 20%:
         DamageVariance = 0.425
 
-    - Chance 1:
+    - Chance 10%:
         DamageVariance = 0.4
 
 0x38000002 Mutation #8:
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponOffense += 0.01
 
-    - Chance 0.5:
+    - Chance 30%:
         WeaponOffense += 0.02
 
-    - Chance 0.8:
+    - Chance 30%:
         WeaponOffense += 0.03
 
-    - Chance 0.95:
+    - Chance 15%:
         WeaponOffense += 0.04
 
-    - Chance 1:
+    - Chance 5%:
         WeaponOffense += 0.05
 
 0x38000002 Mutation #9:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponOffense += 0.02
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponOffense += 0.03
 
-    - Chance 0.5:
+    - Chance 30%:
         WeaponOffense += 0.04
 
-    - Chance 0.8:
+    - Chance 30%:
         WeaponOffense += 0.05
 
-    - Chance 0.95:
+    - Chance 15%:
         WeaponOffense += 0.06
 
-    - Chance 1:
+    - Chance 5%:
         WeaponOffense += 0.07
 
 0x38000002 Mutation #10:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance 0.02:
+    - Chance 2%:
         WeaponOffense += 0.03
 
-    - Chance 0.07:
+    - Chance 5%:
         WeaponOffense += 0.04
 
-    - Chance 0.22:
+    - Chance 15%:
         WeaponOffense += 0.05
 
-    - Chance 0.47:
+    - Chance 25%:
         WeaponOffense += 0.06
 
-    - Chance 0.77:
+    - Chance 30%:
         WeaponOffense += 0.07
 
-    - Chance 0.92:
+    - Chance 15%:
         WeaponOffense += 0.08
 
-    - Chance 0.97:
+    - Chance 5%:
         WeaponOffense += 0.09
 
-    - Chance 1:
+    - Chance 3%:
         WeaponOffense += 0.1
 
 0x38000002 Mutation #11:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponOffense += 0.05
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponOffense += 0.06
 
-    - Chance 0.45:
+    - Chance 25%:
         WeaponOffense += 0.07
 
-    - Chance 0.75:
+    - Chance 30%:
         WeaponOffense += 0.08
 
-    - Chance 0.9:
+    - Chance 15%:
         WeaponOffense += 0.09
 
-    - Chance 0.95:
+    - Chance 5%:
         WeaponOffense += 0.1
 
-    - Chance 0.98:
+    - Chance 3%:
         WeaponOffense += 0.11
 
-    - Chance 1:
+    - Chance 2%:
         WeaponOffense += 0.12
 
 0x38000002 Mutation #12:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.03:
+    - Chance 3%:
         WeaponOffense += 0.06
 
-    - Chance 0.08:
+    - Chance 5%:
         WeaponOffense += 0.07
 
-    - Chance 0.23:
+    - Chance 15%:
         WeaponOffense += 0.08
 
-    - Chance 0.48:
+    - Chance 25%:
         WeaponOffense += 0.09
 
-    - Chance 0.73:
+    - Chance 25%:
         WeaponOffense += 0.1
 
-    - Chance 0.88:
+    - Chance 15%:
         WeaponOffense += 0.11
 
-    - Chance 0.93:
+    - Chance 5%:
         WeaponOffense += 0.12
 
-    - Chance 0.96:
+    - Chance 3%:
         WeaponOffense += 0.13
 
-    - Chance 0.98:
+    - Chance 2%:
         WeaponOffense += 0.14
 
-    - Chance 1:
+    - Chance 2%:
         WeaponOffense += 0.15
 
 0x38000002 Mutation #13:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponOffense += 0.07
 
-    - Chance 0.1:
+    - Chance 5%:
         WeaponOffense += 0.08
 
-    - Chance 0.2:
+    - Chance 10%:
         WeaponOffense += 0.09
 
-    - Chance 0.35:
+    - Chance 15%:
         WeaponOffense += 0.1
 
-    - Chance 0.55:
+    - Chance 20%:
         WeaponOffense += 0.11
 
-    - Chance 0.75:
+    - Chance 20%:
         WeaponOffense += 0.12
 
-    - Chance 0.9:
+    - Chance 15%:
         WeaponOffense += 0.13
 
-    - Chance 0.95:
+    - Chance 5%:
         WeaponOffense += 0.14
 
-    - Chance 1:
+    - Chance 5%:
         WeaponOffense += 0.15
 
 0x38000002 Mutation #14:
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponDefense += 0.01
 
-    - Chance 0.5:
+    - Chance 30%:
         WeaponDefense += 0.02
 
-    - Chance 0.8:
+    - Chance 30%:
         WeaponDefense += 0.03
 
-    - Chance 0.95:
+    - Chance 15%:
         WeaponDefense += 0.04
 
-    - Chance 1:
+    - Chance 5%:
         WeaponDefense += 0.05
 
 0x38000002 Mutation #15:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponDefense += 0.02
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponDefense += 0.03
 
-    - Chance 0.5:
+    - Chance 30%:
         WeaponDefense += 0.04
 
-    - Chance 0.8:
+    - Chance 30%:
         WeaponDefense += 0.05
 
-    - Chance 0.95:
+    - Chance 15%:
         WeaponDefense += 0.06
 
-    - Chance 1:
+    - Chance 5%:
         WeaponDefense += 0.07
 
 0x38000002 Mutation #16:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance 0.02:
+    - Chance 2%:
         WeaponDefense += 0.03
 
-    - Chance 0.07:
+    - Chance 5%:
         WeaponDefense += 0.04
 
-    - Chance 0.22:
+    - Chance 15%:
         WeaponDefense += 0.05
 
-    - Chance 0.47:
+    - Chance 25%:
         WeaponDefense += 0.06
 
-    - Chance 0.77:
+    - Chance 30%:
         WeaponDefense += 0.07
 
-    - Chance 0.92:
+    - Chance 15%:
         WeaponDefense += 0.08
 
-    - Chance 0.97:
+    - Chance 5%:
         WeaponDefense += 0.09
 
-    - Chance 1:
+    - Chance 3%:
         WeaponDefense += 0.1
 
 0x38000002 Mutation #17:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponDefense += 0.05
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponDefense += 0.06
 
-    - Chance 0.45:
+    - Chance 25%:
         WeaponDefense += 0.07
 
-    - Chance 0.75:
+    - Chance 30%:
         WeaponDefense += 0.08
 
-    - Chance 0.9:
+    - Chance 15%:
         WeaponDefense += 0.09
 
-    - Chance 0.95:
+    - Chance 5%:
         WeaponDefense += 0.1
 
-    - Chance 0.98:
+    - Chance 3%:
         WeaponDefense += 0.11
 
-    - Chance 1:
+    - Chance 2%:
         WeaponDefense += 0.12
 
 0x38000002 Mutation #18:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.03:
+    - Chance 3%:
         WeaponDefense += 0.06
 
-    - Chance 0.08:
+    - Chance 5%:
         WeaponDefense += 0.07
 
-    - Chance 0.23:
+    - Chance 15%:
         WeaponDefense += 0.08
 
-    - Chance 0.48:
+    - Chance 25%:
         WeaponDefense += 0.09
 
-    - Chance 0.73:
+    - Chance 25%:
         WeaponDefense += 0.1
 
-    - Chance 0.88:
+    - Chance 15%:
         WeaponDefense += 0.11
 
-    - Chance 0.93:
+    - Chance 5%:
         WeaponDefense += 0.12
 
-    - Chance 0.96:
+    - Chance 3%:
         WeaponDefense += 0.13
 
-    - Chance 0.98:
+    - Chance 2%:
         WeaponDefense += 0.14
 
-    - Chance 1:
+    - Chance 2%:
         WeaponDefense += 0.15
 
 0x38000002 Mutation #19:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponDefense += 0.07
 
-    - Chance 0.1:
+    - Chance 5%:
         WeaponDefense += 0.08
 
-    - Chance 0.2:
+    - Chance 10%:
         WeaponDefense += 0.09
 
-    - Chance 0.35:
+    - Chance 15%:
         WeaponDefense += 0.1
 
-    - Chance 0.55:
+    - Chance 20%:
         WeaponDefense += 0.11
 
-    - Chance 0.75:
+    - Chance 20%:
         WeaponDefense += 0.12
 
-    - Chance 0.9:
+    - Chance 15%:
         WeaponDefense += 0.13
 
-    - Chance 0.95:
+    - Chance 5%:
         WeaponDefense += 0.14
 
-    - Chance 1:
+    - Chance 5%:
         WeaponDefense += 0.15
 
 0x38000002 Mutation #20:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance 0.1:
+    - Chance 10%:
         WeaponMissileDefense = 1.005
 
-    - Chance 0.3:
+    - Chance 20%:
         WeaponMissileDefense = 1.01
 
-    - Chance 0.7:
+    - Chance 40%:
         WeaponMissileDefense = 1.015
 
-    - Chance 0.9:
+    - Chance 20%:
         WeaponMissileDefense = 1.02
 
-    - Chance 1:
+    - Chance 10%:
         WeaponMissileDefense = 1.025
 
 0x38000002 Mutation #21:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance 0.1:
+    - Chance 10%:
         WeaponMagicDefense = 1.005
 
-    - Chance 0.3:
+    - Chance 20%:
         WeaponMagicDefense = 1.01
 
-    - Chance 0.7:
+    - Chance 40%:
         WeaponMagicDefense = 1.015
 
-    - Chance 0.9:
+    - Chance 20%:
         WeaponMagicDefense = 1.02
 
-    - Chance 1:
+    - Chance 10%:
         WeaponMagicDefense = 1.025
 

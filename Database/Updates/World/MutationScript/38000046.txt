@@ -2,7 +2,7 @@
 
 Tier chances: 1
 
-    - Chance 1:
+    - Chance 100%:
         ImbuedEffect >= 0, add 0
         ImbuedEffect += 536870912
 

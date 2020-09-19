@@ -2,63 +2,63 @@
 
 Tier chances: 1, 1, 1, 0, 0, 0
 
-    - Chance 0.12:
+    - Chance 12%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 200
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.23:
+    - Chance 11%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 160
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.34:
+    - Chance 11%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 145
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.45:
+    - Chance 11%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 250
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.56:
+    - Chance 11%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 205
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.67:
+    - Chance 11%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 185
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.78:
+    - Chance 11%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 300
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.89:
+    - Chance 11%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 1:
+    - Chance 11%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 15
@@ -69,105 +69,105 @@ Tier chances: 1, 1, 1, 0, 0, 0
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.07:
+    - Chance 7%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 200
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.14:
+    - Chance 7%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 160
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.2:
+    - Chance 6%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 145
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.27:
+    - Chance 7%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 250
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.34:
+    - Chance 7%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 205
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.4:
+    - Chance 6%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 185
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.47:
+    - Chance 7%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 300
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.54:
+    - Chance 7%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.6:
+    - Chance 6%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 225
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.67:
+    - Chance 7%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 325
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.74:
+    - Chance 7%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 270
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.8:
+    - Chance 6%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.87:
+    - Chance 7%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 350
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.94:
+    - Chance 7%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 290
         ArmorLevel += Random(0, 40)
 
-    - Chance 1:
+    - Chance 6%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 15
@@ -178,126 +178,126 @@ Tier chances: 0, 0, 0, 1, 0, 0
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.06:
+    - Chance 6%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 200
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.12:
+    - Chance 6%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 160
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.17:
+    - Chance 5%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 145
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.23:
+    - Chance 6%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 250
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.29:
+    - Chance 6%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 205
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.34:
+    - Chance 5%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 185
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.4:
+    - Chance 6%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 300
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.46:
+    - Chance 6%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.51:
+    - Chance 5%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 225
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.57:
+    - Chance 6%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 325
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.63:
+    - Chance 6%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 270
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.68:
+    - Chance 5%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.74:
+    - Chance 6%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 350
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.79:
+    - Chance 5%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 290
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.84:
+    - Chance 5%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 265
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.9:
+    - Chance 6%:
         ArmorLevel = 440
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 370
         ArmorLevel += Random(0, 30)
 
-    - Chance 0.95:
+    - Chance 5%:
         ArmorLevel = 440
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 305
         ArmorLevel += Random(0, 30)
 
-    - Chance 1:
+    - Chance 5%:
         ArmorLevel = 440
         WieldRequirements = RawSkill
         WieldSkillType = 15
@@ -308,147 +308,147 @@ Tier chances: 0, 0, 0, 0, 1, 0
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.05:
+    - Chance 5%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 200
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.1:
+    - Chance 5%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 160
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.15:
+    - Chance 5%:
         ArmorLevel = 100
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 145
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.2:
+    - Chance 5%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 250
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.25:
+    - Chance 5%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 205
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.3:
+    - Chance 5%:
         ArmorLevel = 200
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 185
         ArmorLevel += Random(0, 100)
 
-    - Chance 0.35:
+    - Chance 5%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 300
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.4:
+    - Chance 5%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.45:
+    - Chance 5%:
         ArmorLevel = 300
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 225
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.5:
+    - Chance 5%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 325
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.55:
+    - Chance 5%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 270
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.6:
+    - Chance 5%:
         ArmorLevel = 350
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 245
         ArmorLevel += Random(0, 50)
 
-    - Chance 0.65:
+    - Chance 5%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 350
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.7:
+    - Chance 5%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 290
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.75:
+    - Chance 5%:
         ArmorLevel = 400
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 265
         ArmorLevel += Random(0, 40)
 
-    - Chance 0.8:
+    - Chance 5%:
         ArmorLevel = 440
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 370
         ArmorLevel += Random(0, 30)
 
-    - Chance 0.85:
+    - Chance 5%:
         ArmorLevel = 440
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 305
         ArmorLevel += Random(0, 30)
 
-    - Chance 0.9:
+    - Chance 5%:
         ArmorLevel = 440
         WieldRequirements = RawSkill
         WieldSkillType = 15
         WieldDifficulty = 280
         ArmorLevel += Random(0, 30)
 
-    - Chance 0.94:
+    - Chance 4%:
         ArmorLevel = 470
         WieldRequirements = RawSkill
         WieldSkillType = 6
         WieldDifficulty = 400
         ArmorLevel += Random(0, 30)
 
-    - Chance 0.97:
+    - Chance 3%:
         ArmorLevel = 470
         WieldRequirements = RawSkill
         WieldSkillType = 7
         WieldDifficulty = 330
         ArmorLevel += Random(0, 30)
 
-    - Chance 1:
+    - Chance 3%:
         ArmorLevel = 470
         WieldRequirements = RawSkill
         WieldSkillType = 15
@@ -459,154 +459,154 @@ Tier chances: 0, 0, 0, 0, 0, 1
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.6:
+    - Chance 60%:
 
-    - Chance 0.89:
+    - Chance 29%:
         ArmorModVsSlash += 0.1
 
-    - Chance 0.99:
+    - Chance 10%:
         ArmorModVsSlash += 0.2
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsSlash += 0.3
 
 0x38000022 Mutation #6:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.6:
+    - Chance 60%:
 
-    - Chance 0.89:
+    - Chance 29%:
         ArmorModVsPierce += 0.1
 
-    - Chance 0.99:
+    - Chance 10%:
         ArmorModVsPierce += 0.2
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsPierce += 0.3
 
 0x38000022 Mutation #7:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.6:
+    - Chance 60%:
 
-    - Chance 0.89:
+    - Chance 29%:
         ArmorModVsBludgeon += 0.1
 
-    - Chance 0.99:
+    - Chance 10%:
         ArmorModVsBludgeon += 0.2
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsBludgeon += 0.3
 
 0x38000022 Mutation #8:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.45:
+    - Chance 45%:
 
-    - Chance 0.69:
+    - Chance 24%:
         ArmorModVsCold += 0.2
 
-    - Chance 0.84:
+    - Chance 15%:
         ArmorModVsCold += 0.4
 
-    - Chance 0.94:
+    - Chance 10%:
         ArmorModVsCold += 0.6
 
-    - Chance 0.99:
+    - Chance 5%:
         ArmorModVsCold += 0.8
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsCold += 1
 
 0x38000022 Mutation #9:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.45:
+    - Chance 45%:
 
-    - Chance 0.69:
+    - Chance 24%:
         ArmorModVsFire += 0.2
 
-    - Chance 0.84:
+    - Chance 15%:
         ArmorModVsFire += 0.4
 
-    - Chance 0.94:
+    - Chance 10%:
         ArmorModVsFire += 0.6
 
-    - Chance 0.99:
+    - Chance 5%:
         ArmorModVsFire += 0.8
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsFire += 1
 
 0x38000022 Mutation #10:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.45:
+    - Chance 45%:
 
-    - Chance 0.69:
+    - Chance 24%:
         ArmorModVsAcid += 0.2
 
-    - Chance 0.84:
+    - Chance 15%:
         ArmorModVsAcid += 0.4
 
-    - Chance 0.94:
+    - Chance 10%:
         ArmorModVsAcid += 0.6
 
-    - Chance 0.99:
+    - Chance 5%:
         ArmorModVsAcid += 0.8
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsAcid += 1
 
 0x38000022 Mutation #11:
 
 Tier chances: 1, 1, 1, 1, 1, 1
 
-    - Chance 0.45:
+    - Chance 45%:
 
-    - Chance 0.69:
+    - Chance 24%:
         ArmorModVsElectric += 0.2
 
-    - Chance 0.84:
+    - Chance 15%:
         ArmorModVsElectric += 0.4
 
-    - Chance 0.94:
+    - Chance 10%:
         ArmorModVsElectric += 0.6
 
-    - Chance 0.99:
+    - Chance 5%:
         ArmorModVsElectric += 0.8
 
-    - Chance 1:
+    - Chance 1%:
         ArmorModVsElectric += 1
 
 0x38000022 Mutation #12:
 
 Tier chances: 0.5, 0.5, 0.5, 0.6, 0.8, 0
 
-    - Chance 0.25:
+    - Chance 25%:
         EncumbranceVal *= Random(0.65, 0.75)
 
-    - Chance 0.75:
+    - Chance 50%:
         EncumbranceVal *= Random(0.55, 0.65)
 
-    - Chance 1:
+    - Chance 25%:
         EncumbranceVal *= Random(0.45, 0.55)
 
 0x38000022 Mutation #13:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.25:
+    - Chance 25%:
         EncumbranceVal *= Random(0.55, 0.65)
 
-    - Chance 0.75:
+    - Chance 50%:
         EncumbranceVal *= Random(0.45, 0.55)
 
-    - Chance 1:
+    - Chance 25%:
         EncumbranceVal *= Random(0.35, 0.45)
 

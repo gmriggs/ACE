@@ -2,22 +2,22 @@
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance 0.1:
+    - Chance 10%:
         ArmorLevel += 10
 
-    - Chance 0.3:
+    - Chance 20%:
         ArmorLevel += 20
 
-    - Chance 0.7:
+    - Chance 40%:
         ArmorLevel += 30
 
-    - Chance 0.9:
+    - Chance 20%:
         ArmorLevel += 40
 
-    - Chance 1:
+    - Chance 10%:
         ArmorLevel += 50
 
-    - Chance 1:
+    - Chance 100%:
         ArmorLevel += Random(-5, 5)
         Variable[0] = ArmorLevel
         Variable[0] *= ArmorLevel
@@ -30,28 +30,28 @@ Tier chances: 1, 0, 0, 0, 0, 0
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         ArmorLevel += 20
 
-    - Chance 0.15:
+    - Chance 10%:
         ArmorLevel += 30
 
-    - Chance 0.35:
+    - Chance 20%:
         ArmorLevel += 40
 
-    - Chance 0.65:
+    - Chance 30%:
         ArmorLevel += 50
 
-    - Chance 0.85:
+    - Chance 20%:
         ArmorLevel += 60
 
-    - Chance 0.95:
+    - Chance 10%:
         ArmorLevel += 70
 
-    - Chance 1:
+    - Chance 5%:
         ArmorLevel += 80
 
-    - Chance 1:
+    - Chance 100%:
         ArmorLevel += Random(-5, 5)
         Variable[0] = ArmorLevel
         Variable[0] *= ArmorLevel
@@ -64,28 +64,28 @@ Tier chances: 0, 1, 0, 0, 0, 0
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         ArmorLevel += 30
 
-    - Chance 0.15:
+    - Chance 10%:
         ArmorLevel += 40
 
-    - Chance 0.35:
+    - Chance 20%:
         ArmorLevel += 50
 
-    - Chance 0.65:
+    - Chance 30%:
         ArmorLevel += 60
 
-    - Chance 0.85:
+    - Chance 20%:
         ArmorLevel += 70
 
-    - Chance 0.95:
+    - Chance 10%:
         ArmorLevel += 80
 
-    - Chance 1:
+    - Chance 5%:
         ArmorLevel += 90
 
-    - Chance 1:
+    - Chance 100%:
         ArmorLevel += Random(-5, 5)
         Variable[0] = ArmorLevel
         Variable[0] *= ArmorLevel
@@ -98,28 +98,28 @@ Tier chances: 0, 0, 1, 0, 0, 0
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         ArmorLevel += 40
 
-    - Chance 0.15:
+    - Chance 10%:
         ArmorLevel += 50
 
-    - Chance 0.35:
+    - Chance 20%:
         ArmorLevel += 60
 
-    - Chance 0.65:
+    - Chance 30%:
         ArmorLevel += 70
 
-    - Chance 0.85:
+    - Chance 20%:
         ArmorLevel += 80
 
-    - Chance 0.95:
+    - Chance 10%:
         ArmorLevel += 90
 
-    - Chance 1:
+    - Chance 5%:
         ArmorLevel += 100
 
-    - Chance 1:
+    - Chance 100%:
         ArmorLevel += Random(-5, 5)
         Variable[0] = ArmorLevel
         Variable[0] *= ArmorLevel
@@ -132,28 +132,28 @@ Tier chances: 0, 0, 0, 1, 0, 0
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         ArmorLevel += 50
 
-    - Chance 0.15:
+    - Chance 10%:
         ArmorLevel += 60
 
-    - Chance 0.35:
+    - Chance 20%:
         ArmorLevel += 70
 
-    - Chance 0.65:
+    - Chance 30%:
         ArmorLevel += 80
 
-    - Chance 0.85:
+    - Chance 20%:
         ArmorLevel += 90
 
-    - Chance 0.95:
+    - Chance 10%:
         ArmorLevel += 100
 
-    - Chance 1:
+    - Chance 5%:
         ArmorLevel += 110
 
-    - Chance 1:
+    - Chance 100%:
         ArmorLevel += Random(-5, 5)
         Variable[0] = ArmorLevel
         Variable[0] *= ArmorLevel
@@ -166,28 +166,28 @@ Tier chances: 0, 0, 0, 0, 1, 0
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.05:
+    - Chance 5%:
         ArmorLevel += 60
 
-    - Chance 0.15:
+    - Chance 10%:
         ArmorLevel += 70
 
-    - Chance 0.35:
+    - Chance 20%:
         ArmorLevel += 80
 
-    - Chance 0.65:
+    - Chance 30%:
         ArmorLevel += 90
 
-    - Chance 0.85:
+    - Chance 20%:
         ArmorLevel += 100
 
-    - Chance 0.95:
+    - Chance 10%:
         ArmorLevel += 110
 
-    - Chance 1:
+    - Chance 5%:
         ArmorLevel += 120
 
-    - Chance 1:
+    - Chance 100%:
         ArmorLevel += Random(-5, 5)
         Variable[0] = ArmorLevel
         Variable[0] *= ArmorLevel

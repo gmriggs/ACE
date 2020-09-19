@@ -307,13 +307,26 @@ namespace ACE.Server.Command.Handlers
                 lines.Add($"Tier chances: {string.Join(", ", mutation.MutationChance.Select(i => i.Chance))}");
                 lines.Add("");
 
-                foreach (var outcome in mutation.MutationOutcome)
+                for (var outcomeIdx = 0; outcomeIdx < mutation.MutationOutcome.Count; outcomeIdx++)
                 {
+                    var outcome = mutation.MutationOutcome.ElementAt(outcomeIdx);
+
+                    /*if (outcomeIdx > 0)
+                    {
+                        lines.Add("------------------");
+                        Console.WriteLine($"Found multiple for {tSysMutationFilter:X8}");
+                    }*/
+
+                    var prevChance = 0.0;
+
                     for (var effectListIdx = 0; effectListIdx < outcome.MutationEffectList.Count; effectListIdx++)
                     {
                         var effectList = outcome.MutationEffectList.ElementAt(effectListIdx);
 
-                        lines.Add($"    - Chance {effectList.Probability}:");
+                        var chance = (decimal)effectList.Probability - (decimal)prevChance;
+
+                        lines.Add($"    - Chance {(float)(chance * 100)}%:");
+                        prevChance = effectList.Probability;
 
                         for (var effectIdx = 0; effectIdx < effectList.MutationEffect.Count; effectIdx++)
                         {

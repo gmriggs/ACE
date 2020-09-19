@@ -2,31 +2,31 @@
 
 Tier chances: 1, 1, 1, 1, 0, 0
 
-    - Chance 0.75:
+    - Chance 75%:
         ElementalDamageMod = 1.01
 
-    - Chance 1:
+    - Chance 25%:
         ElementalDamageMod = 1.02
 
 0x3800004A Mutation #2:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.4:
+    - Chance 40%:
         ElementalDamageMod = 1.01
 
-    - Chance 0.65:
+    - Chance 25%:
         ElementalDamageMod = 1.02
 
-    - Chance 0.85:
+    - Chance 20%:
         ElementalDamageMod = 1.03
         WieldDifficulty = 310
 
-    - Chance 0.95:
+    - Chance 10%:
         ElementalDamageMod = 1.04
         WieldDifficulty = 310
 
-    - Chance 1:
+    - Chance 5%:
         ElementalDamageMod = 1.05
         WieldDifficulty = 310
 
@@ -34,41 +34,41 @@ Tier chances: 0, 0, 0, 0, 1, 0
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.08:
+    - Chance 8%:
         ElementalDamageMod = 1.01
 
-    - Chance 0.13:
+    - Chance 5%:
         ElementalDamageMod = 1.02
 
-    - Chance 0.28:
+    - Chance 15%:
         ElementalDamageMod = 1.03
         WieldDifficulty = 310
 
-    - Chance 0.48:
+    - Chance 20%:
         ElementalDamageMod = 1.04
         WieldDifficulty = 310
 
-    - Chance 0.63:
+    - Chance 15%:
         ElementalDamageMod = 1.05
         WieldDifficulty = 310
 
-    - Chance 0.71:
+    - Chance 8%:
         ElementalDamageMod = 1.06
         WieldDifficulty = 330
 
-    - Chance 0.86:
+    - Chance 15%:
         ElementalDamageMod = 1.07
         WieldDifficulty = 330
 
-    - Chance 0.94:
+    - Chance 8%:
         ElementalDamageMod = 1.08
         WieldDifficulty = 330
 
-    - Chance 0.98:
+    - Chance 4%:
         ElementalDamageMod = 1.09
         WieldDifficulty = 355
 
-    - Chance 1:
+    - Chance 2%:
         ElementalDamageMod = 1.1
         WieldDifficulty = 355
 
@@ -76,327 +76,327 @@ Tier chances: 0, 0, 0, 0, 0, 1
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance 0.3:
+    - Chance 30%:
 
-    - Chance 0.7:
+    - Chance 40%:
         ManaConversionMod = 0.01
 
-    - Chance 1:
+    - Chance 30%:
         ManaConversionMod = 0.02
 
 0x3800004A Mutation #5:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance 0.1:
+    - Chance 10%:
 
-    - Chance 0.3:
+    - Chance 20%:
         ManaConversionMod = 0.01
 
-    - Chance 0.7:
+    - Chance 40%:
         ManaConversionMod = 0.02
 
-    - Chance 0.9:
+    - Chance 20%:
         ManaConversionMod = 0.03
 
-    - Chance 1:
+    - Chance 10%:
         ManaConversionMod = 0.04
 
 0x3800004A Mutation #6:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
 
-    - Chance 0.15:
+    - Chance 10%:
         ManaConversionMod = 0.01
 
-    - Chance 0.35:
+    - Chance 20%:
         ManaConversionMod = 0.02
 
-    - Chance 0.65:
+    - Chance 30%:
         ManaConversionMod = 0.03
 
-    - Chance 0.85:
+    - Chance 20%:
         ManaConversionMod = 0.04
 
-    - Chance 0.95:
+    - Chance 10%:
         ManaConversionMod = 0.05
 
-    - Chance 1:
+    - Chance 5%:
         ManaConversionMod = 0.06
 
 0x3800004A Mutation #7:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         ManaConversionMod = 0.02
 
-    - Chance 0.15:
+    - Chance 10%:
         ManaConversionMod = 0.03
 
-    - Chance 0.35:
+    - Chance 20%:
         ManaConversionMod = 0.04
 
-    - Chance 0.65:
+    - Chance 30%:
         ManaConversionMod = 0.05
 
-    - Chance 0.85:
+    - Chance 20%:
         ManaConversionMod = 0.06
 
-    - Chance 0.95:
+    - Chance 10%:
         ManaConversionMod = 0.07
 
-    - Chance 1:
+    - Chance 5%:
         ManaConversionMod = 0.08
 
 0x3800004A Mutation #8:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         ManaConversionMod = 0.04
 
-    - Chance 0.15:
+    - Chance 10%:
         ManaConversionMod = 0.05
 
-    - Chance 0.35:
+    - Chance 20%:
         ManaConversionMod = 0.06
 
-    - Chance 0.65:
+    - Chance 30%:
         ManaConversionMod = 0.07
 
-    - Chance 0.85:
+    - Chance 20%:
         ManaConversionMod = 0.08
 
-    - Chance 0.95:
+    - Chance 10%:
         ManaConversionMod = 0.09
 
-    - Chance 1:
+    - Chance 5%:
         ManaConversionMod = 0.1
 
 0x3800004A Mutation #9:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.05:
+    - Chance 5%:
         ManaConversionMod = 0.05
 
-    - Chance 0.2:
+    - Chance 15%:
         ManaConversionMod = 0.06
 
-    - Chance 0.4:
+    - Chance 20%:
         ManaConversionMod = 0.07
 
-    - Chance 0.7:
+    - Chance 30%:
         ManaConversionMod = 0.08
 
-    - Chance 0.9:
+    - Chance 20%:
         ManaConversionMod = 0.09
 
-    - Chance 1:
+    - Chance 10%:
         ManaConversionMod = 0.1
 
 0x3800004A Mutation #10:
 
 Tier chances: 1, 0, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponDefense += 0.01
 
-    - Chance 0.5:
+    - Chance 30%:
         WeaponDefense += 0.02
 
-    - Chance 0.8:
+    - Chance 30%:
         WeaponDefense += 0.03
 
-    - Chance 0.95:
+    - Chance 15%:
         WeaponDefense += 0.04
 
-    - Chance 1:
+    - Chance 5%:
         WeaponDefense += 0.05
 
 0x3800004A Mutation #11:
 
 Tier chances: 0, 1, 0, 0, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponDefense += 0.02
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponDefense += 0.03
 
-    - Chance 0.5:
+    - Chance 30%:
         WeaponDefense += 0.04
 
-    - Chance 0.8:
+    - Chance 30%:
         WeaponDefense += 0.05
 
-    - Chance 0.95:
+    - Chance 15%:
         WeaponDefense += 0.06
 
-    - Chance 1:
+    - Chance 5%:
         WeaponDefense += 0.07
 
 0x3800004A Mutation #12:
 
 Tier chances: 0, 0, 1, 0, 0, 0
 
-    - Chance 0.02:
+    - Chance 2%:
         WeaponDefense += 0.03
 
-    - Chance 0.07:
+    - Chance 5%:
         WeaponDefense += 0.04
 
-    - Chance 0.22:
+    - Chance 15%:
         WeaponDefense += 0.05
 
-    - Chance 0.47:
+    - Chance 25%:
         WeaponDefense += 0.06
 
-    - Chance 0.77:
+    - Chance 30%:
         WeaponDefense += 0.07
 
-    - Chance 0.92:
+    - Chance 15%:
         WeaponDefense += 0.08
 
-    - Chance 0.97:
+    - Chance 5%:
         WeaponDefense += 0.09
 
-    - Chance 1:
+    - Chance 3%:
         WeaponDefense += 0.1
 
 0x3800004A Mutation #13:
 
 Tier chances: 0, 0, 0, 1, 0, 0
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponDefense += 0.05
 
-    - Chance 0.2:
+    - Chance 15%:
         WeaponDefense += 0.06
 
-    - Chance 0.45:
+    - Chance 25%:
         WeaponDefense += 0.07
 
-    - Chance 0.75:
+    - Chance 30%:
         WeaponDefense += 0.08
 
-    - Chance 0.9:
+    - Chance 15%:
         WeaponDefense += 0.09
 
-    - Chance 0.95:
+    - Chance 5%:
         WeaponDefense += 0.1
 
-    - Chance 0.98:
+    - Chance 3%:
         WeaponDefense += 0.11
 
-    - Chance 1:
+    - Chance 2%:
         WeaponDefense += 0.12
 
 0x3800004A Mutation #14:
 
 Tier chances: 0, 0, 0, 0, 1, 0
 
-    - Chance 0.03:
+    - Chance 3%:
         WeaponDefense += 0.06
 
-    - Chance 0.08:
+    - Chance 5%:
         WeaponDefense += 0.07
 
-    - Chance 0.23:
+    - Chance 15%:
         WeaponDefense += 0.08
 
-    - Chance 0.48:
+    - Chance 25%:
         WeaponDefense += 0.09
 
-    - Chance 0.73:
+    - Chance 25%:
         WeaponDefense += 0.1
 
-    - Chance 0.88:
+    - Chance 15%:
         WeaponDefense += 0.11
 
-    - Chance 0.93:
+    - Chance 5%:
         WeaponDefense += 0.12
 
-    - Chance 0.96:
+    - Chance 3%:
         WeaponDefense += 0.13
 
-    - Chance 0.98:
+    - Chance 2%:
         WeaponDefense += 0.14
 
-    - Chance 1:
+    - Chance 2%:
         WeaponDefense += 0.15
 
 0x3800004A Mutation #15:
 
 Tier chances: 0, 0, 0, 0, 0, 1
 
-    - Chance 0.05:
+    - Chance 5%:
         WeaponDefense += 0.07
 
-    - Chance 0.1:
+    - Chance 5%:
         WeaponDefense += 0.08
 
-    - Chance 0.2:
+    - Chance 10%:
         WeaponDefense += 0.09
 
-    - Chance 0.35:
+    - Chance 15%:
         WeaponDefense += 0.1
 
-    - Chance 0.55:
+    - Chance 20%:
         WeaponDefense += 0.11
 
-    - Chance 0.75:
+    - Chance 20%:
         WeaponDefense += 0.12
 
-    - Chance 0.9:
+    - Chance 15%:
         WeaponDefense += 0.13
 
-    - Chance 0.95:
+    - Chance 5%:
         WeaponDefense += 0.14
 
-    - Chance 1:
+    - Chance 5%:
         WeaponDefense += 0.15
 
 0x3800004A Mutation #16:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance 0.1:
+    - Chance 10%:
         WeaponMissileDefense = 1.005
 
-    - Chance 0.3:
+    - Chance 20%:
         WeaponMissileDefense = 1.01
 
-    - Chance 0.7:
+    - Chance 40%:
         WeaponMissileDefense = 1.015
 
-    - Chance 0.9:
+    - Chance 20%:
         WeaponMissileDefense = 1.02
 
-    - Chance 1:
+    - Chance 10%:
         WeaponMissileDefense = 1.025
 
 0x3800004A Mutation #17:
 
 Tier chances: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
 
-    - Chance 0.1:
+    - Chance 10%:
         WeaponMagicDefense = 1.005
 
-    - Chance 0.3:
+    - Chance 20%:
         WeaponMagicDefense = 1.01
 
-    - Chance 0.7:
+    - Chance 40%:
         WeaponMagicDefense = 1.015
 
-    - Chance 0.9:
+    - Chance 20%:
         WeaponMagicDefense = 1.02
 
-    - Chance 1:
+    - Chance 10%:
         WeaponMagicDefense = 1.025
 
