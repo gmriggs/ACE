@@ -1131,7 +1131,9 @@ namespace ACE.Server.WorldObjects
                         if (colliding)
                         {
                             // try initial placement
+                            PhysicsObj.PklHack = true;
                             var result = PhysicsObj.SetPositionSimple(PhysicsObj.Position, true);
+                            PhysicsObj.PklHack = false;
 
                             if (result == SetPositionError.OK)
                             {

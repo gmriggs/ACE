@@ -386,6 +386,10 @@ namespace ACE.Server.Physics.Animation
             var totalDist = 0.0f;
             var totalRad = 0.0f;
 
+            var startAngle = 0.0f;
+            if (ObjectInfo.Object.PklHack)
+                startAngle = ObjectInfo.Object.Position.Frame.get_heading();
+
             for (var i = 0; i < numSteps; i++)
             {
                 totalDist += distPerStep;
@@ -400,7 +404,7 @@ namespace ACE.Server.Physics.Animation
                 for (var j = 0; j < rad; j++)
                 {
                     SpherePath.SetCheckPos(SpherePath.CurPos, SpherePath.CurCell);
-                    frame.set_heading(angle * j);
+                    frame.set_heading((startAngle + angle) * j);
                     var offset = frame.get_vector_heading() * totalDist;
                     SpherePath.GlobalOffset = AdjustOffset(offset);
                     if (SpherePath.GlobalOffset.Length() >= PhysicsGlobals.EPSILON)

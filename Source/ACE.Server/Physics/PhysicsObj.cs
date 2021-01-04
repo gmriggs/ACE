@@ -1344,6 +1344,8 @@ namespace ACE.Server.Physics
             return result;
         }
 
+        public bool PklHack = false;
+
         public SetPositionError SetPositionSimple(Position pos, bool sliding)
         {
             var setPos = new SetPosition();
