@@ -696,6 +696,9 @@ namespace ACE.Server.WorldObjects
             CheckHouse();
 
             EnqueueBroadcastPhysicsState();
+
+            LastAutoPos = new Position(Location);
+            LastAutoPosTime = DateTime.UtcNow;
         }
 
         public void SendTeleportedViaMagicMessage(WorldObject itemCaster, Spell spell)
@@ -808,6 +811,48 @@ namespace ACE.Server.WorldObjects
             location.RotationY = lifestone.RotationY;
             location.RotationZ = lifestone.RotationZ;
             location.RotationW = lifestone.RotationW;
+        }
+
+        public Position LastAutoPos;
+        public DateTime LastAutoPosTime;
+
+        public readonly static TimeSpan MinAutoPosThreshold = TimeSpan.FromSeconds(5);
+
+        public readonly static float MinAutoPosFactor = 1.25f;
+
+        public void OnAutoPos(Position newPos)
+        {
+            if (Teleporting)
+                return;
+
+            if (LastAutoPos != null)
+            {
+                var timeElapsed = DateTime.UtcNow - LastAutoPosTime;
+
+                if (timeElapsed < MinAutoPosThreshold)
+                    return;
+
+                var dist = LastAutoPos.Distance2D(newPos);
+
+                var speed = dist / timeElapsed.TotalSeconds;
+
+                //Console.WriteLine($"Current speed (estimated): {speed}");
+
+                var runRate = GetRunRate();
+
+                var runSpeed = runRate * Physics.Animation.MotionInterp.RunAnimSpeed;
+
+                //Console.WriteLine($"Ideal speed: {runSpeed}");
+
+                if (speed > runSpeed* MinAutoPosFactor)
+                {
+                    var factor = Math.Round(speed / runSpeed, 2);
+
+                    log.Warn($"{Name} is running {factor}x faster than normal");
+                }
+            }
+            LastAutoPos = newPos;
+            LastAutoPosTime = DateTime.UtcNow;
         }
     }
 }
