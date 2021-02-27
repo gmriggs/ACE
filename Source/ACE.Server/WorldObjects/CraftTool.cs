@@ -36,7 +36,7 @@ namespace ACE.Server.WorldObjects
                 return;
             }
 
-            if (Aetheria.IsAetheriaManaStone(this) && Aetheria.IsAetheria(target.WeenieClassId))
+            if (Aetheria.IsAetheriaManaStone(this) && Aetheria.IsAetheria(target))
             {
                 Aetheria.UseObjectOnTarget(player, this, target);
                 return;

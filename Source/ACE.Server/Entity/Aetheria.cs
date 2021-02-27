@@ -87,9 +87,10 @@ namespace ACE.Server.Entity
         }
 
 
-        public static bool IsAetheria(uint wcid)
+        public static bool IsAetheria(WorldObject wo)
         {
-            return wcid == AetheriaBlue || wcid == AetheriaYellow || wcid == AetheriaRed;
+            //return wcid == AetheriaBlue || wcid == AetheriaYellow || wcid == AetheriaRed;
+            return wo is Gem && wo.Name != null && (wo.Name.Equals("Aetheria") || wo.Name.Equals("Coalesced Aetheria"));
         }
 
         public static AetheriaColor? GetColor(uint wcid)

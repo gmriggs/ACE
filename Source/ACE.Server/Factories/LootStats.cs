@@ -472,7 +472,7 @@ namespace ACE.Server.Factories
                         break;
                     case ItemType.Gem:
                         string aetheriaColor = "None";
-                        if (Server.Entity.Aetheria.IsAetheria(testItem.WeenieClassId))
+                        if (Server.Entity.Aetheria.IsAetheria(testItem))
                         {
                             AetheriaCount++;
                             if (testItem.WieldDifficulty == 75)

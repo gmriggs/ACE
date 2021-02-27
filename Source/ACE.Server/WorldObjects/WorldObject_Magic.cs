@@ -1683,7 +1683,7 @@ namespace ACE.Server.WorldObjects
 
             if (caster.ProcSpell == spell.Id)
             {
-                if (caster is Gem && Aetheria.IsAetheria(caster.WeenieClassId))
+                if (caster is Gem && Aetheria.IsAetheria(caster))
                 {
                     caster = this;
                     aetheriaProc = true;

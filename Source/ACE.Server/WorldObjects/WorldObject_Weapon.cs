@@ -938,7 +938,7 @@ namespace ACE.Server.WorldObjects
             var chance = ProcSpellRate ?? 0.0f;
 
             // special handling for aetheria
-            if (Aetheria.IsAetheria(WeenieClassId))
+            if (Aetheria.IsAetheria(this))
                 chance = Aetheria.CalcProcRate(this, wielder);
 
             var rng = ThreadSafeRandom.Next(0.0f, 1.0f);
