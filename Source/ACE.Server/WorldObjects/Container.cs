@@ -9,6 +9,7 @@ using ACE.Entity;
 using ACE.Entity.Enum;
 using ACE.Entity.Enum.Properties;
 using ACE.Entity.Models;
+using ACE.Server.Entity;
 using ACE.Server.Entity.Actions;
 using ACE.Server.Factories;
 using ACE.Server.Managers;
@@ -153,13 +154,25 @@ namespace ACE.Server.WorldObjects
         /// The only time this should be used is to populate Inventory from the ctor.
         /// This will remove from worldObjects as they're sorted.
         /// </summary>
-        private void SortWorldObjectsIntoInventory(IList<WorldObject> worldObjects)
+        private void SortWorldObjectsIntoInventory(IList<WorldObject> worldObjects, Container rootOwner = null)
         {
+            rootOwner ??= this;
+
+            var player = rootOwner as Player;
+
             // This will pull out all of our main pack items and side slot items (foci & containers)
             for (int i = worldObjects.Count - 1; i >= 0; i--)
             {
                 if ((worldObjects[i].ContainerId ?? 0) == Biota.Id)
                 {
+                    if (player != null)
+                    {
+                        if (!InventoryRegistry.TryAdd(worldObjects[i], player))
+                        {
+                            worldObjects.RemoveAt(i);
+                            continue;
+                        }
+                    }
                     Inventory[worldObjects[i].Guid] = worldObjects[i];
                     if (worldObjects[i].WeenieType != WeenieType.Container) // We skip over containers because we'll add their burden/value in the next loop.
                     {
@@ -186,7 +199,7 @@ namespace ACE.Server.WorldObjects
             var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).ToList();
             foreach (var container in sideContainers)
             {
-                ((Container)container).SortWorldObjectsIntoInventory(worldObjects); // This will set the InventoryLoaded flag for this sideContainer
+                ((Container)container).SortWorldObjectsIntoInventory(worldObjects, rootOwner); // This will set the InventoryLoaded flag for this sideContainer
                 EncumbranceVal += container.EncumbranceVal; // This value includes the containers burden itself + all child items
                 Value += container.Value; // This value includes the containers value itself + all child items
             }
@@ -386,9 +399,9 @@ namespace ACE.Server.WorldObjects
         /// If enough burden is available, this will try to add an item to the main pack. If the main pack is full, it will try to add it to the first side pack with room.<para />
         /// It will also increase the EncumbranceVal and Value.
         /// </summary>
-        public bool TryAddToInventory(WorldObject worldObject, int placementPosition = 0, bool limitToMainPackOnly = false, bool burdenCheck = true)
+        public bool TryAddToInventory(WorldObject worldObject, int placementPosition = 0, bool limitToMainPackOnly = false, bool burdenCheck = true, Container rootOwner = null)
         {
-            return TryAddToInventory(worldObject, out _, placementPosition, limitToMainPackOnly, burdenCheck);
+            return TryAddToInventory(worldObject, out _, placementPosition, limitToMainPackOnly, burdenCheck, rootOwner);
         }
 
         /// <summary>
@@ -493,10 +506,14 @@ namespace ACE.Server.WorldObjects
         /// If enough burden is available, this will try to add an item to the main pack. If the main pack is full, it will try to add it to the first side pack with room.<para />
         /// It will also increase the EncumbranceVal and Value.
         /// </summary>
-        public bool TryAddToInventory(WorldObject worldObject, out Container container, int placementPosition = 0, bool limitToMainPackOnly = false, bool burdenCheck = true)
+        public bool TryAddToInventory(WorldObject worldObject, out Container container, int placementPosition = 0, bool limitToMainPackOnly = false, bool burdenCheck = true, Container rootOwner = null)
         {
-            // bug: should be root owner
-            if (this is Player player && burdenCheck)
+            // todo: better handling of rootOwner for Containers
+            rootOwner ??= this;
+
+            var player = rootOwner as Player;
+
+            if (rootOwner is Player && burdenCheck)
             {
                 if (!player.HasEnoughBurdenToAddToInventory(worldObject))
                 {
@@ -531,7 +548,7 @@ namespace ACE.Server.WorldObjects
 
                         foreach (var sidePack in containers)
                         {
-                            if (sidePack.TryAddToInventory(worldObject, out container, placementPosition, true))
+                            if (sidePack.TryAddToInventory(worldObject, out container, placementPosition, true, true, rootOwner))
                             {
                                 EncumbranceVal += (worldObject.EncumbranceVal ?? 0);
                                 Value += (worldObject.Value ?? 0);
@@ -547,6 +564,12 @@ namespace ACE.Server.WorldObjects
             }
 
             if (Inventory.ContainsKey(worldObject.Guid))
+            {
+                container = null;
+                return false;
+            }
+
+            if (player != null && !InventoryRegistry.TryAdd(worldObject, player, true))
             {
                 container = null;
                 return false;
@@ -613,11 +636,18 @@ namespace ACE.Server.WorldObjects
         /// This will clear the ContainerId and PlacementPosition properties and remove the object from the Inventory dictionary.<para />
         /// It will also subtract the EncumbranceVal and Value.
         /// </summary>
-        public bool TryRemoveFromInventory(ObjectGuid objectGuid, out WorldObject item, bool forceSave = false)
+        public bool TryRemoveFromInventory(ObjectGuid objectGuid, out WorldObject item, bool forceSave = false, Container rootOwner = null)
         {
+            rootOwner ??= this;
+
+            var player = rootOwner as Player;
+
             // first search me / add all items of type.
             if (Inventory.Remove(objectGuid, out item))
             {
+                if (player != null)
+                    InventoryRegistry.TryRemove(item, player);
+
                 int removedItemsPlacementPosition = item.PlacementPosition ?? 0;
 
                 item.OwnerId = null;
@@ -646,7 +676,7 @@ namespace ACE.Server.WorldObjects
             var sideContainers = Inventory.Values.Where(i => i.WeenieType == WeenieType.Container).ToList();
             foreach (var container in sideContainers)
             {
-                if (((Container)container).TryRemoveFromInventory(objectGuid, out item))
+                if (((Container)container).TryRemoveFromInventory(objectGuid, out item, false, rootOwner))
                 {
                     EncumbranceVal -= (item.EncumbranceVal ?? 0);
                     Value -= (item.Value ?? 0);

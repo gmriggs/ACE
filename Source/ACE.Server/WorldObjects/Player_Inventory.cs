@@ -180,11 +180,6 @@ namespace ACE.Server.WorldObjects
             SpendItem
         }
 
-        public bool TryRemoveFromInventoryWithNetworking(uint objectGuid, out WorldObject item, RemoveFromInventoryAction removeFromInventoryAction)
-        {
-            return TryRemoveFromInventoryWithNetworking(new ObjectGuid(objectGuid), out item, removeFromInventoryAction); // todo fix
-        }
-
         public bool TryRemoveFromInventoryWithNetworking(ObjectGuid objectGuid, out WorldObject item, RemoveFromInventoryAction removeFromInventoryAction)
         {
             if (!TryRemoveFromInventory(objectGuid, out item))
@@ -1186,7 +1181,7 @@ namespace ACE.Server.WorldObjects
 
             var burdenCheck = itemRootOwner != this && containerRootOwner == this;
 
-            if (!container.TryAddToInventory(item, placement, true, burdenCheck))
+            if (!container.TryAddToInventory(item, placement, true, burdenCheck, containerRootOwner))
             {
                 Session.Network.EnqueueSend(new GameEventCommunicationTransientString(Session, $"Unable to put {item.Name} into container")); // Custom error message
                 Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, item.Guid.Full));
@@ -1300,7 +1295,7 @@ namespace ACE.Server.WorldObjects
             }
             else
             {
-                if (!TryRemoveFromInventoryWithNetworking(item.Guid.Full, out _, RemoveFromInventoryAction.DropItem))
+                if (!TryRemoveFromInventoryWithNetworking(item.Guid, out _, RemoveFromInventoryAction.DropItem))
                 {
                     Session.Network.EnqueueSend(new GameEventCommunicationTransientString(Session, "Failed to remove item from inventory!")); // Custom error message
                     Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, item.Guid.Full));
@@ -2029,7 +2024,7 @@ namespace ACE.Server.WorldObjects
             //Console.WriteLine($"{Name}.DoHandleActionStackableSplitToContainer({stack?.Name}, {stackFoundInContainer?.Name}, {stackRootOwner?.Name}, {container?.Name}, {containerRootOwner?.Name}, {newStack?.Name}, {placementPosition}, {amount})");
 
             // Before we modify the original stack, we make sure we can add the new stack
-            if (!container.TryAddToInventory(newStack, placementPosition, true))
+            if (!container.TryAddToInventory(newStack, placementPosition, true, true, containerRootOwner))
             {
                 Session.Network.EnqueueSend(new GameEventCommunicationTransientString(Session, "TryAddToInventory failed!")); // Custom error message
                 Session.Network.EnqueueSend(new GameEventInventoryServerSaveFailed(Session, stack.Guid.Full));

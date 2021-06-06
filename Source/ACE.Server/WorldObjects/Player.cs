@@ -551,6 +551,7 @@ namespace ACE.Server.WorldObjects
                 if (skipAnimations)
                 {
                     CurrentLandblock?.RemoveWorldObject(Guid, false);
+                    HandleInventoryAtLogout();
                     SetPropertiesAtLogOut();
                     SavePlayerToDatabase();
                     PlayerManager.SwitchPlayerFromOnlineToOffline(this);
@@ -576,6 +577,7 @@ namespace ACE.Server.WorldObjects
                             return;
 
                         CurrentLandblock?.RemoveWorldObject(Guid, false);
+                        HandleInventoryAtLogout();
                         SetPropertiesAtLogOut();
                         SavePlayerToDatabase();
                         PlayerManager.SwitchPlayerFromOnlineToOffline(this);
@@ -595,10 +597,17 @@ namespace ACE.Server.WorldObjects
             }
             else
             {
+                HandleInventoryAtLogout();
                 SetPropertiesAtLogOut();
                 SavePlayerToDatabase();
                 PlayerManager.SwitchPlayerFromOnlineToOffline(this);
             }
+        }
+
+        public void HandleInventoryAtLogout()
+        {
+            foreach (var kvp in Inventory)
+                InventoryRegistry.TryRemove(kvp.Value, this);
         }
 
         public void HandleMRT()
