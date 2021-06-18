@@ -239,7 +239,7 @@ namespace ACE.Server.WorldObjects
             var combatMod = healer.CombatMode == CombatMode.NonCombat ? 1.0f : 1.1f;
 
             var effectiveSkill = (int)Math.Round((healingSkill.Current + BoostValue) * trainedMod);
-            difficulty = (int)Math.Round((vital.MaxValue - vital.Current) * PropertyManager.GetDouble("healing_difficulty").Item * combatMod);
+            difficulty = (int)Math.Round(vital.Missing * PropertyManager.GetDouble("healing_difficulty").Item * combatMod);
 
             var skillCheck = SkillCheck.GetSkillChance(effectiveSkill, difficulty);
             return skillCheck > ThreadSafeRandom.Next(0.0f, 1.0f);
@@ -255,8 +255,8 @@ namespace ACE.Server.WorldObjects
             var healBase = healingSkill * (float)HealkitMod.Value;
 
             // todo: determine applicable range from pcaps
-            var healMin = healBase * 0.2f;      // ??
-            var healMax = healBase * 0.5f;
+            var healMin = healBase * (float)PropertyManager.GetDouble("healing_min_percent").Item;      // ??
+            var healMax = healBase * (float)PropertyManager.GetDouble("healing_max_percent").Item;
             var healAmount = ThreadSafeRandom.Next(healMin, healMax);
 
             // verify healing boost comes from target instead of healer?
@@ -270,7 +270,7 @@ namespace ACE.Server.WorldObjects
             if (criticalHeal) healAmount *= 2;
 
             // cap to missing vital
-            var missingVital = vital.MaxValue - vital.Current;
+            var missingVital = vital.Missing;
             if (healAmount > missingVital)
                 healAmount = missingVital;
 

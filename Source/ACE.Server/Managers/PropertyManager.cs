@@ -636,6 +636,8 @@ namespace ACE.Server.Managers
                 ("equipmentsetid_drop_rate", new Property<double>(1.0, "Modifier for EquipmentSetID drop rate, 1 being normal")),
                 ("fast_missile_modifier", new Property<double>(1.2, "The speed multiplier applied to fast missiles. Defaults to retail value of 1.2")),
                 ("healing_difficulty", new Property<double>(2.0, "The difficulty of using a healing kit. Defaults to the wiki value of 2.0.")),
+                ("healing_min_percent", new Property<double>(0.2, "The minimum percent of max vital restored. Defaults to 0.2")),
+                ("healing_max_percent", new Property<double>(0.5, "The minimum percent of max vital restored. Defaults to 0.5")),
                 ("ignore_magic_armor_pvp_scalar", new Property<double>(1.0, "Scales the effectiveness of IgnoreMagicArmor (ie. hollow weapons) in pvp battles. 1.0 = full effectiveness / ignore all enchantments on armor (default), 0.5 = half effectiveness / use half enchantments from armor, 0.0 = no effectiveness / use full enchantments from armor")),
                 ("ignore_magic_resist_pvp_scalar", new Property<double>(1.0, "Scales the effectiveness of IgnoreMagicResist (ie. hollow weapons) in pvp battles. 1.0 = full effectiveness / ignore all resistances from life enchantments (default), 0.5 = half effectiveness / use half resistances from life enchantments, 0.0 = no effectiveness / use full resistances from life enchantments")),
                 ("luminance_modifier", new Property<double>(1.0, "Scales the amount of luminance received by players")),
