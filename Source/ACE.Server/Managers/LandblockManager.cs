@@ -397,7 +397,7 @@ namespace ACE.Server.Managers
         /// <summary>
         /// Returns a reference to a landblock, loading the landblock if not already active
         /// </summary>
-        public static Landblock GetLandblock(LandblockId landblockId, bool loadAdjacents, bool permaload = false)
+        public static Landblock GetLandblock(LandblockId landblockId, bool loadAdjacents, bool permaload = false, bool tryLoad = true)
         {
             Landblock landblock;
 
@@ -409,6 +409,8 @@ namespace ACE.Server.Managers
 
                 if (landblock == null)
                 {
+                    if (!tryLoad) return null;
+
                     // load up this landblock
                     landblock = landblocks[landblockId.LandblockX, landblockId.LandblockY] = new Landblock(landblockId);
 

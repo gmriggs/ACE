@@ -3897,5 +3897,47 @@ namespace ACE.Server.Command.Handlers
             }
             LootSwap.UpdateTables(folder);
         }
+
+        [CommandHandler("objdump", AccessLevel.Admin, CommandHandlerFlag.None, "trace object roots")]
+        public static void HandleObjDump(Session session, params string[] parameters)
+        {
+            var objs = Physics.Managers.ServerObjectManager.ServerObjects;
+
+            var landblocks = new HashSet<ushort>();
+
+            foreach (var obj in objs.Values)
+            {
+                if (obj.CurLandblock == null)
+                    continue;
+
+                landblocks.Add((ushort)(obj.CurLandblock.ID >> 16));
+            }
+            Console.WriteLine($"Found {objs.Count:N0} server objects in {landblocks.Count:N0} unique landblocks");
+
+            foreach (var obj in objs.Values)
+            {
+                if (obj.CurLandblock == null)
+                {
+                    Console.WriteLine($"{obj.Name} ({obj.ID}) has null landblock");
+                    continue;
+                }
+
+                var lbid = new LandblockId(obj.CurLandblock.ID);
+
+                var landblock = LandblockManager.GetLandblock(lbid, false, false, false);
+
+                if (landblock == null)
+                {
+                    Console.WriteLine($"{obj.Name} ({obj.ID}) is pointing to unloaded landblock {obj.CurLandblock.ID:X8}");
+                    continue;
+                }
+
+                if (obj.CurLandblock != landblock.PhysicsLandblock)
+                {
+                    Console.WriteLine($"{obj.Name} ({obj.ID}) is pointing to a previous instance of landblock {obj.CurLandblock.ID:X8}");
+                    continue;
+                }
+            }
+        }
     }
 }
