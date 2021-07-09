@@ -3912,13 +3912,13 @@ namespace ACE.Server.Command.Handlers
 
                 landblocks.Add((ushort)(obj.CurLandblock.ID >> 16));
             }
-            Console.WriteLine($"Found {objs.Count:N0} server objects in {landblocks.Count:N0} unique landblocks");
+            log.Info($"Found {objs.Count:N0} server objects in {landblocks.Count:N0} unique landblocks");
 
             foreach (var obj in objs.Values)
             {
                 if (obj.CurLandblock == null)
                 {
-                    Console.WriteLine($"{obj.Name} ({obj.ID}) has null landblock");
+                    log.Info($"{obj.Name} ({obj.ID:X8}) has null landblock");
                     continue;
                 }
 
@@ -3928,14 +3928,73 @@ namespace ACE.Server.Command.Handlers
 
                 if (landblock == null)
                 {
-                    Console.WriteLine($"{obj.Name} ({obj.ID}) is pointing to unloaded landblock {obj.CurLandblock.ID:X8}");
-                    continue;
+                    log.Info($"{obj.Name} ({obj.ID:X8}) is pointing to unloaded landblock {obj.CurLandblock.ID:X8}");
+                }
+                else if (obj.CurLandblock != landblock.PhysicsLandblock)
+                {
+                    log.Info($"{obj.Name} ({obj.ID:X8}) is pointing to a previous instance of landblock {obj.CurLandblock.ID:X8}");
                 }
 
-                if (obj.CurLandblock != landblock.PhysicsLandblock)
+                if (obj.ObjMaint == null) continue;
+
+                foreach (var knownObj in obj.ObjMaint.GetKnownObjectsValues())
                 {
-                    Console.WriteLine($"{obj.Name} ({obj.ID}) is pointing to a previous instance of landblock {obj.CurLandblock.ID:X8}");
-                    continue;
+                    var lbid2 = new LandblockId(knownObj.CurLandblock?.ID ?? 0xFFFFFFFF);
+
+                    var lb2 = lbid.Raw != 0xFFFFFFFF ? LandblockManager.GetLandblock(lbid2, false, false, false) : null;
+
+                    if (knownObj.WeenieObj?.WorldObject == null || knownObj.WeenieObj.WorldObject.IsDestroyed || knownObj.CurLandblock != lb2?.PhysicsLandblock)
+                    {
+                        log.Info($"{obj.Name} ({obj.ID:X8}) known objects is pointing to WorldObject in inconsistent state {knownObj.Name} ({knownObj.ID:X8}), IsDestroyed: {knownObj.WeenieObj?.WorldObject?.IsDestroyed}, CurLandblock: {knownObj.CurLandblock?.ID:X8}, PhysLandblock: {lb2?.PhysicsLandblock?.ID:X8}");
+                    }
+                }
+
+                foreach (var visibleObj in obj.ObjMaint.GetVisibleObjectsValues())
+                {
+                    var lbid2 = new LandblockId(visibleObj.CurLandblock?.ID ?? 0xFFFFFFFF);
+
+                    var lb2 = lbid.Raw != 0xFFFFFFFF ? LandblockManager.GetLandblock(lbid2, false, false, false) : null;
+
+                    if (visibleObj.WeenieObj?.WorldObject == null || visibleObj.WeenieObj.WorldObject.IsDestroyed || visibleObj.CurLandblock != lb2?.PhysicsLandblock)
+                    {
+                        log.Info($"{obj.Name} ({obj.ID:X8}) visible objects is pointing to WorldObject in inconsistent state {visibleObj.Name} ({visibleObj.ID:X8}), IsDestroyed: {visibleObj.WeenieObj?.WorldObject?.IsDestroyed}, CurLandblock: {visibleObj.CurLandblock?.ID:X8}, PhysLandblock: {lb2?.PhysicsLandblock?.ID:X8}");
+                    }
+                }
+
+                foreach (var knownPlayer in obj.ObjMaint.GetKnownPlayersValues())
+                {
+                    var lbid2 = new LandblockId(knownPlayer.CurLandblock?.ID ?? 0xFFFFFFFF);
+
+                    var lb2 = lbid.Raw != 0xFFFFFFFF ? LandblockManager.GetLandblock(lbid2, false, false, false) : null;
+
+                    if (knownPlayer.WeenieObj?.WorldObject == null || knownPlayer.WeenieObj.WorldObject.IsDestroyed || knownPlayer.CurLandblock != lb2?.PhysicsLandblock)
+                    {
+                        log.Info($"{obj.Name} ({obj.ID:X8}) known players is pointing to WorldObject in inconsistent state {knownPlayer.Name} ({knownPlayer.ID:X8}), IsDestroyed: {knownPlayer.WeenieObj?.WorldObject?.IsDestroyed}, CurLandblock: {knownPlayer.CurLandblock?.ID:X8}, PhysLandblock: {lb2?.PhysicsLandblock?.ID:X8}");
+                    }
+                }
+
+                foreach (var visibleTarget in obj.ObjMaint.GetVisibleTargetsValues())
+                {
+                    var lbid2 = new LandblockId(visibleTarget.CurLandblock?.ID ?? 0xFFFFFFFF);
+
+                    var lb2 = lbid.Raw != 0xFFFFFFFF ? LandblockManager.GetLandblock(lbid2, false, false, false) : null;
+
+                    if (visibleTarget.WeenieObj?.WorldObject == null || visibleTarget.WeenieObj.WorldObject.IsDestroyed || visibleTarget.CurLandblock != lb2?.PhysicsLandblock)
+                    {
+                        log.Info($"{obj.Name} ({obj.ID:X8}) visible targets is pointing to WorldObject in inconsistent state {visibleTarget.Name} ({visibleTarget.ID:X8}), IsDestroyed: {visibleTarget.WeenieObj?.WorldObject?.IsDestroyed}, CurLandblock: {visibleTarget.CurLandblock?.ID:X8}, PhysLandblock: {lb2?.PhysicsLandblock?.ID:X8}");
+                    }
+                }
+
+                foreach (var retaliateTarget in obj.ObjMaint.GetRetaliateTargetsValues())
+                {
+                    var lbid2 = new LandblockId(retaliateTarget.CurLandblock?.ID ?? 0xFFFFFFFF);
+
+                    var lb2 = lbid.Raw != 0xFFFFFFFF ? LandblockManager.GetLandblock(lbid2, false, false, false) : null;
+
+                    if (retaliateTarget.WeenieObj?.WorldObject == null || retaliateTarget.WeenieObj.WorldObject.IsDestroyed || retaliateTarget.CurLandblock != lb2?.PhysicsLandblock)
+                    {
+                        log.Info($"{obj.Name} ({obj.ID:X8}) retaliate targets is pointing to WorldObject in inconsistent state {retaliateTarget.Name} ({retaliateTarget.ID:X8}), IsDestroyed: {retaliateTarget.WeenieObj?.WorldObject?.IsDestroyed}, CurLandblock: {retaliateTarget.CurLandblock?.ID:X8}, PhysLandblock: {lb2?.PhysicsLandblock?.ID:X8}");
+                    }
                 }
             }
         }
