@@ -912,7 +912,7 @@ namespace ACE.Server.WorldObjects
             if (name.Contains(material))
                 name = name.Replace(material, "");
 
-            return $"{material} {name}";
+            return $"{material} {name}".Trim();
         }
 
         public string DisplayName
