@@ -356,10 +356,14 @@ namespace ACE.Server.WorldObjects
         protected void DoSpellEffects(Spell spell, WorldObject caster, WorldObject target, bool projectileHit = false)
         {
             if (spell.CasterEffect != 0 && (!spell.IsProjectile || !projectileHit))
-                EnqueueBroadcast(new GameMessageScript(Guid, spell.CasterEffect, spell.Formula.Scale));
+                caster.EnqueueBroadcast(new GameMessageScript(caster.Guid, spell.CasterEffect, spell.Formula.Scale));
 
             if (spell.TargetEffect != 0 && (!spell.IsProjectile || projectileHit))
-                target.EnqueueBroadcast(new GameMessageScript(target.Guid, spell.TargetEffect, spell.Formula.Scale));
+            {
+                var targetBroadcaster = target.Wielder ?? target;
+
+                targetBroadcaster.EnqueueBroadcast(new GameMessageScript(target.Guid, spell.TargetEffect, spell.Formula.Scale));
+            }
         }
 
         /// <summary>
@@ -2075,7 +2079,6 @@ namespace ACE.Server.WorldObjects
             var targetCreature = target as Creature;
             var targetPlayer = target as Player;
 
-
             // if negative item spell, can be resisted by the wielder
             if (spell.IsHarmful)
             {
@@ -2113,10 +2116,13 @@ namespace ACE.Server.WorldObjects
                         // targeting self
                         if (creature != null)
                         {
-                            var items = creature.EquippedObjects.Values.Where(i => (i.WeenieType == WeenieType.Clothing || i.IsShield) && i.IsEnchantable);
+                            var items = creature.EquippedObjects.Values.Where(i => (i.WeenieType == WeenieType.Clothing || i.IsShield) && i.IsEnchantable).ToList();
 
                             foreach (var item in items)
                                 HandleCastSpell(spell, item);
+
+                            if (items.Count > 0)
+                                DoSpellEffects(spell, this, creature);
                         }
                     }
                     else
