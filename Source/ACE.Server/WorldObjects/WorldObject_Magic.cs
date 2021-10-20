@@ -2116,7 +2116,7 @@ namespace ACE.Server.WorldObjects
                             var items = creature.EquippedObjects.Values.Where(i => (i.WeenieType == WeenieType.Clothing || i.IsShield) && i.IsEnchantable);
 
                             foreach (var item in items)
-                                HandleCastSpell(spell, target);
+                                HandleCastSpell(spell, item);
                         }
                     }
                     else
@@ -2126,7 +2126,7 @@ namespace ACE.Server.WorldObjects
 
                         if (item != null)
                         {
-                            HandleCastSpell(spell, target);
+                            HandleCastSpell(spell, item);
                         }
                         else
                         {
@@ -2161,7 +2161,7 @@ namespace ACE.Server.WorldObjects
 
                     if (weapon != null && weapon.IsEnchantable)
                     {
-                        HandleCastSpell(spell, target);
+                        HandleCastSpell(spell, weapon);
                     }
                     else
                     {
