@@ -1408,6 +1408,9 @@ namespace ACE.Server.WorldObjects
             return false;
         }
 
+        /// <summary>
+        /// Sends a chat message with respect to SquelchManager
+        /// </summary>
         public void SendChatMessage(WorldObject source, string msg, ChatMessageType msgType)
         {
             if (!SquelchManager.Squelches.Contains(source, msgType))

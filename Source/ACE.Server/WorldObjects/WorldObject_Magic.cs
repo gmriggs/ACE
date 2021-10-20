@@ -410,9 +410,9 @@ namespace ACE.Server.WorldObjects
 
             if (aetheriaProc)
             {
-                var message = new GameMessageSystemChat($"Aetheria surges on {target.Name} with the power of {spell.Name}!", ChatMessageType.Magic);
+                var message = new GameMessageSystemChat($"Aetheria surges on {target.Name} with the power of {spell.Name}!", ChatMessageType.Spellcasting);
 
-                EnqueueBroadcast(message, LocalBroadcastRange, ChatMessageType.Magic);
+                EnqueueBroadcast(message, LocalBroadcastRange, ChatMessageType.Spellcasting);
             }
             else if (player != null && !cloakProc)
             {
