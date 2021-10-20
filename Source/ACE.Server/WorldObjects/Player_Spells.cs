@@ -247,8 +247,6 @@ namespace ACE.Server.WorldObjects
                     buffMessages.Where(k => !k.Bane).ToList().ForEach(k => k.SetTargetPlayer(targetPlayer));
                     // update client-side enchantments
                     targetPlayer.Session.Network.EnqueueSend(buffMessages.Where(k => !k.Bane).Select(k => k.SessionMessage).ToArray());
-                    // run client-side effect scripts, omitting duplicates
-                    targetPlayer.EnqueueBroadcast(buffMessages.Where(k => !k.Bane).ToList().GroupBy(m => m.Spell.TargetEffect).Select(a => a.First().LandblockMessage).ToArray());
                     // update server-side enchantments
 
                     var buffsForPlayer = buffMessages.Where(k => !k.Bane).ToList().Select(k => k.Enchantment);
@@ -257,18 +255,17 @@ namespace ACE.Server.WorldObjects
                     var critterBuffsForPlayer = buffsForPlayer.Where(k => k.Spell.School == MagicSchool.CreatureEnchantment).ToList();
                     var itemBuffsForPlayer = buffsForPlayer.Where(k => k.Spell.School == MagicSchool.ItemEnchantment).ToList();
 
-                    EnchantmentStatus ec;
                     lifeBuffsForPlayer.ForEach(spl =>
                     {
-                        ec = HandleCastSpell(spl.Spell, targetPlayer);
+                        HandleCastSpell(spl.Spell, targetPlayer);
                     });
                     critterBuffsForPlayer.ForEach(spl =>
                     {
-                        ec = HandleCastSpell(spl.Spell, targetPlayer);
+                        HandleCastSpell(spl.Spell, targetPlayer);
                     });
                     itemBuffsForPlayer.ForEach(spl =>
                     {
-                        ec = HandleCastSpell(spl.Spell, targetPlayer);
+                        HandleCastSpell(spl.Spell, targetPlayer);
                     });
                 }
                 if (buffMessages.Any(k => k.Bane))
@@ -281,11 +278,7 @@ namespace ACE.Server.WorldObjects
                         foreach (var item in items)
                         {
                             if ((item.WeenieType == WeenieType.Clothing || item.IsShield) && item.IsEnchantable)
-                            {
-                                itemBuff.SetLandblockMessage(item.Guid);
                                 HandleCastSpell(itemBuff.Spell, item, this);
-                                targetPlayer?.EnqueueBroadcast(itemBuff.LandblockMessage);
-                            }
                         }
                     }
                 }
@@ -381,18 +374,12 @@ namespace ACE.Server.WorldObjects
         {
             public bool Bane { get; set; } = false;
             public GameEventMagicUpdateEnchantment SessionMessage { get; set; } = null;
-            public GameMessageScript LandblockMessage { get; set; } = null;
             public Spell Spell { get; set; } = null;
             public Enchantment Enchantment { get; set; } = null;
             public void SetTargetPlayer(Player p)
             {
                 Enchantment.Target = p;
                 SessionMessage = new GameEventMagicUpdateEnchantment(p.Session, Enchantment);
-                SetLandblockMessage(p.Guid);
-            }
-            public void SetLandblockMessage(ObjectGuid target)
-            {
-                LandblockMessage = new GameMessageScript(target, Spell.TargetEffect, 1f);
             }
         }
 
