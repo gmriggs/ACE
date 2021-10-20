@@ -247,6 +247,8 @@ namespace ACE.Server.WorldObjects
                     buffMessages.Where(k => !k.Bane).ToList().ForEach(k => k.SetTargetPlayer(targetPlayer));
                     // update client-side enchantments
                     targetPlayer.Session.Network.EnqueueSend(buffMessages.Where(k => !k.Bane).Select(k => k.SessionMessage).ToArray());
+                    // run client-side effect scripts, omitting duplicates
+                    targetPlayer.EnqueueBroadcast(buffMessages.Where(k => !k.Bane).ToList().GroupBy(m => m.Spell.TargetEffect).Select(a => a.First().LandblockMessage).ToArray());
                     // update server-side enchantments
 
                     var buffsForPlayer = buffMessages.Where(k => !k.Bane).ToList().Select(k => k.Enchantment);
@@ -257,15 +259,15 @@ namespace ACE.Server.WorldObjects
 
                     lifeBuffsForPlayer.ForEach(spl =>
                     {
-                        HandleCastSpell(spl.Spell, targetPlayer);
+                        CreateEnchantmentSilent(spl.Spell, targetPlayer);
                     });
                     critterBuffsForPlayer.ForEach(spl =>
                     {
-                        HandleCastSpell(spl.Spell, targetPlayer);
+                        CreateEnchantmentSilent(spl.Spell, targetPlayer);
                     });
                     itemBuffsForPlayer.ForEach(spl =>
                     {
-                        HandleCastSpell(spl.Spell, targetPlayer);
+                        CreateEnchantmentSilent(spl.Spell, targetPlayer);
                     });
                 }
                 if (buffMessages.Any(k => k.Bane))
@@ -278,11 +280,23 @@ namespace ACE.Server.WorldObjects
                         foreach (var item in items)
                         {
                             if ((item.WeenieType == WeenieType.Clothing || item.IsShield) && item.IsEnchantable)
-                                HandleCastSpell(itemBuff.Spell, item, this);
+                                CreateEnchantmentSilent(itemBuff.Spell, item);
                         }
                     }
                 }
             });
+        }
+
+        private void CreateEnchantmentSilent(Spell spell, WorldObject target)
+        {
+            var addResult = target.EnchantmentManager.Add(spell, this, null);
+
+            if (target is Player targetPlayer)
+            {
+                targetPlayer.Session.Network.EnqueueSend(new GameEventMagicUpdateEnchantment(targetPlayer.Session, new Enchantment(targetPlayer, addResult.Enchantment)));
+
+                targetPlayer.HandleSpellHooks(spell);
+            }
         }
 
         // TODO: switch this over to SpellProgressionTables
@@ -374,12 +388,18 @@ namespace ACE.Server.WorldObjects
         {
             public bool Bane { get; set; } = false;
             public GameEventMagicUpdateEnchantment SessionMessage { get; set; } = null;
+            public GameMessageScript LandblockMessage { get; set; } = null;
             public Spell Spell { get; set; } = null;
             public Enchantment Enchantment { get; set; } = null;
             public void SetTargetPlayer(Player p)
             {
                 Enchantment.Target = p;
                 SessionMessage = new GameEventMagicUpdateEnchantment(p.Session, Enchantment);
+                SetLandblockMessage(p.Guid);
+            }
+            public void SetLandblockMessage(ObjectGuid target)
+            {
+                LandblockMessage = new GameMessageScript(target, Spell.TargetEffect, 1f);
             }
         }
 
