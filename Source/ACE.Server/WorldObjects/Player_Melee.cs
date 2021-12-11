@@ -137,7 +137,9 @@ namespace ACE.Server.WorldObjects
 
             // reset PrevMotionCommand / DualWieldAlternate each time button is clicked
             PrevMotionCommand = MotionCommand.Invalid;
-            DualWieldAlternate = false;
+
+            if (DateTime.UtcNow - LastMeleeAttackTime >= AlternateThreshold)
+                DualWieldAlternate = false;
 
             var attackSequence = ++AttackSequence;
 
@@ -249,6 +251,10 @@ namespace ACE.Server.WorldObjects
             PhysicsObj.cancel_moveto();
         }
 
+        private DateTime LastMeleeAttackTime;
+
+        private static readonly TimeSpan AlternateThreshold = TimeSpan.FromSeconds(3);
+
         /// <summary>
         /// Performs a player melee attack against a target
         /// </summary>
@@ -281,6 +287,7 @@ namespace ACE.Server.WorldObjects
 
             // point of no return beyond this point -- cannot be cancelled
             Attacking = true;
+            LastMeleeAttackTime = DateTime.UtcNow;
 
             if (subsequent)
             {
