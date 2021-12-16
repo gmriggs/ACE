@@ -94,6 +94,8 @@ namespace ACE.Server.WorldObjects
 
         public bool HitMsg;     // FIXME: find a better way to do this for projectiles
 
+        public int NoVelocityFrames;
+
         public WorldObject Wielder;
 
         public WorldObject() { }

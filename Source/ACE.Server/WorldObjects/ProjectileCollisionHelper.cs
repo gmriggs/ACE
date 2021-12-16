@@ -139,16 +139,19 @@ namespace ACE.Server.WorldObjects
 
             //Console.WriteLine($"Projectile.OnCollideEnvironment({WorldObject.Name} - {WorldObject.Guid})");
 
-            worldObject.CurrentLandblock?.RemoveWorldObject(worldObject.Guid, showError: !worldObject.PhysicsObj.entering_world);
-            worldObject.PhysicsObj.set_active(false);
+            //worldObject.CurrentLandblock?.RemoveWorldObject(worldObject.Guid, showError: !worldObject.PhysicsObj.entering_world);
+            //worldObject.PhysicsObj.set_active(false);
 
-            if (worldObject.ProjectileSource is Player player)
+            if (!worldObject.HitMsg)
             {
-                player.Session.Network.EnqueueSend(new GameMessageSystemChat("Your missile attack hit the environment.", ChatMessageType.Broadcast));
-            }
-            else if (worldObject.ProjectileSource is Creature creature)
-            {
-                creature.MonsterProjectile_OnCollideEnvironment();
+                if (worldObject.ProjectileSource is Player player)
+                {
+                    player.Session.Network.EnqueueSend(new GameMessageSystemChat("Your missile attack hit the environment.", ChatMessageType.Broadcast));
+                }
+                else if (worldObject.ProjectileSource is Creature creature)
+                {
+                    creature.MonsterProjectile_OnCollideEnvironment();
+                }
             }
 
             worldObject.HitMsg = true;

@@ -275,6 +275,19 @@ namespace ACE.Server.WorldObjects
                 }
                 else
                 {
+                    // projectile has PhysicsState.Missile cleared after collision
+                    if (ProjectileSource != null && PhysicsObj.CachedVelocity == Vector3.Zero)
+                    {
+                        // projectile might momentarily have no velocity after collision, until gravity applies
+                        NoVelocityFrames++;
+
+                        if (NoVelocityFrames > 5)
+                        {
+                            PhysicsObj.set_active(false);
+                            return false;
+                        }
+                    }
+
                     // determine if updates should be run for object
                     var runUpdate = PhysicsObj.IsAnimating || PhysicsObj.InitialUpdates <= 1;
 
