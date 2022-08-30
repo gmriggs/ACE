@@ -73,10 +73,16 @@ namespace ACE.Server.Entity
         public DateTime StartTime { get; set; }
 
         /// <summary>
+        /// If the automatic TurnTo before/after the windup is cancelled,
+        /// the system will now listen for the next Ready state to continue.
+        /// </summary>
+        public bool TurnToCancelled { get; set; }
+
+        /// <summary>
         /// If a player interrupts a TurnTo during casting,
         /// the TurnTo resumes when the player is no longer holding any Turn keys
         /// </summary>
-        public bool PendingTurnRelease { get; set; }
+        //public bool PendingTurnRelease { get; set; }
 
         /// <summary>
         /// Tracks the cast # for /recordcast
@@ -130,7 +136,8 @@ namespace ACE.Server.Entity
             CastMotionDone = false;
             TurnStarted = false;
             IsTurning = false;
-            PendingTurnRelease = false;
+            TurnToCancelled = false;
+            //PendingTurnRelease = false;
             CanQueue = false;
             CastQueue = null;
             AlwaysTurn = false;
@@ -161,7 +168,8 @@ namespace ACE.Server.Entity
             CastMotionDone = false;
             TurnStarted = false;
             IsTurning = false;
-            PendingTurnRelease = false;
+            TurnToCancelled = false;
+            //PendingTurnRelease = false;
             Player.TurnTarget = null;
             CanQueue = false;
             CastQueue = null;

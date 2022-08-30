@@ -191,9 +191,6 @@ namespace ACE.Server.WorldObjects
                 OnMoveToState_ServerMethod(moveToState);
             else
                 OnMoveToState_ClientMethod(moveToState);
-
-            if (MagicState.IsCasting && MagicState.PendingTurnRelease && moveToState.RawMotionState.TurnCommand == 0)
-                OnTurnRelease();
         }
 
         public void OnMoveToState_ClientMethod(MoveToState moveToState)
@@ -306,7 +303,7 @@ namespace ACE.Server.WorldObjects
                     RequestedLocation = null;
                 }
 
-                if (FastTick && PhysicsObj.IsMovingOrAnimating || PhysicsObj.Velocity != Vector3.Zero)
+                if (FastTick && PhysicsObj.IsMovingOrAnimating || PhysicsObj.Velocity != Vector3.Zero || MagicState.IsCasting && MagicState.TurnToCancelled)
                 {
                     UpdatePlayerPhysics();
 
@@ -387,7 +384,7 @@ namespace ACE.Server.WorldObjects
                 LastMoveToState = null;
             }*/
 
-            if (MagicState.IsCasting && MagicState.PendingTurnRelease)
+            if (MagicState.IsCasting && MagicState.TurnToCancelled)
                 CheckTurn();
         }
 
@@ -701,7 +698,7 @@ namespace ACE.Server.WorldObjects
 
         public override void HandleMotionDone(uint motionID, bool success)
         {
-            //Console.WriteLine($"{Name}.HandleMotionDone({(MotionCommand)motionID}, {success})");
+            log.Debug($"{Name}.HandleMotionDone({(MotionCommand)motionID}, {success})");
 
             if (!FastTick) return;
 

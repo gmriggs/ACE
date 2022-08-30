@@ -49,5 +49,13 @@ namespace ACE.Server.Network.Structure
             // align to DWORD boundary
             reader.Align();
         }
+
+        public bool HasMovement()
+        {
+            if (RawMotionState == null)
+                return false;
+
+            return RawMotionState.HasMovement();
+        }
     }
 }

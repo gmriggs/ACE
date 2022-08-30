@@ -8,6 +8,7 @@ namespace ACE.Server.Entity
         public uint SpellId;
         //public bool BuiltInSpell;
         public WorldObject CasterItem;
+        public long TurnTries;
 
         public WindupParams(uint targetGuid, uint spellId, WorldObject casterItem)
         {
@@ -15,6 +16,7 @@ namespace ACE.Server.Entity
             SpellId = spellId;
             //BuiltInSpell = builtInSpell;
             CasterItem = casterItem;
+            TurnTries = 0;
         }
 
         public override string ToString()

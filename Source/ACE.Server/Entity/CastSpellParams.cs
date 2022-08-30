@@ -12,8 +12,9 @@ namespace ACE.Server.Entity
         public uint ManaUsed { get; set; }
         public WorldObject Target { get; set; }
         public Player.CastingPreCheckStatus Status { get; set; }
+        public long TurnTries { get; set; }
 
-        public bool HasWindupGestures => !Spell.Flags.HasFlag(SpellFlags.FastCast) && Caster != null && Spell.Formula.HasWindupGestures;
+        public bool HasWindupGestures => !Spell.Flags.HasFlag(SpellFlags.FastCast) && Caster == null && Spell.Formula.HasWindupGestures;
 
         public CastSpellParams(Spell spell, WorldObject caster, uint magicSkill, uint manaUsed, WorldObject target, Player.CastingPreCheckStatus status)
         {
@@ -24,6 +25,7 @@ namespace ACE.Server.Entity
             ManaUsed = manaUsed;
             Target = target;
             Status = status;
+            TurnTries = 0;
         }
 
         public override string ToString()
