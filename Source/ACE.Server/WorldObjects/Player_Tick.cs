@@ -191,6 +191,19 @@ namespace ACE.Server.WorldObjects
                 OnMoveToState_ServerMethod(moveToState);
             else
                 OnMoveToState_ClientMethod(moveToState);
+
+            if (MagicState.IsCasting && MagicState.TurnToCancelled)
+            {
+                var holdCastMode = (HoldCastMode)PropertyManager.GetLong("hold_cast_mode").Item;
+
+                if (holdCastMode != HoldCastMode.ReadyStateCallback)
+                {
+                    var movement = holdCastMode == HoldCastMode.MoveKeys ? moveToState.HasMovement() : moveToState.RawMotionState.TurnCommand != 0;
+
+                    if (!movement)
+                        OnTurnRelease();
+                }
+            }
         }
 
         public void OnMoveToState_ClientMethod(MoveToState moveToState)

@@ -73,16 +73,24 @@ namespace ACE.Server.Entity
         public DateTime StartTime { get; set; }
 
         /// <summary>
+        /// functionality determined by hold_cast_mode server config property
+        ///
+        /// 0 - turn keys (default)
+        /// 
+        /// If a player interrupts a TurnTo during casting,
+        /// the TurnTo resumes when the player is no longer holding any Turn keys
+        ///
+        /// 1 - move keys
+        ///
+        /// If a player interrupts a TurnTo during casting,
+        /// the TurnTo resumes when the player is no longer holding any movement keys
+        ///
+        /// 2 - motion ready callback
+        /// 
         /// If the automatic TurnTo before/after the windup is cancelled,
         /// the system will now listen for the next Ready state to continue.
         /// </summary>
         public bool TurnToCancelled { get; set; }
-
-        /// <summary>
-        /// If a player interrupts a TurnTo during casting,
-        /// the TurnTo resumes when the player is no longer holding any Turn keys
-        /// </summary>
-        //public bool PendingTurnRelease { get; set; }
 
         /// <summary>
         /// Tracks the cast # for /recordcast
@@ -137,7 +145,6 @@ namespace ACE.Server.Entity
             TurnStarted = false;
             IsTurning = false;
             TurnToCancelled = false;
-            //PendingTurnRelease = false;
             CanQueue = false;
             CastQueue = null;
             AlwaysTurn = false;
@@ -169,7 +176,6 @@ namespace ACE.Server.Entity
             TurnStarted = false;
             IsTurning = false;
             TurnToCancelled = false;
-            //PendingTurnRelease = false;
             Player.TurnTarget = null;
             CanQueue = false;
             CastQueue = null;
