@@ -507,8 +507,8 @@ namespace ACE.Server.Physics
                 foreach (var sphere in spheres)
                 {
                     // convert to landblock coordinates
-                    var playerSphere = new Sphere(Position.Frame.LocalToGlobal(pSphere.Center), pSphere.Radius);
-                    var globSphere = new Sphere(obj.Position.Frame.LocalToGlobal(sphere.Center), sphere.Radius);
+                    var playerSphere = new Sphere(Position.Frame.LocalToGlobal(pSphere.Center), pSphere.Radius * Scale);
+                    var globSphere = new Sphere(obj.Position.Frame.LocalToGlobal(sphere.Center), sphere.Radius * obj.Scale);
 
                     if (playerSphere.Intersects(globSphere))
                         return true;
@@ -521,7 +521,7 @@ namespace ACE.Server.Physics
                     var lowpoint = obj.Position.Frame.LocalToGlobal(cylsphere.LowPoint);
 
                     var disp = center - lowpoint;
-                    var radsum = pSphere.Radius + cylsphere.Radius - PhysicsGlobals.EPSILON;
+                    var radsum = (pSphere.Radius * Scale) + (cylsphere.Radius * obj.Scale) - PhysicsGlobals.EPSILON;
 
                     if (cylsphere.CollidesWithSphere(pSphere, disp, radsum))
                         return true;

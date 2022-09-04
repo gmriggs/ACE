@@ -504,6 +504,7 @@ namespace ACE.Server.WorldObjects
                 {
                     PKLogout = true;
 
+                    Console.WriteLine($"Setting frozen state");
                     IsFrozen = true;
                     EnqueueBroadcastPhysicsState();
 

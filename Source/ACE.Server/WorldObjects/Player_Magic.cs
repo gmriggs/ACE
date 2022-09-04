@@ -895,7 +895,7 @@ namespace ACE.Server.WorldObjects
 
             if (FastTick)
             {
-                if (PropertyManager.GetDouble("spellcast_max_angle").Item > 5.0f && IsWithinAngle(target) && PropertyManager.GetBool("cast_turnto_optional").Item)
+                if (target == null || PropertyManager.GetDouble("spellcast_max_angle").Item > 5.0f && IsWithinAngle(target) && PropertyManager.GetBool("cast_turnto_optional").Item)
                 {
                     // emulate current gdle TurnTo - doesn't match retail, but some players may prefer this
                     OnMoveComplete_Magic(WeenieError.None);
