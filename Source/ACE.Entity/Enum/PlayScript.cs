@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace ACE.Entity.Enum
 {
     public enum PlayScript : uint

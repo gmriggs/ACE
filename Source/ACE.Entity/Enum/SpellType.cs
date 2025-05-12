@@ -1,6 +1,6 @@
-﻿namespace ACE.Entity.Enum
+namespace ACE.Entity.Enum
 {
-    public enum SpellType
+    public enum SpellType: uint
     {
         Undef,
         Enchantment,

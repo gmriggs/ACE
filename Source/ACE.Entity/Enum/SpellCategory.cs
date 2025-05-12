@@ -1,6 +1,9 @@
+using System.ComponentModel;
+
 namespace ACE.Entity.Enum
 {
-    public enum SpellCategory : uint
+    //[TypeConverter(typeof(EnumTypeConverter))]
+    public enum SpellCategory: uint
     {
         Undef = 0,
         StrengthRaising = 1,

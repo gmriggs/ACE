@@ -1,6 +1,8 @@
+using System.ComponentModel;
+
 namespace ACE.Entity.Enum
 {
-    public enum MagicSchool
+    public enum MagicSchool: uint
     {
         None                = 0,
         WarMagic            = 1,

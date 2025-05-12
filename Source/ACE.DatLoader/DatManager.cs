@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 
 using log4net;
 
@@ -25,6 +26,8 @@ namespace ACE.DatLoader
 
         public static void Initialize(string datFileDirectory, bool keepOpen = false, bool loadCell = true)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             var datDir = Path.GetFullPath(Path.Combine(datFileDirectory));
 
             if (loadCell)

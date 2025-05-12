@@ -3,7 +3,7 @@ using System;
 namespace ACE.Entity.Enum
 {
     [Flags]
-    public enum SpellFlags
+    public enum SpellFlags: uint
     {
         Resistable                      = 0x1,
         PKSensitive                     = 0x2,

@@ -8,39 +8,39 @@ namespace ACE.DatLoader.Entity
 {
     public class SpellBase : IUnpackable
     {
-        public string Name { get; private set; }
-        public string Desc { get; private set; }
-        public MagicSchool School { get; private set; }
-        public uint Icon { get; private set; }
-        public SpellCategory Category { get; private set; } // All related levels of the same spell. Same category spells will not stack. (Strength Self I & Strength Self II)
-        public uint Bitfield { get; private set; }
-        public uint BaseMana { get; private set; } // Mana Cost
-        public float BaseRangeConstant { get; private set; }
-        public float BaseRangeMod { get; private set; }
-        public uint Power { get; private set; } // Used to determine which spell in the catgory is the strongest.
-        public float SpellEconomyMod { get; private set; } // A legacy of a bygone era
-        public uint FormulaVersion { get; private set; }
-        public float ComponentLoss { get; private set; } // Burn rate
-        public SpellType MetaSpellType { get; private set; }
-        public uint MetaSpellId { get; private set; } // Just the spell id again
+        public string Name { get; set; }
+        public string Desc { get; set; }
+        public MagicSchool School { get; set; }
+        public uint Icon { get; set; }
+        public SpellCategory Category { get; set; } // All related levels of the same spell. Same category spells will not stack. (Strength Self I & Strength Self II)
+        public SpellFlags Bitfield { get; set; }
+        public uint BaseMana { get; set; } // Mana Cost
+        public float BaseRangeConstant { get; set; }
+        public float BaseRangeMod { get; set; }
+        public uint Power { get; set; } // Used to determine which spell in the category is the strongest.
+        public float SpellEconomyMod { get; set; } // A legacy of a bygone era
+        public uint FormulaVersion { get; set; }
+        public float ComponentLoss { get; set; } // Burn rate
+        public SpellType MetaSpellType { get; set; }
+        public uint MetaSpellId { get; set; } // Just the spell id again
         
         // Only on EnchantmentSpell/FellowshipEnchantmentSpells
-        public double Duration { get; private set; }
-        public float DegradeModifier { get; private set; } // Unknown what this does
-        public float DegradeLimit { get; private set; }  // Unknown what this does
+        public double Duration { get; set; }
+        public float DegradeModifier { get; set; } // Unknown what this does
+        public float DegradeLimit { get; set; }  // Unknown what this does
 
-        public double PortalLifetime { get; private set; } // Only for PortalSummon_SpellType
+        public double PortalLifetime { get; set; } // Only for PortalSummon_SpellType
 
-        public List<uint> Formula { get; private set; } // UInt Values correspond to the SpellComponentsTable
+        public List<uint> Formula { get; set; } // UInt Values correspond to the SpellComponentsTable
 
-        public uint CasterEffect { get; private set; }  // effect that playes on the caster of the casted spell (e.g. for buffs, protects, etc)
-        public uint TargetEffect { get; private set; } // effect that playes on the target of the casted spell (e.g. for debuffs, vulns, etc)
-        public uint FizzleEffect { get; private set; } // is always zero. All spells have the same fizzle effect.
-        public double RecoveryInterval { get; private set; } // is always zero
-        public float RecoveryAmount { get; private set; } // is always zero
-        public uint DisplayOrder { get; private set; } // for soring in the spell list in the client UI
-        public uint NonComponentTargetType { get; private set; } // Unknown what this does
-        public uint ManaMod { get; private set; } // Additional mana cost per target (e.g. "Incantation of Acid Bane" Mana Cost = 80 + 14 per target)
+        public PlayScript CasterEffect { get; set; }  // effect that plays on the caster of the casted spell (e.g. for buffs, protects, etc)
+        public PlayScript TargetEffect { get; set; } // effect that plays on the target of the casted spell (e.g. for debuffs, vulns, etc)
+        public PlayScript FizzleEffect { get; set; } // is always zero. All spells have the same fizzle effect.
+        public double RecoveryInterval { get; set; } // is always zero
+        public float RecoveryAmount { get; set; } // is always zero
+        public uint DisplayOrder { get; set; } // for soring in the spell list in the client UI
+        public ItemType NonComponentTargetType { get; set; } // Unknown what this does
+        public uint ManaMod { get; set; } // Additional mana cost per target (e.g. "Incantation of Acid Bane" Mana Cost = 80 + 14 per target)
 
         public SpellBase()
         {
@@ -64,7 +64,7 @@ namespace ACE.DatLoader.Entity
             School = (MagicSchool)reader.ReadUInt32();
             Icon = reader.ReadUInt32();
             Category = (SpellCategory)reader.ReadUInt32();
-            Bitfield = reader.ReadUInt32();
+            Bitfield = (SpellFlags)reader.ReadUInt32();
             BaseMana = reader.ReadUInt32();
             BaseRangeConstant = reader.ReadSingle();
             BaseRangeMod = reader.ReadSingle();
@@ -100,16 +100,16 @@ namespace ACE.DatLoader.Entity
                     rawComps.Add(comp);
             }
 
-            // Get the decryped component values
+            // Get the decrypted component values
             Formula = DecryptFormula(rawComps, Name, Desc);
 
-            CasterEffect = reader.ReadUInt32();
-            TargetEffect = reader.ReadUInt32();
-            FizzleEffect = reader.ReadUInt32();
+            CasterEffect = (PlayScript)reader.ReadUInt32();
+            TargetEffect = (PlayScript)reader.ReadUInt32();
+            FizzleEffect = (PlayScript)reader.ReadUInt32();
             RecoveryInterval = reader.ReadDouble();
             RecoveryAmount = reader.ReadSingle();
             DisplayOrder = reader.ReadUInt32();
-            NonComponentTargetType = reader.ReadUInt32();
+            NonComponentTargetType = (ItemType)reader.ReadUInt32();
             ManaMod = reader.ReadUInt32();
         }
 
